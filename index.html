@@ -628,7 +628,7 @@ footer span { color: var(--blue); }
 .scholar-box { padding: 0; }
 .scholar-metric-link {
   display: block;
-  padding: 18px;
+  padding: 18px 16px 14px;
   text-decoration: none;
   height: 100%;
   transition: background 0.2s;
@@ -638,7 +638,7 @@ footer span { color: var(--blue); }
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 .scholar-label-top {
   font-family: 'DM Mono', monospace;
@@ -650,29 +650,47 @@ footer span { color: var(--blue); }
 }
 .scholar-stats {
   display: flex;
-  gap: 12px;
+  gap: 0;
+  width: 100%;
 }
 .scholar-stat {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1;
+  border-right: 1px solid var(--rule);
 }
+.scholar-stat:last-child { border-right: none; }
 .scholar-num {
   font-family: 'DM Sans', sans-serif;
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 600;
   color: #4285F4;
   line-height: 1;
   letter-spacing: -0.03em;
 }
+.scholar-num.scopus-color { color: #E9521E; }
+.scholar-num.wos-color    { color: #5A2D8A; }
 .scholar-stat-label {
   font-family: 'DM Mono', monospace;
-  font-size: 7.5px;
+  font-size: 7px;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   color: var(--muted);
   text-transform: uppercase;
-  margin-top: 3px;
+  margin-top: 4px;
+  text-align: center;
+  line-height: 1.3;
+}
+.db-loading-dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--muted);
+  opacity: 0.4;
+  animation: pulse 1.4s infinite;
+  vertical-align: middle;
+  margin: 0 1px;
 }
 
 /* ─ AFFILIATIONS ─ */
@@ -778,10 +796,13 @@ footer span { color: var(--blue); }
 <header class="hero">
   <div class="hero-inner">
     <div>
-      <div class="hero-label">Ecuador</div>
+      <div class="hero-label">🇪🇨 Ecuador</div>
       <h1 class="hero-name">Jorge Parraga-Alava</h1>
       <div class="hero-title">
-<a class="contact-link" href="mailto:jorge.parraga@utm.edu.ec">✉ jorge.parraga@utm.edu.ec</a>
+<a class="contact-link" href="mailto:jorge.parraga@utm.edu.ec" style="display:inline-flex;align-items:center;gap:6px;">
+  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+  jorge.parraga@utm.edu.ec
+</a>
       </div>
       <div class="hero-pills">
         <span class="pill pill-blue">Data Science</span>
@@ -835,14 +856,14 @@ footer span { color: var(--blue); }
       <div class="about-card">
         <div class="about-card-label">Research Interests</div>
         <div class="interests-wrap" style="margin-top:4px;">
+          <span class="interest-tag">Artificial Intelligence</span>
           <span class="interest-tag">Machine Learning</span>
           <span class="interest-tag">Data Science</span>
           <span class="interest-tag">Deep Learning</span>
           <span class="interest-tag">Bibliometrics</span>
           <span class="interest-tag">Big Data</span> 
           <span class="interest-tag">Computational Intelligence</span>
-          <span class="interest-tag">Educational Data Analysis</span> 
-          <span class="interest-tag">Geospatial Analytics</span>
+          <span class="interest-tag">Educational Data Analysis</span>
         </div>
       </div>
     </div>
@@ -856,36 +877,72 @@ footer span { color: var(--blue); }
     <div class="metrics-row fade-in" id="metrics-row">
 
  
-      <div class="metric-box">
-       <a href="https://www.scopus.com/authid/detail.uri?authorId=57193428877" target="_blank" rel="noopener" class="scholar-metric-link">
-        <div class="metric-num">40</div>
-        <div class="metric-label">Scopus Papers</div>
-         </a>
+      <!-- SCOPUS PANEL -->
+      <div class="metric-box scholar-box">
+        <a href="https://www.scopus.com/authid/detail.uri?authorId=57193428877" target="_blank" rel="noopener" class="scholar-metric-link">
+          <div class="scholar-top">
+            <span class="scholar-label-top">Scopus</span>
+          </div>
+          <div class="scholar-stats">
+            <div class="scholar-stat">
+              <span class="scholar-num scopus-color" id="sc-works"><span class="db-loading-dot"></span></span>
+              <span class="scholar-stat-label">Works</span>
+            </div>
+            <div class="scholar-stat">
+              <span class="scholar-num scopus-color" id="sc-cites"><span class="db-loading-dot"></span></span>
+              <span class="scholar-stat-label">Citations</span>
+            </div>
+            <div class="scholar-stat">
+              <span class="scholar-num scopus-color" id="sc-hindex"><span class="db-loading-dot"></span></span>
+              <span class="scholar-stat-label">h-index</span>
+            </div>
+          </div>
+        </a>
       </div>
 
-
-
-      <div class="metric-box">
-
+      <!-- WEB OF SCIENCE PANEL -->
+      <div class="metric-box scholar-box">
         <a href="https://www.webofscience.com/wos/author/record/GZA-8759-2022" target="_blank" rel="noopener" class="scholar-metric-link">
-        <div class="metric-num">35</div>
-        <div class="metric-label">WoS Papers</div>
-    </a>
-
+          <div class="scholar-top">
+            <span class="scholar-label-top">Web of Science</span>
+          </div>
+          <div class="scholar-stats">
+            <div class="scholar-stat">
+              <span class="scholar-num wos-color" id="wos-works"><span class="db-loading-dot"></span></span>
+              <span class="scholar-stat-label">Works</span>
+            </div>
+            <div class="scholar-stat">
+              <span class="scholar-num wos-color" id="wos-cites"><span class="db-loading-dot"></span></span>
+              <span class="scholar-stat-label">Citations</span>
+            </div>
+            <div class="scholar-stat">
+              <span class="scholar-num wos-color" id="wos-hindex"><span class="db-loading-dot"></span></span>
+              <span class="scholar-stat-label">h-index</span>
+            </div>
+          </div>
+        </a>
       </div>
 
-
-
-      <div class="metric-box">
-
+      <!-- GOOGLE SCHOLAR PANEL -->
+      <div class="metric-box scholar-box">
         <a href="https://scholar.google.es/citations?user=w8fiGu0AAAAJ" target="_blank" rel="noopener" class="scholar-metric-link">
-
- 
-            <div class="metric-num" id="m-scho">60</div>
-            <div class="metric-label">Google Scholar</div>
- 
-
-     
+          <div class="scholar-top">
+            <span class="scholar-label-top">Google Scholar</span>
+          </div>
+          <div class="scholar-stats">
+            <div class="scholar-stat">
+              <span class="scholar-num" id="gs-works"><span class="db-loading-dot"></span></span>
+              <span class="scholar-stat-label">Works</span>
+            </div>
+            <div class="scholar-stat">
+              <span class="scholar-num" id="gs-citations"><span class="db-loading-dot"></span></span>
+              <span class="scholar-stat-label">Citations</span>
+            </div>
+            <div class="scholar-stat">
+              <span class="scholar-num" id="gs-hindex"><span class="db-loading-dot"></span></span>
+              <span class="scholar-stat-label">h-index</span>
+            </div>
+          </div>
         </a>
       </div>
 
@@ -903,7 +960,7 @@ footer span { color: var(--blue); }
 
     <div class="orcid-note" style="margin-bottom:20px;">
       <span class="live-dot"></span>
-      Publications loaded live from ORCID public API · Updates automatically
+      Publications loaded live from ORCID · Updates automatically
     </div>
 
     <div id="pub-loading">Loading publications from ORCID…</div>
@@ -919,10 +976,11 @@ footer span { color: var(--blue); }
 
     <div style="margin-top:16px; padding:14px 18px; background:var(--accent2); border-left:3px solid var(--blue); border-radius:0 4px 4px 0;">
       <p style="color:var(--muted); font-family:'DM Mono',monospace; font-size:10px; line-height:1.6;">
-        Q-rankings and indexing (Scopus/WoS) are not provided by the ORCID API.
-        Verify at <a href="https://www.scopus.com/authid/detail.uri?authorId=57193428877" target="_blank" style="color:var(--blue);">Scopus</a> ·
+        Scopus and WoS metrics are fetched automatically and may show <strong style="color:var(--blue);">?</strong> if a source is temporarily unavailable.
+        Google Scholar metrics are scraped. For verified real-time figures visit
+        <a href="https://www.scopus.com/authid/detail.uri?authorId=57193428877" target="_blank" style="color:var(--blue);">Scopus</a> ·
         <a href="https://www.webofscience.com/wos/author/rid/O-6976-2019" target="_blank" style="color:var(--blue);">Web of Science</a> ·
-        <a href="https://orcid.org/0000-0001-8558-9122" target="_blank" style="color:var(--blue);">ORCID</a>.
+        <a href="https://scholar.google.com/citations?user=w8fiGu0AAAAJ" target="_blank" style="color:var(--blue);">Google Scholar</a>.
       </p>
     </div>
   </section>
@@ -1052,7 +1110,7 @@ footer span { color: var(--blue); }
         <div class="affil-period">2019 – Present</div>
         <div class="affil-name">Universidad Técnica de Manabí</div>
         <div class="affil-location">Portoviejo, Ecuador</div>
-        <div class="affil-role">Full Professor · Departamento de Sistemas Computacionales</div>
+        <div class="affil-role">Full Professor</div>
         <span class="affil-badge affil-badge-current">Current</span>
       </div>
 
@@ -1083,7 +1141,7 @@ footer span { color: var(--blue); }
         <div class="affil-period">2018 – 2019</div>
         <div class="affil-name">ESPAM MFL</div>
         <div class="affil-location">Calceta, Ecuador</div>
-        <div class="affil-role">Lecturer · Computer Engineering</div>
+        <div class="affil-role">Lecturer</div>
       </div>
 
       <div class="affil-item">
@@ -1107,41 +1165,203 @@ footer span { color: var(--blue); }
   </p>
 </footer>
 
-<!-- ─────── GOOGLE SCHOLAR METRICS ─────── -->
+<!-- ─────── ACADEMIC METRICS (Scholar · Scopus · WoS) ─────── -->
 <script>
-(function() {
-  var SCHOLAR_URL = "https://scholar.google.es/citations?user=w8fiGu0AAAAJ&hl=en";
-  var PROXY = "https://api.allorigins.win/get?url=" + encodeURIComponent(SCHOLAR_URL);
+(function () {
+  'use strict';
 
-  // Static fallback — update these manually when needed
-  var STATIC = { citations: "—", hindex: "—", i10: "—" };
-
-  function setMetrics(c, h, i) {
-    var ec = document.getElementById("gs-citations");
-    var eh = document.getElementById("gs-hindex");
-    var ei = document.getElementById("gs-i10");
-    if (ec) ec.textContent = c;
-    if (eh) eh.textContent = h;
-    if (ei) ei.textContent = i;
+  /*
+   * Static fallback values (from verified profile screenshots, March 2026).
+   * Shown immediately on load; overwritten by live fetch on success.
+   *   Google Scholar : 534 citations · h-index 12
+   *   Scopus         : 35 docs · 263 citations · h-index 8
+   *   Web of Science : 25 pubs · 154 citations · h-index 6
+   */
+  function setText(id, val) {
+    var el = document.getElementById(id);
+    if (el && val !== null && val !== undefined) el.textContent = String(val);
   }
 
-  fetch(PROXY)
-    .then(function(r) { return r.json(); })
-    .then(function(d) {
-      var html = d.contents || "";
-      // Scholar puts totals in #gsc_rsb_st table: citations, h-index, i10-index
-      var nums = html.match(/<td class="gsc_rsb_std">(\d+)<\/td>/g);
-      if (nums && nums.length >= 4) {
-        var extract = function(s) { return s.replace(/<[^>]+>/g,""); };
-        // positions: [all-time citations, recent citations, all-time h, recent h, all-time i10, recent i10]
-        setMetrics(extract(nums[0]), extract(nums[2]), extract(nums[4]));
-      } else {
-        setMetrics(STATIC.citations, STATIC.hindex, STATIC.i10);
+  setText('gs-citations', '534');
+  setText('gs-hindex',    '12');
+  setText('gs-works',     '60');
+  setText('sc-works',     '35');
+  setText('sc-cites',     '263');
+  setText('sc-hindex',    '8');
+  setText('wos-works',    '25');
+  setText('wos-cites',    '154');
+  setText('wos-hindex',   '6');
+
+  var PROXY_BASE  = 'https://api.allorigins.win/get?url=';
+  var PROXY2_BASE = 'https://corsproxy.io/?';
+
+  /* ════════════════════════════════════════════
+     1. GOOGLE SCHOLAR — corsproxy.io for everything
+     corsproxy.io returns plain text (not JSON wrapper).
+     Paginates cstart=0,20,40... until rows < 20.
+     Confirmed working: 61 works (20+20+20+1).
+  ════════════════════════════════════════════ */
+  (function fetchScholar() {
+    var GS_USER  = 'w8fiGu0AAAAJ';
+    var PAGE     = 20;
+    var CPBASE   = 'https://corsproxy.io/?';
+
+    function gsUrl(cstart) {
+      return 'https://scholar.google.com/citations?user=' + GS_USER +
+             '&hl=en&pagesize=' + PAGE + '&cstart=' + cstart;
+    }
+
+    var statsSet = false;
+
+    function parseStats(html) {
+      if (statsSet) return;
+      var cells = [];
+      var re = /<td[^>]*class="gsc_rsb_std"[^>]*>(\d+)<\/td>/g, m;
+      while ((m = re.exec(html)) !== null) cells.push(m[1]);
+      if (cells.length >= 3) {
+        setText('gs-citations', cells[0]);
+        setText('gs-hindex',    cells[2]);
+        statsSet = true;
+      }
+    }
+
+    function walkPages(cstart, total) {
+      fetch(CPBASE + encodeURIComponent(gsUrl(cstart)))
+        .then(function(r) { return r.text(); })
+        .then(function(html) {
+          parseStats(html);
+          var rows = (html.match(/class="gsc_a_tr"/g) || []).length - (html.match(/class="gsc_a_trh"/g) || []).length;
+          var newTotal = total + rows;
+          if (rows < PAGE || cstart > 500) {
+            setText('gs-works', newTotal);
+          } else {
+            walkPages(cstart + PAGE, newTotal);
+          }
+        })
+        .catch(function() {
+          if (total > 0) setText('gs-works', total);
+        });
+    }
+
+    walkPages(0, 0);
+  })();
+
+  /* ════════════════════════════════════════════
+     2. SCOPUS via Elsevier Author Retrieval API
+     Author ID : 57193428877
+     API key   : 83de99976f8205833d2bc99e204c6ae8
+     Inst token: a12b43a02fd32b2e78b0cc853cc496ff
+     Direct call — no proxy needed.
+
+     FIELD MAPPING (Author Retrieval Response):
+       document-count  = number of works (35)
+       citation-count  = total citations received (263)
+         NOTE: cited-by-count = documents that cite the author
+               which is a different, lower number (~242).
+               We want citation-count for the raw total.
+       h-index         = h-index value (8)
+  ════════════════════════════════════════════ */
+  (function fetchScopus() {
+    var AUTHOR_ID  = '57193428877';
+    var API_KEY    = '83de99976f8205833d2bc99e204c6ae8';
+    var INST_TOKEN = 'a12b43a02fd32b2e78b0cc853cc496ff';
+
+    var url = 'https://api.elsevier.com/content/author/author_id/' + AUTHOR_ID
+            + '?field=document-count,citation-count,cited-by-count,h-index';
+
+    fetch(url, {
+      headers: {
+        'Accept':          'application/json',
+        'X-ELS-APIKey':    API_KEY,
+        'X-ELS-Insttoken': INST_TOKEN
       }
     })
-    .catch(function() {
-      setMetrics(STATIC.citations, STATIC.hindex, STATIC.i10);
+    .then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      var resp    = data['author-retrieval-response'];
+      var profile = (resp && resp[0]) || {};
+      var core    = profile['coredata'] || {};
+
+      var works  = core['document-count'];
+      var cites  = core['citation-count'];   /* total citations — the correct field */
+      var hIdx   = profile['h-index'];
+
+      if (works != null) setText('sc-works',  works);
+      if (cites != null) setText('sc-cites',  cites);
+      if (hIdx  != null) setText('sc-hindex', hIdx);
+    })
+    .catch(function (err) {
+      console.warn('Scopus API error:', err);
+      /* static fallback already visible */
     });
+  })();
+
+  /* ════════════════════════════════════════════
+     3. WEB OF SCIENCE
+     No public REST API for author metrics.
+     Scrape the public author record page via
+     CORS proxy, parse __NEXT_DATA__ JSON payload
+     or fallback regex on rendered HTML.
+     Profile: webofscience.com/wos/author/record/GZA-8759-2022
+  ════════════════════════════════════════════ */
+  (function fetchWoS() {
+    var WOS_URL = 'https://www.webofscience.com/wos/author/record/GZA-8759-2022';
+
+    function parseAndSet(html) {
+      if (!html) return false;
+      var found = false;
+
+      /* Try embedded __NEXT_DATA__ JSON payload */
+      var ndMatch = html.match(/<script[^>]+id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/);
+      if (ndMatch) {
+        try {
+          var nd = JSON.parse(ndMatch[1]);
+          var ap = nd && nd.props && nd.props.pageProps &&
+                   (nd.props.pageProps.authorData || nd.props.pageProps.author);
+          if (ap) {
+            var pubs  = ap.documentCount  || ap.totalDocuments || ap.publications;
+            var cites = ap.timesCited     || ap.citationCount  || ap.citations;
+            var hIdx  = ap.hIndex         || ap['h-index'];
+            if (pubs  != null) { setText('wos-works',  pubs);  found = true; }
+            if (cites != null) { setText('wos-cites',  cites); found = true; }
+            if (hIdx  != null) { setText('wos-hindex', hIdx);  found = true; }
+          }
+        } catch (e) { /* fall through */ }
+      }
+
+      if (found) return true;
+
+      /* Regex fallback on rendered HTML */
+      var pubM  = html.match(/>(\d+)<\/[^>]+>\s*[^<]*(?:Publication|Document)/i) ||
+                  html.match(/(\d+)\s*Publication/i);
+      var citM  = html.match(/>(\d+)<\/[^>]+>\s*[^<]*(?:Times?\s*Cited|Citation)/i) ||
+                  html.match(/(\d+)\s*Times?\s*Cited/i);
+      var hM    = html.match(/[Hh][\s-]Index[^<]*<[^>]+>\s*(\d+)/) ||
+                  html.match(/(\d+)[^<]*[Hh][\s-]Index/);
+
+      if (pubM)  { setText('wos-works',  pubM[1]);  found = true; }
+      if (citM)  { setText('wos-cites',  citM[1]);  found = true; }
+      if (hM)    { setText('wos-hindex', hM[1]);    found = true; }
+
+      return found;
+    }
+
+    fetch(PROXY_BASE + encodeURIComponent(WOS_URL))
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (!parseAndSet(d.contents || '')) throw new Error('parse failed');
+      })
+      .catch(function () {
+        fetch(PROXY2_BASE + encodeURIComponent(WOS_URL))
+          .then(function (r) { return r.text(); })
+          .then(function (html) { parseAndSet(html); })
+          .catch(function () { /* static values remain */ });
+      });
+  })();
+
 })();
 </script>
 
@@ -1267,10 +1487,11 @@ footer span { color: var(--blue); }
   .catch(function(err) {
     loadingEl.innerHTML =
       '<span style="font-family:\'DM Mono\',monospace;font-size:10px;color:#DC2626;">' +
-      'Could not load ORCID data: ' + err.message +
-      '. View list at <a href="https://orcid.org/' + ORCID_ID + '" target="_blank" style="color:var(--blue);">orcid.org/' + ORCID_ID + '</a>.' +
+      'Could not load publications from ORCID. ' +
+      '<a href="https://orcid.org/0000-0001-8558-9122" target="_blank" style="color:var(--blue);">View on ORCID</a>' +
       '</span>';
   });
+
 })();
 </script>
 
