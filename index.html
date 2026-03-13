@@ -1261,43 +1261,29 @@ footer span { color: var(--blue); }
                We want citation-count for the raw total.
        h-index         = h-index value (8)
   ════════════════════════════════════════════ */
-  (function fetchScopus() {
-    var AUTHOR_ID  = '57193428877';
-    var API_KEY    = '83de99976f8205833d2bc99e204c6ae8';
-    var INST_TOKEN = 'a12b43a02fd32b2e78b0cc853cc496ff';
+    (function fetchScopus() {
+      fetch('https://scopus-proxy-blond.vercel.app/api/scopus')
+        .then(function (r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        })
+        .then(function (data) {
+          var resp    = data['author-retrieval-response'];
+          var profile = (resp && resp[0]) || {};
+          var core    = profile['coredata'] || {};
 
-    var url = 'https://api.elsevier.com/content/author/author_id/' + AUTHOR_ID
-            + '?field=document-count,citation-count,cited-by-count,h-index';
+          var works  = core['document-count'];
+          var cites  = core['citation-count'];
+          var hIdx   = profile['h-index'];
 
-    fetch(url, {
-      headers: {
-        'Accept':          'application/json',
-        'X-ELS-APIKey':    API_KEY,
-        'X-ELS-Insttoken': INST_TOKEN
-      }
-    })
-    .then(function (r) {
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.json();
-    })
-    .then(function (data) {
-      var resp    = data['author-retrieval-response'];
-      var profile = (resp && resp[0]) || {};
-      var core    = profile['coredata'] || {};
-
-      var works  = core['document-count'];
-      var cites  = core['citation-count'];   /* total citations — the correct field */
-      var hIdx   = profile['h-index'];
-
-      if (works != null) setText('sc-works',  works);
-      if (cites != null) setText('sc-cites',  cites);
-      if (hIdx  != null) setText('sc-hindex', hIdx);
-    })
-    .catch(function (err) {
-      console.warn('Scopus API error:', err);
-      /* static fallback already visible */
-    });
-  })();
+          if (works != null) setText('sc-works',  works);
+          if (cites != null) setText('sc-cites',  cites);
+          if (hIdx  != null) setText('sc-hindex', hIdx);
+        })
+        .catch(function (err) {
+          console.warn('Scopus proxy error:', err);
+        });
+    })();
 
   /* ════════════════════════════════════════════
      3. WEB OF SCIENCE
