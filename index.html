@@ -1248,9 +1248,7 @@ footer span { color: var(--blue); }
 
   /* ════════════════════════════════════════════
      2. SCOPUS via Elsevier Author Retrieval API
-     Author ID : 57193428877
-     API key   : 83de99976f8205833d2bc99e204c6ae8
-     Inst token: a12b43a02fd32b2e78b0cc853cc496ff
+     Author ID : 57193428877 
      Direct call — no proxy needed.
 
      FIELD MAPPING (Author Retrieval Response):
@@ -1262,7 +1260,8 @@ footer span { color: var(--blue); }
        h-index         = h-index value (8)
   ════════════════════════════════════════════ */
     (function fetchScopus() {
-      fetch('https://scopus-proxy-blond.vercel.app/api/scopus')
+      var SCOPUS_AUTHOR_ID = '57193428877';
+      fetch('https://scopus-proxy-blond.vercel.app/api/scopus?author_id=' + SCOPUS_AUTHOR_ID)
         .then(function (r) {
           if (!r.ok) throw new Error('HTTP ' + r.status);
           return r.json();
@@ -1284,7 +1283,6 @@ footer span { color: var(--blue); }
           console.warn('Scopus proxy error:', err);
         });
     })();
-
   /* ════════════════════════════════════════════
      3. WEB OF SCIENCE
      No public REST API for author metrics.
