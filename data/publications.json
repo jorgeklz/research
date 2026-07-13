@@ -1,0 +1,541 @@
+{
+  "updated": "2026-07-13",
+  "items": [
+    {
+      "id": "cisti2026-oop",
+      "doi": "10.1007/978-3-032-12882-9_6",
+      "title": "Comparing Academic Performance in Online and Face-to-Face Object-Oriented Programming Courses: An Educational Data Mining Analysis",
+      "authors": [
+        "Jorge Rodas-Silva",
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "CISTI 2024, Salamanca, Spain (LNNS)",
+      "type": "conference",
+      "year": 2026,
+      "openAccess": false,
+      "postId": "post-cisti2026-oop",
+      "topics": [
+        "education",
+        "data-mining"
+      ],
+      "citations": 0
+    },
+    {
+      "id": "iwinac2026-hijacking",
+      "doi": "10.1007/978-3-032-27317-8_8",
+      "title": "Evaluating Long Short-Term Memory Autoencoders for Vehicle Hijacking Detection on Unified Heterogeneous Datasets",
+      "authors": [
+        "Edison Solorzano",
+        "Jorge Parraga-Alava",
+        "Enrique Domínguez"
+      ],
+      "venue": "IWINAC 2026, Fuerteventura, Spain (LNCS)",
+      "type": "conference",
+      "year": 2026,
+      "openAccess": false,
+      "postId": "post-iwinac2026-hijacking",
+      "topics": [
+        "deep-learning",
+        "security",
+        "computer-vision"
+      ],
+      "pages": "73-83",
+      "citations": 0
+    },
+    {
+      "id": "enfoqueute2026-har",
+      "doi": "10.29019/enfoqueute.1266",
+      "title": "Human Action Recognition Based on Computer Vision: A Comprehensive Review (2020-2025)",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Lenin Cedeño Morales"
+      ],
+      "venue": "Enfoque UTE",
+      "type": "journal",
+      "year": 2026,
+      "openAccess": true,
+      "postId": "post-enfoqueute2026-har",
+      "topics": [
+        "computer-vision",
+        "deep-learning",
+        "review"
+      ],
+      "citations": 0
+    },
+    {
+      "id": "enfoqueute2026-iot-agri",
+      "doi": "10.29019/enfoqueute.1236",
+      "title": "Integration of IoT and Artificial Intelligence in Ecuadorian Agriculture: A Systematic Literature Review (2020-2025)",
+      "authors": [
+        "Eysonhover Basurto Loor",
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "Enfoque UTE",
+      "type": "journal",
+      "year": 2026,
+      "openAccess": true,
+      "postId": "post-enfoqueute2026-iot-agri",
+      "topics": [
+        "agriculture",
+        "iot",
+        "review"
+      ],
+      "citations": 0
+    },
+    {
+      "id": "cran2026-momst",
+      "doi": "10.32614/cran.package.momst",
+      "title": "momst: Multi-Objective Minimum Spanning Tree via NSGA-II with Local Search",
+      "authors": [
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "CRAN: Contributed Packages",
+      "type": "software",
+      "year": 2026,
+      "openAccess": true,
+      "postId": "post-cran2026-momst",
+      "topics": [
+        "optimization",
+        "clustering",
+        "software"
+      ],
+      "citations": 0
+    },
+    {
+      "id": "simpa2026-mstknnclust",
+      "doi": "10.1016/j.simpa.2026.100845",
+      "title": "mstknnclust: An R package for graph-based clustering via MST-kNN intersection",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Mario Inostroza-Ponta",
+        "Pablo Moscato"
+      ],
+      "venue": "Software Impacts, 29, 100845",
+      "type": "journal",
+      "year": 2026,
+      "openAccess": true,
+      "postId": "post-simpa2026-mstknnclust",
+      "topics": [
+        "clustering",
+        "software",
+        "bioinformatics"
+      ],
+      "pages": "100845",
+      "citations": 0
+    },
+    {
+      "id": "engreports2025-ct",
+      "doi": "10.1002/eng2.70203",
+      "title": "Computational Thinking and Academic Performance Across Different Instructional Modalities in Pre-University Courses: A Data-Driven Study",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Jorge Rodas-Silva"
+      ],
+      "venue": "Engineering Reports",
+      "type": "journal",
+      "year": 2025,
+      "openAccess": false,
+      "postId": "post-engreports2025-ct",
+      "topics": [
+        "education",
+        "data-mining"
+      ],
+      "citations": 1
+    },
+    {
+      "id": "computation2025-dropout",
+      "doi": "10.3390/computation13080198",
+      "title": "Factors, Prediction, Explainability, and Simulating University Dropout Through Machine Learning: A Systematic Review, 2012-2024",
+      "authors": [
+        "Mauricio Quimiz-Moreira",
+        "Rosa Delgadillo",
+        "Jorge Parraga-Alava",
+        "Nelson Maculan",
+        "David Mauricio"
+      ],
+      "venue": "Computation, 13(8), 198",
+      "type": "journal",
+      "year": 2025,
+      "openAccess": true,
+      "postId": "post-computation2025-dropout",
+      "topics": [
+        "education",
+        "machine-learning",
+        "review"
+      ],
+      "citations": 3
+    },
+    {
+      "id": "artiis2025-solar",
+      "doi": "10.1007/978-3-031-83210-9_25",
+      "title": "Predicting Solar Radiation in Manabi: A Machine Learning Approach",
+      "authors": [
+        "Daniel Arteaga-Subiaga",
+        "Jorge Parraga-Alava",
+        "Lucía Rivadeneira"
+      ],
+      "venue": "ARTIIS 2024, Santiago de Chile, Chile (CCIS)",
+      "type": "conference",
+      "year": 2025,
+      "openAccess": false,
+      "postId": "post-artiis2025-solar",
+      "topics": [
+        "energy",
+        "machine-learning"
+      ],
+      "pages": "335-350",
+      "citations": 0
+    },
+    {
+      "id": "csl2024-twitter",
+      "doi": "10.1016/j.csl.2023.101579",
+      "title": "An effective approach for identifying keywords as high-quality filters to get emergency-implicated Twitter Spanish data",
+      "authors": [
+        "Joel Garcia-Arteaga",
+        "Jesús Zambrano-Zambrano",
+        "Jorge Parraga-Alava",
+        "Jorge Rodas-Silva"
+      ],
+      "venue": "Computer Speech & Language, 84, 101579",
+      "type": "journal",
+      "year": 2024,
+      "openAccess": false,
+      "postId": "post-csl2024-twitter",
+      "topics": [
+        "nlp",
+        "social-media"
+      ],
+      "citations": 9
+    },
+    {
+      "id": "hbet2024-applab",
+      "doi": "10.1155/2024/4918351",
+      "title": "Applying Educational Programming Language-Based Learning to Enhance the Programming Skills of Non-ICT Engineering College Students",
+      "authors": [
+        "Jorge Rodas-Silva",
+        "Jorge Parraga-Alava",
+        "Mariuxi Vinueza-Morales",
+        "Ana Eva Chacón Luna",
+        "Jesennia Cárdenas-Cobo"
+      ],
+      "venue": "Human Behavior and Emerging Technologies",
+      "type": "journal",
+      "year": 2024,
+      "openAccess": false,
+      "postId": "post-hbet2024-applab",
+      "topics": [
+        "education"
+      ],
+      "citations": 3
+    },
+    {
+      "id": "enfoqueute2024-ann",
+      "doi": "10.29019/enfoqueute.1058",
+      "title": "Artificial Neural Networks for Classification Tasks: A Systematic Literature Review",
+      "authors": [
+        "Eduardo Molina",
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "Enfoque UTE",
+      "type": "journal",
+      "year": 2024,
+      "openAccess": true,
+      "postId": "post-enfoqueute2024-ann",
+      "topics": [
+        "deep-learning",
+        "review"
+      ],
+      "citations": 7
+    },
+    {
+      "id": "rte2024-law",
+      "doi": "10.37815/rte.v36n1.1151",
+      "title": "Computer Law and its Influence on Information Systems: An Analysis from Legal and Technological Perspectives in Ecuador",
+      "authors": [
+        "Iván Alfonso Moreira Moreira",
+        "Marlon Navia Mendoza",
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "Revista Tecnológica - ESPOL",
+      "type": "journal",
+      "year": 2024,
+      "openAccess": false,
+      "postId": "post-rte2024-law",
+      "topics": [
+        "nlp",
+        "text-mining",
+        "law"
+      ],
+      "citations": 1
+    },
+    {
+      "id": "etcm2024-power",
+      "doi": "10.1109/etcm63562.2024.10746142",
+      "title": "Enhancing Electric Power Consumption Prediction Using Machine Learning and Genetic Algorithms",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Jorge Rodas-Silva"
+      ],
+      "venue": "ETCM 2024, Cuenca, Ecuador (IEEE)",
+      "type": "conference",
+      "year": 2024,
+      "openAccess": false,
+      "postId": "post-etcm2024-power",
+      "topics": [
+        "energy",
+        "machine-learning",
+        "optimization"
+      ],
+      "citations": 0
+    },
+    {
+      "id": "icedeg2024-stress",
+      "doi": "10.1109/icedeg61611.2024.10702055",
+      "title": "Stress Detection among Higher Education Students: A Comprehensive Systematic Review of Machine Learning Approaches",
+      "authors": [
+        "Enrique Macías Arias",
+        "Jorge Parraga-Alava",
+        "David Zambrano Montenegro"
+      ],
+      "venue": "ICEDEG 2024, Lucerne, Switzerland (IEEE)",
+      "type": "conference",
+      "year": 2024,
+      "openAccess": false,
+      "postId": "post-icedeg2024-stress",
+      "topics": [
+        "health",
+        "education",
+        "review",
+        "machine-learning"
+      ],
+      "citations": 0
+    },
+    {
+      "id": "stsa2023-ga-emergency",
+      "doi": "10.1007/978-3-031-32213-6_4",
+      "title": "A Tuning Approach Using Genetic Algorithms for Emergency Incidents Classification in Social Media in Ecuador",
+      "authors": [
+        "Joel Garcia-Arteaga",
+        "Jesus Zambrano-Zambrano",
+        "Jorge Parraga-Alava",
+        "Jorge Rodas-Silva"
+      ],
+      "venue": "SmartTech-IC 2022, Cuenca, Ecuador (CCIS)",
+      "type": "conference",
+      "year": 2023,
+      "openAccess": false,
+      "postId": null,
+      "topics": [
+        "social-media",
+        "optimization",
+        "nlp"
+      ],
+      "citations": 0
+    },
+    {
+      "id": "dib2023-cbcovid",
+      "doi": "10.1016/j.dib.2023.109016",
+      "title": "CBCovid19EC: A dataset complete blood count and PCR test for COVID-19 detection in Ecuadorian population",
+      "authors": [
+        "R. Ordoñez-Avila",
+        "J. Parraga-Alava",
+        "J. Meza Hormaza",
+        "L. Vaca-Cárdenas",
+        "E. Portmann",
+        "L. Terán",
+        "M. Dorn"
+      ],
+      "venue": "Data in Brief",
+      "type": "journal",
+      "year": 2023,
+      "openAccess": false,
+      "postId": null,
+      "topics": [
+        "health",
+        "dataset"
+      ],
+      "citations": 7
+    },
+    {
+      "id": "cienciamatria2023-busuu",
+      "doi": "10.35381/cm.v9i2.1158",
+      "title": "La plataforma digital Busuu en la enseñanza del idioma inglés en Educación General Básica, Ecuador",
+      "authors": [
+        "Victoria Johanna Mero-Mero",
+        "Jorge Antonio Párraga-Alava"
+      ],
+      "venue": "CIENCIAMATRIA",
+      "type": "journal",
+      "year": 2023,
+      "openAccess": false,
+      "postId": null,
+      "topics": [
+        "education"
+      ],
+      "citations": 0
+    },
+    {
+      "id": "episteme2022-web20",
+      "doi": "10.35381/e.k.v5i1.2189",
+      "title": "Enseñanza y aprendizaje de forma creativa mediante herramientas web 2.0",
+      "authors": [
+        "Holger Arturo Proaño-Zambrano",
+        "Jorge Antonio Parraga-Alava"
+      ],
+      "venue": "EPISTEME KOINONIA",
+      "type": "journal",
+      "year": 2022,
+      "openAccess": false,
+      "postId": null,
+      "topics": [
+        "education"
+      ],
+      "citations": 0
+    },
+    {
+      "id": "lnns2022-elderly",
+      "doi": "10.1007/978-3-031-11438-0_48",
+      "title": "Prediction of Diseases in the Elderly in Manabí Through Big Data Technologies",
+      "authors": [
+        "Fernando Alfredo Reyes Reyes",
+        "Marely Del Rosario Cruz Felipe",
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "CI3 2021, Sangolqui, Ecuador (LNNS)",
+      "type": "conference",
+      "year": 2022,
+      "openAccess": false,
+      "postId": null,
+      "topics": [
+        "health",
+        "big-data"
+      ],
+      "citations": 1
+    },
+    {
+      "id": "data2021-lelephid",
+      "doi": "10.3390/data6050051",
+      "title": "LeLePhid: An Image Dataset for Aphid Detection and Infestation Severity on Lemon Leaves",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Roberth Alcivar-Cevallos",
+        "Jéssica Morales Carrillo",
+        "Magdalena Castro",
+        "Shabely Avellán",
+        "Aaron Loor",
+        "Fernando Mendoza"
+      ],
+      "venue": "Data, 6(5), 51",
+      "type": "journal",
+      "year": 2021,
+      "openAccess": true,
+      "postId": null,
+      "topics": [
+        "agriculture",
+        "computer-vision",
+        "dataset"
+      ],
+      "citations": 20
+    },
+    {
+      "id": "sst2021-social-emergency",
+      "doi": "10.1007/978-981-16-4126-8_25",
+      "title": "Toward a Social Media Emergency Events Detection Based on Supervised Learning",
+      "authors": [
+        "Yahir Mendoza",
+        "Jorge Santillan",
+        "Roberth Alcivar-Cevallos",
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "CITIS 2021, Guayaquil, Ecuador (SIST)",
+      "type": "conference",
+      "year": 2021,
+      "openAccess": false,
+      "postId": null,
+      "topics": [
+        "social-media",
+        "nlp"
+      ],
+      "citations": 2
+    },
+    {
+      "id": "dib2020-power",
+      "doi": "10.1016/j.dib.2020.105246",
+      "title": "A data set for electric power consumption forecasting based on socio-demographic features: Data from an area of southern Colombia",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Jorge Dario Moncayo-Nacaza",
+        "Javier Revelo-Fuelagán",
+        "Paul D. Rosero-Montalvo",
+        "Andrés Anaya-Isaza",
+        "Diego Hernán Peluffo-Ordóñez"
+      ],
+      "venue": "Data in Brief",
+      "type": "journal",
+      "year": 2020,
+      "openAccess": false,
+      "topics": [
+        "energy",
+        "dataset"
+      ],
+      "citations": 3
+    },
+    {
+      "id": "jbcb2020-gene",
+      "doi": "10.1142/s0219720020500389",
+      "title": "Influence of the GO-based semantic similarity measures in multi-objective gene clustering algorithm performance",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Mario Inostroza-Ponta"
+      ],
+      "venue": "Journal of Bioinformatics and Computational Biology",
+      "type": "journal",
+      "year": 2020,
+      "openAccess": false,
+      "topics": [
+        "clustering",
+        "bioinformatics"
+      ],
+      "citations": 1
+    },
+    {
+      "id": "ijms2020-tgct",
+      "doi": "10.3390/ijms21124487",
+      "title": "Meta-Analysis of Gene Expressions in Testicular Germ Cell Tumor Histologies",
+      "authors": [
+        "Finn Edler von Eyben",
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "International Journal of Molecular Sciences",
+      "type": "journal",
+      "year": 2020,
+      "openAccess": true,
+      "topics": [
+        "health",
+        "bioinformatics"
+      ],
+      "citations": 14
+    },
+    {
+      "id": "dib2019-rocole",
+      "doi": "10.1016/j.dib.2019.104414",
+      "title": "RoCoLe: A robusta coffee leaf images dataset for evaluation of machine learning based methods in plant diseases recognition",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Kevin Cusme",
+        "Angélica Loor",
+        "Esneider Santander"
+      ],
+      "venue": "Data in Brief",
+      "type": "journal",
+      "year": 2019,
+      "openAccess": false,
+      "topics": [
+        "agriculture",
+        "computer-vision",
+        "dataset"
+      ],
+      "citations": 96
+    }
+  ]
+}

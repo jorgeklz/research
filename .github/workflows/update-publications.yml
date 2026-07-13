@@ -1,0 +1,39 @@
+name: Update publications & generate posts
+
+on:
+  schedule:
+    # Every Monday 07:00 UTC (02:00 Ecuador)
+    - cron: "0 7 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Update publications from ORCID/Crossref
+        env:
+          # Optional: add ANTHROPIC_API_KEY in repo Settings > Secrets to get
+          # fully written bilingual posts. Without it, draft posts are created.
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python3 scripts/update_publications.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "site-bot"
+          git config user.email "actions@github.com"
+          if ! git diff --quiet data/; then
+            git add data/
+            git commit -m "auto: new publications and posts ($(date -u +%F))"
+            git push
+          else
+            echo "No changes."
+          fi
