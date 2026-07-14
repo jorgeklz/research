@@ -80,6 +80,7 @@
     cal: svg('<rect x="3" y="4.5" width="18" height="16" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2.5" x2="8" y2="6"/><line x1="16" y1="2.5" x2="16" y2="6"/>', 13),
     clock: svg('<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/>', 13),
     eye: svg('<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>', 13),
+    pin: svg('<path d="M12 21s7-6.4 7-11.5A7 7 0 1 0 5 9.5C5 14.6 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/>', 13),
     whatsapp: svg('<path d="M3 21l1.4-4.4A8 8 0 1 1 8.6 19.6 8 8 0 0 1 3 21Z"/><path d="M8.7 8.4c.3 0 .5.35.6.6l.5 1.35c.05.15.05.3-.05.45l-.45.6c-.1.15-.1.3 0 .45.35.6.85 1.2 1.4 1.65.55.45 1.15.8 1.75 1.05.15.05.3.05.4-.05l.55-.55c.15-.15.3-.15.45-.1l1.3.55c.25.1.55.3.55.6 0 .6-.4 1.2-.95 1.4-.6.25-1.3.3-2.15 0a7.2 7.2 0 0 1-2.9-1.85 7.2 7.2 0 0 1-1.85-2.9c-.3-.85-.25-1.55 0-2.15.2-.55.8-.95 1.4-.95Z"/>', 13),
     tJournal: svg('<path d="M4 5a2 2 0 0 1 2-2h5v16H6a2 2 0 0 0-2 2V5Z"/><path d="M20 5a2 2 0 0 0-2-2h-5v16h5a2 2 0 0 1 2 2V5Z"/>', 13),
     tConf: svg('<rect x="3" y="4" width="18" height="12" rx="2"/><line x1="12" y1="16" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/><polyline points="8.5 11 11 8.5 13 10.5 16 7"/>', 13),
@@ -121,7 +122,12 @@
   const firstPara = (t) => String(t || "").split(/\n\s*\n/)[0] || "";
   const stripJats = (t) => { const d = document.createElement("div"); d.innerHTML = String(t || "").replace(/<[^>]+>/g, " "); return d.textContent.replace(/\s+/g, " ").trim(); };
   const fmtDate = (iso) => { try { return new Date(iso + "T12:00:00").toLocaleDateString(LANG === "es" ? "es-EC" : "en-GB", { year: "numeric", month: "short", day: "numeric" }); } catch (e) { return iso; } };
-  const boldSelf = (a) => a.map((x) => /parraga|párraga/i.test(x) ? `<b>${esc(x)}</b>` : esc(x)).join(", ");
+  const boldSelf = (a) => {
+    const marked = a.map((x) => /parraga|párraga/i.test(x) ? `<b>${esc(x)}</b>` : esc(x));
+    if (marked.length <= 1) return marked.join("");
+    const conj = LANG === "es" ? " y " : " and ";
+    return marked.slice(0, -1).join(", ") + conj + marked[marked.length - 1];
+  };
   const typeLabel = (t) => T[t] || (t === "journal-article" ? T.journal : /conf|proceed/.test(t || "") ? T.conference : t) || "";
 
   function bibtex(p) {
@@ -175,13 +181,38 @@
           const dp = (m[k] || {})["date-parts"]; if (dp && dp[0] && dp[0][0]) { year = dp[0][0]; break; }
         }
         const ct = m["container-title"] || [];
-        const type = m.type === "journal-article" ? "journal" : /proceed|conf/.test(m.type || "") ? "conference" : "other";
+        const venueName = stripJats(ct[0] || "");
+        const venueLooksLikeConference = /conference|proceedings|symposium|workshop|congress|congreso/i.test(venueName);
+        let type = m.type === "journal-article" ? "journal" : /proceed|conf/.test(m.type || "") ? "conference" : "other";
+        if (venueLooksLikeConference) type = "conference";
         return {
-          title: stripJats((m.title || [""])[0]), authors, venue: ct[0] || "", year,
+          title: stripJats((m.title || [""])[0]), authors, venue: venueName, year,
           pages: m.page || null, type, abstract: stripJats(m.abstract || ""),
           openAccess: (m.license || []).some((l) => /creativecommons/.test(l.URL || ""))
         };
       });
+  }
+
+  /* ---------- secondary abstract source: OpenAlex (covers many DOIs Crossref lacks) ---------- */
+  function openAlexAbstract(doi) {
+    return fetch("https://api.openalex.org/works/https://doi.org/" + encodeURIComponent(doi))
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        const idx = j && j.abstract_inverted_index;
+        if (!idx) return "";
+        const words = [];
+        Object.keys(idx).forEach((w) => { idx[w].forEach((pos) => { words[pos] = w; }); });
+        return words.join(" ").replace(/\s+/g, " ").trim();
+      })
+      .catch(() => "");
+  }
+  function topicLabel(t) { return String(t || "").replace(/-/g, " "); }
+  /* crude EN/ES language guess so we never silently pass off an English abstract as a Spanish one */
+  function looksEnglish(text) {
+    const t = " " + String(text || "").toLowerCase() + " ";
+    const en = (t.match(/ (the|and|of|is|with|this|were|from|study|using|based) /g) || []).length;
+    const es = (t.match(/ (el|la|los|las|de|que|es|con|este|esta|estudio|para|una|del) /g) || []).length;
+    return en > es;
   }
 
   /* ---------- dynamic bilingual post from metadata (Crossref abstract) ---------- */
@@ -194,46 +225,45 @@
   }
   function buildPost(meta, doi) {
     const venue = meta.venue || "";
-    const kind = meta.type === "journal" ? { en: "journal article", es: "artículo de revista" }
-      : meta.type === "conference" ? { en: "conference paper", es: "ponencia de congreso" }
-      : { en: "publication", es: "publicación" };
-    const coEn = (meta.authors && meta.authors.length) ? boldSelf(meta.authors) : "";
     const abs = meta.abstract || "";
     const oaEn = meta.openAccess ? " It is open access, so anyone can read it in full." : "";
     const oaEs = meta.openAccess ? " Es de acceso abierto, así que cualquiera puede leerlo completo." : "";
+    const abstractIsEnglish = abs && looksEnglish(abs);
+    const esNote = abstractIsEnglish
+      ? `*Nota: aún no hay una versión en español de este resumen; se muestra tal como aparece en la fuente original (inglés).*\n\n`
+      : "";
 
     let en, es;
     if (abs) {
       const parts = splitParagraphs(abs, 3);
-      en = `This **${kind.en}**${venue ? `, published in *${venue}*` : ""}${meta.year ? ` in ${meta.year}` : ""}, ` +
-        `${coEn ? "was written by " + coEn + ". " : "is summarised below. "}Here is what it is about, in plain terms.\n\n` +
-        parts.map((p) => esc ? p : p).join("\n\n") +
+      en = parts.join("\n\n") +
         `\n\nYou can read the full paper through the link below.${oaEn}`;
-      es = `Este **${kind.es}**${venue ? `, publicado en *${venue}*` : ""}${meta.year ? ` en ${meta.year}` : ""}, ` +
-        `${coEn ? "fue escrito por " + coEn + ". " : "se resume a continuación. "}Esto es de lo que trata, en términos simples.\n\n` +
-        parts.map((p) => p).join("\n\n") +
+      es = esNote + parts.join("\n\n") +
         `\n\nPuedes leer el artículo completo en el enlace de abajo.${oaEs}`;
     } else {
-      en = `This **${kind.en}**${venue ? `, published in *${venue}*` : ""}${meta.year ? ` in ${meta.year}` : ""}, ` +
-        `${coEn ? "was written by " + coEn + ". " : "is listed below. "}\n\n` +
-        `The publisher does not provide a public abstract for this work, so the full details live in the paper itself.\n\n` +
-        `The topic fits the lines of research on artificial intelligence, machine learning and data science featured across this site.\n\n` +
+      const topics = (meta.topics || []).map(topicLabel);
+      const topicsEn = topics.length
+        ? `Based on its publication record, this work relates to ${topics.slice(0, 3).join(", ")}.\n\n`
+        : "";
+      const topicsEs = topics.length
+        ? `Según su registro de publicación, este trabajo se relaciona con ${topics.slice(0, 3).join(", ")}.\n\n`
+        : "";
+      en = `The publisher does not provide a public abstract for this work, so this page is limited to what is listed in its metadata; the full details live in the paper itself.\n\n` +
+        topicsEn +
         `You can read the full paper through the link below.${oaEn}`;
-      es = `Este **${kind.es}**${venue ? `, publicado en *${venue}*` : ""}${meta.year ? ` en ${meta.year}` : ""}, ` +
-        `${coEn ? "fue escrito por " + coEn + ". " : "se detalla abajo. "}\n\n` +
-        `La editorial no ofrece un resumen público de este trabajo, así que los detalles completos están en el propio artículo.\n\n` +
-        `El tema encaja con las líneas de investigación en inteligencia artificial, machine learning y ciencia de datos presentes en este sitio.\n\n` +
+      es = `La editorial no ofrece un resumen público de este trabajo, así que esta página se limita a lo que indican sus metadatos; los detalles completos están en el propio artículo.\n\n` +
+        topicsEs +
         `Puedes leer el artículo completo en el enlace de abajo.${oaEs}`;
     }
 
     return {
       auto: true, doi,
       date: (meta.year ? meta.year + "-01-01" : new Date().toISOString().slice(0, 10)),
-      type: "paper",
+      type: meta.type === "conference" ? "conference" : meta.type === "software" ? "software" : "journal",
       title: { en: meta.title, es: meta.title },
       summary: {
-        en: `New ${kind.en}${venue ? " in " + venue : ""}${meta.year ? " (" + meta.year + ")" : ""}.`,
-        es: `Nueva ${kind.es}${venue ? " en " + venue : ""}${meta.year ? " (" + meta.year + ")" : ""}.`
+        en: `New publication${venue ? " in " + venue : ""}${meta.year ? " (" + meta.year + ")" : ""}.`,
+        es: `Nueva publicación${venue ? " en " + venue : ""}${meta.year ? " (" + meta.year + ")" : ""}.`
       },
       body: { en, es },
       links: doi ? [{ label: "DOI", url: "https://doi.org/" + doi }] : []
@@ -400,10 +430,19 @@
       });
 
   }
+  function parseVenueLocation(venue) {
+    const parts = String(venue || "").split(",").map((s) => s.trim()).filter(Boolean);
+    if (parts.length < 3) return null;
+    const city = parts[1];
+    const country = parts[2].replace(/\s*\([^)]*\)\s*$/, "").trim();
+    if (!city || !country) return null;
+    return `${city}, ${country}`;
+  }
   function pubKind(post, pubs) {
     const pub = post.doi && (pubs.items || []).find((p) => normDoi(p.doi) === normDoi(post.doi));
-    const type = pub ? pub.type : (post.type === "conference" ? "conference" : "journal");
-    if (type === "conference") return { label: T.conference, icon: ICON.tConf };
+    const type = pub ? pub.type : (["conference", "software"].includes(post.type) ? post.type : "journal");
+    const venue = (pub && pub.venue) || (post._ref && post._ref.venue) || "";
+    if (type === "conference") return { label: T.conference, icon: ICON.tConf, location: parseVenueLocation(venue) };
     if (type === "software") return { label: T.software, icon: ICON.tSoft };
     return { label: T.journal, icon: ICON.tJournal };
   }
@@ -411,6 +450,7 @@
     opts = opts || {};
     const k = pubKind(post, pubs);
     const mins = readingMinutes(post);
+    const locHtml = k.location ? `<span class="mi">${ICON.pin}${esc(k.location)}</span>` : "";
     const viewsHtml = opts.showViews
       ? `<span class="mi" id="post-views">${ICON.eye}<span class="views-count">···</span></span>`
       : "";
@@ -420,6 +460,7 @@
     return `<div class="meta">
       <span class="mi">${ICON.cal}<time datetime="${esc(post.date)}">${fmtDate(post.date)}</time></span>
       <span class="mi">${k.icon}${esc(k.label)}</span>
+      ${locHtml}
       <span class="mi">${ICON.clock}${mins} ${esc(T.minRead)}</span>
       ${viewsHtml}
       ${shareHtml}
@@ -695,7 +736,7 @@
     if (ref) {
       html += `<div class="refbox">
         <span class="lab">${T.aboutPaper}</span>
-        <div class="ref-cite">${ref.authors && ref.authors.length ? boldSelf(ref.authors) + ". " : ""}<em>${esc(ref.title)}</em>. ${esc(ref.venue || "")}${ref.year ? ", " + ref.year : ""}.${post.doi ? ` <a href="https://doi.org/${esc(post.doi)}" target="_blank" rel="noopener">doi:${esc(post.doi)}</a>` : ""}</div>
+        <div class="ref-cite"><em>${esc(ref.title)}</em>. ${esc(ref.venue || "")}${ref.year ? ", " + ref.year : ""}.${post.doi ? ` <a href="https://doi.org/${esc(post.doi)}" target="_blank" rel="noopener">doi:${esc(post.doi)}</a>` : ""}</div>
         ${doiURL ? `<a class="read-paper" href="${esc(doiURL)}" target="_blank" rel="noopener">${ICON.external}<span>${T.readPaper}</span>${oa ? `<span class="oa-chip">${T.openAccess}</span>` : ""}</a>` : ""}
       </div>`;
     } else if (doiURL) {
@@ -725,11 +766,16 @@
       body.innerHTML = `<p class="loading">${T.generating}</p>`;
       crossref(doi).then((m) => {
         if (local) { m.title = local.title || m.title; if (local.authors && local.authors.length) m.authors = local.authors; if (local.venue) m.venue = local.venue; }
-        const post = buildPost(m, doi);
-        post._ref = { title: m.title, authors: m.authors, venue: m.venue, year: m.year };
-        renderPost(profile, pubs, post);
+        m.topics = local ? local.topics : [];
+        const finish = (meta) => {
+          const post = buildPost(meta, doi);
+          post._ref = { title: meta.title, authors: meta.authors, venue: meta.venue, year: meta.year };
+          renderPost(profile, pubs, post);
+        };
+        if (m.abstract) { finish(m); }
+        else { openAlexAbstract(doi).then((abs) => { m.abstract = abs; finish(m); }); }
       }).catch(() => {
-        if (local) { const post = buildPost({ title: local.title, authors: local.authors, venue: local.venue, year: local.year, abstract: "" }, doi); renderPost(profile, pubs, post); }
+        if (local) { const post = buildPost({ title: local.title, authors: local.authors, venue: local.venue, year: local.year, abstract: "", topics: local.topics }, doi); renderPost(profile, pubs, post); }
         else hero.innerHTML = `<h1>${T.notFound}</h1>`, body.innerHTML = "";
       });
       return;
