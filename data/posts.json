@@ -329,6 +329,37 @@
       ]
     },
     {
+      "id": "post-smc2025-helmet",
+      "date": "2025-10-05",
+      "type": "paper",
+      "doi": "10.1109/smc58881.2025.11343106",
+      "auto": false,
+      "topics": [
+        "computer-vision",
+        "deep-learning",
+        "optimization",
+        "safety"
+      ],
+      "title": {
+        "en": "Checking for hard hats automatically, on site",
+        "es": "Comprobar el uso de cascos de forma automática, en obra"
+      },
+      "summary": {
+        "en": "With Jorge Rodas-Silva, a CNN tuned by a genetic algorithm to automatically check whether workers are wearing safety helmets, presented at IEEE SMC 2025 in Vienna, Austria.",
+        "es": "Con Jorge Rodas-Silva, una CNN afinada con un algoritmo genético para comprobar automáticamente si los trabajadores llevan casco de seguridad, presentado en IEEE SMC 2025 en Viena, Austria."
+      },
+      "body": {
+        "en": "Construction sites and factories require workers to wear a helmet, but checking that by hand across a busy site is slow and easy to get wrong. A camera that could flag a worker without one in real time would let a safety officer step in before an accident happens, not after.\n\nWith **Jorge Rodas-Silva**, who led the work, I built a detector for exactly that: a **convolutional neural network (CNN)** trained to recognise whether a person in an image is wearing a helmet, with its settings tuned by a **genetic algorithm**.\n\nA CNN's raw settings, how many layers it has, how they are connected, how fast it learns, make a real difference to its accuracy, and getting them right by hand is mostly guesswork. A genetic algorithm searches that space automatically: borrowing from natural selection, it keeps a population of candidate configurations, lets the best-performing ones survive and combine over many generations, and converges on settings tuned to the task, the same approach we used earlier to fine-tune a power-demand forecaster.\n\nThe result is a more practical route to real-time **personal protective equipment (PPE)** compliance monitoring, the kind of system a site camera could run continuously rather than relying on occasional spot checks. We presented the work at the **2025 IEEE International Conference on Systems, Man, and Cybernetics (SMC)**, held in Vienna, Austria.",
+        "es": "Las obras de construcción y las fábricas exigen que los trabajadores usen casco, pero comprobarlo a mano en una obra concurrida es lento y fácil de pasar por alto. Una cámara capaz de señalar a un trabajador sin casco en tiempo real permitiría que un responsable de seguridad intervenga antes del accidente, no después.\n\nCon **Jorge Rodas-Silva**, que lideró el trabajo, construí un detector para justamente eso: una **red neuronal convolucional (CNN)** entrenada para reconocer si una persona en una imagen lleva puesto un casco, con sus parámetros afinados mediante un **algoritmo genético**.\n\nLos parámetros de una CNN, cuántas capas tiene, cómo se conectan, qué tan rápido aprende, marcan una diferencia real en su precisión, y ajustarlos a mano suele ser cuestión de ensayo y error. Un algoritmo genético busca en ese espacio de forma automática: tomando prestado de la selección natural, mantiene una población de configuraciones candidatas, deja que las que mejor rinden sobrevivan y se combinen durante muchas generaciones, y converge en parámetros afinados para la tarea, el mismo enfoque que usamos antes para afinar un pronosticador de demanda eléctrica.\n\nEl resultado es una vía más práctica hacia el monitoreo en tiempo real del cumplimiento del uso de **equipo de protección personal (EPP)**, el tipo de sistema que una cámara de obra podría ejecutar de forma continua en lugar de depender de controles ocasionales. Presentamos el trabajo en la **2025 IEEE International Conference on Systems, Man, and Cybernetics (SMC)**, realizada en Viena, Austria."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1109/smc58881.2025.11343106"
+        }
+      ]
+    },
+    {
       "id": "post-enfoqueute2024-ann",
       "date": "2024-10-01",
       "type": "paper",
