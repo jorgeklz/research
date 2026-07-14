@@ -2,6 +2,91 @@
   "updated": "2026-07-13",
   "items": [
     {
+      "id": "etcm2025-braintumor",
+      "doi": "10.1109/ETCM67548.2025.11304324",
+      "title": "Brain Tumor Detection in Magnetic Resonance Imaging Using Class Balancing Techniques and Pretrained Neural Networks",
+      "authors": [
+        "Jesus Zambrano",
+        "Jorge Parraga-Alava",
+        "Carlos Silva-Villafuerte"
+      ],
+      "venue": "ETCM 2025, Quito, Ecuador",
+      "type": "conference",
+      "year": 2025,
+      "openAccess": false,
+      "postId": "post-etcm2025-braintumor",
+      "topics": [
+        "health",
+        "deep-learning",
+        "machine-learning"
+      ],
+      "citations": 0
+    },
+    {
+      "id": "ici2st2025-population",
+      "doi": "10.1109/ICI2ST68465.2025.00018",
+      "title": "Impact of social factors on population growth in Ecuador, based on time-series algorithms",
+      "authors": [
+        "Winter Meza-Jiménez",
+        "Jorge Herrera-Tapia",
+        "Jorge Parraga-Alava",
+        "Iván García-Santillán"
+      ],
+      "venue": "ICI2ST 2025, Quito, Ecuador",
+      "type": "conference",
+      "year": 2025,
+      "openAccess": false,
+      "postId": "post-ici2st2025-population",
+      "topics": [
+        "health",
+        "machine-learning"
+      ],
+      "citations": 0
+    },
+    {
+      "id": "iti2026-bibliometric",
+      "doi": "10.53591/iti.v18i25.3172",
+      "title": "A Bibliometric Analysis of a University-Based Computer Science Journal",
+      "authors": [
+        "Robin Fernando Zambrano Triviño",
+        "Jorge Parraga-Alava",
+        "Manuel Villalobos-Cid"
+      ],
+      "venue": "Investigación, Tecnología e Innovación, Vol. 18 No. 25 (2026)",
+      "type": "journal",
+      "year": 2026,
+      "openAccess": true,
+      "postId": "post-iti2026-bibliometric",
+      "topics": [
+        "review",
+        "nlp",
+        "software"
+      ],
+      "pages": "11-22",
+      "citations": 0
+    },
+    {
+      "id": "iti2026-rust-alzheimer",
+      "doi": "10.53591/iti.v18i25.3232",
+      "title": "Modelo basado en Rust en la detección eficiente de Alzheimer en imágenes de resonancia magnética cerebral",
+      "authors": [
+        "Joel García Arteaga",
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "Investigación, Tecnología e Innovación, Vol. 18 No. 25 (2026)",
+      "type": "journal",
+      "year": 2026,
+      "openAccess": true,
+      "postId": "post-iti2026-rust-alzheimer",
+      "topics": [
+        "health",
+        "deep-learning",
+        "machine-learning"
+      ],
+      "pages": "23-34",
+      "citations": 0
+    },
+    {
       "id": "cisti2026-oop",
       "doi": "10.1007/978-3-032-12882-9_6",
       "title": "Comparing Academic Performance in Online and Face-to-Face Object-Oriented Programming Courses: An Educational Data Mining Analysis",
