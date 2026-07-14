@@ -22,6 +22,7 @@
       paper: "New paper", news: "News",
       readMore: "Read the post", cite: "Cite", copied: "BibTeX copied", doi: "DOI",
       openAccess: "Open access", all: "All", post: "Post", aboutPaper: "About the paper", readPaper: "Read the paper",
+      readOriginalPaper: "Read the original paper",
       postLink: "Explanatory post", article: "Article", minRead: "min read", cvEdu: "Education", cvExp: "Academic experience", cvAwards: "Awards & recognition",
       views: "views", viewsOne: "view", shareWa: "Share on WhatsApp",
       empty: "Nothing here yet.", notFound: "Post not found.", loadingOrcid: "Loading publications from ORCID…",
@@ -29,6 +30,7 @@
       prev: "← Prev", next: "Next →", pageOf: (a, b) => `Page ${a} of ${b}`, goTo: "Go to",
       backNews: "← All news & posts", generating: "Preparing a plain-language summary…",
       autoNote: "Summary generated automatically from the publication metadata.",
+      autoSummary: "Read a plain-language summary of this paper, generated from its abstract.",
       loadFail: "Could not load data. Serve the site with a local server (python3 -m http.server) instead of opening the file directly.",
       orcidFail: "Could not reach ORCID. Showing the curated list instead."
     },
@@ -37,6 +39,7 @@
       paper: "Nuevo artículo", news: "Noticia",
       readMore: "Leer el post", cite: "Citar", copied: "BibTeX copiado", doi: "DOI",
       openAccess: "Acceso abierto", all: "Todas", post: "Post", aboutPaper: "Sobre el artículo", readPaper: "Leer el paper",
+      readOriginalPaper: "Leer el paper original",
       postLink: "Post explicativo de la publicación", article: "Artículo", minRead: "min de lectura", cvEdu: "Educación", cvExp: "Experiencia académica", cvAwards: "Premios y reconocimientos",
       views: "vistas", viewsOne: "vista", shareWa: "Compartir en WhatsApp",
       empty: "Aún no hay contenido.", notFound: "Entrada no encontrada.", loadingOrcid: "Cargando publicaciones desde ORCID…",
@@ -44,6 +47,7 @@
       prev: "← Ant.", next: "Sig. →", pageOf: (a, b) => `Página ${a} de ${b}`, goTo: "Ir a",
       backNews: "← Todas las noticias y posts", generating: "Preparando un resumen divulgativo…",
       autoNote: "Resumen generado automáticamente a partir de los metadatos de la publicación.",
+      autoSummary: "Lee un resumen en lenguaje simple de este artículo, generado a partir de su abstract.",
       loadFail: "No se pudieron cargar los datos. Sirve el sitio con un servidor local (python3 -m http.server).",
       orcidFail: "No se pudo conectar con ORCID. Se muestra la lista curada."
     }
@@ -335,12 +339,46 @@
     return el;
   }
 
+  /* ---------- shared: curated list + ORCID live fetch/merge (used by Publications and News pages) ---------- */
+  function curatedPubsSorted(pubs) {
+    return [...pubs.items].sort((a, b) => (b.year || 0) - (a.year || 0));
+  }
+  function fetchLivePubs(pubs) {
+    const curatedList = curatedPubsSorted(pubs);
+    const localByDoi = {}; pubs.items.forEach((p) => { if (p.doi) localByDoi[normDoi(p.doi)] = p; });
+    return fetch(`https://pub.orcid.org/v3.0/${ORCID_ID}/works`, { headers: { Accept: "application/json" } })
+      .then((r) => { if (!r.ok) throw new Error("orcid " + r.status); return r.json(); })
+      .then((data) => {
+        const groups = data.group || [];
+        const works = groups.map((g) => g["work-summary"] && g["work-summary"][0]).filter(Boolean).map((w) => {
+          const title = (w.title && w.title.title && w.title.title.value) || "";
+          const year = (w["publication-date"] && w["publication-date"].year && w["publication-date"].year.value) || null;
+          const jt = (w["journal-title"] && w["journal-title"].value) || "";
+          let doi = null;
+          const ids = (w["external-ids"] && w["external-ids"]["external-id"]) || [];
+          const d = ids.find((e) => e["external-id-type"] === "doi"); if (d) doi = d["external-id-value"];
+          const wtype = (w.type || "").toLowerCase();
+          const type = wtype.includes("journal") ? "journal" : (wtype.includes("conference") || wtype.includes("proceed")) ? "conference" : (wtype.includes("book") ? "book" : "other");
+          const local = doi && localByDoi[normDoi(doi)];
+          if (local) return Object.assign({}, local);
+          return { title, year: year ? Number(year) : null, venue: jt, doi, type, authors: [], _needsEnrich: !!doi };
+        }).filter((w) => w.title);
+        // dedupe by doi/title, keep ORCID order (already year-grouped) then sort by year desc
+        const seen = new Set();
+        const merged = [];
+        works.forEach((w) => { if (isExcluded(w)) return; const k = normDoi(w.doi) || w.title.toLowerCase(); if (!seen.has(k)) { seen.add(k); merged.push(w); } });
+        // include any local not present
+        curatedList.forEach((p) => { if (isExcluded(p)) return; const k = normDoi(p.doi) || p.title.toLowerCase(); if (!seen.has(k)) { seen.add(k); merged.push(p); } });
+        merged.sort((a, b) => (b.year || 0) - (a.year || 0));
+        return merged;
+      });
+  }
+
   /* ---------- Publications page: ORCID live + local merge + pagination ---------- */
   function fillPublications(profile, pubs, posts) {
     const list = $("#pub-list"), fw = $("#pub-filters"), byId = indexPosts(posts);
     const pag = $("#pub-pagination"), info = $("#pag-info");
     const prev = $("#pag-prev"), next = $("#pag-next"), note = $("#orcid-note");
-    const localByDoi = {}; pubs.items.forEach((p) => { if (p.doi) localByDoi[normDoi(p.doi)] = p; });
 
     let all = [], filtered = [], type = "all", page = 0;
 
@@ -392,34 +430,11 @@
     }
 
     // curated (local) list as immediate fallback
-    const curatedList = [...pubs.items].sort((a, b) => (b.year || 0) - (a.year || 0));
-    all = curatedList; apply();
+    all = curatedPubsSorted(pubs); apply();
 
     // live ORCID
-    fetch(`https://pub.orcid.org/v3.0/${ORCID_ID}/works`, { headers: { Accept: "application/json" } })
-      .then((r) => { if (!r.ok) throw new Error("orcid " + r.status); return r.json(); })
-      .then((data) => {
-        const groups = data.group || [];
-        const works = groups.map((g) => g["work-summary"] && g["work-summary"][0]).filter(Boolean).map((w) => {
-          const title = (w.title && w.title.title && w.title.title.value) || "";
-          const year = (w["publication-date"] && w["publication-date"].year && w["publication-date"].year.value) || null;
-          const jt = (w["journal-title"] && w["journal-title"].value) || "";
-          let doi = null;
-          const ids = (w["external-ids"] && w["external-ids"]["external-id"]) || [];
-          const d = ids.find((e) => e["external-id-type"] === "doi"); if (d) doi = d["external-id-value"];
-          const wtype = (w.type || "").toLowerCase();
-          const type = wtype.includes("journal") ? "journal" : (wtype.includes("conference") || wtype.includes("proceed")) ? "conference" : (wtype.includes("book") ? "book" : "other");
-          const local = doi && localByDoi[normDoi(doi)];
-          if (local) return Object.assign({}, local);
-          return { title, year: year ? Number(year) : null, venue: jt, doi, type, authors: [], _needsEnrich: !!doi };
-        }).filter((w) => w.title);
-        // dedupe by doi/title, keep ORCID order (already year-grouped) then sort by year desc
-        const seen = new Set();
-        const merged = [];
-        works.forEach((w) => { if (isExcluded(w)) return; const k = normDoi(w.doi) || w.title.toLowerCase(); if (!seen.has(k)) { seen.add(k); merged.push(w); } });
-        // include any local not present
-        curatedList.forEach((p) => { if (isExcluded(p)) return; const k = normDoi(p.doi) || p.title.toLowerCase(); if (!seen.has(k)) { seen.add(k); merged.push(p); } });
-        merged.sort((a, b) => (b.year || 0) - (a.year || 0));
+    fetchLivePubs(pubs)
+      .then((merged) => {
         all = merged;
         if (note) note.querySelector(".txt").textContent = `${merged.length} ${T.worksTotal} · ${T.syncedOrcid}`;
         apply();
@@ -504,13 +519,18 @@
       ${shareHtml}
     </div>`;
   }
+  function postCardHref(post) {
+    return post.id ? `${POST_PAGE}?id=${encodeURIComponent(post.id)}`
+      : `${POST_PAGE}?doi=${encodeURIComponent(post.doi)}`;
+  }
   function cardEl(post, pubs) {
     const el = document.createElement("article"); el.className = "card";
+    const href = postCardHref(post);
     el.innerHTML = `
       ${postMeta(post, pubs)}
-      <h3><a href="${POST_PAGE}?id=${encodeURIComponent(post.id)}">${esc(pick(post.title))}</a></h3>
+      <h3><a href="${href}">${esc(pick(post.title))}</a></h3>
       <p>${esc(pick(post.summary))}</p>
-      <a class="more" href="${POST_PAGE}?id=${encodeURIComponent(post.id)}">${T.readMore} ${ICON.arrow}</a>`;
+      <a class="more" href="${href}">${T.readMore} ${ICON.arrow}</a>`;
     return el;
   }
   function rowsEl(container, items, kind) {
@@ -715,11 +735,44 @@
     });
     render();
   }
+  // Builds the news feed as one entry per publication, in the exact order the
+  // publications themselves are listed (pubList, already sorted newest-first).
+  // A publication with a curated post uses it; a 2024+ publication without one
+  // gets a lightweight placeholder card that links to the dynamically-generated
+  // post (post.html?doi=...), same rule the Publications page already follows.
+  function buildNewsList(pubList, posts) {
+    const byDoi = {}; (posts.items || []).forEach((p) => { if (p.doi) byDoi[normDoi(p.doi)] = p; });
+    const out = [];
+    pubList.forEach((p) => {
+      if (isExcluded(p)) return;
+      const curated = p.doi && byDoi[normDoi(p.doi)];
+      if (curated) { out.push(curated); return; }
+      if ((p.year || 0) < 2024 || !p.doi) return; // matches the Publications-page rule
+      out.push({
+        id: null,
+        doi: p.doi,
+        date: `${p.year}-01-01`,
+        type: p.type,
+        auto: true,
+        topics: p.topics || [],
+        title: { en: p.title, es: p.title },
+        summary: { en: T.autoSummary, es: T.autoSummary }
+      });
+    });
+    // curated posts not tied to any doi currently in pubList (e.g. software posts) go last, newest first
+    const usedIds = new Set(out.map((x) => x.id).filter(Boolean));
+    const usedDois = new Set(out.map((x) => x.doi && normDoi(x.doi)).filter(Boolean));
+    const leftover = (posts.items || []).filter((p) => {
+      const k = p.doi && normDoi(p.doi);
+      return !(p.id && usedIds.has(p.id)) && !(k && usedDois.has(k));
+    }).sort((a, b) => (a.date < b.date ? 1 : -1));
+    return out.concat(leftover);
+  }
   function fillNews(profile, pubs, posts) {
     const wrap = $("#news-list");
     const pag = $("#news-pagination"), info = $("#news-info");
     const prev = $("#news-prev"), next = $("#news-next");
-    const s = [...posts.items].sort((a, b) => (a.date < b.date ? 1 : -1));
+    let s = buildNewsList(curatedPubsSorted(pubs), posts);
     let page = 0;
     function render() {
       const pages = Math.max(1, Math.ceil(s.length / PAGE_SIZE));
@@ -737,6 +790,8 @@
     if (prev) prev.addEventListener("click", () => { if (page > 0) { page--; render(); window.scrollTo({ top: 0, behavior: "smooth" }); } });
     if (next) next.addEventListener("click", () => { page++; render(); window.scrollTo({ top: 0, behavior: "smooth" }); });
     render();
+    // refine with the live ORCID-ordered list once it arrives, keeping the same order rule
+    fetchLivePubs(pubs).then((merged) => { s = buildNewsList(merged, posts); render(); }).catch(() => {});
   }
 
   function renderRelated(posts, current) {
@@ -756,7 +811,7 @@
           <span class="rel-t">${esc(pick(p.title))}</span>
           <span class="rel-m">${fmtDate(p.date)}</span>
         </a>
-        ${doiURL ? `<a class="rel-doi" href="${doiURL}" target="_blank" rel="noopener" title="${T.doi}: ${esc(p.doi)}">${ICON.external}<span>${T.doi}</span></a>` : ""}
+        ${doiURL ? `<a class="rel-doi" href="${doiURL}" target="_blank" rel="noopener" title="${T.doi}: ${esc(p.doi)}">${ICON.external}<span>${T.readOriginalPaper}</span></a>` : ""}
       </div>`;
     }).join("");
   }
