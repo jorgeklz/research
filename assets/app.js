@@ -53,7 +53,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().trim();
 
-  const VER = "15";
+  const VER = "17";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -409,6 +409,7 @@
   function fillChrome(profile) {
     const name = LANG === "es" && profile.nameEs ? profile.nameEs : profile.name;
     $$(".brand .bname").forEach((e) => e.textContent = name);
+    $$(".brand .logo").forEach((e) => e.setAttribute("alt", name));
     const soc = $("#socials");
     if (soc && profile.profiles) {
       soc.innerHTML = profile.profiles.map((p) =>
