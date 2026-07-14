@@ -344,6 +344,11 @@ h1.title em { font-style: normal; color: var(--blue); }
 .post-links { border-top: 1px solid var(--line); margin-top: 1.8rem; padding-top: 1rem; font-size: var(--fs-xs); font-weight: 600; display: flex; gap: 1.3rem; flex-wrap: wrap; }
 .post-links a { color: var(--blue-600); display: inline-flex; align-items: center; gap: .3rem; }
 .post-links a:hover { color: var(--blue-700); }
+.post-links a.share-wa svg { color: #25d366; }
+.meta a.share-wa { color: inherit; text-decoration: none; }
+.meta a.share-wa svg { color: #25d366; }
+.meta a.share-wa:hover { color: var(--blue-600); }
+.meta a.share-wa:hover svg { color: #1ebe5b; }
 .backlink { font-size: var(--fs-xs); font-weight: 600; color: var(--ink-2); padding: 1.6rem 0 0; display: inline-flex; align-items: center; gap: .3rem; }
 .backlink:hover { color: var(--blue-600); }
 

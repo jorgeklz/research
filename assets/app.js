@@ -23,6 +23,7 @@
       readMore: "Read the post", cite: "Cite", copied: "BibTeX copied", doi: "DOI",
       openAccess: "Open access", all: "All", post: "Post", aboutPaper: "About the paper", readPaper: "Read the paper",
       postLink: "Explanatory post", article: "Article", minRead: "min read", cvEdu: "Education", cvExp: "Academic experience", cvAwards: "Awards & recognition",
+      views: "views", viewsOne: "view", shareWa: "Share on WhatsApp",
       empty: "Nothing here yet.", notFound: "Post not found.", loadingOrcid: "Loading publications from ORCID…",
       syncedOrcid: "Live from ORCID", worksTotal: "publications",
       prev: "← Prev", next: "Next →", pageOf: (a, b) => `Page ${a} of ${b}`, goTo: "Go to",
@@ -37,6 +38,7 @@
       readMore: "Leer el post", cite: "Citar", copied: "BibTeX copiado", doi: "DOI",
       openAccess: "Acceso abierto", all: "Todas", post: "Post", aboutPaper: "Sobre el artículo", readPaper: "Leer el paper",
       postLink: "Post explicativo de la publicación", article: "Artículo", minRead: "min de lectura", cvEdu: "Educación", cvExp: "Experiencia académica", cvAwards: "Premios y reconocimientos",
+      views: "vistas", viewsOne: "vista", shareWa: "Compartir en WhatsApp",
       empty: "Aún no hay contenido.", notFound: "Entrada no encontrada.", loadingOrcid: "Cargando publicaciones desde ORCID…",
       syncedOrcid: "En vivo desde ORCID", worksTotal: "publicaciones",
       prev: "← Ant.", next: "Sig. →", pageOf: (a, b) => `Página ${a} de ${b}`, goTo: "Ir a",
@@ -77,6 +79,8 @@
     read: svg('<path d="M12 6.5C9 3.5 4.5 4 3 4v13c1.5 0 6-.5 9 2.5M12 6.5C15 3.5 19.5 4 21 4v13c-1.5 0-6-.5-9 2.5M12 6.5V19"/>', 16),
     cal: svg('<rect x="3" y="4.5" width="18" height="16" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2.5" x2="8" y2="6"/><line x1="16" y1="2.5" x2="16" y2="6"/>', 13),
     clock: svg('<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/>', 13),
+    eye: svg('<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>', 13),
+    whatsapp: svg('<path d="M3 21l1.4-4.4A8 8 0 1 1 8.6 19.6 8 8 0 0 1 3 21Z"/><path d="M8.7 8.4c.3 0 .5.35.6.6l.5 1.35c.05.15.05.3-.05.45l-.45.6c-.1.15-.1.3 0 .45.35.6.85 1.2 1.4 1.65.55.45 1.15.8 1.75 1.05.15.05.3.05.4-.05l.55-.55c.15-.15.3-.15.45-.1l1.3.55c.25.1.55.3.55.6 0 .6-.4 1.2-.95 1.4-.6.25-1.3.3-2.15 0a7.2 7.2 0 0 1-2.9-1.85 7.2 7.2 0 0 1-1.85-2.9c-.3-.85-.25-1.55 0-2.15.2-.55.8-.95 1.4-.95Z"/>', 13),
     tJournal: svg('<path d="M4 5a2 2 0 0 1 2-2h5v16H6a2 2 0 0 0-2 2V5Z"/><path d="M20 5a2 2 0 0 0-2-2h-5v16h5a2 2 0 0 1 2 2V5Z"/>', 13),
     tConf: svg('<rect x="3" y="4" width="18" height="12" rx="2"/><line x1="12" y1="16" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/><polyline points="8.5 11 11 8.5 13 10.5 16 7"/>', 13),
     tSoft: svg('<polyline points="9 8 5 12 9 16"/><polyline points="15 8 19 12 15 16"/>', 13),
@@ -368,6 +372,34 @@
     const words = t.replace(/[#*`>_\[\]()]/g, " ").split(/\s+/).filter(Boolean).length;
     return Math.max(1, Math.round(words / 200));
   }
+  /* ---------- visit counter (per post, shared across visitors) ---------- */
+  const VIEWS_NS = "jorgeparragaalava-site-posts";
+  function postViewKey(post) {
+    return post.id || (post.doi ? "doi-" + normDoi(post.doi) : "page-" + location.search);
+  }
+  function loadViewCount(post) {
+    const wrap = $("#post-views");
+    if (!wrap) return;
+    const label = wrap.querySelector(".views-count");
+    const key = encodeURIComponent(postViewKey(post));
+    const show = (raw) => {
+      const n = Number(raw) || 1;
+      const fmt = n.toLocaleString(LANG === "es" ? "es-EC" : "en-US");
+      label.textContent = `${fmt} ${n === 1 ? T.viewsOne : T.views}`;
+    };
+    // primary: Abacus (abacus.jasoncameron.dev). countapi.xyz is discontinued, so it is not used here.
+    fetch(`https://abacus.jasoncameron.dev/hit/${VIEWS_NS}/${key}`)
+      .then((r) => { if (!r.ok) throw new Error("abacus"); return r.json(); })
+      .then((d) => show(d.value))
+      .catch(() => {
+        // fallback: CounterAPI v1 (no auth required)
+        fetch(`https://api.counterapi.dev/v1/${VIEWS_NS}/${key}/up`)
+          .then((r) => { if (!r.ok) throw new Error("counterapi"); return r.json(); })
+          .then((d) => show(d.value))
+          .catch(() => { wrap.style.display = "none"; });
+      });
+
+  }
   function pubKind(post, pubs) {
     const pub = post.doi && (pubs.items || []).find((p) => normDoi(p.doi) === normDoi(post.doi));
     const type = pub ? pub.type : (post.type === "conference" ? "conference" : "journal");
@@ -375,13 +407,22 @@
     if (type === "software") return { label: T.software, icon: ICON.tSoft };
     return { label: T.journal, icon: ICON.tJournal };
   }
-  function postMeta(post, pubs) {
+  function postMeta(post, pubs, opts) {
+    opts = opts || {};
     const k = pubKind(post, pubs);
     const mins = readingMinutes(post);
+    const viewsHtml = opts.showViews
+      ? `<span class="mi" id="post-views">${ICON.eye}<span class="views-count">···</span></span>`
+      : "";
+    const shareHtml = opts.shareUrl
+      ? `<a class="mi share-wa" href="https://api.whatsapp.com/send?text=${encodeURIComponent(pick(post.title) + " — " + opts.shareUrl)}" target="_blank" rel="noopener">${ICON.whatsapp}<span>${esc(T.shareWa)}</span></a>`
+      : "";
     return `<div class="meta">
       <span class="mi">${ICON.cal}<time datetime="${esc(post.date)}">${fmtDate(post.date)}</time></span>
       <span class="mi">${k.icon}${esc(k.label)}</span>
       <span class="mi">${ICON.clock}${mins} ${esc(T.minRead)}</span>
+      ${viewsHtml}
+      ${shareHtml}
     </div>`;
   }
   function cardEl(post, pubs) {
@@ -644,7 +685,8 @@
   function renderPost(profile, pubs, post) {
     const hero = $("#post-hero"), body = $("#article"), links = $("#post-links");
     document.title = pick(post.title) + " — " + profile.name;
-    hero.innerHTML = `<h1>${esc(pick(post.title))}</h1>${postMeta(post, pubs)}`;
+    hero.innerHTML = `<h1>${esc(pick(post.title))}</h1>${postMeta(post, pubs, { showViews: true, shareUrl: location.href })}`;
+    loadViewCount(post);
     let html = md(pick(post.body));
     const pub = post.doi && pubs.items.find((p) => normDoi(p.doi) === normDoi(post.doi));
     const ref = pub || post._ref;
