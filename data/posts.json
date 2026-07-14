@@ -360,6 +360,64 @@
       ]
     },
     {
+      "id": "post-etcm2025-aphids",
+      "date": "2025-10-21",
+      "type": "paper",
+      "doi": "10.1109/ETCM67548.2025.11304406",
+      "auto": false,
+      "topics": [
+        "computer-vision",
+        "deep-learning",
+        "agriculture"
+      ],
+      "title": {
+        "en": "Which CNN actually spots aphids on a lemon leaf",
+        "es": "Qué CNN detecta mejor a los pulgones en una hoja de limón"
+      },
+      "summary": {
+        "en": "With Jorge Rodas-Silva, Joseph Chávez Reyes and Gema Bravo Navarrete, a comparison of CNN architectures for detecting aphids on lemon leaves, presented at IEEE ETCM 2025 in Quito, Ecuador.",
+        "es": "Con Jorge Rodas-Silva, Joseph Chávez Reyes y Gema Bravo Navarrete, una comparación de arquitecturas CNN para detectar pulgones en hojas de limón, presentado en IEEE ETCM 2025 en Quito, Ecuador."
+      },
+      "body": {
+        "en": "A few years ago, with **LeLePhid**, we published a small dataset of lemon leaf photos for detecting aphids and rating how badly a leaf was infested. A dataset on its own does not tell you which detection method actually works best on it, and for a grower deciding what to deploy in the field, that choice matters as much as the data.\n\nWith **Jorge Rodas-Silva**, **Joseph Chávez Reyes** and **Gema Bravo Navarrete**, I compared several **convolutional neural network (CNN)** architectures on that same aphid-detection problem, to see which one holds up best on images taken in a real lemon field rather than under lab conditions.\n\nThe comparison matters because architectures differ in how they trade off accuracy against how much training data and computing power they need. On a small agricultural dataset like this one, a heavier network can end up memorising the training images instead of learning to generalise, so the \"best\" model on paper is not always the most practical one to deploy.\n\nWe presented the comparison at the **2025 IEEE Ninth Ecuador Technical Chapters Meeting (ETCM)**, held in Quito, Ecuador. The aim was practical: give growers and other researchers a clearer sense of which CNN architecture to reach for when the available data is limited, before committing to a full field deployment.",
+        "es": "Hace unos años, con **LeLePhid**, publicamos un pequeño conjunto de fotos de hojas de limón para detectar pulgones y calificar qué tan infestada estaba una hoja. Un conjunto de datos por sí solo no dice qué método de detección funciona mejor sobre él, y para un agricultor que decide qué implementar en el campo, esa elección importa tanto como los datos.\n\nCon **Jorge Rodas-Silva**, **Joseph Chávez Reyes** y **Gema Bravo Navarrete**, comparé varias arquitecturas de **redes neuronales convolucionales (CNN)** sobre ese mismo problema de detección de pulgones, para ver cuál se sostiene mejor con imágenes tomadas en un campo de limón real y no en condiciones de laboratorio.\n\nLa comparación importa porque las arquitecturas difieren en cómo equilibran precisión frente a cuántos datos de entrenamiento y potencia de cómputo necesitan. En un conjunto de datos agrícola pequeño como este, una red más pesada puede terminar memorizando las imágenes de entrenamiento en lugar de aprender a generalizar, así que el modelo \"mejor\" en el papel no siempre es el más práctico para implementar.\n\nPresentamos la comparación en el **2025 IEEE Ninth Ecuador Technical Chapters Meeting (ETCM)**, realizado en Quito, Ecuador. El objetivo fue práctico: darles a los agricultores y a otros investigadores una idea más clara de qué arquitectura CNN elegir cuando los datos disponibles son limitados, antes de comprometerse con una implementación completa en el campo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1109/ETCM67548.2025.11304406"
+        }
+      ]
+    },
+    {
+      "id": "post-jpr2025-mentalhealth",
+      "date": "2025-05-15",
+      "type": "paper",
+      "doi": "10.1016/j.jpsychores.2025.112150",
+      "auto": false,
+      "topics": [
+        "health"
+      ],
+      "title": {
+        "en": "Why young people in Ecuador end up hospitalized for mental health",
+        "es": "Por qué los jóvenes en Ecuador terminan hospitalizados por salud mental"
+      },
+      "summary": {
+        "en": "With German Josuet Lapo-Talledo, Ana Lúcia S. Rodrigues, Karime Montes-Escobar and Aline Siteneski, a nationwide look at pediatric hospitalizations for mental health disorders in Ecuador, published in the Journal of Psychosomatic Research.",
+        "es": "Con German Josuet Lapo-Talledo, Ana Lúcia S. Rodrigues, Karime Montes-Escobar y Aline Siteneski, una mirada a escala nacional a las hospitalizaciones pediátricas por trastornos de salud mental en Ecuador, publicado en Journal of Psychosomatic Research."
+      },
+      "body": {
+        "en": "Mental health problems that begin in childhood or adolescence often go unnoticed until they become severe enough to require a hospital stay, by which point the condition has usually been building for a while. In Ecuador, as in much of Latin America, there has been little nationwide data on how often young people are hospitalized for these reasons, or why.\n\nWith **German Josuet Lapo-Talledo**, **Ana Lúcia S. Rodrigues**, **Karime Montes-Escobar** and **Aline Siteneski**, I studied eight years of nationwide hospital records to see which mental and behavioral disorders, classified using the standard **ICD-10** codes, led to hospitalization of children and adolescents in Ecuador, who was affected, and how long each stay lasted.\n\n**Substance use disorders** turned out to be the leading cause of these hospitalizations, ahead of any other diagnosis. **Depressive disorders** were the next major driver, and admissions for depression were more common among girls than boys; when hospitalization was needed for depression, the stay often ran past eleven days, longer than for most other causes.\n\nThese patterns point to where Ecuador's pediatric mental health services are under the most pressure today, and to two groups, adolescents with substance use problems and girls with depression, who may benefit most from earlier, targeted support before a crisis requires hospitalization. We published the results in the *Journal of Psychosomatic Research*.",
+        "es": "Los problemas de salud mental que comienzan en la niñez o la adolescencia suelen pasar inadvertidos hasta que se vuelven lo bastante graves como para requerir una hospitalización, momento en el que el trastorno ya lleva tiempo desarrollándose. En Ecuador, como en buena parte de América Latina, ha habido pocos datos a escala nacional sobre con qué frecuencia los jóvenes terminan hospitalizados por estos motivos, o por qué.\n\nCon **German Josuet Lapo-Talledo**, **Ana Lúcia S. Rodrigues**, **Karime Montes-Escobar** y **Aline Siteneski**, estudié ocho años de registros hospitalarios a escala nacional para ver qué trastornos mentales y del comportamiento, clasificados con los códigos estándar **CIE-10**, llevaban a la hospitalización de niños y adolescentes en Ecuador, a quién afectaban y cuánto duraba cada estancia.\n\nLos trastornos por **uso de sustancias psicoactivas** resultaron ser la causa principal de estas hospitalizaciones, por encima de cualquier otro diagnóstico. Los **trastornos depresivos** fueron el segundo motivo más importante, y los ingresos por depresión fueron más frecuentes en niñas que en niños; cuando se necesitaba hospitalización por depresión, la estancia solía superar los once días, más que la mayoría de las otras causas.\n\nEstos patrones señalan dónde está hoy la mayor presión sobre los servicios de salud mental infantil en Ecuador, y apuntan a dos grupos, adolescentes con problemas de uso de sustancias y niñas con depresión, que podrían beneficiarse más de un apoyo temprano y dirigido, antes de que se necesite una hospitalización. Publicamos los resultados en *Journal of Psychosomatic Research*."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.jpsychores.2025.112150"
+        }
+      ]
+    },
+    {
       "id": "post-enfoqueute2024-ann",
       "date": "2024-10-01",
       "type": "paper",
@@ -444,6 +502,35 @@
         {
           "label": "DOI",
           "url": "https://doi.org/10.1016/j.csl.2023.101579"
+        }
+      ]
+    },
+    {
+      "id": "post-heliyon2024-housing-fuzzy",
+      "date": "2024-02-23",
+      "type": "paper",
+      "doi": "10.1016/j.heliyon.2024.e26444",
+      "auto": false,
+      "topics": [
+        "review",
+        "recommender-systems"
+      ],
+      "title": {
+        "en": "Teaching a recommender to understand 'close enough' and 'affordable'",
+        "es": "Enseñarle a un recomendador qué significa \"cerca\" y \"asequible\""
+      },
+      "summary": {
+        "en": "With Emanuel G. Muñoz, Jaime Meza, Jonathan Josue Proaño Morales and Sebastian Ventura, two decades of research on fuzzy recommender systems for housing, reviewed under PRISMA and published in Heliyon.",
+        "es": "Con Emanuel G. Muñoz, Jaime Meza, Jonathan Josue Proaño Morales y Sebastian Ventura, dos décadas de investigación sobre sistemas de recomendación difusos para vivienda, revisadas con PRISMA y publicadas en Heliyon."
+      },
+      "body": {
+        "en": "Looking for a home is inherently vague: \"close to downtown\", \"reasonably priced\", \"in decent condition\" are the terms people actually use, not the rigid filters most real-estate search tools offer. **Fuzzy recommender systems** try to close that gap by letting a system reason with those imprecise, human terms instead of forcing buyers into strict checkboxes.\n\nWith **Emanuel G. Muñoz**, **Jaime Meza**, **Jonathan Josue Proaño Morales** and **Sebastian Ventura**, I reviewed two decades of research on fuzzy recommender systems built specifically for housing. Following the **PRISMA** methodology, we searched six academic databases covering work published between 1985 and 2024 and classified over a thousand articles to map out how the field has developed.\n\nA recurring pattern stood out: the more mature systems in this space tend to build in safeguards around trust and security between buyers and sellers, and some borrow ideas from **game theory** to model how the two sides actually negotiate, rather than treating a recommendation as a one-way suggestion.\n\nThe review is meant as a map for anyone starting work in this area, whether in real estate specifically or in fuzzy recommender systems more broadly, and it flags where the field still has open problems. We published it in *Heliyon*, and it is open access.",
+        "es": "Buscar una vivienda es, por naturaleza, impreciso: \"cerca del centro\", \"a buen precio\", \"en buen estado\" son los términos que la gente realmente usa, no los filtros rígidos que ofrecen la mayoría de los buscadores inmobiliarios. Los **sistemas de recomendación difusos** (fuzzy) intentan cerrar esa brecha dejando que un sistema razone con esos términos imprecisos y humanos en lugar de obligar a los compradores a casillas estrictas.\n\nCon **Emanuel G. Muñoz**, **Jaime Meza**, **Jonathan Josue Proaño Morales** y **Sebastian Ventura**, revisé dos décadas de investigación sobre sistemas de recomendación difusos construidos específicamente para vivienda. Siguiendo la metodología **PRISMA**, buscamos en seis bases de datos académicas trabajos publicados entre 1985 y 2024 y clasificamos más de mil artículos para mapear cómo se ha desarrollado el campo.\n\nUn patrón se repitió: los sistemas más maduros en esta área suelen incorporar salvaguardas de confianza y seguridad entre compradores y vendedores, y algunos toman ideas de la **teoría de juegos** para modelar cómo negocian realmente las dos partes, en lugar de tratar una recomendación como una sugerencia de una sola vía.\n\nLa revisión está pensada como un mapa para quien empiece a trabajar en esta área, ya sea en bienes raíces específicamente o en sistemas de recomendación difusos en general, y señala dónde el campo todavía tiene problemas abiertos. La publicamos en *Heliyon*, y es de acceso abierto."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.heliyon.2024.e26444"
         }
       ]
     },

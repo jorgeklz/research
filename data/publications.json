@@ -209,6 +209,50 @@
       "citations": 0
     },
     {
+      "id": "etcm2025-aphids",
+      "doi": "10.1109/ETCM67548.2025.11304406",
+      "title": "Deep Learning for Aphids Detection: A Comparative CNNs Study on Lemon Leaves Images",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Jorge Rodas-Silva",
+        "Joseph Chávez Reyes",
+        "Gema Bravo Navarrete"
+      ],
+      "venue": "ETCM 2025, Quito, Ecuador (IEEE)",
+      "type": "conference",
+      "year": 2025,
+      "openAccess": false,
+      "postId": "post-etcm2025-aphids",
+      "topics": [
+        "computer-vision",
+        "deep-learning",
+        "agriculture"
+      ],
+      "citations": 0
+    },
+    {
+      "id": "jpr2025-mentalhealth",
+      "doi": "10.1016/j.jpsychores.2025.112150",
+      "title": "Children and adolescents mental health in Ecuador: High rates of mental and behavioral disorders due to psychoactive substance use and depression",
+      "authors": [
+        "German Josuet Lapo-Talledo",
+        "Ana Lúcia S. Rodrigues",
+        "Karime Montes-Escobar",
+        "Jorge Parraga-Alava",
+        "Aline Siteneski"
+      ],
+      "venue": "Journal of Psychosomatic Research, 194, 112150",
+      "type": "journal",
+      "year": 2025,
+      "openAccess": false,
+      "postId": "post-jpr2025-mentalhealth",
+      "topics": [
+        "health"
+      ],
+      "pages": "112150",
+      "citations": 0
+    },
+    {
       "id": "csl2024-twitter",
       "doi": "10.1016/j.csl.2023.101579",
       "title": "An effective approach for identifying keywords as high-quality filters to get emergency-implicated Twitter Spanish data",
@@ -228,6 +272,29 @@
         "social-media"
       ],
       "citations": 9
+    },
+    {
+      "id": "heliyon2024-housing-fuzzy",
+      "doi": "10.1016/j.heliyon.2024.e26444",
+      "title": "Housing fuzzy recommender system: A systematic literature review",
+      "authors": [
+        "Emanuel G. Muñoz",
+        "Jorge Parraga-Alava",
+        "Jaime Meza",
+        "Jonathan Josue Proaño Morales",
+        "Sebastian Ventura"
+      ],
+      "venue": "Heliyon, 10(5), e26444",
+      "type": "journal",
+      "year": 2024,
+      "openAccess": true,
+      "postId": "post-heliyon2024-housing-fuzzy",
+      "topics": [
+        "review",
+        "recommender-systems"
+      ],
+      "pages": "e26444",
+      "citations": 0
     },
     {
       "id": "hbet2024-applab",
