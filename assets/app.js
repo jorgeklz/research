@@ -120,7 +120,28 @@
     }).join("\n");
   }
   const firstPara = (t) => String(t || "").split(/\n\s*\n/)[0] || "";
-  const stripJats = (t) => { const d = document.createElement("div"); d.innerHTML = String(t || "").replace(/<[^>]+>/g, " "); return d.textContent.replace(/\s+/g, " ").trim(); };
+  const stripJats = (t) => {
+    let s = String(t || "");
+    // Crossref/OpenAlex sometimes double-escape JATS markup (e.g. "&amp;lt;jats:italic&amp;gt;");
+    // decode entities repeatedly (bounded) so any nested escaping is fully resolved before we strip tags.
+    const d = document.createElement("div");
+    for (let i = 0; i < 3; i++) {
+      d.innerHTML = s;
+      const decoded = d.textContent;
+      if (decoded === s) break;
+      s = decoded;
+    }
+    // now remove any real/decoded tags (JATS <italic>, <sub>, <mml:...>, etc.)
+    d.innerHTML = s.replace(/<[^>]+>/g, " ");
+    s = d.textContent;
+    // normalize unicode (combining forms -> precomposed) so accents render consistently
+    if (s.normalize) s = s.normalize("NFC");
+    return s
+      .replace(/\s+/g, " ")
+      .replace(/\s+([,.;:!?])/g, "$1")   // stray space before punctuation left by tag removal
+      .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, "") // stray control chars
+      .trim();
+  };
   const fmtDate = (iso) => { try { return new Date(iso + "T12:00:00").toLocaleDateString(LANG === "es" ? "es-EC" : "en-GB", { year: "numeric", month: "short", day: "numeric" }); } catch (e) { return iso; } };
   const boldSelf = (a) => {
     const marked = a.map((x) => /parraga|párraga/i.test(x) ? `<b>${esc(x)}</b>` : esc(x));
@@ -145,6 +166,7 @@
     t.textContent = msg; t.classList.add("show"); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 1700);
   }
   const indexPosts = (posts) => { const m = {}; (posts.items || []).forEach((p) => m[p.id] = p); return m; };
+
 
   function updateGoto(container, pages, current, onGo) {
     if (!container) return;
@@ -217,9 +239,25 @@
 
   /* ---------- dynamic bilingual post from metadata (Crossref abstract) ---------- */
   function splitParagraphs(text, n) {
-    const sents = String(text || "").replace(/\s+/g, " ").trim().match(/[^.!?]+[.!?]+/g) || [String(text || "")];
-    if (sents.length <= 1) return [text];
-    const per = Math.ceil(sents.length / n), out = [];
+    const clean = String(text || "").replace(/\s+/g, " ").trim();
+    // Abbreviations whose trailing "." must not be treated as a sentence end.
+    const ABBR = /\b(et al|e\.g|i\.e|vs|cf|approx|fig|figs|eq|eqs|no|pp|p|vol|ref|refs|dr|mr|mrs|ms|prof|st|dept|resp|resp|vol|no)\.$/i;
+    const raw = clean.match(/[^.!?]+[.!?]+(?:["')\]]+)?\s*/g) || [clean];
+    const sents = [];
+    for (const piece of raw) {
+      const trimmed = piece.trim();
+      if (!trimmed) continue;
+      const prev = sents[sents.length - 1];
+      // merge with previous fragment if it ended on a known abbreviation, or if this
+      // fragment is just a lone number/letter (decimal points, initials, "Fig. 3.")
+      if (prev && (ABBR.test(prev) || /\d\.$/.test(prev) && /^\d/.test(trimmed) || /^[a-z0-9]$/i.test(trimmed.replace(/[.)\]]+$/, "")))) {
+        sents[sents.length - 1] = (prev + " " + trimmed).trim();
+      } else {
+        sents.push(trimmed);
+      }
+    }
+    if (sents.length <= 1) return [clean];
+    const per = Math.max(1, Math.ceil(sents.length / n)), out = [];
     for (let i = 0; i < sents.length; i += per) out.push(sents.slice(i, i + per).join(" ").trim());
     return out.filter(Boolean);
   }
