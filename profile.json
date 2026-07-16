@@ -1,0 +1,210 @@
+{
+  "name": "Jorge Parraga-Alava",
+  "nameEs": "Jorge Párraga-Álava",
+  "degree": "Ph.D.",
+  "orcid": "0000-0001-8558-9122",
+  "scopusAuthorId": "57193428877",
+  "scopusProxy": "https://scopus-proxy-blond.vercel.app/api/scopus?author_id=57193428877",
+  "email": "jorge.parraga@utm.edu.ec",
+  "location": {
+    "en": "Portoviejo, Ecuador",
+    "es": "Portoviejo, Ecuador"
+  },
+  "role": {
+    "en": "Full Professor · Senior Member, IEEE",
+    "es": "Profesor Titular · Senior Member, IEEE"
+  },
+  "affiliation": {
+    "en": "Faculty of Computer Sciences, Universidad Técnica de Manabí",
+    "es": "Facultad de Ciencias Informáticas, Universidad Técnica de Manabí"
+  },
+  "tagline": {
+    "en": "Here I gather my publications and explain each one in plain language, so anyone can follow what the research is really about.",
+    "es": "Aquí reúno mis publicaciones y explico cada una en lenguaje simple, para que cualquiera entienda de qué trata realmente la investigación."
+  },
+  "interests": {
+    "en": [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Data Science",
+      "Deep Learning",
+      "Bibliometrics",
+      "Big Data",
+      "Computational Intelligence"
+    ],
+    "es": [
+      "Inteligencia Artificial",
+      "Machine Learning",
+      "Ciencia de Datos",
+      "Deep Learning",
+      "Bibliometría",
+      "Big Data",
+      "Inteligencia Computacional"
+    ]
+  },
+  "bio": {
+    "en": "I am a Full Professor at the [Universidad Técnica de Manabí](https://www.utm.edu.ec) (UTM) in Ecuador and a Senior Member of the IEEE, where I serve as Chair of the Computational Intelligence Society, IEEE Ecuador Section. I hold a Ph.D. in Engineering Sciences with a major in Computer Science from the [Universidad de Santiago de Chile](https://www.usach.cl), awarded *Summa Cum Laude*.\n\nMy research sits at the intersection of artificial intelligence, machine learning and data science, with a recurring interest in bibliometrics and in problems that matter for Ecuador and Latin America: crop pests, solar energy, student dropout, road safety and public opinion. I coordinate UTM's [Master's Program in Data Science and Machine Learning](https://www.utm.edu.ec/posgrado/maestrias-profesionales/maestri-a-en-ciencia-de-datos-y-ma-quinas-de-aprendizaje) and edit the journal [Revista Informática y Sistemas](https://revistas.utm.edu.ec/index.php/Informaticaysistemas/index).\n\nAlongside the papers, I try to make research legible: every new publication here becomes a plain-language post, in English and Spanish.",
+    "es": "Soy Profesor Titular de la [Universidad Técnica de Manabí](https://www.utm.edu.ec) (UTM), en Ecuador, y Senior Member del IEEE, donde soy Chair de la Sociedad de Inteligencia Computacional (Computational Intelligence Society) de la Sección IEEE Ecuador. Tengo un Ph.D. en Ciencias de la Ingeniería con mención en Informática por la [Universidad de Santiago de Chile](https://www.usach.cl), obtenido *Summa Cum Laude*.\n\nMi investigación vive en el cruce entre inteligencia artificial, machine learning y ciencia de datos, con un interés recurrente en bibliometría y en problemas que importan para Ecuador y América Latina: plagas agrícolas, energía solar, deserción estudiantil, seguridad vial y opinión pública. Coordino la [Maestría en Ciencia de Datos y Máquinas de Aprendizaje](https://www.utm.edu.ec/posgrado/maestrias-profesionales/maestri-a-en-ciencia-de-datos-y-ma-quinas-de-aprendizaje) de la UTM y dirijo la [Revista Informática y Sistemas](https://revistas.utm.edu.ec/index.php/Informaticaysistemas/index).\n\nJunto a los artículos, intento hacer legible la investigación: cada nueva publicación aquí se convierte en un post en lenguaje simple, en inglés y español."
+  },
+  "metrics": {
+    "citations": "560+",
+    "hIndex": null,
+    "note": {
+      "en": "Google Scholar",
+      "es": "Google Scholar"
+    }
+  },
+  "experience": [
+    {
+      "period": "Dec 2023 — Present",
+      "role": {
+        "en": "Coordinator, M.Sc. in Data Science & Machine Learning",
+        "es": "Coordinador, Maestría en Ciencia de Datos y Máquinas de Aprendizaje"
+      },
+      "org": "Facultad de Posgrado · UTM",
+      "orgUrl": "https://www.utm.edu.ec/posgrado/maestrias-profesionales/maestri-a-en-ciencia-de-datos-y-ma-quinas-de-aprendizaje"
+    },
+    {
+      "period": "Apr 2022 — Present",
+      "role": {
+        "en": "Editor-in-Chief, Revista Informática y Sistemas",
+        "es": "Director / Editor en Jefe, Revista Informática y Sistemas"
+      },
+      "org": "Universidad Técnica de Manabí",
+      "orgUrl": "https://revistas.utm.edu.ec/index.php/Informaticaysistemas/index"
+    },
+    {
+      "period": "Sep 2020 — Present",
+      "role": {
+        "en": "Full Professor",
+        "es": "Profesor Titular"
+      },
+      "org": "Facultad de Ciencias Informáticas · UTM",
+      "orgUrl": "https://www.utm.edu.ec"
+    },
+    {
+      "period": "Jan 2024 — Dec 2026",
+      "role": {
+        "en": "Principal Investigator, OPMIA Project",
+        "es": "Investigador Principal, Proyecto OPMIA"
+      },
+      "org": {
+        "en": "Optimizing AI Models on Multivariate and Image Datasets · UTM",
+        "es": "Optimización de Modelos de IA sobre Datos Multivariados e Imágenes · UTM"
+      },
+      "orgUrl": "https://www.utm.edu.ec"
+    },
+    {
+      "period": "Jun 2022 — Feb 2025",
+      "role": {
+        "en": "Vice-Dean, Computing Career",
+        "es": "Vicedecano, Carrera de Computación"
+      },
+      "org": "Facultad de Ciencias Informáticas · UTM",
+      "orgUrl": "https://www.utm.edu.ec"
+    }
+  ],
+  "education": [
+    {
+      "year": "2017",
+      "title": {
+        "en": "Ph.D. in Engineering Sciences — Computer Science",
+        "es": "Ph.D. en Ciencias de la Ingeniería — Informática"
+      },
+      "org": "Universidad de Santiago de Chile",
+      "orgUrl": "https://www.usach.cl",
+      "note": {
+        "en": "Summa Cum Laude",
+        "es": "Summa Cum Laude"
+      }
+    },
+    {
+      "year": "2012",
+      "title": {
+        "en": "M.Sc. in Systems Management",
+        "es": "M.Sc. en Gerencia de Sistemas"
+      },
+      "org": "Universidad de las Fuerzas Armadas ESPE",
+      "note": null,
+      "orgUrl": "https://www.espe.edu.ec"
+    },
+    {
+      "year": "2010",
+      "title": {
+        "en": "B.Sc. in Computer Science",
+        "es": "Ing. en Informática"
+      },
+      "org": "ESPAM MFL · Calceta",
+      "note": {
+        "en": "Valedictorian",
+        "es": "Mejor egresado"
+      }
+    }
+  ],
+  "awards": [
+    {
+      "year": "2025",
+      "title": {
+        "en": "Best Researcher 2024",
+        "es": "Mejor Investigador 2024"
+      },
+      "org": "Facultad de Ciencias Informáticas · UTM"
+    },
+    {
+      "year": "2024",
+      "title": {
+        "en": "Best Professor 2023",
+        "es": "Mejor Docente 2023"
+      },
+      "org": "Facultad de Ciencias Informáticas · UTM"
+    },
+    {
+      "year": "2019",
+      "title": {
+        "en": "Best Doctoral Thesis Award",
+        "es": "Premio a la Mejor Tesis Doctoral"
+      },
+      "org": "IEEE LA-CCI Postgraduate Theses Contest"
+    },
+    {
+      "year": "2012",
+      "title": {
+        "en": "Doctoral Excellence Scholarship",
+        "es": "Beca de Excelencia Doctoral"
+      },
+      "org": "SENESCYT Ecuador"
+    }
+  ],
+  "profiles": [
+    {
+      "label": "Google Scholar",
+      "handle": "w8fiGu0AAAAJ",
+      "url": "https://scholar.google.com/citations?user=w8fiGu0AAAAJ"
+    },
+    {
+      "label": "Scopus",
+      "handle": "57193428877",
+      "url": "https://www.scopus.com/authid/detail.uri?authorId=57193428877"
+    },
+    {
+      "label": "Web of Science",
+      "handle": "O-6976-2019",
+      "url": "https://www.webofscience.com/wos/author/rid/O-6976-2019"
+    },
+    {
+      "label": "ORCID",
+      "handle": "0000-0001-8558-9122",
+      "url": "https://orcid.org/0000-0001-8558-9122"
+    },
+    {
+      "label": "DBLP",
+      "handle": "194/1624",
+      "url": "https://dblp.org/pid/194/1624.html"
+    },
+    {
+      "label": "GitHub",
+      "handle": "jorgeklz",
+      "url": "https://github.com/jorgeklz"
+    }
+  ]
+}

@@ -1,0 +1,685 @@
+{
+  "items": [
+    {
+      "id": "post-etcm2025-braintumor",
+      "date": "2025-10-21",
+      "type": "paper",
+      "doi": "10.1109/ETCM67548.2025.11304324",
+      "auto": false,
+      "topics": [
+        "health",
+        "deep-learning",
+        "machine-learning"
+      ],
+      "title": {
+        "en": "Which pretrained network spots brain tumors best?",
+        "es": "¿Qué red preentrenada detecta mejor los tumores cerebrales?"
+      },
+      "summary": {
+        "en": "With Jesus Zambrano and Carlos Silva-Villafuerte, a systematic comparison of five pretrained CNNs for brain tumor detection in MRI, presented in Quito, Ecuador.",
+        "es": "Con Jesus Zambrano y Carlos Silva-Villafuerte, una comparación sistemática de cinco CNNs preentrenadas para la detección de tumores cerebrales en resonancias, presentada en Quito, Ecuador."
+      },
+      "body": {
+        "en": "Picking a neural network to detect brain tumors from an MRI is not just about which one scores highest on a leaderboard. It also matters how the training data is prepared, how big the images are, and, above all, how well the model avoids missing a real tumor or flagging a healthy scan as diseased, since those are the mistakes with real clinical weight.\n\nWith **Jesus Zambrano** and **Carlos Silva-Villafuerte**, we followed the **CRISP-ML(Q)** methodology to systematically compare five pretrained **convolutional neural networks**, AlexNet, DenseNet121, InceptionV3, ResNet50, and VGG16, on the BraTS2020 dataset of low-grade gliomas. We also tested three ways of handling **class imbalance** (the original data, SMOTE, and undersampling), different training-set sizes (70% to 90%), and three image resolutions (64×64, 128×128, and 256×256 pixels), scoring each combination on accuracy, F1-score, sensitivity, and specificity, with the last two weighted more heavily for their clinical relevance.\n\nVGG16 came out on top at the highest resolution, reaching 95.80% accuracy, a 94.20% F1-score, 93.38% sensitivity, and 97.19% specificity with 256×256 images. Interestingly, the class-balancing strategy made little statistical difference to performance, while 128×128 images turned out to be a solid middle ground between accuracy and computing cost.\n\nThe takeaway is that VGG16 is a robust, clinically reliable option for automatic brain tumor detection, one that could realistically run in settings with limited computing resources, with room to grow further through multimodal data fusion and model compression. We presented this at ETCM 2025 in Quito, Ecuador.",
+        "es": "Elegir una red neuronal para detectar tumores cerebrales en una resonancia no se trata solo de cuál obtiene el puntaje más alto. También importa cómo se preparan los datos de entrenamiento, qué tan grandes son las imágenes y, sobre todo, qué tan bien evita el modelo pasar por alto un tumor real o marcar como enferma una resonancia sana, porque esos son los errores con verdadero peso clínico.\n\nCon **Jesus Zambrano** y **Carlos Silva-Villafuerte**, seguimos la metodología **CRISP-ML(Q)** para comparar sistemáticamente cinco **redes neuronales convolucionales** preentrenadas, AlexNet, DenseNet121, InceptionV3, ResNet50 y VGG16, sobre el conjunto de datos BraTS2020 de gliomas de bajo grado. También probamos tres formas de manejar el **desbalance de clases** (datos originales, SMOTE y submuestreo), distintas proporciones de entrenamiento (70% a 90%) y tres resoluciones de imagen (64×64, 128×128 y 256×256 píxeles), evaluando cada combinación con exactitud, F1-score, sensibilidad y especificidad, dando más peso a estas dos últimas por su relevancia clínica.\n\nVGG16 resultó ser el mejor en la resolución más alta, con 95.80% de exactitud, un F1-score de 94.20%, 93.38% de sensibilidad y 97.19% de especificidad con imágenes de 256×256. Curiosamente, la estrategia de balanceo de clases apenas influyó en el rendimiento, mientras que las imágenes de 128×128 resultaron un buen punto medio entre precisión y costo computacional.\n\nLa conclusión es que VGG16 es una opción robusta y clínicamente confiable para la detección automática de tumores cerebrales, capaz de funcionar en entornos con recursos computacionales limitados, con margen para mejorar aún más mediante fusión de datos multimodales y técnicas de compresión de modelos. Presentamos esto en ETCM 2025, en Quito, Ecuador."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1109/ETCM67548.2025.11304324"
+        }
+      ]
+    },
+    {
+      "id": "post-ici2st2025-population",
+      "date": "2025-10-29",
+      "type": "paper",
+      "doi": "10.1109/ICI2ST68465.2025.00018",
+      "auto": false,
+      "topics": [
+        "health",
+        "machine-learning"
+      ],
+      "title": {
+        "en": "Forecasting how Ecuador's population will actually change",
+        "es": "Proyectando cómo va a cambiar realmente la población de Ecuador"
+      },
+      "summary": {
+        "en": "With Winter Meza-Jiménez, Jorge Herrera-Tapia and Iván García-Santillán, comparing four time-series methods to forecast population growth in Ecuador from social variables, presented in Quito, Ecuador.",
+        "es": "Con Winter Meza-Jiménez, Jorge Herrera-Tapia e Iván García-Santillán, comparación de cuatro métodos de series de tiempo para proyectar el crecimiento poblacional de Ecuador a partir de variables sociales, presentado en Quito, Ecuador."
+      },
+      "body": {
+        "en": "Population projections usually get reduced to a single growth curve, but the real drivers behind that curve, how many people marry, divorce, die, or move abroad, shift constantly and rarely in a straight line. Ignoring that detail makes long-term planning for schools, healthcare, and housing less reliable than it should be.\n\nWith **Winter Meza-Jiménez**, **Jorge Herrera-Tapia** and **Iván García-Santillán**, we built forecasts of Ecuador's population growth that explicitly account for social variables: mortality (with and without the COVID-19 effect), marriages, divorces, and net migration. Rather than picking one forecasting method upfront, we compared four well-established **time-series** approaches, ARIMA, SARIMA, Prophet, and VAR, each with a different way of handling trends, seasonality, and the interaction between variables.\n\nTo judge which approach handled Ecuador's demographic patterns best, we evaluated the models using standard error metrics, MAE, RMSE, and sMAPE, that measure how far each forecast strayed from what actually happened.\n\nThe payoff is a more grounded way to think about population change: not just a projected number, but a sense of which social forces are pulling it up or down, and which forecasting tool is trustworthy enough to plan around. We presented this at ICI2ST 2025 in Quito, Ecuador.",
+        "es": "Las proyecciones de población suelen reducirse a una sola curva de crecimiento, pero los factores reales detrás de esa curva, cuánta gente se casa, se divorcia, muere o emigra, cambian todo el tiempo y casi nunca en línea recta. Ignorar ese detalle hace que la planificación a largo plazo de escuelas, salud y vivienda sea menos confiable de lo que debería.\n\nCon **Winter Meza-Jiménez**, **Jorge Herrera-Tapia** e **Iván García-Santillán**, construimos proyecciones del crecimiento poblacional de Ecuador que incorporan explícitamente variables sociales: mortalidad (con y sin el efecto de la COVID-19), matrimonios, divorcios y migración neta. En lugar de elegir un solo método de pronóstico de entrada, comparamos cuatro enfoques de **series de tiempo** ya establecidos, ARIMA, SARIMA, Prophet y VAR, cada uno con una forma distinta de manejar tendencias, estacionalidad y la interacción entre variables.\n\nPara determinar qué enfoque manejaba mejor los patrones demográficos de Ecuador, evaluamos los modelos con métricas de error estándar, MAE, RMSE y sMAPE, que miden qué tan lejos quedó cada pronóstico de lo que realmente ocurrió.\n\nEl resultado es una forma más sólida de pensar el cambio poblacional: no solo una cifra proyectada, sino una idea de qué fuerzas sociales la empujan hacia arriba o hacia abajo, y qué herramienta de pronóstico es lo bastante confiable como para planificar con ella. Presentamos esto en ICI2ST 2025, en Quito, Ecuador."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1109/ICI2ST68465.2025.00018"
+        }
+      ]
+    },
+    {
+      "id": "post-iti2026-bibliometric",
+      "date": "2026-05-31",
+      "type": "paper",
+      "doi": "10.53591/iti.v18i25.3172",
+      "auto": false,
+      "topics": [
+        "review",
+        "nlp",
+        "software"
+      ],
+      "title": {
+        "en": "What a decade of a small university journal's articles reveals",
+        "es": "Lo que una década de artículos de una revista universitaria revela"
+      },
+      "summary": {
+        "en": "With Robin Fernando Zambrano Triviño and Manuel Villalobos-Cid, a bibliometric and NLP-based analysis of nine years of Informática y Sistemas, UTM's own computer science journal.",
+        "es": "Con Robin Fernando Zambrano Triviño y Manuel Villalobos-Cid, un análisis bibliométrico y basado en NLP de nueve años de Informática y Sistemas, la revista de informática de la UTM."
+      },
+      "body": {
+        "en": "Small, regional academic journals rarely get studied the way big international ones do, yet they play a real role in showcasing local research. The problem is that the software many of them run on, Open Journal Systems (OJS), tends to produce metadata that is incomplete or inconsistent, which makes it hard to know how a journal is actually doing.\n\nWith **Robin Fernando Zambrano Triviño** and **Manuel Villalobos-Cid**, we looked at *Informática y Sistemas*, the computer science journal published by Universidad Técnica de Manabí (UTM). Rather than relying only on traditional **bibliometrics**, we combined it with **natural language processing** to classify each article's subject area more reliably than manual tagging usually allows, pulling publication data from the journal's OJS platform and citation counts from Dimensions.ai.\n\nBetween 2017 and 2025, the journal published 109 articles, averaging 3.16 authors per paper and a Collaboration Index of 2.84, signs that researchers are teaming up across institutions fairly often. But the average article had received only 0.16 citations, a reminder that publishing consistently is not the same as being seen internationally.\n\nThose numbers work more as a map than a verdict: they show the journal's editorial team where collaboration is already working and where visibility still needs work. We published it in *Investigación, Tecnología e Innovación*, and it is open access.",
+        "es": "Las revistas académicas pequeñas y regionales rara vez se estudian con el mismo detalle que las grandes revistas internacionales, aunque cumplen un papel real al dar visibilidad a la investigación local. El problema es que el software que muchas usan, Open Journal Systems (OJS), suele generar metadatos incompletos o inconsistentes, lo que dificulta saber cómo le va realmente a una revista.\n\nCon **Robin Fernando Zambrano Triviño** y **Manuel Villalobos-Cid**, analizamos *Informática y Sistemas*, la revista de informática de la Universidad Técnica de Manabí (UTM). En lugar de apoyarnos solo en la **bibliometría** tradicional, la combinamos con **procesamiento de lenguaje natural** para clasificar el área temática de cada artículo con más precisión que el etiquetado manual habitual, tomando los datos de publicación de la plataforma OJS de la revista y las citas de Dimensions.ai.\n\nEntre 2017 y 2025, la revista publicó 109 artículos, con un promedio de 3.16 autores por artículo y un Índice de Colaboración de 2.84, señal de que los investigadores colaboran con cierta frecuencia entre instituciones. Pero el artículo promedio había recibido apenas 0.16 citas, un recordatorio de que publicar de forma constante no es lo mismo que tener visibilidad internacional.\n\nEsas cifras funcionan más como un mapa que como un veredicto: le muestran al equipo editorial de la revista dónde ya funciona bien la colaboración y dónde falta trabajar la visibilidad. Lo publicamos en *Investigación, Tecnología e Innovación*, y es de acceso abierto."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.53591/iti.v18i25.3172"
+        }
+      ]
+    },
+    {
+      "id": "post-iti2026-rust-alzheimer",
+      "date": "2026-05-31",
+      "type": "paper",
+      "doi": "10.53591/iti.v18i25.3232",
+      "auto": false,
+      "topics": [
+        "health",
+        "deep-learning",
+        "machine-learning"
+      ],
+      "title": {
+        "en": "A fast, lighter way to spot Alzheimer's in brain scans",
+        "es": "Una forma más rápida y liviana de detectar Alzheimer en resonancias"
+      },
+      "summary": {
+        "en": "With Joel García Arteaga, comparing three MRI classification strategies for Alzheimer's disease and testing whether the best one can run efficiently in Rust instead of Python.",
+        "es": "Con Joel García Arteaga, comparación de tres estrategias de clasificación de resonancias para la enfermedad de Alzheimer y prueba de si la mejor puede ejecutarse de forma eficiente en Rust en lugar de Python."
+      },
+      "body": {
+        "en": "Building a model that can accurately spot Alzheimer's disease from a brain MRI is only half the job. The other half is making that model fast and light enough to actually run where it is needed, such as a clinic without a data-center's worth of computing power.\n\nWith **Joel García Arteaga**, we compared three ways of sorting brain scans from a public set of 6,400 MRI images across four diagnostic classes: a hybrid model combining a **convolutional neural network** with mutual-information feature selection and **k-nearest neighbors**, a network called ADD-Net, and a Master-Slave ensemble built on VGG-16, using SMOTETomek to keep the classes balanced during training.\n\nThe hybrid model came out clearly ahead, reaching 94.38% test accuracy and a weighted F1-score of 0.94, followed by ADD-Net (86.99%, F1 = 0.87) and the ensemble (75.73%, F1 = 0.76). We then took that winning model and rebuilt its inference pipeline in **Rust**, a programming language built for speed and efficiency: processing 128 images dropped from 34.47 seconds to 3.43 seconds, and throughput jumped from 3.71 to 37.31 images per second, though accuracy slipped by 6.25 percentage points compared to the original Python version.\n\nThat trade-off is the real finding here: Rust shows strong potential for deploying diagnostic AI efficiently, part of a broader push toward **Green AI**, models that are not just accurate but also cheaper and faster to run. We published it in *Investigación, Tecnología e Innovación*, and it is open access.",
+        "es": "Construir un modelo que detecte con precisión la enfermedad de Alzheimer en una resonancia magnética cerebral es solo la mitad del trabajo. La otra mitad es lograr que ese modelo sea lo bastante rápido y liviano para funcionar donde realmente se necesita, como una clínica sin la capacidad de cómputo de un centro de datos.\n\nCon **Joel García Arteaga**, comparamos tres formas de clasificar resonancias cerebrales a partir de un conjunto público de 6,400 imágenes distribuidas en cuatro clases diagnósticas: un modelo híbrido que combina una **red neuronal convolucional** con selección de características por información mutua y **k-vecinos más cercanos**, una red llamada ADD-Net, y un ensamble Master-Slave basado en VGG-16, usando SMOTETomek para mantener las clases balanceadas durante el entrenamiento.\n\nEl modelo híbrido resultó claramente el mejor, con 94.38% de exactitud en prueba y un F1 ponderado de 0.94, seguido por ADD-Net (86.99%; F1 = 0.87) y el ensamble (75.73%; F1 = 0.76). Luego tomamos ese modelo ganador y reconstruimos su canal de inferencia en **Rust**, un lenguaje de programación pensado para la velocidad y la eficiencia: procesar 128 imágenes pasó de 34.47 a 3.43 segundos, y el rendimiento subió de 3.71 a 37.31 imágenes por segundo, aunque la exactitud bajó 6.25 puntos porcentuales frente a la versión original en Python.\n\nEse equilibrio es el hallazgo central: Rust muestra un gran potencial para desplegar IA diagnóstica de forma eficiente, dentro de una tendencia más amplia hacia la **Green AI**, modelos que no solo sean precisos sino también más baratos y rápidos de ejecutar. Lo publicamos en *Investigación, Tecnología e Innovación*, y es de acceso abierto."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.53591/iti.v18i25.3232"
+        }
+      ]
+    },
+    {
+      "id": "post-icedeg2024-stress",
+      "date": "2024-06-24",
+      "type": "paper",
+      "doi": "10.1109/icedeg61611.2024.10702055",
+      "auto": false,
+      "topics": [
+        "health",
+        "education",
+        "review",
+        "machine-learning"
+      ],
+      "title": {
+        "en": "Can a computer tell when a student is stressed?",
+        "es": "¿Puede una computadora saber cuándo un estudiante está estresado?"
+      },
+      "summary": {
+        "en": "With Enrique Macías Arias and David Zambrano Montenegro, a systematic review of the machine-learning methods used to detect stress in university students, presented in Lucerne, Switzerland.",
+        "es": "Con Enrique Macías Arias y David Zambrano Montenegro, una revisión sistemática de los métodos de machine learning usados para detectar estrés en estudiantes universitarios, presentada en Lucerna, Suiza."
+      },
+      "body": {
+        "en": "University life can be quietly overwhelming, and sustained **stress** takes a real toll on students' health and grades. If a system could notice rising stress early, a university could reach out before a student is in crisis. The hard question is how to detect something as invisible as stress in a reliable way.\n\nWith **Enrique Macías Arias**, who led the work, and **David Zambrano Montenegro**, we carried out a **systematic review**, a structured, rule-based reading of the published research, to map how **machine learning** has been used for exactly this task among higher-education students.\n\nWe compared studies along the lines that matter in practice: what signals they learn from, such as answers to questionnaires, physiological measurements from wearables like heart rate, or behavioural data; which models they use; and how accurately those models actually flag stress. Laid side by side, the studies reveal which combinations tend to work and where the evidence is still thin.\n\nRather than proposing one more detector, the review works as a **guide** for anyone building stress-detection tools for student wellbeing, so they can start from what the field already knows instead of guessing. We presented it at **ICEDEG 2024**, the Tenth International Conference on eDemocracy & eGovernment, held in Lucerne, Switzerland.",
+        "es": "La vida universitaria puede abrumar en silencio, y el **estrés** sostenido pasa una factura real a la salud y las notas de los estudiantes. Si un sistema pudiera notar el estrés en aumento a tiempo, una universidad podría acercarse antes de que el estudiante entre en crisis. La pregunta difícil es cómo detectar algo tan invisible como el estrés de forma confiable.\n\nCon **Enrique Macías Arias**, que lideró el trabajo, y **David Zambrano Montenegro**, realizamos una **revisión sistemática**, una lectura estructurada y basada en reglas de la investigación publicada, para mapear cómo se ha usado el **machine learning** justo para esta tarea en estudiantes de educación superior.\n\nComparamos los estudios según lo que importa en la práctica: de qué señales aprenden, como respuestas a cuestionarios, mediciones fisiológicas de dispositivos ponibles como el ritmo cardíaco, o datos de comportamiento; qué modelos usan; y con qué precisión esos modelos realmente detectan el estrés. Puestos lado a lado, los estudios muestran qué combinaciones tienden a funcionar y dónde la evidencia aún es escasa.\n\nEn lugar de proponer un detector más, la revisión sirve como una **guía** para quien construya herramientas de detección de estrés orientadas al bienestar estudiantil, para partir de lo que el campo ya sabe en vez de adivinar. La presentamos en **ICEDEG 2024**, la Décima Conferencia Internacional de eDemocracia y eGobierno, en Lucerna, Suiza."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1109/icedeg61611.2024.10702055"
+        }
+      ]
+    },
+    {
+      "id": "post-etcm2024-power",
+      "date": "2024-10-15",
+      "type": "paper",
+      "doi": "10.1109/etcm63562.2024.10746142",
+      "auto": false,
+      "topics": [
+        "energy",
+        "machine-learning",
+        "optimization"
+      ],
+      "title": {
+        "en": "Predicting electricity demand, tuned by evolution",
+        "es": "Predecir la demanda eléctrica, afinada por la evolución"
+      },
+      "summary": {
+        "en": "With Jorge Rodas-Silva, machine learning combined with genetic algorithms to forecast electric power consumption more accurately, presented in Cuenca, Ecuador.",
+        "es": "Con Jorge Rodas-Silva, machine learning combinado con algoritmos genéticos para pronosticar el consumo de energía eléctrica con más precisión, presentado en Cuenca, Ecuador."
+      },
+      "body": {
+        "en": "Electricity is hard to store, so a power company has to produce roughly what people will use, at the moment they use it. Guess too low and you risk blackouts; guess too high and you waste fuel and money. Good **forecasts** of demand are what keep that balance, which makes predicting **power consumption** a genuinely useful problem.\n\nWith **Jorge Rodas-Silva**, we built a forecasting approach that pairs two ideas. A **machine-learning** model learns the relationship between past conditions and the electricity that follows, and a **genetic algorithm** tunes that model automatically.\n\nThe genetic algorithm is the interesting part. Borrowing from natural selection, it keeps a population of candidate settings for the model, lets the best-performing ones survive and combine over many generations, and so searches the huge space of configurations far more thoroughly than tuning by hand. The result is a predictor better adjusted to the data than a default one.\n\nMore accurate consumption forecasts help utilities plan generation, cut waste, and serve customers more reliably, which matters especially where budgets and infrastructure are tight. We presented the work at the **IEEE ETCM 2024** (Ecuador Technical Chapters Meeting), held in Cuenca, Ecuador.",
+        "es": "La electricidad es difícil de almacenar, así que una empresa eléctrica debe producir aproximadamente lo que la gente va a usar, en el momento en que lo usa. Si te quedas corto, arriesgas apagones; si te pasas, desperdicias combustible y dinero. Buenos **pronósticos** de la demanda son los que mantienen ese equilibrio, lo que vuelve la predicción del **consumo eléctrico** un problema realmente útil.\n\nCon **Jorge Rodas-Silva** construimos un enfoque de pronóstico que une dos ideas. Un modelo de **machine learning** aprende la relación entre las condiciones pasadas y la electricidad que llega después, y un **algoritmo genético** ajusta ese modelo de forma automática.\n\nEl algoritmo genético es la parte interesante. Tomando prestado de la selección natural, mantiene una población de configuraciones candidatas para el modelo, deja que las que mejor rinden sobrevivan y se combinen durante muchas generaciones, y así busca en el enorme espacio de configuraciones mucho más a fondo que un ajuste manual. El resultado es un predictor mejor ajustado a los datos que uno por defecto.\n\nPronósticos de consumo más precisos ayudan a las empresas a planificar la generación, reducir el desperdicio y servir a los clientes de forma más confiable, algo que importa sobre todo donde el presupuesto y la infraestructura son ajustados. Presentamos el trabajo en el **IEEE ETCM 2024** (Ecuador Technical Chapters Meeting), en Cuenca, Ecuador."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1109/etcm63562.2024.10746142"
+        }
+      ]
+    },
+    {
+      "id": "post-simpa2026-mstknnclust",
+      "date": "2026-05-20",
+      "type": "paper",
+      "doi": "10.1016/j.simpa.2026.100845",
+      "auto": false,
+      "topics": [
+        "clustering",
+        "software",
+        "bioinformatics"
+      ],
+      "title": {
+        "en": "Finding natural groups in data without guessing how many there are",
+        "es": "Encontrar grupos naturales en los datos sin adivinar cuántos hay"
+      },
+      "summary": {
+        "en": "An open R package, built with Mario Inostroza-Ponta and Pablo Moscato, that groups data by intersecting two classic graphs, so you never set the number of clusters beforehand.",
+        "es": "Un paquete de R abierto, hecho con Mario Inostroza-Ponta y Pablo Moscato, que agrupa datos intersectando dos grafos clásicos, sin fijar de antemano el número de grupos."
+      },
+      "body": {
+        "en": "Imagine you empty a big box of mixed buttons on a table and want to sort them into natural piles by color and size. A person does this by eye, but a computer needs a rule, and most computer methods for making piles, called **clustering**, demand something strange up front: you must tell them how many piles to make. If you already knew that, you probably would not need the method in the first place.\n\nTogether with Mario Inostroza-Ponta, from the University of Santiago in Chile, and Pablo Moscato, from the University of Newcastle in Australia, we built an R package called **mstknnclust** to get around that problem. R is a free programming language widely used by scientists, and a package is a ready-made tool you can install and reuse.\n\nThe method leans on two classic ways of drawing a network over your data points. The first is the **minimum spanning tree**: the set of connections that links every point together using the least total distance, like the shortest possible road network that still reaches every town. The second is the **k-nearest-neighbors graph**, where each point is simply joined to its handful of closest neighbors. Our package keeps only the connections that **both** networks agree on. When you remove everything else, the remaining structure naturally falls apart into separate clumps, and each clump becomes a group. Nobody had to decide the number of groups in advance; it emerges from the shape of the data.\n\nThe package is open access, runs with just a few commands, and can draw both the groups it finds and the networks behind them. That makes an idea from graph theory usable by biologists, geologists, or anyone with a messy table of measurements who wants to see the hidden structure inside it.",
+        "es": "Imagina que vuelcas una caja grande de botones mezclados sobre una mesa y quieres ordenarlos en montones naturales por color y tamaño. Una persona lo hace de un vistazo, pero una computadora necesita una regla, y la mayoría de los métodos para hacer montones, llamados **agrupamiento** o clustering, exigen algo raro de entrada: hay que decirles cuántos montones hacer. Si ya lo supieras, probablemente no necesitarías el método.\n\nJunto a Mario Inostroza-Ponta, de la Universidad de Santiago de Chile, y Pablo Moscato, de la University of Newcastle en Australia, construimos un paquete de R llamado **mstknnclust** para sortear ese problema. R es un lenguaje de programación gratuito muy usado por científicos, y un paquete es una herramienta lista para instalar y reutilizar.\n\nEl método se apoya en dos formas clásicas de dibujar una red sobre los puntos de tus datos. La primera es el **árbol de expansión mínima**: el conjunto de conexiones que une todos los puntos usando la menor distancia total, como la red de carreteras más corta que aún llega a cada pueblo. La segunda es el **grafo de k vecinos más cercanos**, donde cada punto se une simplemente con su puñado de vecinos más próximos. Nuestro paquete conserva solo las conexiones en las que **ambas** redes coinciden. Al quitar todo lo demás, la estructura que queda se separa de forma natural en grupos, y cada grupo es una agrupación. Nadie tuvo que decidir el número de grupos de antemano; sale de la forma de los datos.\n\nEl paquete es de acceso abierto, funciona con pocas órdenes y puede dibujar tanto los grupos que encuentra como las redes que hay detrás. Así, una idea de la teoría de grafos queda al alcance de biólogos, geólogos o de cualquiera que tenga una tabla desordenada de mediciones y quiera ver la estructura oculta dentro de ella."
+      },
+      "links": [
+        {
+          "label": "DOI (open access)",
+          "url": "https://doi.org/10.1016/j.simpa.2026.100845"
+        }
+      ]
+    },
+    {
+      "id": "post-enfoqueute2026-har",
+      "date": "2026-07-01",
+      "type": "paper",
+      "doi": "10.29019/enfoqueute.1266",
+      "auto": false,
+      "topics": [
+        "computer-vision",
+        "deep-learning",
+        "review"
+      ],
+      "title": {
+        "en": "Teaching computers to recognize what people are doing in video",
+        "es": "Enseñar a las computadoras a reconocer qué hacen las personas en video"
+      },
+      "summary": {
+        "en": "With Lenin Cedeño Morales, a systematic review of 81 studies on how AI recognizes human actions in video, and which models work best.",
+        "es": "Con Lenin Cedeño Morales, una revisión sistemática de 81 estudios sobre cómo la IA reconoce acciones humanas en video, y qué modelos funcionan mejor."
+      },
+      "body": {
+        "en": "When a camera watches a scene, a person instantly understands what is happening: someone is walking, another is falling, a third is waving. Getting a computer to reach that same understanding, known as human action recognition, is surprisingly hard, and it matters for real things like security cameras, monitoring the safety of older adults living alone, and analyzing an athlete's technique.\n\nThe trouble for a researcher entering this field is that there are dozens of competing methods and no obvious way to know which to trust. With my student Lenin Cedeño Morales, we tackled that by carrying out a **systematic review**, a careful, rule-based reading of the existing literature, following a structured method called SALSA. In total we studied 81 published works and compared how they performed.\n\nA clear pattern emerged. Convolutional neural networks, the same family of models that powers most modern image recognition, lead the field because they are good at reading the content of each video frame. But a video is not just a stack of pictures; the order of the frames carries meaning. The methods that did best added a sense of time on top of the images, for example using three-dimensional convolutions or a memory mechanism called **LSTM** that remembers what happened in earlier frames. The strongest approaches, including ones that track the moving skeleton of a body, reached around 98% accuracy on demanding public test sets such as NTU-RGB+D and UCF101.\n\nRather than crown a single winner, the review works as a practical map. Someone who has to choose a model for a real project can see which architectures tend to work, on what kind of data, and at what cost, and start from evidence instead of guesswork.",
+        "es": "Cuando una cámara observa una escena, una persona entiende al instante qué pasa: alguien camina, otro se cae, un tercero saluda. Lograr que una computadora alcance esa misma comprensión, algo llamado reconocimiento de **acciones humanas**, es sorprendentemente difícil, y sirve para cosas reales como cámaras de seguridad, vigilar la seguridad de adultos mayores que viven solos y analizar la técnica de un deportista.\n\nEl problema para un investigador que entra en este campo es que hay decenas de métodos que compiten y ninguna forma obvia de saber en cuál confiar. Con mi estudiante Lenin Cedeño Morales lo abordamos haciendo una **revisión sistemática**, una lectura cuidadosa y basada en reglas de la literatura existente, siguiendo un método estructurado llamado SALSA. En total estudiamos 81 trabajos publicados y comparamos su desempeño.\n\nApareció un patrón claro. Las **redes neuronales convolucionales**, la misma familia de modelos que impulsa gran parte del reconocimiento de imágenes moderno, lideran el campo porque son buenas leyendo el contenido de cada cuadro del video. Pero un video no es solo un montón de fotos; el orden de los cuadros tiene significado. Los métodos que rindieron mejor agregaron un sentido del tiempo sobre las imágenes, por ejemplo con convoluciones tridimensionales o un mecanismo de memoria llamado **LSTM** que recuerda lo que pasó en cuadros anteriores. Los enfoques más fuertes, incluidos algunos que siguen el esqueleto en movimiento de un cuerpo, llegaron a cerca del 98% de acierto en pruebas públicas exigentes como NTU-RGB+D y UCF101.\n\nEn vez de coronar a un único ganador, la revisión sirve como un mapa práctico. Quien deba elegir un modelo para un proyecto real puede ver qué arquitecturas suelen funcionar, con qué tipo de datos y a qué costo, y partir de evidencia en lugar de conjeturas."
+      },
+      "links": [
+        {
+          "label": "DOI (open access)",
+          "url": "https://doi.org/10.29019/enfoqueute.1266"
+        }
+      ]
+    },
+    {
+      "id": "post-cran2026-momst",
+      "date": "2026-06-22",
+      "type": "paper",
+      "doi": "10.32614/cran.package.momst",
+      "auto": false,
+      "topics": [
+        "optimization",
+        "clustering",
+        "software"
+      ],
+      "title": {
+        "en": "When the cheapest network is not the only good one",
+        "es": "Cuando la red más barata no es la única buena"
+      },
+      "summary": {
+        "en": "An R package I built that searches for many good spanning trees at once, balancing competing goals instead of optimizing just one.",
+        "es": "Un paquete de R que construí, que busca muchos buenos árboles de expansión a la vez, equilibrando objetivos en conflicto en vez de optimizar solo uno."
+      },
+      "body": {
+        "en": "Picture a company that has to lay cable to connect many offices. The cheapest plan is the one that links every office using the least total cable, and there are well-known algorithms that find exactly that: it is called a minimum **spanning tree**. For decades this has been a textbook problem with a single neat answer.\n\nReal life, though, rarely cares about only one thing. The company might also want the network to keep working if one cable is cut, and the absolute cheapest layout can turn out to be the most fragile. When you have two goals that pull against each other, cheap versus reliable, there is no longer one best answer; there is a whole set of sensible compromises. I built an R package called **momst** to find that set.\n\nUnder the hood it uses **NSGA-II**, an **evolutionary algorithm**. The idea borrows from natural selection: the program keeps a population of candidate networks, lets the better ones survive and combine to produce new candidates, and repeats this over many generations. A local-search step then polishes the survivors. Because it optimizes for several goals at once, it does not return a single tree but a family of them, ranging from cheapest to most robust.\n\nThat difference is the whole point. Instead of handing a planner one number and asking them to trust it, the tool lays out the real **trade-off**s so a human can choose the balance that fits their situation. The same idea applies well beyond cables, to transport routes, sensor networks, or any problem where connecting things cheaply and connecting them safely are both worth caring about.",
+        "es": "Imagina una empresa que debe tender cable para conectar muchas oficinas. El plan más barato es el que une cada oficina usando la menor cantidad total de cable, y hay algoritmos conocidos que encuentran justamente eso: se llama **árbol de expansión** mínima. Durante décadas fue un problema de manual con una única respuesta elegante.\n\nSin embargo, la vida real rara vez se fija en una sola cosa. La empresa también podría querer que la red siga funcionando si se corta un cable, y la disposición más barata puede resultar la más frágil. Cuando tienes dos objetivos que tiran en sentidos opuestos, barato frente a confiable, ya no existe una única mejor respuesta; existe todo un conjunto de **compromiso**s razonables. Construí un paquete de R llamado **momst** para encontrar ese conjunto.\n\nPor dentro usa **NSGA-II**, un **algoritmo evolutivo**. La idea toma prestado de la selección natural: el programa mantiene una población de redes candidatas, deja que las mejores sobrevivan y se combinen para producir nuevas candidatas, y repite esto durante muchas generaciones. Un paso de búsqueda local luego pule a las sobrevivientes. Como optimiza varios objetivos a la vez, no devuelve un solo árbol sino una familia de ellos, desde el más barato hasta el más robusto.\n\nEsa diferencia es todo el sentido. En lugar de darle a quien planifica un único número y pedirle que confíe, la herramienta muestra los compromisos reales para que una persona elija el equilibrio que le sirve. La misma idea aplica mucho más allá de los cables: rutas de transporte, redes de sensores o cualquier problema donde conectar cosas de forma barata y conectarlas de forma segura importen a la vez."
+      },
+      "links": [
+        {
+          "label": "DOI (open access)",
+          "url": "https://doi.org/10.32614/cran.package.momst"
+        }
+      ]
+    },
+    {
+      "id": "post-enfoqueute2026-iot-agri",
+      "date": "2026-01-01",
+      "type": "paper",
+      "doi": "10.29019/enfoqueute.1236",
+      "auto": false,
+      "topics": [
+        "agriculture",
+        "iot",
+        "review"
+      ],
+      "title": {
+        "en": "Smarter farming in Ecuador, one sensor at a time",
+        "es": "Agricultura más inteligente en Ecuador, un sensor a la vez"
+      },
+      "summary": {
+        "en": "With Eysonhover Basurto Loor, a review of 40 studies on how the Internet of Things and AI are used in Ecuadorian agriculture.",
+        "es": "Con Eysonhover Basurto Loor, una revisión de 40 estudios sobre cómo se usan el Internet de las Cosas y la IA en la agricultura ecuatoriana."
+      },
+      "body": {
+        "en": "A farmer's oldest tool is attention: walking the fields, checking the soil, noticing the first sign of a pest. Modern technology promises to extend that attention with cheap sensors that measure temperature, humidity, or soil moisture and send their readings over the internet, and with artificial intelligence that turns those readings into advice, such as when to water or where a disease is starting. But how much of this is really happening on the ground in a country like Ecuador?\n\nWith Eysonhover Basurto Loor, we set out to answer that with a **systematic review**, a structured survey of the published evidence. We read 40 studies from 2020 to 2025 that combined the **Internet of Things**, which is the network of connected sensors, with artificial intelligence in Ecuadorian agriculture.\n\nSeveral things became clear. Machine learning was the dominant tool, especially **neural networks** used to detect pests and monitor crops from images and sensor data, with reported accuracies between 80% and 95%. The most common inputs were environmental and production data, and platforms such as ThingSpeak and ThingsBoard were often used to collect and display readings in real time. We also grouped the studies by crop and by the kind of sensors involved, so the review reads like an inventory of what people are actually trying.\n\nJust as important, we were honest about the obstacles that keep this technology from spreading: patchy connectivity in rural areas, the cost of equipment, and the difficulty of getting clean, trustworthy data. We closed by pointing to strategic crops for Ecuador, banana, cacao, mango, and rice, where better sensing and prediction could most improve productivity and sustainability.",
+        "es": "La herramienta más antigua de un agricultor es la atención: recorrer los campos, revisar el suelo, notar el primer indicio de una plaga. La tecnología moderna promete extender esa atención con sensores baratos que miden temperatura, humedad o humedad del suelo y envían sus lecturas por internet, y con inteligencia artificial que convierte esas lecturas en consejos, como cuándo regar o dónde empieza una enfermedad. Pero, ¿cuánto de esto ocurre de verdad en el terreno en un país como Ecuador?\n\nCon Eysonhover Basurto Loor nos propusimos responder eso con una **revisión sistemática**, un estudio estructurado de la evidencia publicada. Leímos 40 estudios de 2020 a 2025 que combinaban el **Internet de las Cosas**, es decir, la red de sensores conectados, con inteligencia artificial en la agricultura ecuatoriana.\n\nVarias cosas quedaron claras. El **machine learning** fue la herramienta dominante, sobre todo **redes neuronales** usadas para detectar plagas y monitorear cultivos a partir de imágenes y datos de sensores, con precisiones reportadas entre 80% y 95%. Las entradas más comunes fueron datos ambientales y de producción, y plataformas como ThingSpeak y ThingsBoard se usaron a menudo para recolectar y mostrar lecturas en tiempo real. También agrupamos los estudios por cultivo y por el tipo de sensores, así que la revisión se lee como un inventario de lo que la gente realmente está intentando.\n\nIgual de importante, fuimos honestos sobre los obstáculos que impiden que esta tecnología se difunda: conectividad irregular en zonas rurales, el costo de los equipos y la dificultad de obtener datos limpios y confiables. Cerramos señalando cultivos estratégicos para Ecuador, banano, cacao, mango y arroz, donde una mejor medición y predicción podría mejorar más la productividad y la sostenibilidad."
+      },
+      "links": [
+        {
+          "label": "DOI (open access)",
+          "url": "https://doi.org/10.29019/enfoqueute.1236"
+        }
+      ]
+    },
+    {
+      "id": "post-cisti2026-oop",
+      "date": "2026-01-15",
+      "type": "paper",
+      "doi": "10.1007/978-3-032-12882-9_6",
+      "auto": false,
+      "topics": [
+        "education",
+        "data-mining"
+      ],
+      "title": {
+        "en": "Do students learn to code better online or in the classroom?",
+        "es": "¿Se aprende a programar mejor en línea o en el aula?"
+      },
+      "summary": {
+        "en": "With Jorge Rodas-Silva, an educational data mining study comparing performance in online versus face-to-face object-oriented programming courses, presented in Salamanca, Spain.",
+        "es": "Con Jorge Rodas-Silva, un estudio de minería de datos educativa que compara el rendimiento en cursos de programación orientada a objetos en línea y presenciales, presentado en Salamanca, España."
+      },
+      "body": {
+        "en": "When the pandemic pushed courses online almost overnight, teachers were left with a nagging question that outlasted the emergency: do students really learn as well through a screen as they do in a classroom? For a subject like programming, which many students already find intimidating, the answer is not obvious and should not be settled by opinion alone.\n\nWith Jorge Rodas-Silva, we looked at this using real records from **object-oriented programming** courses, a common early programming subject. Rather than ask students how they felt, we used **educational data mining**, which means searching for patterns in the actual grades and outcomes the courses produced under each teaching format.\n\nThe value of this approach is that it treats teaching like something we can measure and compare fairly. We lined up performance in the online version against the **face-to-face** version and looked for meaningful differences, not just averages that might hide important details. That lets a program see where remote teaching keeps pace and where the classroom still gives students an advantage, which is exactly the information needed to design a sensible blended course instead of guessing.\n\nWe presented the study at CISTI 2024, the 19th Iberian Conference on Information Systems and Technologies, held in Salamanca, Spain. Work like this is a small but concrete contribution to a debate that will keep mattering as universities decide how much teaching to keep online for good.",
+        "es": "Cuando la pandemia empujó los cursos a internet casi de un día para otro, a los docentes les quedó una duda persistente que sobrevivió a la emergencia: ¿de verdad los estudiantes aprenden igual de bien a través de una pantalla que en un aula? Para una materia como la programación, que muchos ya encuentran intimidante, la respuesta no es obvia y no debería zanjarse solo con opiniones.\n\nCon Jorge Rodas-Silva miramos esto usando registros reales de cursos de **programación orientada a objetos**, una materia inicial común de programación. En lugar de preguntar a los estudiantes cómo se sentían, usamos **minería de datos educativa**, que significa buscar patrones en las notas y resultados que los cursos produjeron de verdad en cada formato de enseñanza.\n\nEl valor de este enfoque es que trata la enseñanza como algo que podemos medir y comparar de forma justa. Pusimos lado a lado el rendimiento de la versión en línea frente a la **presencial** y buscamos diferencias con sentido, no solo promedios que podrían esconder detalles importantes. Eso permite a un programa ver dónde la enseñanza a distancia se mantiene a la par y dónde el aula aún da ventaja a los estudiantes, que es justo la información necesaria para diseñar un curso híbrido sensato en vez de adivinar.\n\nPresentamos el estudio en CISTI 2024, la 19.ª Conferencia Ibérica de Sistemas y Tecnologías de Información, en Salamanca, España. Un trabajo así es un aporte pequeño pero concreto a un debate que seguirá importando mientras las universidades deciden cuánta enseñanza dejar en línea de forma permanente."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1007/978-3-032-12882-9_6"
+        }
+      ]
+    },
+    {
+      "id": "post-iwinac2026-hijacking",
+      "date": "2026-04-10",
+      "type": "paper",
+      "doi": "10.1007/978-3-032-27317-8_8",
+      "auto": false,
+      "topics": [
+        "deep-learning",
+        "security",
+        "computer-vision"
+      ],
+      "title": {
+        "en": "Teaching a neural network to notice when a vehicle trip looks wrong",
+        "es": "Enseñar a una red neuronal a notar cuando un viaje en vehículo se ve extraño"
+      },
+      "summary": {
+        "en": "With Edison Solorzano and Enrique Domínguez, an LSTM autoencoder learns what a normal trip looks like and flags one that does not fit, presented in Fuerteventura, Spain.",
+        "es": "Con Edison Solórzano y Enrique Domínguez, un autoencoder LSTM aprende cómo luce un viaje normal y alerta cuando uno no encaja, presentado en Fuerteventura, España."
+      },
+      "body": {
+        "en": "A delivery truck usually lives a predictable life. Day after day it follows similar routes, at similar speeds, with similar stops. That routine is boring, and boring is exactly what makes it useful: when a truck is hijacked, the trip suddenly stops looking like itself. The challenge is to get a computer to notice that change automatically, in the moment, without a human watching every vehicle.\n\nWith Edison Solorzano and Enrique Domínguez, of the University of Málaga in Spain, we built a system that does this. At its heart is an **LSTM autoencoder**. That name sounds technical, but the idea is intuitive. An autoencoder is a neural network trained to take something in and rebuild it as faithfully as possible; the LSTM part means it is good at handling sequences that unfold over time, like the trail of GPS points a trip leaves behind.\n\nHere is the trick. We trained the network only on **normal trips**, so it became an expert at rebuilding ordinary journeys. When it later meets a trip that behaves strangely, it cannot rebuild it well, and the size of that error becomes an alarm. The beauty of this is that the system never needs examples of hijackings to learn from; it only needs to know what normal looks like, which is a realistic assumption because normal trips are abundant and attacks are rare.\n\nA practical hurdle is that real movement data comes from many sources, sensors, and formats that do not naturally fit together, so part of our work was unifying these **heterogeneous datasets** so a single model could learn from all of them. We presented the results at IWINAC 2026 in Fuerteventura, in the Canary Islands, Spain, with an eye on a problem that is painfully real in Latin America: making cargo transport safer.",
+        "es": "Un camión de reparto suele llevar una vida predecible. Día tras día sigue rutas parecidas, a velocidades parecidas, con paradas parecidas. Esa rutina es aburrida, y lo aburrido es justo lo que la hace útil: cuando un camión es secuestrado, el viaje de pronto deja de parecerse a sí mismo. El reto es que una computadora note ese cambio de forma automática, en el momento, sin que una persona vigile cada vehículo.\n\nCon Edison Solórzano y Enrique Domínguez, de la Universidad de Málaga en España, construimos un sistema que hace esto. En su centro hay un **autoencoder LSTM**. El nombre suena técnico, pero la idea es intuitiva. Un autoencoder es una red neuronal entrenada para tomar algo y reconstruirlo lo más fielmente posible; la parte LSTM significa que es buena manejando secuencias que se despliegan en el tiempo, como el rastro de puntos GPS que deja un viaje.\n\nAquí está el truco. Entrenamos la red solo con **viajes normales**, así que se volvió experta en reconstruir trayectos comunes. Cuando después se topa con un viaje que se comporta de forma extraña, no logra reconstruirlo bien, y el tamaño de ese error se convierte en una alarma. Lo bello es que el sistema nunca necesita ejemplos de secuestros para aprender; solo necesita saber cómo luce lo normal, un supuesto realista porque los viajes normales abundan y los ataques son raros.\n\nUn obstáculo práctico es que los datos reales de movimiento vienen de muchas fuentes, sensores y formatos que no encajan de manera natural, así que parte de nuestro trabajo fue unificar esos **conjuntos heterogéneos** para que un solo modelo aprendiera de todos. Presentamos los resultados en IWINAC 2026, en Fuerteventura, Islas Canarias, España, con la mirada puesta en un problema dolorosamente real en América Latina: hacer más seguro el transporte de carga."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1007/978-3-032-27317-8_8"
+        }
+      ]
+    },
+    {
+      "id": "post-computation2025-dropout",
+      "date": "2025-08-12",
+      "type": "paper",
+      "doi": "10.3390/computation13080198",
+      "auto": false,
+      "topics": [
+        "education",
+        "machine-learning",
+        "review"
+      ],
+      "title": {
+        "en": "Twelve years of predicting university dropout, in one map",
+        "es": "Doce años prediciendo la deserción universitaria, en un solo mapa"
+      },
+      "summary": {
+        "en": "With Mauricio Quimiz-Moreira, Rosa Delgadillo, Nelson Maculan and David Mauricio, a systematic review of how machine learning has been used from 2012 to 2024 to understand, predict and explain university dropout.",
+        "es": "Con Mauricio Quimiz-Moreira, Rosa Delgadillo, Nelson Maculan y David Mauricio, una revisión sistemática de cómo se ha usado el machine learning entre 2012 y 2024 para entender, predecir y explicar la deserción universitaria."
+      },
+      "body": {
+        "en": "Every year, many university students quietly disappear from their programs before finishing. Behind each departure is a personal story, but across thousands of students patterns appear, and universities have spent decades trying to read those patterns early enough to help. In the last twelve years, machine learning has become one of the main tools for the job, and the research has grown into a sprawling, hard-to-navigate literature.\n\nWith Mauricio Quimiz-Moreira, Rosa Delgadillo, Nelson Maculan, and David Mauricio, colleagues spanning Ecuador, Peru, and Brazil, we set out to turn that sprawl into a clear map. We followed **PRISMA**, a rigorous method for reviewing research, so the survey is systematic rather than a personal selection of favorite papers, and we organized what we found around four questions: what causes **dropout**, how it is predicted, whether the predictions can be explained, and whether they can be simulated.\n\nThe scale is striking. We identified 520 distinct factors that studies have linked to dropout, and we sorted them into five families, demographic, socioeconomic, institutional, personal, and academic, with the most studied in each being gender, scholarships, infrastructure, student identification, and grades. On the prediction side, we catalogued 83 different **machine learning models**, led by familiar ones like decision trees, logistic regression, and random forests.\n\nWe paid special attention to **explainability**, the ability of a model to say why it flagged a particular student, using tools such as SHAP and LIME. This is not a technical footnote; it is the difference between a system that is useful and one that is not. A model that merely predicts a student will drop out gives an advisor nowhere to start. A model that shows the prediction rests mostly on a sharp grade drop combined with financial strain hands that advisor something concrete to act on.",
+        "es": "Cada año, muchos estudiantes universitarios desaparecen en silencio de sus carreras antes de terminar. Detrás de cada abandono hay una historia personal, pero a lo largo de miles de estudiantes aparecen patrones, y las universidades llevan décadas tratando de leer esos patrones a tiempo para ayudar. En los últimos doce años, el machine learning se ha vuelto una de las herramientas principales para ello, y la investigación ha crecido hasta ser una literatura enorme y difícil de recorrer.\n\nCon Mauricio Quimiz-Moreira, Rosa Delgadillo, Nelson Maculan y David Mauricio, colegas de Ecuador, Perú y Brasil, nos propusimos convertir esa maraña en un mapa claro. Seguimos **PRISMA**, un método riguroso para revisar investigación, para que el estudio sea sistemático y no una selección personal de artículos favoritos, y organizamos lo encontrado en torno a cuatro preguntas: qué causa la **deserción**, cómo se predice, si las predicciones se pueden explicar y si se pueden simular.\n\nLa escala impresiona. Identificamos 520 factores distintos que los estudios han vinculado con la deserción, y los ordenamos en cinco familias, demográfica, socioeconómica, institucional, personal y académica, siendo los más estudiados el género, las becas, la infraestructura, la identificación del estudiante y las notas. En la parte de predicción, catalogamos 83 **modelos de machine learning** diferentes, liderados por conocidos como árboles de decisión, regresión logística y random forest.\n\nPrestamos especial atención a la **explicabilidad**, la capacidad de un modelo de decir por qué marcó a un estudiante concreto, con herramientas como SHAP y LIME. Esto no es un detalle técnico; es la diferencia entre un sistema útil y uno que no lo es. Un modelo que solo predice que un estudiante desertará no le da a un tutor por dónde empezar. Un modelo que muestra que la predicción se apoya sobre todo en una caída fuerte de notas combinada con dificultades económicas le entrega a ese tutor algo concreto sobre lo cual actuar."
+      },
+      "links": [
+        {
+          "label": "DOI (open access)",
+          "url": "https://doi.org/10.3390/computation13080198"
+        }
+      ]
+    },
+    {
+      "id": "post-engreports2025-ct",
+      "date": "2025-06-01",
+      "type": "paper",
+      "doi": "10.1002/eng2.70203",
+      "auto": false,
+      "topics": [
+        "education",
+        "data-mining"
+      ],
+      "title": {
+        "en": "Which teaching format best builds computational thinking?",
+        "es": "¿Qué formato de enseñanza desarrolla mejor el pensamiento computacional?"
+      },
+      "summary": {
+        "en": "With Jorge Rodas-Silva, a data-driven comparison of online, blended and face-to-face pre-university courses in computational thinking.",
+        "es": "Con Jorge Rodas-Silva, una comparación basada en datos de cursos preuniversitarios de pensamiento computacional en línea, híbridos y presenciales."
+      },
+      "body": {
+        "en": "Before students ever write a line of code, they need a way of thinking that programmers rely on constantly: breaking a messy problem into small, clear, ordered steps a machine could follow. This skill is called **computational thinking**, and schools now try to build it through many formats, fully online, blended, or face-to-face. A fair question is which format actually works best.\n\nWith Jorge Rodas-Silva, we studied this using data from pre-university students at a public university in Ecuador during 2023. Instead of relying on impressions, we compared the three formats with **statistical tests**, which are a disciplined way of checking whether a difference is real or just chance.\n\nThe results favored the classroom: face-to-face students achieved the best outcomes overall. But the more useful findings are in the details. Across every format, two things predicted success most strongly, a student's **admission score** and their gender. Beyond that, the formats behaved differently: socioeconomic factors mattered more for students learning in person, while academic factors carried more weight for those learning online or in blended courses.\n\nThose nuances are what make the study practical. A university cannot always offer everyone the same format, but it can use findings like these to decide who is best served by which mode, and to design courses that do not quietly disadvantage certain students. It turns a vague debate about online versus in-person into concrete guidance grounded in evidence.",
+        "es": "Antes de que los estudiantes escriban una sola línea de código, necesitan una forma de pensar en la que los programadores se apoyan todo el tiempo: descomponer un problema desordenado en pasos pequeños, claros y ordenados que una máquina podría seguir. Esa habilidad se llama **pensamiento computacional**, y hoy las instituciones intentan desarrollarla en muchos formatos, totalmente en línea, híbrido o presencial. Una pregunta justa es cuál funciona mejor.\n\nCon Jorge Rodas-Silva estudiamos esto usando datos de estudiantes preuniversitarios de una universidad pública de Ecuador durante 2023. En lugar de fiarnos de impresiones, comparamos los tres formatos con **pruebas estadísticas**, una manera disciplinada de verificar si una diferencia es real o solo azar.\n\nLos resultados favorecieron al aula: los estudiantes presenciales lograron los mejores resultados en general. Pero los hallazgos más útiles están en los detalles. En todos los formatos, dos cosas predijeron el éxito con más fuerza, el **puntaje de admisión** del estudiante y su género. Más allá de eso, los formatos se comportaron distinto: los factores socioeconómicos pesaron más para quienes aprendían en persona, mientras que los factores académicos tuvieron más peso para quienes aprendían en línea o en cursos híbridos.\n\nEsos matices son los que hacen práctico el estudio. Una universidad no siempre puede ofrecer a todos el mismo formato, pero puede usar hallazgos así para decidir a quién le sirve mejor cada modalidad y diseñar cursos que no perjudiquen en silencio a ciertos estudiantes. Convierte un debate vago sobre lo virtual frente a lo presencial en una guía concreta apoyada en evidencia."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1002/eng2.70203"
+        }
+      ]
+    },
+    {
+      "id": "post-artiis2025-solar",
+      "date": "2025-03-01",
+      "type": "paper",
+      "doi": "10.1007/978-3-031-83210-9_25",
+      "auto": false,
+      "topics": [
+        "energy",
+        "machine-learning"
+      ],
+      "title": {
+        "en": "Forecasting sunshine to plan solar energy in Manabi",
+        "es": "Pronosticar el sol para planificar energía solar en Manabí"
+      },
+      "summary": {
+        "en": "With Daniel Arteaga-Subiaga and Lucía Rivadeneira, machine learning models predict solar radiation in Manabi, Ecuador, presented in Santiago de Chile.",
+        "es": "Con Daniel Arteaga-Subiaga y Lucía Rivadeneira, modelos de machine learning predicen la radiación solar en Manabí, Ecuador, presentado en Santiago de Chile."
+      },
+      "body": {
+        "en": "A solar panel is only as good as the sunlight that reaches it, and sunlight is not constant: clouds, seasons, and the time of day all change how much energy arrives at a given place. For anyone deciding whether to invest in solar power, that variability is a real risk. Good **forecasts** of incoming sunlight, technically called **solar radiation**, turn that gamble into a plan.\n\nWith Daniel Arteaga-Subiaga and Lucía Rivadeneira, we trained **machine learning** models to predict solar radiation in Manabi, the coastal province of Ecuador where we work. Machine learning here means letting a program learn the relationship between easily measured conditions and the radiation that follows, by studying many past examples rather than being given a fixed formula.\n\nWe compared several models to see which could forecast the incoming radiation most reliably from the local measurements available, since a method that works in one climate does not automatically work in another. The point was not to chase a record accuracy but to find something dependable enough to be useful on the ground.\n\nThat local focus is what matters most. Manabi has strong, abundant sun but almost none of the forecasting infrastructure that wealthier regions take for granted. A model tuned to local data is a concrete step toward planning solar installations sensibly there. We shared the work at ARTIIS 2024, held in Santiago de Chile, Chile.",
+        "es": "Un panel solar vale tanto como la luz solar que le llega, y esa luz no es constante: las nubes, las estaciones y la hora del día cambian cuánta energía llega a un lugar dado. Para quien decide si invertir en energía solar, esa variabilidad es un riesgo real. Buenos **pronósticos** de la luz entrante, técnicamente llamada **radiación solar**, convierten esa apuesta en un plan.\n\nCon Daniel Arteaga-Subiaga y Lucía Rivadeneira entrenamos modelos de **machine learning** para predecir la radiación solar en Manabí, la provincia costera de Ecuador donde trabajamos. Machine learning aquí significa dejar que un programa aprenda la relación entre condiciones fáciles de medir y la radiación que llega después, estudiando muchos ejemplos pasados en lugar de recibir una fórmula fija.\n\nComparamos varios modelos para ver cuál podía pronosticar la radiación entrante de forma más confiable a partir de las mediciones locales disponibles, ya que un método que funciona en un clima no funciona automáticamente en otro. La meta no era perseguir una precisión récord, sino encontrar algo lo bastante confiable para ser útil en el terreno.\n\nEse enfoque local es lo que más importa. Manabí tiene un sol fuerte y abundante, pero casi nada de la infraestructura de pronóstico que las regiones más ricas dan por sentada. Un modelo ajustado a datos locales es un paso concreto para planificar instalaciones solares con sensatez allí. Compartimos el trabajo en ARTIIS 2024, en Santiago de Chile, Chile."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1007/978-3-031-83210-9_25"
+        }
+      ]
+    },
+    {
+      "id": "post-smc2025-helmet",
+      "date": "2025-10-05",
+      "type": "paper",
+      "doi": "10.1109/smc58881.2025.11343106",
+      "auto": false,
+      "topics": [
+        "computer-vision",
+        "deep-learning",
+        "optimization",
+        "safety"
+      ],
+      "title": {
+        "en": "Checking for hard hats automatically, on site",
+        "es": "Comprobar el uso de cascos de forma automática, en obra"
+      },
+      "summary": {
+        "en": "With Jorge Rodas-Silva, a CNN tuned by a genetic algorithm to automatically check whether workers are wearing safety helmets, presented at IEEE SMC 2025 in Vienna, Austria.",
+        "es": "Con Jorge Rodas-Silva, una CNN afinada con un algoritmo genético para comprobar automáticamente si los trabajadores llevan casco de seguridad, presentado en IEEE SMC 2025 en Viena, Austria."
+      },
+      "body": {
+        "en": "Construction sites and factories require workers to wear a helmet, but checking that by hand across a busy site is slow and easy to get wrong. A camera that could flag a worker without one in real time would let a safety officer step in before an accident happens, not after.\n\nWith **Jorge Rodas-Silva**, who led the work, we built a detector for exactly that: a **convolutional neural network (CNN)** trained to recognise whether a person in an image is wearing a helmet, with its settings tuned by a **genetic algorithm**.\n\nA CNN's raw settings, how many layers it has, how they are connected, how fast it learns, make a real difference to its accuracy, and getting them right by hand is mostly guesswork. A genetic algorithm searches that space automatically: borrowing from natural selection, it keeps a population of candidate configurations, lets the best-performing ones survive and combine over many generations, and converges on settings tuned to the task, the same approach we used earlier to fine-tune a power-demand forecaster.\n\nThe result is a more practical route to real-time **personal protective equipment (PPE)** compliance monitoring, the kind of system a site camera could run continuously rather than relying on occasional spot checks. We presented the work at the **2025 IEEE International Conference on Systems, Man, and Cybernetics (SMC)**, held in Vienna, Austria.",
+        "es": "Las obras de construcción y las fábricas exigen que los trabajadores usen casco, pero comprobarlo a mano en una obra concurrida es lento y fácil de pasar por alto. Una cámara capaz de señalar a un trabajador sin casco en tiempo real permitiría que un responsable de seguridad intervenga antes del accidente, no después.\n\nCon **Jorge Rodas-Silva**, que lideró el trabajo, construimos un detector para justamente eso: una **red neuronal convolucional (CNN)** entrenada para reconocer si una persona en una imagen lleva puesto un casco, con sus parámetros afinados mediante un **algoritmo genético**.\n\nLos parámetros de una CNN, cuántas capas tiene, cómo se conectan, qué tan rápido aprende, marcan una diferencia real en su precisión, y ajustarlos a mano suele ser cuestión de ensayo y error. Un algoritmo genético busca en ese espacio de forma automática: tomando prestado de la selección natural, mantiene una población de configuraciones candidatas, deja que las que mejor rinden sobrevivan y se combinen durante muchas generaciones, y converge en parámetros afinados para la tarea, el mismo enfoque que usamos antes para afinar un pronosticador de demanda eléctrica.\n\nEl resultado es una vía más práctica hacia el monitoreo en tiempo real del cumplimiento del uso de **equipo de protección personal (EPP)**, el tipo de sistema que una cámara de obra podría ejecutar de forma continua en lugar de depender de controles ocasionales. Presentamos el trabajo en la **2025 IEEE International Conference on Systems, Man, and Cybernetics (SMC)**, realizada en Viena, Austria."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1109/smc58881.2025.11343106"
+        }
+      ]
+    },
+    {
+      "id": "post-etcm2025-aphids",
+      "date": "2025-10-21",
+      "type": "paper",
+      "doi": "10.1109/ETCM67548.2025.11304406",
+      "auto": false,
+      "topics": [
+        "computer-vision",
+        "deep-learning",
+        "agriculture"
+      ],
+      "title": {
+        "en": "Which CNN actually spots aphids on a lemon leaf?",
+        "es": "¿Qué CNN detecta mejor a los pulgones en una hoja de limón?"
+      },
+      "summary": {
+        "en": "With Jorge Rodas-Silva, Joseph Chávez Reyes and Gema Bravo Navarrete, a comparison of CNN architectures for detecting aphids on lemon leaves, presented at IEEE ETCM 2025 in Quito, Ecuador.",
+        "es": "Con Jorge Rodas-Silva, Joseph Chávez Reyes y Gema Bravo Navarrete, una comparación de arquitecturas CNN para detectar pulgones en hojas de limón, presentado en IEEE ETCM 2025 en Quito, Ecuador."
+      },
+      "body": {
+        "en": "A few years ago, with **LeLePhid**, we published a small dataset of lemon leaf photos for detecting aphids and rating how badly a leaf was infested. A dataset on its own does not tell you which detection method actually works best on it, and for a grower deciding what to deploy in the field, that choice matters as much as the data.\n\nWith **Jorge Rodas-Silva**, **Joseph Chávez Reyes** and **Gema Bravo Navarrete**, we compared several **convolutional neural network (CNN)** architectures on that same aphid-detection problem, to see which one holds up best on images taken in a real lemon field rather than under lab conditions.\n\nThe comparison matters because architectures differ in how they trade off accuracy against how much training data and computing power they need. On a small agricultural dataset like this one, a heavier network can end up memorising the training images instead of learning to generalise, so the \"best\" model on paper is not always the most practical one to deploy.\n\nWe presented the comparison at the **2025 IEEE Ninth Ecuador Technical Chapters Meeting (ETCM)**, held in Quito, Ecuador. The aim was practical: give growers and other researchers a clearer sense of which CNN architecture to reach for when the available data is limited, before committing to a full field deployment.",
+        "es": "Hace unos años, con **LeLePhid**, publicamos un pequeño conjunto de fotos de hojas de limón para detectar pulgones y calificar qué tan infestada estaba una hoja. Un conjunto de datos por sí solo no dice qué método de detección funciona mejor sobre él, y para un agricultor que decide qué implementar en el campo, esa elección importa tanto como los datos.\n\nCon **Jorge Rodas-Silva**, **Joseph Chávez Reyes** y **Gema Bravo Navarrete**, comparamos varias arquitecturas de **redes neuronales convolucionales (CNN)** sobre ese mismo problema de detección de pulgones, para ver cuál se sostiene mejor con imágenes tomadas en un campo de limón real y no en condiciones de laboratorio.\n\nLa comparación importa porque las arquitecturas difieren en cómo equilibran precisión frente a cuántos datos de entrenamiento y potencia de cómputo necesitan. En un conjunto de datos agrícola pequeño como este, una red más pesada puede terminar memorizando las imágenes de entrenamiento en lugar de aprender a generalizar, así que el modelo \"mejor\" en el papel no siempre es el más práctico para implementar.\n\nPresentamos la comparación en el **2025 IEEE Ninth Ecuador Technical Chapters Meeting (ETCM)**, realizado en Quito, Ecuador. El objetivo fue práctico: darles a los agricultores y a otros investigadores una idea más clara de qué arquitectura CNN elegir cuando los datos disponibles son limitados, antes de comprometerse con una implementación completa en el campo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1109/ETCM67548.2025.11304406"
+        }
+      ]
+    },
+    {
+      "id": "post-jpr2025-mentalhealth",
+      "date": "2025-05-15",
+      "type": "paper",
+      "doi": "10.1016/j.jpsychores.2025.112150",
+      "auto": false,
+      "topics": [
+        "health"
+      ],
+      "title": {
+        "en": "Why young people in Ecuador end up hospitalized for mental health?",
+        "es": "¿Por qué los jóvenes en Ecuador terminan hospitalizados por salud mental?"
+      },
+      "summary": {
+        "en": "With German Josuet Lapo-Talledo, Ana Lúcia S. Rodrigues, Karime Montes-Escobar and Aline Siteneski, a nationwide look at pediatric hospitalizations for mental health disorders in Ecuador, published in the Journal of Psychosomatic Research.",
+        "es": "Con German Josuet Lapo-Talledo, Ana Lúcia S. Rodrigues, Karime Montes-Escobar y Aline Siteneski, una mirada a escala nacional a las hospitalizaciones pediátricas por trastornos de salud mental en Ecuador, publicado en Journal of Psychosomatic Research."
+      },
+      "body": {
+        "en": "Mental health problems that begin in childhood or adolescence often go unnoticed until they become severe enough to require a hospital stay, by which point the condition has usually been building for a while. In Ecuador, as in much of Latin America, there has been little nationwide data on how often young people are hospitalized for these reasons, or why.\n\nWith **German Josuet Lapo-Talledo**, **Ana Lúcia S. Rodrigues**, **Karime Montes-Escobar** and **Aline Siteneski**, we studied eight years of nationwide hospital records to see which mental and behavioral disorders, classified using the standard **ICD-10** codes, led to hospitalization of children and adolescents in Ecuador, who was affected, and how long each stay lasted.\n\n**Substance use disorders** turned out to be the leading cause of these hospitalizations, ahead of any other diagnosis. **Depressive disorders** were the next major driver, and admissions for depression were more common among girls than boys; when hospitalization was needed for depression, the stay often ran past eleven days, longer than for most other causes.\n\nThese patterns point to where Ecuador's pediatric mental health services are under the most pressure today, and to two groups, adolescents with substance use problems and girls with depression, who may benefit most from earlier, targeted support before a crisis requires hospitalization. We published the results in the *Journal of Psychosomatic Research*.",
+        "es": "Los problemas de salud mental que comienzan en la niñez o la adolescencia suelen pasar inadvertidos hasta que se vuelven lo bastante graves como para requerir una hospitalización, momento en el que el trastorno ya lleva tiempo desarrollándose. En Ecuador, como en buena parte de América Latina, ha habido pocos datos a escala nacional sobre con qué frecuencia los jóvenes terminan hospitalizados por estos motivos, o por qué.\n\nCon **German Josuet Lapo-Talledo**, **Ana Lúcia S. Rodrigues**, **Karime Montes-Escobar** y **Aline Siteneski**, estudiamos ocho años de registros hospitalarios a escala nacional para ver qué trastornos mentales y del comportamiento, clasificados con los códigos estándar **CIE-10**, llevaban a la hospitalización de niños y adolescentes en Ecuador, a quién afectaban y cuánto duraba cada estancia.\n\nLos trastornos por **uso de sustancias psicoactivas** resultaron ser la causa principal de estas hospitalizaciones, por encima de cualquier otro diagnóstico. Los **trastornos depresivos** fueron el segundo motivo más importante, y los ingresos por depresión fueron más frecuentes en niñas que en niños; cuando se necesitaba hospitalización por depresión, la estancia solía superar los once días, más que la mayoría de las otras causas.\n\nEstos patrones señalan dónde está hoy la mayor presión sobre los servicios de salud mental infantil en Ecuador, y apuntan a dos grupos, adolescentes con problemas de uso de sustancias y niñas con depresión, que podrían beneficiarse más de un apoyo temprano y dirigido, antes de que se necesite una hospitalización. Publicamos los resultados en *Journal of Psychosomatic Research*."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.jpsychores.2025.112150"
+        }
+      ]
+    },
+    {
+      "id": "post-enfoqueute2024-ann",
+      "date": "2024-10-01",
+      "type": "paper",
+      "doi": "10.29019/enfoqueute.1058",
+      "auto": false,
+      "topics": [
+        "deep-learning",
+        "review"
+      ],
+      "title": {
+        "en": "A field guide to neural networks for classification",
+        "es": "Una guía de campo de las redes neuronales para clasificación"
+      },
+      "summary": {
+        "en": "With Eduardo Molina, a systematic review of 30 studies on which neural network architectures classify data best, and with what accuracy.",
+        "es": "Con Eduardo Molina, una revisión sistemática de 30 estudios sobre qué arquitecturas de redes neuronales clasifican mejor, y con qué precisión."
+      },
+      "body": {
+        "en": "Artificial **neural networks** are behind much of what we now call artificial intelligence, from recognizing faces to reading handwriting. One of their most common jobs is **classification**: sorting something, an image, a signal, a record, into the right category. But there is no single kind of neural network; there are many designs, and picking the wrong one wastes time and effort. A newcomer to the field can easily feel lost.\n\nWith my student Eduardo Molina, we wrote a **systematic review** to bring order to that choice. A systematic review is a structured, rule-based reading of the published research, so the conclusions rest on the weight of many studies rather than on any single result. We examined 30 studies published between 2019 and 2024 and compared which architectures were used, how well they performed, and on what kind of data.\n\nA few clear tendencies emerged. **Convolutional neural networks** dominate when the input is images, because their design mirrors how visual patterns are built up from smaller pieces. Multilayer perceptrons, a more general design, handle ordinary classification tasks, and feed-forward networks showed the highest average accuracy, around 97%. Digitized images were the most common type of data across the studies, appearing in fields as different as medical diagnosis and remote sensing.\n\nRather than declaring one architecture the winner, the review helps a practitioner match a design to a problem using evidence instead of habit. It also names the open challenges the field still faces, especially making these models more interpretable and more efficient, so that their decisions can be trusted and their cost kept reasonable.",
+        "es": "Las **redes neuronales** artificiales están detrás de gran parte de lo que hoy llamamos inteligencia artificial, desde reconocer rostros hasta leer escritura a mano. Uno de sus trabajos más comunes es la **clasificación**: colocar algo, una imagen, una señal, un registro, en la categoría correcta. Pero no existe un único tipo de red neuronal; hay muchos diseños, y elegir el equivocado desperdicia tiempo y esfuerzo. Quien recién llega al campo puede sentirse perdido con facilidad.\n\nCon mi estudiante Eduardo Molina escribimos una **revisión sistemática** para ordenar esa elección. Una revisión sistemática es una lectura estructurada y basada en reglas de la investigación publicada, así que las conclusiones se apoyan en el peso de muchos estudios y no en un resultado aislado. Examinamos 30 estudios publicados entre 2019 y 2024 y comparamos qué arquitecturas se usaron, qué tan bien rindieron y con qué tipo de datos.\n\nSurgieron algunas tendencias claras. Las **redes neuronales convolucionales** dominan cuando la entrada son imágenes, porque su diseño imita cómo los patrones visuales se construyen a partir de piezas más pequeñas. Los perceptrones multicapa, un diseño más general, manejan tareas de clasificación comunes, y las redes feed-forward mostraron la mayor precisión promedio, cerca del 97%. Las imágenes digitalizadas fueron el tipo de dato más común en los estudios, apareciendo en campos tan distintos como el diagnóstico médico y la teledetección.\n\nEn lugar de declarar ganadora a una arquitectura, la revisión ayuda a un profesional a emparejar un diseño con un problema usando evidencia y no costumbre. También nombra los retos abiertos que el campo aún enfrenta, sobre todo hacer estos modelos más interpretables y más eficientes, para que sus decisiones se puedan confiar y su costo se mantenga razonable."
+      },
+      "links": [
+        {
+          "label": "DOI (open access)",
+          "url": "https://doi.org/10.29019/enfoqueute.1058"
+        }
+      ]
+    },
+    {
+      "id": "post-rte2024-law",
+      "date": "2024-06-30",
+      "type": "paper",
+      "doi": "10.37815/rte.v36n1.1151",
+      "auto": false,
+      "topics": [
+        "nlp",
+        "text-mining",
+        "law"
+      ],
+      "title": {
+        "en": "Reading the fine print of computer law with text mining",
+        "es": "Leyendo la letra chica del derecho informático con minería de textos"
+      },
+      "summary": {
+        "en": "With Iván Moreira Moreira and Marlon Navia Mendoza, text mining compares legal and technical writing to map how computer law connects to information systems in Ecuador.",
+        "es": "Con Iván Moreira Moreira y Marlon Navia Mendoza, la minería de textos compara escritura jurídica y técnica para mapear cómo se conecta el derecho informático con los sistemas de información en Ecuador."
+      },
+      "body": {
+        "en": "Laws about software, personal data, and **cybercrime** are written in dense legal language, while the technology they try to govern is described in an entirely different technical vocabulary. The two worlds are clearly connected, but the connections are hard to see at a glance, which makes it hard to tell whether the law actually keeps up with the systems it regulates.\n\nWith Iván Moreira Moreira and Marlon Navia Mendoza, we used **text mining** to make those connections visible. Text mining means using software to find patterns and relationships across large amounts of writing that no person could read and compare by hand. We first gathered our sources following PRISMA, a structured search method, working with bodies of legal and technical text in both Spanish and English.\n\nTwo techniques did the heavy lifting. **Word2Vec** turns words into numbers in a way that captures meaning, so that words used in similar contexts end up close together. Cosine similarity then measures how related any two texts are. With these, we built tree-like diagrams that grouped documents talking about the same themes, which surfaced recurring topics such as cybercrime, data protection, and intellectual property.\n\nComparing the Spanish and English materials revealed both shared concerns and telling differences, and the analysis showed where Ecuadorian legislation genuinely meets information systems, in areas like software protection and e-commerce, and where it still lags. The broader lesson is that understanding computer law well requires reading it alongside the technology, an interdisciplinary approach that these methods make practical.",
+        "es": "Las leyes sobre software, datos personales y **cibercrimen** están escritas en un lenguaje jurídico denso, mientras que la tecnología que intentan regular se describe con un vocabulario técnico completamente distinto. Los dos mundos están claramente conectados, pero las conexiones son difíciles de ver de un vistazo, lo que complica saber si la ley realmente se mantiene al día con los sistemas que regula.\n\nCon Iván Moreira Moreira y Marlon Navia Mendoza usamos **minería de textos** para hacer visibles esas conexiones. La minería de textos consiste en usar software para encontrar patrones y relaciones en grandes cantidades de escritura que ninguna persona podría leer y comparar a mano. Primero reunimos las fuentes siguiendo PRISMA, un método de búsqueda estructurado, trabajando con conjuntos de textos jurídicos y técnicos en español e inglés.\n\nDos técnicas hicieron el trabajo pesado. **Word2Vec** convierte palabras en números de una forma que captura significado, de modo que palabras usadas en contextos parecidos terminan cerca entre sí. La **similitud del coseno** luego mide qué tan relacionados están dos textos. Con ellas construimos diagramas en forma de árbol que agruparon documentos que hablan de los mismos temas, lo que reveló asuntos recurrentes como cibercrimen, protección de datos y propiedad intelectual.\n\nComparar los materiales en español e inglés reveló tanto preocupaciones compartidas como diferencias reveladoras, y el análisis mostró dónde la legislación ecuatoriana se encuentra genuinamente con los sistemas de información, en áreas como la protección del software y el comercio electrónico, y dónde aún se queda atrás. La lección más amplia es que entender bien el derecho informático exige leerlo junto a la tecnología, un enfoque interdisciplinario que estos métodos vuelven práctico."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.37815/rte.v36n1.1151"
+        }
+      ]
+    },
+    {
+      "id": "post-csl2024-twitter",
+      "date": "2024-03-01",
+      "type": "paper",
+      "doi": "10.1016/j.csl.2023.101579",
+      "auto": false,
+      "topics": [
+        "nlp",
+        "social-media"
+      ],
+      "title": {
+        "en": "Filtering the noise to find emergencies on Twitter",
+        "es": "Filtrar el ruido para encontrar emergencias en Twitter"
+      },
+      "summary": {
+        "en": "With Joel Garcia-Arteaga, Jesús Zambrano-Zambrano and Jorge Rodas-Silva, a method to pick the keywords that best filter Spanish tweets about emergencies.",
+        "es": "Con Joel Garcia-Arteaga, Jesús Zambrano-Zambrano y Jorge Rodas-Silva, un método para elegir las palabras clave que mejor filtran tuits en español sobre emergencias."
+      },
+      "body": {
+        "en": "When a flood or an earthquake strikes, some of the earliest and most vivid information comes not from official channels but from ordinary people posting online. The problem is scale: that useful information is buried inside millions of unrelated messages, and the way you dig it out is by filtering on **keywords**. Choose the wrong words and you drown in noise; choose too few and you miss what matters.\n\nWith Joel Garcia-Arteaga, Jesús Zambrano-Zambrano, and Jorge Rodas-Silva, we built a systematic way to choose good **filters** for Spanish-language tweets about emergencies. Instead of a person guessing which words to watch, our method evaluates candidate keywords by how well they actually pull in genuinely **emergency**-related messages while leaving irrelevant chatter behind, and keeps only the high-quality ones.\n\nThe reason this is harder than it sounds is that everyday words are ambiguous. The word for fire can appear in a recipe, a song lyric, or a real emergency, so a naive filter fails. By scoring keywords on real data and measuring their **precision**, the approach separates the words that reliably signal an emergency from the ones that only seem to.\n\nBetter filters mean an emergency team can treat social media as a live sensor of what is happening on the ground, in the language people around them actually use. That last point matters: most tools of this kind are built for English, and this work deliberately serves Spanish-speaking communities that are too often overlooked. The study appeared in the journal Computer Speech & Language.",
+        "es": "Cuando golpea una inundación o un terremoto, parte de la información más temprana y vívida no viene de los canales oficiales sino de personas comunes publicando en línea. El problema es la escala: esa información útil queda enterrada entre millones de mensajes sin relación, y la forma de extraerla es filtrar por **palabras clave**. Elige las palabras equivocadas y te ahogas en ruido; elige muy pocas y se te escapa lo que importa.\n\nCon Joel Garcia-Arteaga, Jesús Zambrano-Zambrano y Jorge Rodas-Silva construimos una forma sistemática de elegir buenos **filtros** para tuits en español sobre **emergencia**s. En lugar de que una persona adivine qué palabras vigilar, nuestro método evalúa palabras clave candidatas según qué tan bien atraen realmente mensajes relacionados con emergencias y dejan afuera la conversación irrelevante, y conserva solo las de alta calidad.\n\nLa razón de que esto sea más difícil de lo que suena es que las palabras cotidianas son ambiguas. La palabra fuego puede aparecer en una receta, la letra de una canción o una emergencia real, así que un filtro ingenuo falla. Al puntuar las palabras clave sobre datos reales y medir su **precisión**, el enfoque separa las palabras que señalan de forma confiable una emergencia de las que solo lo aparentan.\n\nMejores filtros significan que un equipo de emergencia puede tratar las redes sociales como un sensor en vivo de lo que ocurre en el terreno, en el idioma que la gente alrededor realmente usa. Ese último punto importa: la mayoría de herramientas de este tipo están hechas para el inglés, y este trabajo sirve deliberadamente a comunidades hispanohablantes demasiadas veces ignoradas. El estudio apareció en la revista Computer Speech & Language."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.csl.2023.101579"
+        }
+      ]
+    },
+    {
+      "id": "post-heliyon2024-housing-fuzzy",
+      "date": "2024-02-23",
+      "type": "paper",
+      "doi": "10.1016/j.heliyon.2024.e26444",
+      "auto": false,
+      "topics": [
+        "review",
+        "recommender-systems"
+      ],
+      "title": {
+        "en": "Teaching a recommender to understand 'close enough' and 'affordable'",
+        "es": "Enseñarle a un recomendador qué significa \"cerca\" y \"asequible\""
+      },
+      "summary": {
+        "en": "With Emanuel G. Muñoz, Jaime Meza, Jonathan Josue Proaño Morales and Sebastian Ventura, two decades of research on fuzzy recommender systems for housing, reviewed under PRISMA and published in Heliyon.",
+        "es": "Con Emanuel G. Muñoz, Jaime Meza, Jonathan Josue Proaño Morales y Sebastian Ventura, dos décadas de investigación sobre sistemas de recomendación difusos para vivienda, revisadas con PRISMA y publicadas en Heliyon."
+      },
+      "body": {
+        "en": "Looking for a home is inherently vague: \"close to downtown\", \"reasonably priced\", \"in decent condition\" are the terms people actually use, not the rigid filters most real-estate search tools offer. **Fuzzy recommender systems** try to close that gap by letting a system reason with those imprecise, human terms instead of forcing buyers into strict checkboxes.\n\nWith **Emanuel G. Muñoz**, **Jaime Meza**, **Jonathan Josue Proaño Morales** and **Sebastian Ventura**, we reviewed two decades of research on fuzzy recommender systems built specifically for housing. Following the **PRISMA** methodology, we searched six academic databases covering work published between 1985 and 2024 and classified over a thousand articles to map out how the field has developed.\n\nA recurring pattern stood out: the more mature systems in this space tend to build in safeguards around trust and security between buyers and sellers, and some borrow ideas from **game theory** to model how the two sides actually negotiate, rather than treating a recommendation as a one-way suggestion.\n\nThe review is meant as a map for anyone starting work in this area, whether in real estate specifically or in fuzzy recommender systems more broadly, and it flags where the field still has open problems. We published it in *Heliyon*, and it is open access.",
+        "es": "Buscar una vivienda es, por naturaleza, impreciso: \"cerca del centro\", \"a buen precio\", \"en buen estado\" son los términos que la gente realmente usa, no los filtros rígidos que ofrecen la mayoría de los buscadores inmobiliarios. Los **sistemas de recomendación difusos** (fuzzy) intentan cerrar esa brecha dejando que un sistema razone con esos términos imprecisos y humanos en lugar de obligar a los compradores a casillas estrictas.\n\nCon **Emanuel G. Muñoz**, **Jaime Meza**, **Jonathan Josue Proaño Morales** y **Sebastian Ventura**, revisamos dos décadas de investigación sobre sistemas de recomendación difusos construidos específicamente para vivienda. Siguiendo la metodología **PRISMA**, buscamos en seis bases de datos académicas trabajos publicados entre 1985 y 2024 y clasificamos más de mil artículos para mapear cómo se ha desarrollado el campo.\n\nUn patrón se repitió: los sistemas más maduros en esta área suelen incorporar salvaguardas de confianza y seguridad entre compradores y vendedores, y algunos toman ideas de la **teoría de juegos** para modelar cómo negocian realmente las dos partes, en lugar de tratar una recomendación como una sugerencia de una sola vía.\n\nLa revisión está pensada como un mapa para quien empiece a trabajar en esta área, ya sea en bienes raíces específicamente o en sistemas de recomendación difusos en general, y señala dónde el campo todavía tiene problemas abiertos. La publicamos en *Heliyon*, y es de acceso abierto."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.heliyon.2024.e26444"
+        }
+      ]
+    },
+    {
+      "id": "post-hbet2024-applab",
+      "date": "2024-01-15",
+      "type": "paper",
+      "doi": "10.1155/2024/4918351",
+      "auto": false,
+      "topics": [
+        "education"
+      ],
+      "title": {
+        "en": "Helping non-programmers learn to code with a visual tool",
+        "es": "Ayudar a no programadores a aprender a codificar con una herramienta visual"
+      },
+      "summary": {
+        "en": "With Jorge Rodas-Silva, Mariuxi Vinueza-Morales, Ana Eva Chacón Luna and Jesennia Cárdenas-Cobo, a controlled study shows the visual tool App Lab boosts coding skills of non-ICT engineering students.",
+        "es": "Con Jorge Rodas-Silva, Mariuxi Vinueza-Morales, Ana Eva Chacón Luna y Jesennia Cárdenas-Cobo, un estudio controlado muestra que la herramienta visual App Lab mejora la codificación de estudiantes de ingeniería ajenos a las TIC."
+      },
+      "body": {
+        "en": "Programming has become a basic skill even for engineers who never planned to write code, but the usual way of teaching it, with a stern text editor and cryptic error messages, can scare beginners away before they get started. The question we asked is simple: would a friendlier, more visual tool help these students actually learn?\n\nWith Jorge Rodas-Silva, Mariuxi Vinueza-Morales, Ana Eva Chacón Luna, and Jesennia Cárdenas-Cobo, we tested this properly, with a **controlled experiment**. We worked with 56 environmental-engineering students at the State University of Milagro, in Ecuador, and split them into two groups. One group learned with **App Lab**, a platform where you build programs by snapping together visual blocks instead of typing exact syntax; the other continued with the usual approach.\n\nA controlled experiment like this matters because it lets us attribute any difference to the tool rather than to chance or to one group simply being stronger. Both groups took the same assessment before and after, so we measured how much each actually improved.\n\nAfter three weeks, the App Lab group improved their **programming skills** significantly more than the control group, with the clearest gains on the concepts beginners usually struggle with most: **loops, lists, and functions**. The encouraging takeaway is that the right beginner-friendly tool can open programming to students who would otherwise give up on it, which is exactly the population that stands to benefit most from learning to code.",
+        "es": "La programación se ha vuelto una habilidad básica incluso para ingenieros que nunca pensaron escribir código, pero la forma habitual de enseñarla, con un editor de texto severo y mensajes de error crípticos, puede espantar a los principiantes antes de que empiecen. La pregunta que planteamos es simple: ¿ayudaría una herramienta más amigable y visual a que estos estudiantes de verdad aprendan?\n\nCon Jorge Rodas-Silva, Mariuxi Vinueza-Morales, Ana Eva Chacón Luna y Jesennia Cárdenas-Cobo lo probamos como corresponde, con un **experimento controlado**. Trabajamos con 56 estudiantes de ingeniería ambiental de la Universidad Estatal de Milagro, en Ecuador, y los dividimos en dos grupos. Uno aprendió con **App Lab**, una plataforma donde construyes programas encajando bloques visuales en lugar de escribir sintaxis exacta; el otro siguió con el enfoque habitual.\n\nUn experimento controlado como este importa porque permite atribuir cualquier diferencia a la herramienta y no al azar o a que un grupo simplemente fuera más fuerte. Ambos grupos rindieron la misma evaluación antes y después, así que medimos cuánto mejoró realmente cada uno.\n\nTras tres semanas, el grupo de App Lab mejoró sus **habilidades de programación** significativamente más que el grupo de control, con las ganancias más claras en los conceptos con los que los principiantes suelen batallar más: **bucles, listas y funciones**. La conclusión alentadora es que la herramienta inicial adecuada puede abrir la programación a estudiantes que de otro modo la abandonarían, que es justo la población que más se beneficia de aprender a programar."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1155/2024/4918351"
+        }
+      ]
+    }
+  ]
+}
