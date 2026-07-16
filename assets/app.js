@@ -19,7 +19,7 @@
   const T = {
     en: {
       journal: "Journal", conference: "Conference", software: "Software", book: "Book chapter",
-      paper: "New paper", news: "News",
+      paper: "New paper", news: "Posts",
       readMore: "Read the post", cite: "Cite", copied: "BibTeX copied", doi: "DOI",
       openAccess: "Open access", all: "All", post: "Post", aboutPaper: "About the paper", readPaper: "Read the paper",
       readOriginalPaper: "Read the original paper",
@@ -28,7 +28,7 @@
       empty: "Nothing here yet.", notFound: "Post not found.", loadingOrcid: "Loading publications from ORCID…",
       syncedOrcid: "Live from ORCID", worksTotal: "publications",
       prev: "← Prev", next: "Next →", pageOf: (a, b) => `Page ${a} of ${b}`, goTo: "Go to",
-      backNews: "← All news & posts", generating: "Preparing a plain-language summary…",
+      backNews: "← All posts", generating: "Preparing a plain-language summary…",
       autoNote: "Summary generated automatically from the publication metadata.",
       autoSummary: "Read a plain-language summary of this paper, generated from its abstract.",
       loadFail: "Could not load data. Serve the site with a local server (python3 -m http.server) instead of opening the file directly.",
@@ -36,7 +36,7 @@
     },
     es: {
       journal: "Revista", conference: "Congreso", software: "Software", book: "Capítulo de libro",
-      paper: "Nuevo artículo", news: "Noticia",
+      paper: "Nuevo artículo", news: "Posts",
       readMore: "Leer el post", cite: "Citar", copied: "BibTeX copiado", doi: "DOI",
       openAccess: "Acceso abierto", all: "Todas", post: "Post", aboutPaper: "Sobre el artículo", readPaper: "Leer el paper",
       readOriginalPaper: "Leer el paper original",
@@ -45,7 +45,7 @@
       empty: "Aún no hay contenido.", notFound: "Entrada no encontrada.", loadingOrcid: "Cargando publicaciones desde ORCID…",
       syncedOrcid: "En vivo desde ORCID", worksTotal: "publicaciones",
       prev: "← Ant.", next: "Sig. →", pageOf: (a, b) => `Página ${a} de ${b}`, goTo: "Ir a",
-      backNews: "← Todas las noticias y posts", generating: "Preparando un resumen divulgativo…",
+      backNews: "← Todos los posts", generating: "Preparando un resumen divulgativo…",
       autoNote: "Resumen generado automáticamente a partir de los metadatos de la publicación.",
       autoSummary: "Lee un resumen en lenguaje simple de este artículo, generado a partir de su abstract.",
       loadFail: "No se pudieron cargar los datos. Sirve el sitio con un servidor local (python3 -m http.server).",
