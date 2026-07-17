@@ -13,7 +13,7 @@
   const ORCID_ID = "0000-0001-8558-9122";
   const PAGE_SIZE = 5;
   // works hidden from the site (and therefore from the metrics)
-  const EXCLUDE_DOIS = new Set(["10.1063/5.0187487"]);
+  const EXCLUDE_DOIS = new Set([]);
   const isExcluded = (p) => p && EXCLUDE_DOIS.has((p.doi || "").toLowerCase());
 
   const T = {
@@ -344,7 +344,6 @@
     return [...pubs.items].sort((a, b) => (b.year || 0) - (a.year || 0));
   }
   function fetchLivePubs(pubs) {
-    const curatedList = curatedPubsSorted(pubs);
     const localByDoi = {}; pubs.items.forEach((p) => { if (p.doi) localByDoi[normDoi(p.doi)] = p; });
     return fetch(`https://pub.orcid.org/v3.0/${ORCID_ID}/works`, { headers: { Accept: "application/json" } })
       .then((r) => { if (!r.ok) throw new Error("orcid " + r.status); return r.json(); })
@@ -363,12 +362,11 @@
           if (local) return Object.assign({}, local);
           return { title, year: year ? Number(year) : null, venue: jt, doi, type, authors: [], _needsEnrich: !!doi };
         }).filter((w) => w.title);
-        // dedupe by doi/title, keep ORCID order (already year-grouped) then sort by year desc
+        // dedupe by doi/title — the shown list is exactly what ORCID reports (enriched
+        // with local data by DOI when available), so it can never exceed ORCID's count
         const seen = new Set();
         const merged = [];
         works.forEach((w) => { if (isExcluded(w)) return; const k = normDoi(w.doi) || w.title.toLowerCase(); if (!seen.has(k)) { seen.add(k); merged.push(w); } });
-        // include any local not present
-        curatedList.forEach((p) => { if (isExcluded(p)) return; const k = normDoi(p.doi) || p.title.toLowerCase(); if (!seen.has(k)) { seen.add(k); merged.push(p); } });
         merged.sort((a, b) => (b.year || 0) - (a.year || 0));
         return merged;
       });
@@ -438,12 +436,12 @@
         all = merged;
         if (note) note.querySelector(".txt").textContent = `${merged.length} ${T.worksTotal} · ${T.syncedOrcid}`;
         apply();
-        // metrics computed strictly over the publications shown on the site
+        // metrics computed strictly over the publications shown on the site — render
+        // once with the real citation counts, so nothing intermediate ever flickers by
         if ($("#stat-grid")) {
-          renderMetrics(computeMetrics(shownMetricList(merged, null)));
           fetchOpenAlexMap()
             .then((map) => renderMetrics(computeMetrics(shownMetricList(merged, map))))
-            .catch(() => {});
+            .catch(() => renderMetrics(computeMetrics(shownMetricList(merged, null))));
         }
       })
       .catch(() => { if (note) note.querySelector(".txt").textContent = T.orcidFail; });
@@ -659,16 +657,6 @@
     });
   }
 
-  function localMetricList(pubs) {
-    return pubs.items.map((p) => ({
-      year: p.year,
-      citations: p.citations || 0,
-      nAuthors: Array.isArray(p.authors) ? p.authors.length : 0,
-      hasAuthorInfo: Array.isArray(p.authors) && p.authors.length > 0,
-      first: Array.isArray(p.authors) && /parraga|párraga/i.test(p.authors[0] || "")
-    }));
-  }
-
   // OpenAlex citation/author info keyed by DOI, used to enrich the shown publication set
   function fetchOpenAlexMap() {
     const url = "https://api.openalex.org/works?filter=author.orcid:" + ORCID_ID +
@@ -706,9 +694,10 @@
 
   function fillHome(profile, pubs) {
     const say = $("#say"); if (say) say.textContent = pick(profile.tagline);
-    // instant fallback from the local (ORCID-seeded) list; fillPublications refines
-    // the metrics over the exact set of publications shown on the site.
-    renderMetrics(computeMetrics(localMetricList(pubs)));
+    // Start every metric at 0; fillPublications() overwrites these with the real
+    // numbers once the live ORCID (and OpenAlex) data has loaded, so nothing
+    // stale from the local backup file is ever shown, even briefly.
+    renderMetrics({ pubs: 0, cites: 0, h: 0, i10: 0, g: 0, m: 0, cpp: 0, app: 0, first: 0, cited: 0 });
   }
   function fillAbout(profile) {
     const bio = $("#bio"); if (bio) bio.innerHTML = md(pick(profile.bio));
@@ -759,13 +748,12 @@
         summary: { en: T.autoSummary, es: T.autoSummary }
       });
     });
-    // curated posts not tied to any doi currently in pubList (e.g. software posts) go last, newest first
+    // posts with no linked DOI at all (e.g. software posts) go last, newest first.
+    // A post that DOES have a doi but wasn't matched above means ORCID didn't confirm
+    // that publication — it's correctly left out, same as the Publications page.
     const usedIds = new Set(out.map((x) => x.id).filter(Boolean));
-    const usedDois = new Set(out.map((x) => x.doi && normDoi(x.doi)).filter(Boolean));
-    const leftover = (posts.items || []).filter((p) => {
-      const k = p.doi && normDoi(p.doi);
-      return !(p.id && usedIds.has(p.id)) && !(k && usedDois.has(k));
-    }).sort((a, b) => (a.date < b.date ? 1 : -1));
+    const leftover = (posts.items || []).filter((p) => !p.doi && !usedIds.has(p.id))
+      .sort((a, b) => (a.date < b.date ? 1 : -1));
     return out.concat(leftover);
   }
   function fillNews(profile, pubs, posts) {
