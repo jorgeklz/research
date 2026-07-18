@@ -88,11 +88,11 @@ img, svg, video, iframe, canvas {
 }
 .topbar-in {
   max-width: var(--wrap); margin: 0 auto;
-  padding: clamp(1.4rem, 2.6vw, 1.85rem) clamp(1.1rem, 3vw, 2.2rem);
+  padding: clamp(2.2rem, 4vw, 2.9rem) clamp(1.1rem, 3vw, 2.2rem);
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
 }
 .brand { display: flex; align-items: center; gap: .6rem; line-height: 1.15; }
-.brand .logo { height: 34px; width: auto; display: block; flex: none; }
+.brand .logo { height: 40px; width: auto; display: block; flex: none; }
 /* the visible mark is the logo; the name stays in the DOM for
    screen readers and SEO but isn't shown on screen */
 .brand .bname {
