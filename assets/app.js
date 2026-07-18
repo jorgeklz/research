@@ -32,7 +32,9 @@
       autoNote: "Summary generated automatically from the publication metadata.",
       autoSummary: "Read a plain-language summary of this paper, generated from its abstract.",
       loadFail: "Could not load data. Serve the site with a local server (python3 -m http.server) instead of opening the file directly.",
-      orcidFail: "Could not reach ORCID. Showing the curated list instead."
+      orcidFail: "Could not reach ORCID. Showing the curated list instead.",
+      dlAll: "Download all publications (Word)", pubsExportTitle: "Publications", pubsExportSub: "APA 7th Edition",
+      pubsExportGenerated: (d) => `Generated on ${d}`, dlPreparing: "Preparing…"
     },
     es: {
       journal: "Revista", conference: "Congreso", software: "Software", book: "Capítulo de libro",
@@ -49,7 +51,9 @@
       autoNote: "Resumen generado automáticamente a partir de los metadatos de la publicación.",
       autoSummary: "Lee un resumen en lenguaje simple de este artículo, generado a partir de su abstract.",
       loadFail: "No se pudieron cargar los datos. Sirve el sitio con un servidor local (python3 -m http.server).",
-      orcidFail: "No se pudo conectar con ORCID. Se muestra la lista curada."
+      orcidFail: "No se pudo conectar con ORCID. Se muestra la lista curada.",
+      dlAll: "Descargar todas las publicaciones (Word)", pubsExportTitle: "Publicaciones", pubsExportSub: "Edición APA 7",
+      pubsExportGenerated: (d) => `Generado el ${d}`, dlPreparing: "Preparando…"
     }
   }[LANG];
 
@@ -213,6 +217,7 @@
         if (venueLooksLikeConference) type = "conference";
         return {
           title: stripJats((m.title || [""])[0]), authors, venue: venueName, year,
+          volume: m.volume || null, issue: m.issue || null,
           pages: m.page || null, type, abstract: stripJats(m.abstract || ""),
           openAccess: (m.license || []).some((l) => /creativecommons/.test(l.URL || ""))
         };
@@ -373,12 +378,98 @@
   }
 
   /* ---------- Publications page: ORCID live + local merge + pagination ---------- */
+  /* ---------- APA 7 reference list + Word export ---------- */
+  function apaAuthorName(full) {
+    const parts = String(full || "").trim().split(/\s+/).filter(Boolean);
+    if (!parts.length) return "";
+    if (parts.length === 1) return parts[0];
+    const family = parts[parts.length - 1];
+    const initials = parts.slice(0, -1).map((g) => g.charAt(0).toUpperCase() + ".").join(" ");
+    return `${family}, ${initials}`;
+  }
+  function apaAuthorList(authors) {
+    const list = (authors || []).map(apaAuthorName).filter(Boolean);
+    if (!list.length) return "";
+    if (list.length === 1) return list[0] + ".";
+    if (list.length <= 20) return list.slice(0, -1).join(", ") + ", & " + list[list.length - 1] + ".";
+    return list.slice(0, 19).join(", ") + ", . . . " + list[list.length - 1] + ".";
+  }
+  function apaReference(p) {
+    const authors = apaAuthorList(p.authors);
+    const year = `(${p.year || (LANG === "es" ? "s.f." : "n.d.")}).`;
+    let title = esc(p.title || "").trim();
+    if (title && !/[.?!]$/.test(title)) title += ".";
+    let venue = "";
+    if (p.type === "conference") {
+      if (p.venue) venue = ` ${LANG === "es" ? "En" : "In"} <em>${esc(p.venue)}</em>${p.pages ? ` (pp. ${esc(p.pages)})` : ""}.`;
+    } else if (p.venue) {
+      const volIssue = p.volume ? `, <em>${esc(p.volume)}</em>${p.issue ? `(${esc(p.issue)})` : ""}` : "";
+      venue = ` <em>${esc(p.venue)}</em>${volIssue}${p.pages ? `, ${esc(p.pages)}` : ""}.`;
+    }
+    const doi = p.doi ? ` https://doi.org/${esc(p.doi)}` : "";
+    return [authors, year, title, venue, doi].filter(Boolean).join(" ").replace(/\s+/g, " ").trim();
+  }
+  function exportPublicationsWord(profile, items, btn) {
+    if (!items || !items.length) return;
+    const label = btn ? btn.querySelector("span") : null;
+    const labelText = label ? label.textContent : null;
+    if (btn) { btn.disabled = true; if (label) label.textContent = T.dlPreparing; }
+    const sorted = items.slice().sort((a, b) => (b.year || 0) - (a.year || 0));
+    // enrich every item from Crossref first, so volume/issue/pages are complete
+    // even for works that were never scrolled into view on the page itself
+    Promise.all(sorted.map((p) => {
+      if (!p.doi) return Promise.resolve(p);
+      return crossref(p.doi).then((m) => Object.assign({}, p, {
+        venue: m.venue || p.venue,
+        volume: m.volume || p.volume || null,
+        issue: m.issue || p.issue || null,
+        pages: m.pages || p.pages || null,
+        authors: (p.authors && p.authors.length ? p.authors : m.authors) || p.authors
+      })).catch(() => p);
+    })).then((enriched) => buildPublicationsDoc(profile, enriched))
+      .finally(() => { if (btn) { btn.disabled = false; if (label && labelText) label.textContent = labelText; } });
+  }
+  function buildPublicationsDoc(profile, sorted) {
+    const refsHtml = sorted.map((p) =>
+      `<p style="margin:0 0 12pt 0;text-indent:-0.5in;margin-left:0.5in;line-height:2;font-family:'Times New Roman',serif;font-size:12pt;color:#000000;">${apaReference(p)}</p>`
+    ).join("\n");
+    const dateStr = new Date().toLocaleDateString(LANG === "es" ? "es-EC" : "en-GB", { year: "numeric", month: "long", day: "numeric" });
+    const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head><meta charset="utf-8"><title>${esc(profile.name)} — ${esc(T.pubsExportTitle)}</title>
+<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom><w:DoNotOptimizeForBrowser/></w:WordDocument></xml><![endif]-->
+<style>
+@page { size: 8.5in 11in; margin: 1in; }
+body { font-family: 'Times New Roman', serif; color:#000000; }
+</style>
+</head>
+<body>
+<div style="border-bottom:3px solid #2563eb;padding-bottom:14pt;margin-bottom:26pt;">
+  <div style="font-family:Calibri,Arial,sans-serif;font-size:9pt;letter-spacing:2pt;text-transform:uppercase;color:#2563eb;font-weight:bold;margin-bottom:6pt;">${esc(T.pubsExportSub)}</div>
+  <div style="font-family:Calibri,Arial,sans-serif;font-size:22pt;font-weight:bold;color:#0f2748;">${esc(profile.name)}</div>
+  <div style="font-family:Calibri,Arial,sans-serif;font-size:12pt;color:#1d4ed8;font-weight:bold;margin-top:2pt;">${esc(T.pubsExportTitle)}</div>
+  <div style="font-family:Calibri,Arial,sans-serif;font-size:9.5pt;color:#4a5c78;margin-top:8pt;">${esc(T.pubsExportGenerated(dateStr))} · ${sorted.length} ${esc(T.worksTotal)}</div>
+</div>
+${refsHtml}
+</body>
+</html>`;
+    const blob = new Blob(["\ufeff", html], { type: "application/msword" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    const fname = LANG === "es" ? "publicaciones-jorge-parraga-alava.doc" : "publications-jorge-parraga-alava.doc";
+    a.href = url; a.download = fname;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+  }
+
   function fillPublications(profile, pubs, posts) {
     const list = $("#pub-list"), fw = $("#pub-filters"), byId = indexPosts(posts);
     const pag = $("#pub-pagination"), info = $("#pag-info");
     const prev = $("#pag-prev"), next = $("#pag-next"), note = $("#orcid-note");
 
     let all = [], filtered = [], type = "all", page = 0;
+
+    const dlBtn = $("#dl-pubs");
+    if (dlBtn) dlBtn.addEventListener("click", () => exportPublicationsWord(profile, all, dlBtn));
 
     function apply() {
       filtered = type === "all" ? all : all.filter((p) => p.type === type);
