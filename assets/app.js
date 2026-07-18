@@ -554,7 +554,7 @@
         `<a href="${esc(p.url)}" target="_blank" rel="noopener" title="${esc(p.label)}">${socialIcon(p.label)}<span>${esc(p.label)}</span></a>`).join("");
     }
     const mail = $("#foot-mail");
-    if (mail) { mail.innerHTML = `${ICON.mail} <a href="mailto:${esc(profile.email)}">${esc(profile.email)}</a>`; }
+    if (mail) { mail.innerHTML = `<a href="mailto:${esc(profile.email)}" title="${esc(profile.email)}">${ICON.mail}<span class="mail-label">${esc(profile.email)}</span></a>`; }
     const yr = $("#foot-year"); if (yr) yr.textContent = new Date().getFullYear();
   }
 
@@ -653,8 +653,17 @@
         <div class="tip">${esc(METRIC_DESC[mm.k] || "")}</div>
       </div>`).join("");
     grid.querySelectorAll(".stat").forEach((s) => {
-      s.addEventListener("click", () => s.classList.toggle("open"));
+      s.addEventListener("click", (e) => {
+        e.stopPropagation();
+        s.classList.toggle("open");
+      });
     });
+    if (!renderMetrics._outsideClickBound) {
+      renderMetrics._outsideClickBound = true;
+      document.addEventListener("click", () => {
+        document.querySelectorAll(".stat.open").forEach((s) => s.classList.remove("open"));
+      });
+    }
   }
 
   // OpenAlex citation/author info keyed by DOI, used to enrich the shown publication set
