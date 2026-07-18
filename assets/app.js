@@ -34,7 +34,7 @@
       loadFail: "Could not load data. Serve the site with a local server (python3 -m http.server) instead of opening the file directly.",
       orcidFail: "Could not reach ORCID. Showing the curated list instead.",
       dlAll: "Download all publications (Word)", pubsExportTitle: "Publications", pubsExportSub: "APA 7th Edition",
-      pubsExportGenerated: (d) => `Generated on ${d}`, dlPreparing: "Preparing…"
+      pubsExportGenerated: (d) => `Generated on ${d}`, dlPreparing: "Preparing…", contact: "Contact"
     },
     es: {
       journal: "Revista", conference: "Congreso", software: "Software", book: "Capítulo de libro",
@@ -53,7 +53,7 @@
       loadFail: "No se pudieron cargar los datos. Sirve el sitio con un servidor local (python3 -m http.server).",
       orcidFail: "No se pudo conectar con ORCID. Se muestra la lista curada.",
       dlAll: "Descargar todas las publicaciones (Word)", pubsExportTitle: "Publicaciones", pubsExportSub: "Edición APA 7",
-      pubsExportGenerated: (d) => `Generado el ${d}`, dlPreparing: "Preparando…"
+      pubsExportGenerated: (d) => `Generado el ${d}`, dlPreparing: "Preparando…", contact: "Contacto"
     }
   }[LANG];
 
@@ -644,8 +644,6 @@ ${refsHtml}
       soc.innerHTML = profile.profiles.map((p) =>
         `<a href="${esc(p.url)}" target="_blank" rel="noopener" title="${esc(p.label)}">${socialIcon(p.label)}<span>${esc(p.label)}</span></a>`).join("");
     }
-    const mail = $("#foot-mail");
-    if (mail) { mail.innerHTML = `<a href="mailto:${esc(profile.email)}" title="${esc(profile.email)}">${ICON.mail}<span class="mail-label">${esc(profile.email)}</span></a>`; }
     const yr = $("#foot-year"); if (yr) yr.textContent = new Date().getFullYear();
   }
 
@@ -801,6 +799,10 @@ ${refsHtml}
   }
   function fillAbout(profile) {
     const bio = $("#bio"); if (bio) bio.innerHTML = md(pick(profile.bio));
+    const mail = $("#about-mail");
+    if (mail) {
+      mail.innerHTML = `<a class="contact-mail" href="mailto:${esc(profile.email)}">${ICON.mail}<span>${esc(profile.email)}</span></a>`;
+    }
   }
   function fillCV(profile) {
     const stage = $("#cv-stage"), tabsEl = $("#cv-tabs"); if (!stage || !tabsEl) return;

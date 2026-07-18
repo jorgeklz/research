@@ -345,6 +345,18 @@ h1.title em { font-style: normal; color: var(--blue); }
 .prose p { margin: 0 0 1.1em; }
 .prose em { color: var(--blue-600); font-style: normal; font-weight: 700; }
 
+/* ---------- Contact block (About page) ---------- */
+.contact-block { margin-top: 2.4rem; padding-top: 1.8rem; border-top: 1px solid var(--line); max-width: 64ch; }
+.contact-block h2 { font-size: var(--fs-2xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 .9rem; }
+.contact-mail {
+  display: inline-flex; align-items: center; gap: .55rem;
+  font-size: var(--fs-sm); font-weight: 700; color: var(--blue-600);
+  padding: .7rem 1.1rem; border: 1px solid var(--sky-line); background: var(--sky-1);
+  border-radius: var(--radius); transition: all .18s var(--ease);
+}
+.contact-mail svg { width: 16px; height: 16px; flex: none; }
+.contact-mail:hover { background: var(--sky-2); border-color: var(--blue); color: var(--blue-700); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
 /* ---------- Single post ---------- */
 .post-hero { padding-bottom: 1.6rem; border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
 .post-hero h1 + .meta { margin-top: 1.4rem; }
@@ -412,7 +424,7 @@ h1.title em { font-style: normal; color: var(--blue); }
 .site-foot { border-top: 1px solid var(--line); margin-top: 2rem; background: var(--white); }
 .site-foot-in {
   max-width: var(--wrap); margin: 0 auto; padding: 1.6rem clamp(1.1rem, 3vw, 2rem);
-  display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  display: flex; flex-direction: column; align-items: flex-start; gap: .6rem;
 }
 .socials { display: flex; flex-wrap: wrap; gap: .3rem; }
 .socials a {
@@ -422,18 +434,9 @@ h1.title em { font-style: normal; color: var(--blue); }
 }
 .socials a:hover { color: var(--blue-600); background: var(--sky-1); border-color: var(--sky-line); transform: translateY(-1px); }
 .socials a svg { width: 15px; height: 15px; }
-.foot-meta { font-size: var(--fs-xs); color: var(--ink-3); font-weight: 500; overflow-wrap: anywhere; display: inline-flex; align-items: center; gap: .45rem; }
+.foot-meta { font-size: var(--fs-xs); color: var(--ink-3); font-weight: 500; }
 .foot-meta a { color: var(--ink-2); font-weight: 600; }
 .foot-meta a:hover { color: var(--blue-600); }
-/* the mail link wraps both the icon and the address: show both in full (desktop),
-   and shrink to icon-only on mobile via the media query below */
-#foot-mail a[href^="mailto:"] {
-  display: inline-flex; align-items: center; gap: .4rem;
-  color: var(--ink-2);
-  transition: color .18s var(--ease);
-}
-#foot-mail a[href^="mailto:"] svg { width: 15px; height: 15px; flex: none; }
-#foot-mail a[href^="mailto:"]:hover { color: var(--blue-600); }
 
 /* ---------- Toast ---------- */
 #toast {
@@ -486,25 +489,9 @@ h1.title em { font-style: normal; color: var(--blue); }
   .pub { grid-template-columns: 1fr; gap: .4rem; padding: .9rem 1rem; }
   .pub .yr { display: flex; align-items: baseline; gap: .55rem; }
   .pub .yr .kind { margin-top: 0; }
-  .site-foot-in {
-    flex-direction: column; align-items: flex-start; gap: .8rem;
-  }
-  .site-foot-in > * { width: 100%; min-width: 0; }
-  .socials { order: 1; gap: .1rem; }
-  .foot-meta { order: 2; overflow-wrap: anywhere; line-height: 1.6; }
-  /* mobile: collapse the mail link to icon-only so the address text can't overflow */
-  #foot-mail a[href^="mailto:"] {
-    position: relative;
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 26px; height: 26px; border-radius: 8px;
-    border: 1px solid transparent;
-    transition: background-color .18s var(--ease), border-color .18s var(--ease), color .18s var(--ease);
-  }
-  #foot-mail a[href^="mailto:"] .mail-label {
-    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
-  }
-  #foot-mail a[href^="mailto:"]:hover { background-color: var(--sky-1); border-color: var(--sky-line); color: var(--blue-600); }
+  .site-foot-in { gap: .7rem; }
+  .socials { gap: .1rem; }
+  .foot-meta { overflow-wrap: anywhere; line-height: 1.6; }
   .card, .row, .stat { padding: .9rem 1rem; }
   .stat .tip { left: 0; transform: translate(0, 4px); max-width: min(78vw, 240px); }
   .stat .tip::after { left: 24px; }
