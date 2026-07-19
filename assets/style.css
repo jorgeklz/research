@@ -31,14 +31,14 @@
   /* type scale — one consistent set of sizes for the whole site.
      fs-nav sits one step above fs-base so the menu reads slightly
      larger than body copy, as requested. */
-  --fs-2xs: .7rem;   /* tiny uppercase labels: eyebrow, badges, chips */
-  --fs-xs:  .82rem;  /* buttons, filters, pagination, meta rows, links */
-  --fs-sm:  .9rem;   /* secondary text: authors, venue, CV rows */
-  --fs-base: .99rem; /* body copy default */
-  --fs-nav: 1.05rem; /* menu / nav links, slightly larger than body */
-  --fs-md:  1.05rem; /* intro paragraphs, prose, article body */
-  --fs-lg:  1.1rem;  /* card / publication titles */
-  --fs-xl:  1.15rem; /* site name in the top bar */
+  --fs-2xs: .66rem;  /* tiny uppercase labels: eyebrow, badges, chips */
+  --fs-xs:  .78rem;  /* buttons, filters, pagination, meta rows, links */
+  --fs-sm:  .85rem;  /* secondary text: authors, venue, CV rows */
+  --fs-base: .93rem; /* body copy default */
+  --fs-nav: .98rem;  /* menu / nav links, slightly larger than body */
+  --fs-md:  .98rem;  /* intro paragraphs, prose, article body */
+  --fs-lg:  1.03rem; /* card / publication titles */
+  --fs-xl:  1.08rem; /* site name in the top bar */
 
   --font: "Avenir Next", "Avenir", "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --ease: cubic-bezier(.4, 0, .2, 1);
@@ -184,7 +184,7 @@ img, svg, video, iframe, canvas {
 }
 .eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--sky); flex: none; }
 h1.title {
-  font-weight: 700; font-size: clamp(1.4rem, 2.2vw, 1.75rem); line-height: 1.22;
+  font-weight: 700; font-size: clamp(1.3rem, 2.1vw, 1.6rem); line-height: 1.22;
   letter-spacing: -.015em; margin: 0 0 .9rem; color: var(--ink); text-wrap: balance;
 }
 /* .big only constrains the line length of the homepage headline now —
@@ -223,7 +223,7 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .stat-hd svg { width: 13px; height: 13px; flex: none; }
 .stat .l { font-size: var(--fs-2xs); font-weight: 700; letter-spacing: .01em; color: var(--ink-3); line-height: 1.25; text-transform: none; }
 .stat .l .ab { color: var(--blue-600); font-weight: 700; }
-.stat .n { font-weight: 700; font-size: clamp(1.32rem, 2.2vw, 1.7rem); line-height: 1; color: var(--ink); letter-spacing: -.02em; margin-top: auto; }
+.stat .n { font-weight: 700; font-size: clamp(1.24rem, 2.1vw, 1.55rem); line-height: 1; color: var(--ink); letter-spacing: -.02em; margin-top: auto; }
 .stat .n small { color: var(--blue); font-size: .55em; vertical-align: baseline; font-weight: 700; }
 /* metric contextual tooltip */
 .stat { position: relative; cursor: help; }
@@ -340,7 +340,7 @@ h1.title em { font-style: normal; color: var(--blue-700); }
   background: var(--sky-1); border: 1px solid var(--sky-line); padding: .06rem .42rem; border-radius: 5px; vertical-align: middle;
 }
 .cv-block { margin-bottom: 2.4rem; }
-.cv-block h2 { font-size: var(--fs-2xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 .85rem; }
+.cv-block h2 { font-size: var(--fs-lg); font-weight: 700; letter-spacing: -.01em; text-transform: none; color: var(--ink); margin: 0 0 .95rem; }
 
 /* ---------- News / posts ---------- */
 .feed { display: grid; gap: .75rem; }
@@ -384,7 +384,7 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .post-hero { padding-bottom: 1.6rem; border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
 .post-hero h1 + .meta { margin-top: 1.4rem; }
 .post-hero .meta { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; font-size: var(--fs-xs); color: var(--ink-3); font-weight: 600; margin-bottom: .2rem; }
-.post-hero h1 { font-weight: 700; font-size: clamp(1.45rem, 2.6vw, 1.9rem); line-height: 1.2; letter-spacing: -.01em; margin: 0; max-width: 26ch; text-wrap: balance; }
+.post-hero h1 { font-weight: 700; font-size: clamp(1.35rem, 2.4vw, 1.75rem); line-height: 1.2; letter-spacing: -.01em; margin: 0; max-width: 26ch; text-wrap: balance; }
 /* subtle text link (not a button), in the site blue */
 .read-paper {
   display: inline-flex; align-items: center; gap: .4rem; margin-top: 1rem;
@@ -420,7 +420,7 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .article { max-width: 66ch; font-size: var(--fs-md); line-height: 1.75; color: var(--ink); }
 .article p { margin: 0 0 1.15em; }
 .article strong { font-weight: 700; }
-.article h2 { font-weight: 700; font-size: 1.15rem; margin: 1.5em 0 .5em; }
+.article h2 { font-weight: 700; font-size: 1.08rem; margin: 1.5em 0 .5em; }
 .article code { font-size: .88em; background: var(--sky-1); padding: .1em .4em; border-radius: 5px; color: var(--blue-700); }
 .refbox {
   background: var(--sky-1); border: 1px solid var(--sky-line); border-left: 2px solid var(--blue);
@@ -621,10 +621,12 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 /* ---------- consistent light-sky hover for interactive elements ---------- */
 .pub .act a:hover, .pub .act button:hover,
 .card .more:hover, .sec-title .more-link:hover,
-.post-links a:hover, .backlink:hover {
+.post-links a:hover, .backlink:hover,
+.tool-card .topen:hover, .ds-dl:hover, .ds-cite:hover {
   background: var(--sky-1); border-radius: 6px;
 }
-.pub .act a, .pub .act button, .card .more, .sec-title .more-link, .post-links a, .backlink { padding: .12rem .3rem; margin: -.12rem -.3rem; border-radius: 6px; }
+.pub .act a, .pub .act button, .card .more, .sec-title .more-link, .post-links a, .backlink,
+.tool-card .topen, .ds-dl, .ds-cite { padding: .12rem .3rem; margin: -.12rem -.3rem; border-radius: 6px; }
 .filters button:hover, .pagination button:hover:not(:disabled) { background: var(--sky-1); }
 
 /* ---------- related DOI badge ---------- */

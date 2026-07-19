@@ -99,7 +99,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().trim();
 
-  const VER = "33";
+  const VER = "38";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -881,7 +881,7 @@ ${refsHtml}
         <div class="tool-hd"><span class="tool-ic">${logo}</span><div class="tt">${esc(it.name)}</div>${it.year ? `<span class="ds-yr">${esc(it.year)}</span>` : ""}</div>
         ${it.meta ? `<div class="tmeta">${esc(pick(it.meta))}</div>` : ""}
         ${pick(it.desc) ? `<p class="td">${esc(pick(it.desc))}</p>` : ""}
-        ${link}
+        ${link ? `<div class="ds-act">${link}</div>` : ""}
       </article>`;
     };
     container.innerHTML = `<div class="cv-block"><h2>${esc(T.tbTools)}</h2><div class="toolbox">${list.map(card).join("")}</div></div>`;
@@ -930,44 +930,12 @@ ${refsHtml}
   }
 
   function fillCV(profile) {
-    const stage = $("#cv-stage"), tabsEl = $("#cv-tabs"); if (!stage || !tabsEl) return;
-    const projects = profile.projects || {};
-    const toolbox = profile.toolbox || [];
-    const datasets = profile.datasets || [];
-    const hasProjects = projects.research && projects.research.length;
-    const education = profile.education || [], experience = profile.experience || [];
-    // Background (education + experience) · Research projects · Tools & databases
-    const tabs = [
-      { title: T.cvBackground, kind: "background", items: (education.length || experience.length) ? [1] : [] },
-      { title: T.cvProjects, kind: "projects", items: hasProjects ? [1] : [] },
-      { title: T.cvToolbox, kind: "toolbox", items: (toolbox.length || datasets.length) ? [1] : [] }
-    ].filter((p) => p.items.length);
-    let active = 0;
-    function render() {
-      tabsEl.innerHTML = tabs.map((t, i) =>
-        `<button type="button" class="cv-tab${i === active ? " on" : ""}" data-i="${i}">${esc(t.title)}</button>`).join("");
-      const tb = tabs[active];
-      if (tb.kind === "background") {
-        let html = "";
-        if (education.length) html += `<div class="cv-block"><h2>${esc(T.cvEdu)}</h2><div class="rows" id="cv-edu"></div></div>`;
-        if (experience.length) html += `<div class="cv-block"><h2>${esc(T.cvExp)}</h2><div class="rows" id="cv-exp"></div></div>`;
-        stage.innerHTML = html;
-        if (education.length) rowsEl($("#cv-edu"), education, "edu");
-        if (experience.length) rowsEl($("#cv-exp"), experience, "exp");
-      } else if (tb.kind === "projects") {
-        stage.innerHTML = `<div id="cv-projects"></div>`;
-        projectsRows($("#cv-projects"), projects);
-      } else if (tb.kind === "toolbox") {
-        stage.innerHTML = `<div id="cv-toolbox"></div><div id="cv-datasets"></div>`;
-        toolboxCards($("#cv-toolbox"), toolbox);
-        datasetsCards($("#cv-datasets"), datasets);
-      }
-    }
-    tabsEl.addEventListener("click", (e) => {
-      const b = e.target.closest(".cv-tab"); if (!b) return;
-      active = parseInt(b.dataset.i, 10); render();
-    });
-    render();
+    const stage = $("#cv-stage"); if (!stage) return;
+    // no tabs anymore: the portfolio page shows only tools & databases
+    const tabsEl = $("#cv-tabs"); if (tabsEl) tabsEl.remove();
+    stage.innerHTML = `<div id="cv-toolbox"></div><div id="cv-datasets"></div>`;
+    toolboxCards($("#cv-toolbox"), profile.toolbox || []);
+    datasetsCards($("#cv-datasets"), profile.datasets || []);
   }
   // Builds the news feed as one entry per publication, in the exact order the
   // publications themselves are listed (pubList, already sorted newest-first).
