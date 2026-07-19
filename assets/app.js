@@ -43,7 +43,15 @@
       readMore: "Read the post", cite: "Cite", copied: "BibTeX copied", doi: "DOI",
       openAccess: "Open access", all: "All", post: "Post", aboutPaper: "About the paper", readPaper: "Read the paper",
       readOriginalPaper: "Read the original paper",
-      postLink: "Explanatory post", article: "Article", minRead: "min read", cvEdu: "Education", cvExp: "Academic experience", cvAwards: "Awards & recognition",
+      postLink: "Explanatory post", article: "Article", minRead: "min read", cvEdu: "Education", cvExp: "Academic experience", cvAwards: "Awards & recognition", cvBackground: "Background",
+      cvProjects: "Research projects", projResearch: "Research projects", projSoftware: "Software",
+      projRole: "Role", projFunder: "Funded by", projStatus: "Status", projReg: "Reg.",
+      projNote: "Only the most notable projects are shown.", dsDownload: "Download", copiedCmd: "Copied",
+      cvToolbox: "Tools & databases",
+      tbTool: "Tool", tbSoftware: "Software", tbDatabase: "Database",
+      tbTools: "Tools & software", tbDatabases: "Databases",
+      tbOpen: "Open", tbTodo: "To be completed",
+      dsName: "Dataset", dsDomain: "Domain", dsDesc: "Description", dsYear: "Year", dsRepo: "Repository",
       views: "views", viewsOne: "view", shareWa: "Share on WhatsApp",
       empty: "Nothing here yet.", notFound: "Post not found.", loadingOrcid: "Loading publications from ORCID…",
       syncedOrcid: "Live from ORCID", worksTotal: "publications",
@@ -62,7 +70,15 @@
       readMore: "Leer el post", cite: "Citar", copied: "BibTeX copiado", doi: "DOI",
       openAccess: "Acceso abierto", all: "Todas", post: "Post", aboutPaper: "Sobre el artículo", readPaper: "Leer el paper",
       readOriginalPaper: "Leer el paper original",
-      postLink: "Post explicativo de la publicación", article: "Artículo", minRead: "min de lectura", cvEdu: "Educación", cvExp: "Experiencia académica", cvAwards: "Premios y reconocimientos",
+      postLink: "Post explicativo de la publicación", article: "Artículo", minRead: "min de lectura", cvEdu: "Educación", cvExp: "Experiencia académica", cvAwards: "Premios y reconocimientos", cvBackground: "Formación",
+      cvProjects: "Proyectos de investigación", projResearch: "Proyectos de investigación", projSoftware: "Software",
+      projRole: "Rol", projFunder: "Financia", projStatus: "Estado", projReg: "Reg.",
+      projNote: "Se muestran solo los proyectos más destacados.", dsDownload: "Descargar", copiedCmd: "Copiado",
+      cvToolbox: "Herramientas y bases de datos",
+      tbTool: "Herramienta", tbSoftware: "Software", tbDatabase: "Base de datos",
+      tbTools: "Herramientas y software", tbDatabases: "Bases de datos",
+      tbOpen: "Acceder", tbTodo: "Por completar",
+      dsName: "Conjunto de datos", dsDomain: "Dominio", dsDesc: "Descripción", dsYear: "Año", dsRepo: "Repositorio",
       views: "vistas", viewsOne: "vista", shareWa: "Compartir en WhatsApp",
       empty: "Aún no hay contenido.", notFound: "Entrada no encontrada.", loadingOrcid: "Cargando publicaciones desde ORCID…",
       syncedOrcid: "En vivo desde ORCID", worksTotal: "publicaciones",
@@ -83,7 +99,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().trim();
 
-  const VER = "22";
+  const VER = "30";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -100,6 +116,9 @@
     link: svg('<path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"/>', 13),
     external: svg('<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>', 13),
     cite: svg('<path d="M7 8H5a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v3l3-3a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2Z"/><path d="M18 8h-2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v3l3-3a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2Z"/>', 13),
+    copy: svg('<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/>', 13),
+    download: svg('<path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 19h14"/>', 13),
+    dataset: svg('<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.6 3.1 3 7 3s7-1.4 7-3V6"/><path d="M5 12v6c0 1.6 3.1 3 7 3s7-1.4 7-3v-6"/>', 18),
     oa: svg('<rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/><circle cx="12" cy="15.5" r="1.3"/>', 13),
     doc: svg('<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><polyline points="14 3 14 9 20 9"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/>', 13),
     mail: svg('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>', 14),
@@ -135,6 +154,13 @@
     if (k.includes("github")) return ICON.github;
     return ICON.link;
   }
+
+  // development-platform icons for tools — minimalist line style, matching the
+  // footer's social icons (stroke = currentColor, no fills)
+  const PLATFORM_LOGO = {
+    r: svg('<path d="M7 5v14"/><path d="M7 5h6a4 4 0 0 1 0 8H7"/><path d="M11.4 13 17 19"/>', 18),
+    web: svg('<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/>', 18)
+  };
 
   /* ---------- text utils ---------- */
   function md(text) {
@@ -824,21 +850,118 @@ ${refsHtml}
       mail.innerHTML = `<a class="contact-mail" href="mailto:${esc(profile.email)}">${ICON.mail}<span>${esc(profile.email)}</span></a>`;
     }
   }
+  function projectsRows(container, projects) {
+    // research projects: period · title · role/funder · status badge
+    const research = (projects.research || []).map((p) => `
+      <div class="row">
+        <div class="when">${esc(pick(p.period))}</div>
+        <div class="what">
+          <div class="t">${esc(pick(p.title))}${p.status ? `<span class="badge">${esc(pick(p.status))}</span>` : ""}</div>
+          <div class="o">${T.projRole}: ${esc(pick(p.role))} · ${T.projFunder}: ${esc(pick(p.funder))}</div>
+        </div>
+      </div>`).join("");
+    container.innerHTML = research
+      ? `<p class="cv-note">${esc(T.projNote)}</p><div class="cv-block"><div class="rows">${research}</div></div>`
+      : "";
+  }
+
+  // Card grid for tools / software / databases, in the spirit of a research-lab
+  // "software & data" page: each item is a card with a type badge, a short
+  // description and an access link when one exists. Items still to be filled in
+  // render as dashed placeholder cards.
+  function toolboxCards(container, items) {
+    const list = items.filter((it) => it.type === "tool" || it.type === "software")
+      .sort((a, b) => (+b.year || 0) - (+a.year || 0));
+    if (!list.length) { container.innerHTML = ""; return; }
+    const card = (it) => {
+      const logo = PLATFORM_LOGO[it.platform] || "";
+      const link = it.url
+        ? `<a class="topen" href="${esc(it.url)}" target="_blank" rel="noopener">${ICON.external} ${esc(T.tbOpen)}</a>` : "";
+      return `<article class="tool-card">
+        <div class="tool-hd"><span class="tool-ic">${logo}</span><div class="tt">${esc(it.name)}</div>${it.year ? `<span class="ds-yr">${esc(it.year)}</span>` : ""}</div>
+        ${it.meta ? `<div class="tmeta">${esc(pick(it.meta))}</div>` : ""}
+        ${pick(it.desc) ? `<p class="td">${esc(pick(it.desc))}</p>` : ""}
+        ${link}
+      </article>`;
+    };
+    container.innerHTML = `<div class="cv-block"><h2>${esc(T.tbTools)}</h2><div class="toolbox">${list.map(card).join("")}</div></div>`;
+  }
+
+  // BibTeX for a Mendeley dataset, copied to the clipboard just like publications.
+  function datasetBibtex(d) {
+    const key = (d.name || "data").toLowerCase().replace(/[^a-z0-9]/g, "") + (d.year || "");
+    const authors = (d.authors && d.authors.length ? d.authors : ["Parraga-Alava, Jorge"]).join(" and ");
+    const fields = [
+      `  author    = {${authors}}`,
+      `  title     = {${d.name}}`,
+      `  year      = {${d.year || ""}}`,
+      `  publisher = {Mendeley Data}`
+    ];
+    if (d.version) fields.push(`  version   = {${d.version}}`);
+    if (d.doi) fields.push(`  doi       = {${d.doi}}`);
+    return `@misc{${key},\n` + fields.join(",\n") + `\n}`;
+  }
+
+  // Dataset cards — same minimalist card design as the R packages: one line-style
+  // dataset icon for all, a very short description, a link to the repository and a
+  // cite button (BibTeX to clipboard, like the publications list). Sorted by year.
+  function datasetsCards(container, datasets) {
+    if (!datasets || !datasets.length) { container.innerHTML = ""; return; }
+    const sorted = datasets.slice().sort((a, b) => (+b.year || 0) - (+a.year || 0));
+    const cards = sorted.map((d) => {
+      const url = d.doi ? "https://doi.org/" + d.doi : d.url;
+      return `<article class="tool-card ds-card" data-key="${esc((d.name || "").toLowerCase())}">
+        <div class="tool-hd"><span class="tool-ic">${ICON.dataset}</span><div class="tt">${esc(d.name)}</div>${d.year ? `<span class="ds-yr">${esc(d.year)}</span>` : ""}</div>
+        ${d.domain ? `<div class="tmeta">${esc(pick(d.domain))}</div>` : ""}
+        ${pick(d.desc) ? `<p class="td">${esc(pick(d.desc))}</p>` : ""}
+        <div class="ds-act">
+          ${url ? `<a class="ds-dl" href="${esc(url)}" target="_blank" rel="noopener">${ICON.external} ${esc(T.dsRepo)}</a>` : ""}
+          <button type="button" class="ds-cite">${ICON.cite} ${esc(T.cite)}</button>
+        </div>
+      </article>`;
+    }).join("");
+    container.innerHTML = `<div class="cv-block"><h2>${esc(T.tbDatabases)}</h2><div class="toolbox">${cards}</div></div>`;
+    container.querySelectorAll(".ds-card").forEach((el) => {
+      const d = datasets.find((x) => (x.name || "").toLowerCase() === el.dataset.key);
+      const btn = el.querySelector(".ds-cite");
+      if (btn && d) btn.addEventListener("click", () =>
+        navigator.clipboard.writeText(datasetBibtex(d)).then(() => toast(T.copied)).catch(() => toast(T.copied)));
+    });
+  }
+
   function fillCV(profile) {
     const stage = $("#cv-stage"), tabsEl = $("#cv-tabs"); if (!stage || !tabsEl) return;
-    // one tab per category, in order: Education, Academic experience, Awards
+    const projects = profile.projects || {};
+    const toolbox = profile.toolbox || [];
+    const datasets = profile.datasets || [];
+    const hasProjects = projects.research && projects.research.length;
+    const education = profile.education || [], experience = profile.experience || [];
+    // Background (education + experience) · Research projects · Tools & databases
     const tabs = [
-      { title: T.cvEdu, kind: "edu", items: profile.education || [] },
-      { title: T.cvExp, kind: "exp", items: profile.experience || [] },
-      { title: T.cvAwards, kind: "award", items: profile.awards || [] }
+      { title: T.cvBackground, kind: "background", items: (education.length || experience.length) ? [1] : [] },
+      { title: T.cvProjects, kind: "projects", items: hasProjects ? [1] : [] },
+      { title: T.cvToolbox, kind: "toolbox", items: (toolbox.length || datasets.length) ? [1] : [] }
     ].filter((p) => p.items.length);
     let active = 0;
     function render() {
       tabsEl.innerHTML = tabs.map((t, i) =>
         `<button type="button" class="cv-tab${i === active ? " on" : ""}" data-i="${i}">${esc(t.title)}</button>`).join("");
       const tb = tabs[active];
-      stage.innerHTML = `<div class="cv-block"><div class="rows" id="cv-rows"></div></div>`;
-      rowsEl($("#cv-rows"), tb.items, tb.kind);
+      if (tb.kind === "background") {
+        let html = "";
+        if (education.length) html += `<div class="cv-block"><h2>${esc(T.cvEdu)}</h2><div class="rows" id="cv-edu"></div></div>`;
+        if (experience.length) html += `<div class="cv-block"><h2>${esc(T.cvExp)}</h2><div class="rows" id="cv-exp"></div></div>`;
+        stage.innerHTML = html;
+        if (education.length) rowsEl($("#cv-edu"), education, "edu");
+        if (experience.length) rowsEl($("#cv-exp"), experience, "exp");
+      } else if (tb.kind === "projects") {
+        stage.innerHTML = `<div id="cv-projects"></div>`;
+        projectsRows($("#cv-projects"), projects);
+      } else if (tb.kind === "toolbox") {
+        stage.innerHTML = `<div id="cv-toolbox"></div><div id="cv-datasets"></div>`;
+        toolboxCards($("#cv-toolbox"), toolbox);
+        datasetsCards($("#cv-datasets"), datasets);
+      }
     }
     tabsEl.addEventListener("click", (e) => {
       const b = e.target.closest(".cv-tab"); if (!b) return;

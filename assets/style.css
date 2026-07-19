@@ -134,12 +134,8 @@ img, svg, video, iframe, canvas {
 .nav a.lang:hover { border-color: var(--sky); color: #fff; background: transparent; }
 .nav a.lang:hover::before { filter: brightness(1.6); }
 
-/* active nav item gets a small sky underline, our secondary brand accent */
-.nav a.active { position: relative; }
-.nav a.active::after {
-  content: ""; position: absolute; left: .7rem; right: .7rem; bottom: .3rem;
-  height: 2px; border-radius: 2px; background: var(--sky);
-}
+/* active nav item is marked only by the subtle background pill above —
+   no colored underline. */
 
 /* ---------- Mobile menu toggle (hamburger, top-right) ---------- */
 /* Pure-CSS toggle: pair with this markup inside .topbar-in, after .brand —
@@ -579,6 +575,55 @@ h1.title em { font-style: normal; color: var(--blue); }
 }
 .cv-tab:hover { background: var(--sky-1); color: var(--blue-600); }
 .cv-tab.on { color: var(--blue); border-bottom-color: var(--blue); }
+
+/* ---------- Toolbox cards (tools / software / databases) ---------- */
+.toolbox { display: grid; grid-template-columns: repeat(auto-fill, minmax(248px, 1fr)); gap: .75rem; }
+.tool-card {
+  position: relative; background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 1.15rem 1.25rem; box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column; gap: .55rem;
+  transition: border-color .18s var(--ease), box-shadow .18s var(--ease), transform .18s var(--ease);
+}
+.tool-card:hover { border-color: var(--line-2); box-shadow: var(--shadow-lift); transform: translateY(-2px); }
+.tool-badge {
+  align-self: flex-start; font-size: var(--fs-2xs); font-weight: 700; letter-spacing: .05em;
+  text-transform: uppercase; padding: .16rem .55rem; border-radius: 6px;
+}
+.tool-badge.tool { background: var(--sky-1); border: 1px solid var(--sky-line); color: var(--blue-700); }
+.tool-badge.software { background: var(--navy); color: #fff; }
+.tool-badge.database { background: var(--blue); color: #fff; }
+.tool-card .tt { font-weight: 700; font-size: var(--fs-lg); line-height: 1.3; color: var(--ink); overflow-wrap: anywhere; }
+.tool-card .tmeta { font-size: var(--fs-2xs); font-weight: 600; letter-spacing: .02em; color: var(--ink-3); }
+.tool-card .td { margin: 0; font-size: var(--fs-sm); color: var(--ink-2); line-height: 1.55; }
+.tool-card .topen {
+  margin-top: auto; padding-top: .2rem; font-size: var(--fs-xs); font-weight: 700;
+  color: var(--blue-600); display: inline-flex; align-items: center; gap: .35rem;
+}
+.tool-card .topen:hover { color: var(--blue-700); }
+.tool-card .topen svg { width: 13px; height: 13px; }
+.tool-card.placeholder {
+  border-style: dashed; border-color: var(--line-2); background: transparent; box-shadow: none;
+}
+.tool-card.placeholder:hover { transform: none; box-shadow: none; }
+.tool-card .tt-todo { font-weight: 600; font-size: var(--fs-sm); color: var(--ink-3); }
+
+/* ---------- CV intro note ---------- */
+.cv-note { font-size: var(--fs-sm); color: var(--ink-3); font-style: italic; margin: 0 0 1.2rem; }
+
+/* ---------- Tool card header with platform icon ---------- */
+.tool-hd { display: flex; align-items: center; gap: .55rem; }
+.tool-ic { flex: none; display: inline-flex; align-items: center; color: var(--blue-600); }
+.tool-ic svg { width: 18px; height: 18px; }
+.tool-card .tool-hd .tt { margin: 0; }
+
+/* ---------- Dataset cards (same card design as R packages) ---------- */
+.tool-card .ds-yr { margin-left: auto; flex: none; font-size: var(--fs-2xs); font-weight: 700; letter-spacing: .04em; color: var(--blue-700); background: var(--sky-1); border: 1px solid var(--sky-line); padding: .1rem .45rem; border-radius: 5px; }
+.ds-act { display: flex; align-items: center; gap: 1.1rem; margin-top: auto; padding-top: .3rem; font-size: var(--fs-xs); font-weight: 700; }
+.ds-dl { color: var(--blue-600); display: inline-flex; align-items: center; gap: .35rem; }
+.ds-dl:hover { color: var(--blue-700); }
+.ds-cite { background: none; border: none; padding: 0; font: inherit; font-weight: 700; cursor: pointer; color: var(--blue-600); display: inline-flex; align-items: center; gap: .35rem; }
+.ds-cite:hover { color: var(--blue-700); }
+.ds-act svg { width: 13px; height: 13px; }
 
 /* ---------- links in content are bold ---------- */
 .prose a, .article a:not(.read-paper), .refbox a:not(.read-paper), .card p a, .row .what .o a, .foot-meta a, .post-links a, .say a { font-weight: 700; }
