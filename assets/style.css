@@ -209,7 +209,19 @@ h1.title em { font-style: normal; color: var(--blue); }
 .stat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: .7rem; margin-top: 1.8rem; }
 @media (max-width: 900px) { .stat-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 560px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
-.stat { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.4rem 1.5rem; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: .6rem; transition: border-color .18s var(--ease), box-shadow .18s var(--ease), transform .18s var(--ease); }
+/* the top accent is painted as a layered background, not a positioned bar.
+   CSS backgrounds are clipped to the element's border-radius automatically,
+   so the accent follows the rounded corners exactly — no poking past the
+   curve like an absolutely-positioned ::after does. layer 1 is a 3px-tall
+   strip pinned to the top; layer 2 is the panel fill underneath. */
+.stat {
+  background: linear-gradient(var(--sky), var(--sky)) no-repeat top / 100% 3px, var(--panel);
+  border: 1px solid var(--line); border-radius: var(--radius); padding: 1.4rem 1.5rem;
+  box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: .6rem;
+  transition: border-color .18s var(--ease), box-shadow .18s var(--ease), transform .18s var(--ease);
+}
+.stat:nth-child(3n+2) { background: linear-gradient(var(--blue), var(--blue)) no-repeat top / 100% 3px, var(--panel); }
+.stat:nth-child(3n+3) { background: linear-gradient(90deg, var(--sky), var(--blue)) no-repeat top / 100% 3px, var(--panel); }
 .stat-hd { display: flex; align-items: center; gap: .5rem; }
 .stat-hd .ic {
   display: inline-flex; align-items: center; justify-content: center; flex: none;
@@ -217,14 +229,6 @@ h1.title em { font-style: normal; color: var(--blue); }
   background: var(--sky-1); color: var(--blue-600);
 }
 .stat-hd svg { width: 13px; height: 13px; flex: none; }
-/* top accent bar, cycling through two brand tones so the row of cards
-   reads with a bit of rhythm instead of ten identical tiles */
-.stat::after {
-  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  border-radius: var(--radius) var(--radius) 0 0; background: var(--sky);
-}
-.stat:nth-child(3n+2)::after { background: var(--blue); }
-.stat:nth-child(3n+3)::after { background: linear-gradient(90deg, var(--sky), var(--blue)); }
 .stat:nth-child(3n+2) .stat-hd .ic { background: var(--sky-2); color: var(--blue-700); }
 .stat .l { font-size: var(--fs-2xs); font-weight: 700; letter-spacing: .01em; color: var(--ink-3); line-height: 1.25; text-transform: none; }
 .stat .l .ab { color: var(--blue-600); font-weight: 700; }
