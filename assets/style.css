@@ -110,11 +110,11 @@ img, svg, video, iframe, canvas {
 }
 .topbar-in {
   max-width: var(--wrap); margin: 0 auto;
-  padding: 2rem clamp(1.1rem, 3vw, 2.2rem);
+  padding: 1.6rem clamp(1.1rem, 3vw, 2.2rem);
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
 }
 .brand { display: flex; align-items: center; gap: .6rem; line-height: 1.15; }
-.brand .logo { height: 56px; width: auto; display: block; flex: none; filter: brightness(0); }
+.brand .logo { height: 70px; width: auto; display: block; flex: none; }
 /* the visible mark is the logo; the name stays in the DOM for
    screen readers and SEO but isn't shown on screen */
 .brand .bname {
@@ -144,16 +144,15 @@ img, svg, video, iframe, canvas {
 }
 .nav a.lang::before {
   content: "";
-  width: 20px; height: 13px; flex: none; border-radius: 2px;
-  background-size: cover; background-position: center; background-repeat: no-repeat;
-  box-shadow: 0 0 0 1px rgba(15,39,72,.12);
+  width: 20px; height: 14px; flex: none;
+  background-size: contain; background-position: center; background-repeat: no-repeat;
 }
-/* target-language flag: ES link → Ecuador, EN link → USA (flat, minimal) */
+/* target-language flag, line style (no color): ES link → Ecuador, EN link → USA */
 .nav a.lang[hreflang="es"]::before {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 16'%3E%3Crect width='24' height='16' fill='%23ED1C24'/%3E%3Crect width='24' height='12' fill='%23034EA2'/%3E%3Crect width='24' height='8' fill='%23FFDD00'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 16' fill='none' stroke='%234a5c78' stroke-width='1.3' stroke-linejoin='round'%3E%3Crect x='1' y='1.5' width='22' height='13' rx='1.5'/%3E%3Cline x1='1' y1='8' x2='23' y2='8'/%3E%3Cline x1='1' y1='11.5' x2='23' y2='11.5'/%3E%3C/svg%3E");
 }
 .nav a.lang[hreflang="en"]::before {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 14'%3E%3Crect width='26' height='14' fill='%23fff'/%3E%3Cg fill='%23B22234'%3E%3Crect width='26' height='1.08'/%3E%3Crect y='2.15' width='26' height='1.08'/%3E%3Crect y='4.31' width='26' height='1.08'/%3E%3Crect y='6.46' width='26' height='1.08'/%3E%3Crect y='8.62' width='26' height='1.08'/%3E%3Crect y='10.77' width='26' height='1.08'/%3E%3Crect y='12.92' width='26' height='1.08'/%3E%3C/g%3E%3Crect width='11' height='7.54' fill='%233C3B6E'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 16' fill='none' stroke='%234a5c78' stroke-width='1.2' stroke-linejoin='round'%3E%3Crect x='1' y='1.5' width='22' height='13' rx='1.5'/%3E%3Crect x='1' y='1.5' width='10' height='7'/%3E%3Cline x1='11.5' y1='4.5' x2='23' y2='4.5'/%3E%3Cline x1='1' y1='11.3' x2='23' y2='11.3'/%3E%3C/svg%3E");
 }
 .nav a.lang:hover { border-color: var(--blue); color: var(--blue-600); background: var(--sky-1); }
 
