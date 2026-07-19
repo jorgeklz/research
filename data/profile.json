@@ -83,18 +83,6 @@
       "orgUrl": "https://www.utm.edu.ec"
     },
     {
-      "period": "Jan 2024 — Dec 2026",
-      "role": {
-        "en": "Principal Investigator, OPMIA Project",
-        "es": "Investigador Principal, Proyecto OPMIA"
-      },
-      "org": {
-        "en": "Optimizing AI Models on Multivariate and Image Datasets · UTM",
-        "es": "Optimización de Modelos de IA sobre Datos Multivariados e Imágenes · UTM"
-      },
-      "orgUrl": "https://www.utm.edu.ec"
-    },
-    {
       "period": "Jun 2022 — Feb 2025",
       "role": {
         "en": "Vice-Dean, Computing Career",
@@ -173,6 +161,182 @@
         "es": "Beca de Excelencia Doctoral"
       },
       "org": "SENESCYT Ecuador"
+    }
+  ],
+  "projects": {
+    "research": [
+      {
+        "period": { "en": "Jan 2024 — Dec 2026", "es": "Ene 2024 — Dic 2026" },
+        "title": {
+          "en": "OPMIA: Optimizing Artificial Intelligence Models on Multivariate and Image Datasets",
+          "es": "OPMIA: Optimización de Modelos de Inteligencia Artificial sobre Datos Multivariados e Imágenes"
+        },
+        "role": { "en": "Director", "es": "Director" },
+        "funder": { "en": "Universidad Técnica de Manabí", "es": "Universidad Técnica de Manabí" },
+        "status": { "en": "Ongoing", "es": "Vigente" }
+      },
+      {
+        "period": { "en": "Mar 2020 — Feb 2023", "es": "Mar 2020 — Feb 2023" },
+        "title": {
+          "en": "Geospatial Patterns Recognition in Urban Emergency Events Data",
+          "es": "Reconocimiento de Patrones Geoespaciales en Datos de Eventos de Emergencia Urbana"
+        },
+        "role": { "en": "Director", "es": "Director" },
+        "funder": { "en": "Universidad Técnica de Manabí", "es": "Universidad Técnica de Manabí" },
+        "status": { "en": "Completed", "es": "Finalizado" }
+      },
+      {
+        "period": { "en": "Jan 2021 — Dec 2022", "es": "Ene 2021 — Dic 2022" },
+        "title": {
+          "en": "A hemogram-data-based machine learning approach to optimize the use of COVID-19 diagnostic tests",
+          "es": "Enfoque de machine learning basado en datos de hemograma para optimizar el uso de pruebas diagnósticas de COVID-19"
+        },
+        "role": { "en": "Co-director", "es": "Co-director" },
+        "funder": {
+          "en": "University of St. Gallen · Latin American-Swiss Center · Inter-institutional Cooperation",
+          "es": "Universidad de St. Gallen · Centro Latinoamericano-Suizo · Cooperación Interinstitucional"
+        },
+        "status": { "en": "Completed", "es": "Finalizado" }
+      },
+      {
+        "period": { "en": "Aug 2018 — Sep 2019", "es": "Ago 2018 — Sep 2019" },
+        "title": {
+          "en": "Characterization of rust in robusta coffee crops using advanced computational intelligence techniques",
+          "es": "Caracterización de la roya en cultivos de café robusta mediante técnicas avanzadas de inteligencia computacional"
+        },
+        "role": { "en": "Director", "es": "Director" },
+        "funder": {
+          "en": "Escuela Superior Politécnica Agropecuaria de Manabí Manuel Félix López",
+          "es": "Escuela Superior Politécnica Agropecuaria de Manabí Manuel Félix López"
+        },
+        "status": { "en": "Completed", "es": "Finalizado" }
+      }
+    ]
+  },
+  "toolbox": [
+    {
+      "type": "tool",
+      "platform": "r",
+      "name": "momst",
+      "year": "2025",
+      "meta": { "en": "R package · CRAN", "es": "Paquete de R · CRAN" },
+      "desc": {
+        "en": "Multi-objective model selection with NSGA-II: returns the set of best trade-off models.",
+        "es": "Selección de modelos multiobjetivo con NSGA-II: entrega el conjunto de modelos con los mejores compromisos."
+      },
+      "url": "https://cran.r-project.org/package=momst"
+    },
+    {
+      "type": "tool",
+      "platform": "web",
+      "name": "Investigadores UTM",
+      "year": "2023",
+      "meta": { "en": "Web tool", "es": "Herramienta web" },
+      "desc": {
+        "en": "Web portal of Universidad Técnica de Manabí researchers and their Scopus-indexed scientific output.",
+        "es": "Portal web de los investigadores de la Universidad Técnica de Manabí y su producción científica indexada en Scopus."
+      },
+      "url": "https://jorgeklz.github.io/perfiles-utm/"
+    },
+    {
+      "type": "tool",
+      "platform": "r",
+      "name": "mstknnclust",
+      "year": "2023",
+      "meta": { "en": "R package · CRAN", "es": "Paquete de R · CRAN" },
+      "desc": {
+        "en": "MST-kNN clustering that finds the number of clusters automatically from a distance matrix.",
+        "es": "Agrupamiento MST-kNN que determina el número de grupos automáticamente desde una matriz de distancias."
+      },
+      "url": "https://cran.r-project.org/package=mstknnclust"
+    },
+    {
+      "type": "tool",
+      "platform": "r",
+      "name": "moc.gapbk",
+      "year": "2019",
+      "meta": { "en": "R package · CRAN", "es": "Paquete de R · CRAN" },
+      "desc": {
+        "en": "Multi-objective gene clustering guided by a-priori biological knowledge (NSGA-II).",
+        "es": "Agrupamiento de genes multiobjetivo guiado por conocimiento biológico a priori (NSGA-II)."
+      },
+      "url": "https://cran.r-project.org/package=moc.gapbk"
+    }
+  ],
+  "datasets": [
+    {
+      "name": "MeteoCoast-EC",
+      "year": "2025",
+      "authors": ["Parraga-Alava, Jorge"],
+      "domain": { "en": "Meteorology · Climate", "es": "Meteorología · Clima" },
+      "desc": {
+        "en": "Open-access hourly meteorological records from automatic weather stations in coastal Ecuador.",
+        "es": "Registros meteorológicos horarios de acceso abierto de estaciones automáticas en la costa de Ecuador."
+      },
+      "url": "https://data.mendeley.com/drafts/bpsh7jtyd2"
+    },
+    {
+      "name": "urbangEnCy",
+      "year": "2020",
+      "version": "V2",
+      "authors": ["Parraga-Alava, Jorge"],
+      "domain": { "en": "Emergency management", "es": "Gestión de emergencias" },
+      "desc": {
+        "en": "Emergency-event dataset built from citizen sensors for monitoring urban scenarios in Ecuador.",
+        "es": "Conjunto de datos de eventos de emergencia a partir de sensores ciudadanos para monitorear escenarios urbanos en Ecuador."
+      },
+      "doi": "10.17632/4x37zz82k8.2"
+    },
+    {
+      "name": "CBCovid19EC",
+      "year": "2023",
+      "version": "V3",
+      "authors": ["Parraga-Alava, Jorge"],
+      "domain": { "en": "Medicine · COVID-19", "es": "Medicina · COVID-19" },
+      "desc": {
+        "en": "Blood count and PCR for COVID-19 in 377 Ecuadorian patients.",
+        "es": "Hemograma y PCR de COVID-19 en 377 pacientes ecuatorianos."
+      },
+      "doi": "10.17632/7bmfgkkm3z.3"
+    },
+    {
+      "name": "LeLePhid",
+      "year": "2021",
+      "version": "V1",
+      "icon": "leaf",
+      "authors": ["Parraga-Alava, Jorge"],
+      "domain": { "en": "Agriculture · Plant pests", "es": "Agricultura · Plagas" },
+      "desc": {
+        "en": "665 lemon-leaf images labelled for aphid detection and severity.",
+        "es": "665 imágenes de hoja de limón etiquetadas para áfidos y severidad."
+      },
+      "doi": "10.17632/tndhs2zng4.1"
+    },
+    {
+      "name": "PCSTCOL",
+      "year": "2020",
+      "version": "V3",
+      "icon": "energy",
+      "authors": ["Parraga-Alava, Jorge"],
+      "domain": { "en": "Energy · Forecasting", "es": "Energía · Pronóstico" },
+      "desc": {
+        "en": "Electric-power consumption in seven municipalities of Nariño, Colombia.",
+        "es": "Consumo eléctrico en siete municipios de Nariño, Colombia."
+      },
+      "doi": "10.17632/xbt7scz5ny.3"
+    },
+    {
+      "name": "RoCoLe",
+      "year": "2019",
+      "version": "V2",
+      "icon": "coffee",
+      "authors": ["Parraga-Alava, Jorge", "Cusme, Kevin", "Loor, Angélica", "Santander, Esneider"],
+      "domain": { "en": "Agriculture · Plant disease", "es": "Agricultura · Enfermedad vegetal" },
+      "desc": {
+        "en": "1560 robusta-coffee leaf images labelled for leaf-rust presence and severity.",
+        "es": "1560 imágenes de hoja de café robusta etiquetadas para roya y severidad."
+      },
+      "doi": "10.17632/c5yvn32dzg.2"
     }
   ],
   "profiles": [
