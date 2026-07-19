@@ -99,7 +99,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().trim();
 
-  const VER = "38";
+  const VER = "43";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -685,10 +685,10 @@ ${refsHtml}
     const name = LANG === "es" && profile.nameEs ? profile.nameEs : profile.name;
     $$(".brand .bname").forEach((e) => e.textContent = name);
     $$(".brand .logo").forEach((e) => e.setAttribute("alt", name));
-    const soc = $("#socials");
-    if (soc && profile.profiles) {
-      soc.innerHTML = profile.profiles.map((p) =>
+    if (profile.profiles) {
+      const socHtml = profile.profiles.map((p) =>
         `<a href="${esc(p.url)}" target="_blank" rel="noopener" title="${esc(p.label)}">${socialIcon(p.label)}<span>${esc(p.label)}</span></a>`).join("");
+      $$(".socials").forEach((el) => { el.innerHTML = socHtml; });
     }
     const yr = $("#foot-year"); if (yr) yr.textContent = new Date().getFullYear();
   }
