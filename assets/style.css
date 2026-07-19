@@ -40,6 +40,10 @@
 
   --font: "Avenir Next", "Avenir", "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --ease: cubic-bezier(.4, 0, .2, 1);
+  /* a bit of textural variety: buttons get a small spring overshoot,
+     frequent small controls (filters, pagination, tabs) react faster */
+  --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --ease-quick: cubic-bezier(.2, 0, 0, 1);
   --wrap: 940px;
   --radius: 12px;
   --shadow: 0 1px 1px rgba(15,39,72,.04), 0 3px 8px rgba(15,39,72,.06), 0 24px 46px -16px rgba(15,39,72,.22);
@@ -111,7 +115,7 @@ img, svg, video, iframe, canvas {
 .nav a {
   font-size: var(--fs-nav); font-weight: 600; color: var(--navy-ink-2);
   padding: .45rem .7rem; border-radius: 8px; display: inline-block;
-  transition: background .18s var(--ease), color .18s var(--ease), transform .18s var(--ease);
+  transition: background .14s var(--ease-quick), color .14s var(--ease-quick), transform .14s var(--ease-quick);
 }
 .nav a:hover { background: rgba(255,255,255,.1); color: #fff; transform: translateY(-1px); }
 .nav a.active { color: #fff; background: rgba(56,189,248,.16); }
@@ -129,6 +133,13 @@ img, svg, video, iframe, canvas {
 }
 .nav a.lang:hover { border-color: var(--sky); color: #fff; background: transparent; }
 .nav a.lang:hover::before { filter: brightness(1.6); }
+
+/* active nav item gets a small sky underline, our secondary brand accent */
+.nav a.active { position: relative; }
+.nav a.active::after {
+  content: ""; position: absolute; left: .7rem; right: .7rem; bottom: .3rem;
+  height: 2px; border-radius: 2px; background: var(--sky);
+}
 
 /* ---------- Mobile menu toggle (hamburger, top-right) ---------- */
 /* Pure-CSS toggle: pair with this markup inside .topbar-in, after .brand —
@@ -154,7 +165,20 @@ img, svg, video, iframe, canvas {
 .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 clamp(1.1rem, 3vw, 2rem); }
 .content { padding-top: clamp(1.8rem, 4vw, 3rem); padding-bottom: 3rem; min-width: 0; }
 
-.page-head { margin-bottom: 2.2rem; }
+/* ---------- home hero decoration (abstract data/network motif, no photo) ---------- */
+.hero-wrap { position: relative; }
+.hero-deco {
+  position: absolute; top: -2.2rem; right: -1.4rem; z-index: 0;
+  width: min(40vw, 460px); height: auto; opacity: .8; pointer-events: none;
+}
+.hero-deco .n { animation: heroPulse 3.6s ease-in-out infinite; }
+.hero-deco .n2 { animation-delay: .6s; }
+.hero-deco .n3 { animation-delay: 1.2s; }
+@keyframes heroPulse { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+@media (max-width: 900px) { .hero-deco { display: none; } }
+@media (prefers-reduced-motion: reduce) { .hero-deco .n { animation: none; } }
+
+.page-head { position: relative; z-index: 1; margin-bottom: 2.2rem; }
 .eyebrow {
   display: flex; align-items: center; gap: .55rem;
   font-size: var(--fs-2xs); font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
@@ -186,8 +210,22 @@ h1.title em { font-style: normal; color: var(--blue); }
 @media (max-width: 900px) { .stat-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 560px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
 .stat { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.4rem 1.5rem; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: .6rem; transition: border-color .18s var(--ease), box-shadow .18s var(--ease), transform .18s var(--ease); }
-.stat-hd { display: flex; align-items: flex-start; gap: .45rem; }
-.stat-hd svg { width: 14px; height: 14px; color: var(--blue-600); flex: none; margin-top: .05rem; }
+.stat-hd { display: flex; align-items: center; gap: .5rem; }
+.stat-hd .ic {
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+  width: 24px; height: 24px; border-radius: 7px;
+  background: var(--sky-1); color: var(--blue-600);
+}
+.stat-hd svg { width: 13px; height: 13px; flex: none; }
+/* top accent bar, cycling through two brand tones so the row of cards
+   reads with a bit of rhythm instead of ten identical tiles */
+.stat::after {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  border-radius: var(--radius) var(--radius) 0 0; background: var(--sky);
+}
+.stat:nth-child(3n+2)::after { background: var(--blue); }
+.stat:nth-child(3n+3)::after { background: linear-gradient(90deg, var(--sky), var(--blue)); }
+.stat:nth-child(3n+2) .stat-hd .ic { background: var(--sky-2); color: var(--blue-700); }
 .stat .l { font-size: var(--fs-2xs); font-weight: 700; letter-spacing: .01em; color: var(--ink-3); line-height: 1.25; text-transform: none; }
 .stat .l .ab { color: var(--blue-600); font-weight: 700; }
 .stat .n { font-weight: 700; font-size: clamp(1.32rem, 2.2vw, 1.7rem); line-height: 1; color: var(--ink); letter-spacing: -.02em; margin-top: auto; }
@@ -207,7 +245,7 @@ h1.title em { font-style: normal; color: var(--blue); }
 
 /* home extras */
 .home-links { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2rem; }
-.btn { font-size: var(--fs-xs); font-weight: 600; letter-spacing: .02em; padding: .68rem 1.25rem; border-radius: var(--radius); display: inline-flex; align-items: center; gap: .45rem; transition: all .18s var(--ease); }
+.btn { font-size: var(--fs-xs); font-weight: 600; letter-spacing: .02em; padding: .68rem 1.25rem; border-radius: var(--radius); display: inline-flex; align-items: center; gap: .45rem; transition: all .24s var(--ease-spring); }
 .btn.primary { background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; box-shadow: var(--shadow-sm); }
 .btn.primary:hover { background: linear-gradient(180deg, var(--navy-2) 0%, var(--navy-2) 100%); box-shadow: var(--shadow); transform: translateY(-1px); }
 .btn.primary:active { transform: translateY(0); box-shadow: var(--shadow-sm); }
@@ -236,7 +274,7 @@ h1.title em { font-style: normal; color: var(--blue); }
 .filters button {
   font: inherit; font-size: var(--fs-xs); font-weight: 600; cursor: pointer;
   background: var(--panel); color: var(--ink-2);
-  border: 1px solid var(--line-2); padding: .4rem .95rem; border-radius: 100px; transition: all .18s var(--ease);
+  border: 1px solid var(--line-2); padding: .4rem .95rem; border-radius: 100px; transition: all .12s var(--ease-quick);
 }
 .filters button:hover { border-color: var(--blue); color: var(--blue-600); }
 .filters button.on { background: var(--navy); color: #fff; border-color: var(--navy); }
@@ -280,7 +318,7 @@ h1.title em { font-style: normal; color: var(--blue); }
 .pagination button {
   font: inherit; font-size: var(--fs-xs); font-weight: 700; letter-spacing: .04em;
   padding: .5rem 1.1rem; border: 1px solid var(--line-2); background: var(--panel); color: var(--ink-2);
-  border-radius: 8px; cursor: pointer; transition: all .18s var(--ease);
+  border-radius: 8px; cursor: pointer; transition: all .12s var(--ease-quick);
 }
 .pagination button:hover:not(:disabled) { border-color: var(--blue); color: var(--blue-600); }
 .pagination button:disabled { opacity: .35; cursor: default; }
@@ -447,6 +485,13 @@ h1.title em { font-style: normal; color: var(--blue); }
 }
 #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+/* ---------- scroll progress bar (top of viewport) ---------- */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--sky), var(--blue));
+  z-index: 999; pointer-events: none;
+}
+
 /* ---------- Responsive ---------- */
 /* ---------- Responsive / mobile UX ---------- */
 /* top bar stays one row: brand left, hamburger top-right; the full nav
@@ -526,7 +571,7 @@ h1.title em { font-style: normal; color: var(--blue); }
   font: inherit; font-size: var(--fs-xs); font-weight: 600; color: var(--ink-2);
   background: transparent; border: none; padding: .6rem .95rem; cursor: pointer;
   border-bottom: 2px solid transparent; margin-bottom: -1px; border-radius: 8px 8px 0 0;
-  transition: background .18s var(--ease), color .18s var(--ease);
+  transition: background .12s var(--ease-quick), color .12s var(--ease-quick);
 }
 .cv-tab:hover { background: var(--sky-1); color: var(--blue-600); }
 .cv-tab.on { color: var(--blue); border-bottom-color: var(--blue); }

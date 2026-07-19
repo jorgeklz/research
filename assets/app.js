@@ -6,6 +6,26 @@
 (function () {
   "use strict";
 
+  /* ---------- thin scroll-progress bar pinned to the top of the viewport ---------- */
+  (function initScrollProgress() {
+    function boot() {
+      const bar = document.createElement("div");
+      bar.id = "scroll-progress";
+      document.body.appendChild(bar);
+      function update() {
+        const h = document.documentElement;
+        const scrollTop = h.scrollTop || document.body.scrollTop;
+        const height = h.scrollHeight - h.clientHeight;
+        bar.style.width = (height > 0 ? (scrollTop / height) * 100 : 0) + "%";
+      }
+      document.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", update);
+      update();
+    }
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+    else boot();
+  })();
+
   const LANG = document.documentElement.lang === "es" ? "es" : "en";
   const ROOT = document.body.dataset.root || ".";
   const PAGE = document.body.dataset.page;
@@ -63,7 +83,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().trim();
 
-  const VER = "17";
+  const VER = "20";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -737,7 +757,7 @@ ${refsHtml}
     const grid = $("#stat-grid"); if (!grid) return;
     grid.innerHTML = METRICS.map((mm) => `
       <div class="stat" tabindex="0">
-        <div class="stat-hd">${METRIC_ICON[mm.k] || ""}<span class="l">${esc(mm.label)} <span class="ab">(${esc(mm.abbr)})</span></span></div>
+        <div class="stat-hd"><span class="ic">${METRIC_ICON[mm.k] || ""}</span><span class="l">${esc(mm.label)} <span class="ab">(${esc(mm.abbr)})</span></span></div>
         <div class="n" id="m-${mm.k}">${metrics ? fmtMetric(mm.k, metrics[mm.k]) : "—"}</div>
         <div class="tip">${esc(METRIC_DESC[mm.k] || "")}</div>
       </div>`).join("");
