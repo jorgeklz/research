@@ -236,7 +236,8 @@
         "en": "Web portal of Universidad Técnica de Manabí researchers and their Scopus-indexed scientific output.",
         "es": "Portal web de los investigadores de la Universidad Técnica de Manabí y su producción científica indexada en Scopus."
       },
-      "url": "https://jorgeklz.github.io/perfiles-utm/"
+      "url": "https://jorgeklz.github.io/perfiles-utm/",
+      "github": "https://github.com/jorgeklz/perfiles-utm"
     },
     {
       "type": "tool",
@@ -248,7 +249,12 @@
         "en": "MST-kNN clustering that finds the number of clusters automatically from a distance matrix.",
         "es": "Agrupamiento MST-kNN que determina el número de grupos automáticamente desde una matriz de distancias."
       },
-      "url": "https://cran.r-project.org/package=mstknnclust"
+      "url": "https://cran.r-project.org/package=mstknnclust",
+      "github": "https://github.com/jorgeklz/package-mstknnclust",
+      "usedIn": [
+        { "doi": "10.1016/j.simpa.2026.100845" },
+        { "doi": "10.1109/sccc.2018.8705248" }
+      ]
     },
     {
       "type": "tool",
@@ -260,7 +266,10 @@
         "en": "Multi-objective gene clustering guided by a-priori biological knowledge (NSGA-II).",
         "es": "Agrupamiento de genes multiobjetivo guiado por conocimiento biológico a priori (NSGA-II)."
       },
-      "url": "https://cran.r-project.org/package=moc.gapbk"
+      "url": "https://cran.r-project.org/package=moc.gapbk",
+      "usedIn": [
+        { "doi": "10.1186/s13040-018-0178-4" }
+      ]
     }
   ],
   "datasets": [
@@ -285,7 +294,10 @@
         "en": "Emergency-event dataset built from citizen sensors for monitoring urban scenarios in Ecuador.",
         "es": "Conjunto de datos de eventos de emergencia a partir de sensores ciudadanos para monitorear escenarios urbanos en Ecuador."
       },
-      "doi": "10.17632/4x37zz82k8.2"
+      "doi": "10.17632/4x37zz82k8.2",
+      "usedIn": [
+        { "doi": "10.1016/j.dib.2020.106693" }
+      ]
     },
     {
       "name": "CBCovid19EC",
@@ -297,7 +309,10 @@
         "en": "Blood count and PCR for COVID-19 in 377 Ecuadorian patients.",
         "es": "Hemograma y PCR de COVID-19 en 377 pacientes ecuatorianos."
       },
-      "doi": "10.17632/7bmfgkkm3z.3"
+      "doi": "10.17632/7bmfgkkm3z.3",
+      "usedIn": [
+        { "doi": "10.1016/j.meegid.2022.105228" }
+      ]
     },
     {
       "name": "LeLePhid",
@@ -310,7 +325,12 @@
         "en": "665 lemon-leaf images labelled for aphid detection and severity.",
         "es": "665 imágenes de hoja de limón etiquetadas para áfidos y severidad."
       },
-      "doi": "10.17632/tndhs2zng4.1"
+      "doi": "10.17632/tndhs2zng4.1",
+      "usedIn": [
+        { "doi": "10.1007/978-3-030-59194-6_2" },
+        { "doi": "10.1109/etcm67548.2025.11304406" },
+        { "doi": "10.3390/data6050051" }
+      ]
     },
     {
       "name": "PCSTCOL",
@@ -323,7 +343,11 @@
         "en": "Electric-power consumption in seven municipalities of Nariño, Colombia.",
         "es": "Consumo eléctrico en siete municipios de Nariño, Colombia."
       },
-      "doi": "10.17632/xbt7scz5ny.3"
+      "doi": "10.17632/xbt7scz5ny.3",
+      "usedIn": [
+        { "doi": "10.1016/j.dib.2020.105246" },
+        { "doi": "10.1109/etcm63562.2024.10746142" }
+      ]
     },
     {
       "name": "RoCoLe",
@@ -336,7 +360,10 @@
         "en": "1560 robusta-coffee leaf images labelled for leaf-rust presence and severity.",
         "es": "1560 imágenes de hoja de café robusta etiquetadas para roya y severidad."
       },
-      "doi": "10.17632/c5yvn32dzg.2"
+      "doi": "10.17632/c5yvn32dzg.2",
+      "usedIn": [
+        { "doi": "10.1016/j.dib.2019.104414" }
+      ]
     }
   ],
   "profiles": [
