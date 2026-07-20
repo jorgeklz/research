@@ -4,46 +4,40 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Personal web site - Jorge Párraga-Álava, Ph.D.</title>
-<meta name="description" content="News and plain-language posts about publications, conferences and software by Jorge Parraga-Alava.">
+<meta name="description" content="Academic portfolio of Jorge Parraga-Alava: education, experience, research projects, tools, software and datasets.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
 <link rel="stylesheet" href="assets/style.css?v=52">
 </head>
-<body data-page="news" data-root=".">
+<body data-page="cv" data-root=".">
 
 <header class="topbar">
   <div class="topbar-social"><div class="topbar-social-in"><div class="socials" id="top-socials"></div></div></div>
   <div class="topbar-in">
     <a class="brand" href="index.html"><img class="logo" src="assets/logo.svg" alt=""><span class="bname visually-hidden"></span></a>
-
     <input type="checkbox" id="nav-toggle" class="nav-toggle-input" autocomplete="off" hidden>
 <label for="nav-toggle" class="nav-toggle" aria-label="Abrir menú">
   <span></span><span></span><span></span>
 </label>
-
     <nav class="nav">
       <a href="index.html">Profile</a>
       <a href="publications.html">Publications</a>
-      <a class="active" href="news.html">Posts</a>
-      <a href="portfolio.html">Portfolio</a>
-      <a class="lang" href="es/noticias.html" hreflang="es">ES</a>
+      <a href="news.html">Posts</a>
+      <a class="active" href="portfolio.html">Portfolio</a>
+      <a class="lang" href="es/portafolio.html" hreflang="es">ES</a>
     </nav>
   </div>
 </header>
 
-<div class="page-banner"><div class="wrap"><h1 class="page-banner-t">Posts</h1></div></div>
+<div class="page-banner"><div class="wrap"><h1 class="page-banner-t">Portfolio</h1></div></div>
 
 <main class="wrap content">
-  <div class="page-head">    <p class="say">Every new paper becomes a post written for any reader, no jargon required. Conference talks, software and research projects show up here too, in English and Spanish.</p>
+  <div class="page-head">    <p class="say">Open-source R packages and public datasets I have built and released.</p>
   </div>
-  <div class="feed" id="news-list"><p class="loading">Loading…</p></div>
-  <div class="pagination" id="news-pagination" style="display:none">
-    <button id="news-prev" type="button">← Prev</button>
-    <span class="info" id="news-info"></span>
-    <button id="news-next" type="button">Next →</button>
-  </div>
+
+  <div id="cv-stage"></div>
 </main>
 
 <footer class="site-foot">
