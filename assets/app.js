@@ -49,7 +49,7 @@
       projNote: "Only the most notable projects are shown.", dsDownload: "Download", copiedCmd: "Copied",
       cvToolbox: "Tools & databases",
       tbTool: "Tool", tbSoftware: "Software", tbDatabase: "Database",
-      tbTools: "Tools & software", tbDatabases: "Databases",
+      tbTools: "Tools & software", tbDatabases: "Datasets",
       tbOpen: "Open", tbTodo: "To be completed",
       dsName: "Dataset", dsDomain: "Domain", dsDesc: "Description", dsYear: "Year", dsRepo: "Repository",
       usedIn: "Used in publications",
@@ -101,7 +101,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().trim();
 
-  const VER = "50";
+  const VER = "51";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
