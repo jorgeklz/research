@@ -4,53 +4,42 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Personal web site - Jorge Párraga-Álava, Ph.D.</title>
-<meta name="description" content="Publicaciones de Jorge Parraga-Alava, cargadas en vivo desde ORCID: artículos de revista y ponencias de congreso sobre IA, machine learning y ciencia de datos.">
+<meta name="description" content="Portafolio académico de Jorge Parraga-Alava: educación, experiencia, proyectos de investigación, herramientas, software y bases de datos.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg?v=2">
 <link rel="stylesheet" href="../assets/style.css?v=52">
 </head>
-<body data-page="publications" data-root="..">
+<body data-page="cv" data-root="..">
 
 <header class="topbar">
   <div class="topbar-social"><div class="topbar-social-in"><div class="socials" id="top-socials"></div></div></div>
   <div class="topbar-in">
     <a class="brand" href="index.html"><img class="logo" src="../assets/logo.svg" alt=""><span class="bname visually-hidden"></span></a>
+
     <input type="checkbox" id="nav-toggle" class="nav-toggle-input" autocomplete="off" hidden>
 <label for="nav-toggle" class="nav-toggle" aria-label="Abrir menú">
   <span></span><span></span><span></span>
 </label>
+
     <nav class="nav">
       <a href="index.html">Perfil</a>
-      <a class="active" href="publicaciones.html">Publicaciones</a>
+      <a href="publicaciones.html">Publicaciones</a>
       <a href="noticias.html">Posts</a>
-      <a href="portafolio.html">Portafolio</a>
-      <a class="lang" href="../publications.html" hreflang="en">EN</a>
+      <a class="active" href="portafolio.html">Portafolio</a>
+      <a class="lang" href="../portfolio.html" hreflang="en">EN</a>
     </nav>
   </div>
 </header>
 
-<div class="page-banner"><div class="wrap"><h1 class="page-banner-t">Publicaciones</h1></div></div>
+<div class="page-banner"><div class="wrap"><h1 class="page-banner-t">Portafolio</h1></div></div>
 
 <main class="wrap content">
-  <div class="page-head">    <p class="say">Cargadas en vivo desde ORCID y enriquecidas con Crossref, así la lista se mantiene al día sola. Cada trabajo enlaza a su DOI y puede abrir un post divulgativo.</p>
-    <button id="dl-pubs" class="btn ghost" type="button">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 19h14"/></svg>
-      <span>Descargar todas las publicaciones (Word)</span>
-    </button>
+  <div class="page-head">    <p class="say">Paquetes de R de código abierto y bases de datos públicas que he creado y publicado.</p>
   </div>
 
-  <div class="orcid-note" id="orcid-note"><span class="dot"></span><span class="txt">Cargando publicaciones desde ORCID…</span></div>
-
-  <div class="filters" id="pub-filters"></div>
-  <div class="pubs" id="pub-list"><p class="loading">Cargando…</p></div>
-
-  <div class="pagination" id="pub-pagination" style="display:none">
-    <button id="pag-prev" type="button">← Ant.</button>
-    <span class="info" id="pag-info"></span>
-    <button id="pag-next" type="button">Sig. →</button>
-  </div>
+  <div id="cv-stage"></div>
 </main>
 
 <footer class="site-foot">
