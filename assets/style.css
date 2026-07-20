@@ -110,7 +110,7 @@ img, svg, video, iframe, canvas {
 }
 .topbar-in {
   max-width: var(--wrap); margin: 0 auto;
-  padding: 1.6rem clamp(1.1rem, 3vw, 2.2rem);
+  padding: 1.15rem clamp(1.1rem, 3vw, 2.2rem);
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
 }
 .brand { display: flex; align-items: center; gap: .6rem; line-height: 1.15; }
@@ -191,7 +191,7 @@ img, svg, video, iframe, canvas {
 
 /* ---------- Content ---------- */
 .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 clamp(1.1rem, 3vw, 2rem); }
-.content { padding-top: clamp(1.8rem, 4vw, 3rem); padding-bottom: 3rem; min-width: 0; }
+.content { padding-top: clamp(1.8rem, 4vw, 3rem); padding-bottom: 1.5rem; min-width: 0; }
 
 /* ---------- home hero decoration (abstract data/network motif, no photo) ---------- */
 .hero-wrap { position: relative; }
@@ -474,7 +474,7 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .loading { font-size: var(--fs-sm); color: var(--ink-3); padding: 1rem 0; }
 
 /* ---------- Footer (navy) with social icons ---------- */
-.site-foot { border-top: 1px solid var(--navy-line); margin-top: 2rem; background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%); }
+.site-foot { border-top: 1px solid var(--navy-line); margin-top: 1rem; background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%); }
 .site-foot-in {
   max-width: var(--wrap); margin: 0 auto; padding: 1.8rem clamp(1.1rem, 3vw, 2rem);
   display: flex; flex-direction: column; align-items: center; text-align: center; gap: .6rem;
@@ -643,6 +643,34 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .ds-cite { background: none; border: none; padding: 0; font: inherit; font-weight: 700; cursor: pointer; color: var(--blue-600); display: inline-flex; align-items: center; gap: .35rem; }
 .ds-cite:hover { color: var(--blue-700); }
 .ds-act svg { width: 13px; height: 13px; }
+/* GitHub link + "used in publications" contextual menu */
+.ds-gh { color: var(--ink-2); display: inline-flex; align-items: center; }
+.ds-gh:hover { color: var(--ink); }
+.ds-used { position: relative; display: inline-flex; }
+.ds-used-btn { background: none; border: none; padding: 0; cursor: pointer; color: var(--ink-2); display: inline-flex; align-items: center; }
+.ds-used-btn:hover { color: var(--blue-600); }
+.ds-used-menu {
+  display: none; position: absolute; right: 0; bottom: calc(100% + 8px); z-index: 30;
+  width: max-content; max-width: min(300px, calc(100vw - 2.5rem));
+  background: var(--panel); border: 1px solid var(--line-2); border-radius: 10px;
+  box-shadow: var(--shadow); padding: .3rem;
+}
+.ds-used.open .ds-used-menu { display: block; }
+.ds-used-hd { font-size: var(--fs-2xs); font-weight: 700; letter-spacing: .01em; text-transform: none; color: var(--ink-3); padding: .3rem .5rem .35rem; }
+.ds-used-menu a { display: flex; align-items: flex-start; gap: .38rem; padding: .38rem .5rem; border-radius: 7px; font-size: var(--fs-xs); font-weight: 600; color: var(--ink-2); line-height: 1.35; }
+.ds-used-menu a:hover { background: var(--sky-1); color: var(--blue-700); }
+.ds-used-menu a span { overflow-wrap: anywhere; }
+.ds-used-menu a svg { width: 12px; height: 12px; flex: none; margin-top: .18rem; color: var(--blue-600); }
+/* on phones the popover can run off the left edge, so pin it as a full-width
+   sheet at the bottom of the viewport instead — it can never overflow */
+@media (max-width: 560px) {
+  .ds-used-menu {
+    position: fixed; left: .9rem; right: .9rem; bottom: .9rem; top: auto;
+    width: auto; max-width: none;
+    box-shadow: 0 -6px 30px rgba(15,39,72,.22), 0 4px 14px rgba(15,39,72,.14);
+  }
+  .ds-used-menu a { font-size: var(--fs-sm); }
+}
 
 /* ---------- links in content are bold ---------- */
 .prose a, .article a:not(.read-paper), .refbox a:not(.read-paper), .card p a, .row .what .o a, .foot-meta a, .post-links a, .say a { font-weight: 700; }

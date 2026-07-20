@@ -52,6 +52,7 @@
       tbTools: "Tools & software", tbDatabases: "Databases",
       tbOpen: "Open", tbTodo: "To be completed",
       dsName: "Dataset", dsDomain: "Domain", dsDesc: "Description", dsYear: "Year", dsRepo: "Repository",
+      usedIn: "Used in publications",
       views: "views", viewsOne: "view", shareWa: "Share on WhatsApp",
       empty: "Nothing here yet.", notFound: "Post not found.", loadingOrcid: "Loading publications from ORCID…",
       syncedOrcid: "Live from ORCID", worksTotal: "publications",
@@ -79,6 +80,7 @@
       tbTools: "Herramientas y software", tbDatabases: "Bases de datos",
       tbOpen: "Acceder", tbTodo: "Por completar",
       dsName: "Conjunto de datos", dsDomain: "Dominio", dsDesc: "Descripción", dsYear: "Año", dsRepo: "Repositorio",
+      usedIn: "Usado en publicaciones",
       views: "vistas", viewsOne: "vista", shareWa: "Compartir en WhatsApp",
       empty: "Aún no hay contenido.", notFound: "Entrada no encontrada.", loadingOrcid: "Cargando publicaciones desde ORCID…",
       syncedOrcid: "En vivo desde ORCID", worksTotal: "publicaciones",
@@ -99,7 +101,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().trim();
 
-  const VER = "46";
+  const VER = "50";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -119,6 +121,7 @@
     copy: svg('<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/>', 13),
     download: svg('<path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 19h14"/>', 13),
     dataset: svg('<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.6 3.1 3 7 3s7-1.4 7-3V6"/><path d="M5 12v6c0 1.6 3.1 3 7 3s7-1.4 7-3v-6"/>', 18),
+    papers: svg('<path d="M6 2h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z"/><path d="M15 2v5h5"/><line x1="9" y1="13" x2="16" y2="13"/><line x1="9" y1="17" x2="14" y2="17"/>', 13),
     oa: svg('<rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/><circle cx="12" cy="15.5" r="1.3"/>', 13),
     doc: svg('<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><polyline points="14 3 14 9 20 9"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/>', 13),
     mail: svg('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>', 14),
@@ -869,6 +872,45 @@ ${refsHtml}
   // "software & data" page: each item is a card with a type badge, a short
   // description and an access link when one exists. Items still to be filled in
   // render as dashed placeholder cards.
+  // extra card actions shared by tools and datasets: GitHub repo link, and a
+  // contextual menu listing the site's publications that used the item
+  function itemExtras(it) {
+    let h = "";
+    if (it.github) h += `<a class="ds-gh" href="${esc(it.github)}" target="_blank" rel="noopener" title="GitHub">${ICON.github}</a>`;
+    if (it.usedIn && it.usedIn.length) {
+      const rows = it.usedIn.map((u) => {
+        // each associated publication links to its original DOI
+        const href = u.doi ? "https://doi.org/" + u.doi : (u.url || "#");
+        return `<a href="${esc(href)}" data-doi="${esc(u.doi)}" target="_blank" rel="noopener">${ICON.external}<span class="ds-used-t">${esc(u.label || u.doi)}</span></a>`;
+      }).join("");
+      h += `<span class="ds-used"><button type="button" class="ds-used-btn" aria-label="${esc(T.usedIn)}" title="${esc(T.usedIn)}">${ICON.papers}</button><div class="ds-used-menu"><div class="ds-used-hd">${esc(T.usedIn)}</div>${rows}</div></span>`;
+    }
+    return h;
+  }
+  // fetch real publication titles (once) the first time a menu opens
+  function loadUsedTitles(wrap) {
+    if (wrap.dataset.loaded === "1") return;
+    wrap.dataset.loaded = "1";
+    wrap.querySelectorAll(".ds-used-menu a[data-doi]").forEach((a) => {
+      const span = a.querySelector(".ds-used-t");
+      crossref(a.dataset.doi).then((m) => { if (m && m.title) span.textContent = m.title; }).catch(() => {});
+    });
+  }
+  function wireUsedMenus(container) {
+    container.querySelectorAll(".ds-used-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const wrap = btn.parentElement, open = wrap.classList.contains("open");
+        document.querySelectorAll(".ds-used.open").forEach((m) => m.classList.remove("open"));
+        if (!open) { wrap.classList.add("open"); loadUsedTitles(wrap); }
+      });
+    });
+    if (!wireUsedMenus._bound) {
+      wireUsedMenus._bound = true;
+      document.addEventListener("click", () => document.querySelectorAll(".ds-used.open").forEach((m) => m.classList.remove("open")));
+    }
+  }
+
   function toolboxCards(container, items) {
     const list = items.filter((it) => it.type === "tool" || it.type === "software")
       .sort((a, b) => (+b.year || 0) - (+a.year || 0));
@@ -877,14 +919,16 @@ ${refsHtml}
       const logo = PLATFORM_LOGO[it.platform] || "";
       const link = it.url
         ? `<a class="topen" href="${esc(it.url)}" target="_blank" rel="noopener">${ICON.external} ${esc(T.tbOpen)}</a>` : "";
+      const extras = itemExtras(it);
       return `<article class="tool-card">
         <div class="tool-hd"><span class="tool-ic">${logo}</span><div class="tt">${esc(it.name)}</div>${it.year ? `<span class="ds-yr">${esc(it.year)}</span>` : ""}</div>
         ${it.meta ? `<div class="tmeta">${esc(pick(it.meta))}</div>` : ""}
         ${pick(it.desc) ? `<p class="td">${esc(pick(it.desc))}</p>` : ""}
-        ${link ? `<div class="ds-act">${link}</div>` : ""}
+        ${(link || extras) ? `<div class="ds-act">${link}${extras}</div>` : ""}
       </article>`;
     };
     container.innerHTML = `<div class="cv-block"><h2>${esc(T.tbTools)}</h2><div class="toolbox">${list.map(card).join("")}</div></div>`;
+    wireUsedMenus(container);
   }
 
   // BibTeX for a Mendeley dataset, copied to the clipboard just like publications.
@@ -916,17 +960,12 @@ ${refsHtml}
         ${pick(d.desc) ? `<p class="td">${esc(pick(d.desc))}</p>` : ""}
         <div class="ds-act">
           ${url ? `<a class="ds-dl" href="${esc(url)}" target="_blank" rel="noopener">${ICON.external} ${esc(T.dsRepo)}</a>` : ""}
-          <button type="button" class="ds-cite">${ICON.cite} ${esc(T.cite)}</button>
+          ${itemExtras(d)}
         </div>
       </article>`;
     }).join("");
     container.innerHTML = `<div class="cv-block"><h2>${esc(T.tbDatabases)}</h2><div class="toolbox">${cards}</div></div>`;
-    container.querySelectorAll(".ds-card").forEach((el) => {
-      const d = datasets.find((x) => (x.name || "").toLowerCase() === el.dataset.key);
-      const btn = el.querySelector(".ds-cite");
-      if (btn && d) btn.addEventListener("click", () =>
-        navigator.clipboard.writeText(datasetBibtex(d)).then(() => toast(T.copied)).catch(() => toast(T.copied)));
-    });
+    wireUsedMenus(container);
   }
 
   function fillCV(profile) {
