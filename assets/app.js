@@ -103,7 +103,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().trim();
 
-  const VER = "76";
+  const VER = "82";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -926,7 +926,7 @@ ${refsHtml}
   }
   function wireHomeTabs(channelId) {
     const tabsEl = $("#home-tabs"); if (!tabsEl) return;
-    const tabs = $$(".cv-tab", tabsEl);
+    const tabs = $$("button", tabsEl);
     const panels = { pubs: $("#home-panel-pubs"), yt: $("#home-panel-yt") };
     tabs.forEach((btn) => {
       btn.addEventListener("click", () => {
