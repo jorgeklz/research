@@ -281,7 +281,16 @@ h1.title em { font-style: normal; color: var(--blue-700); }
   padding: .55rem .7rem; border-radius: 9px; box-shadow: var(--shadow);
   opacity: 0; visibility: hidden; transition: opacity .18s var(--ease); pointer-events: none;
 }
-.stat:hover .tip, .stat:focus .tip, .stat:focus-within .tip, .stat.open .tip { opacity: 1; visibility: visible; }
+/* the tap-to-open state: this is the only thing driving visibility on touch
+   devices, so it's the only thing that has to close on an outside tap (see
+   the document click listener in app.js) — no CSS :hover involved there */
+.stat.open .tip { opacity: 1; visibility: visible; }
+/* hover-to-preview is a bonus for real mouse pointers only. On touch, iOS/
+   Android can "stick" a :hover state after a tap until something else is
+   tapped, which is exactly what made the tooltip refuse to close before */
+@media (hover: hover) and (pointer: fine) {
+  .stat:hover .tip, .stat:focus .tip, .stat:focus-within .tip { opacity: 1; visibility: visible; }
+}
 
 /* home extras */
 .home-links { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2rem; }
@@ -610,7 +619,7 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 /* ---------- CV tabs ---------- */
 .cv-tabs { display: flex; gap: .3rem; flex-wrap: wrap; margin-bottom: 1.5rem; border-bottom: 1px solid var(--line); }
 .cv-tab {
-  font: inherit; font-size: var(--fs-xs); font-weight: 600; color: var(--ink-2);
+  font: inherit; font-size: var(--fs-md); font-weight: 600; color: var(--ink-2);
   background: transparent; border: none; padding: .6rem .95rem; cursor: pointer;
   border-bottom: 2px solid transparent; margin-bottom: -1px; border-radius: 8px 8px 0 0;
   transition: background .12s var(--ease-quick), color .12s var(--ease-quick);
