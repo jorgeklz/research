@@ -264,16 +264,24 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .stat .n small { color: var(--blue); font-size: .55em; vertical-align: baseline; font-weight: 700; }
 /* metric contextual tooltip */
 .stat { position: relative; cursor: help; }
-.stat:hover, .stat.open { border-color: var(--line-2); border-left-color: var(--blue-700); box-shadow: var(--shadow-lift); transform: translateY(-2px); }
+/* no transform here on purpose: a transformed ancestor becomes the
+   containing block for any position:fixed descendant, which is exactly
+   what broke the tooltip's fixed positioning (it was landing relative to
+   .stat instead of the real viewport, hence appearing near the bottom of
+   the page). Border + shadow still give clear hover feedback without it. */
+.stat:hover, .stat.open { border-color: var(--line-2); border-left-color: var(--blue-700); box-shadow: var(--shadow-lift); }
 .stat .tip {
-  position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translate(-50%, 4px);
-  width: max-content; max-width: 240px;
+  /* position: fixed, with top/left set in px by fitTip() in app.js, right
+     before it's shown (on hover/focus/click). Fixed to the viewport (not to
+     .stat) and with a z-index above the sticky header, so it can never end up
+     hidden behind the header or another pill no matter where it lands. */
+  position: fixed; z-index: 200;
+  width: max-content; max-width: min(78vw, 240px);
   background: var(--ink); color: #fff; font-size: var(--fs-xs); font-weight: 500; line-height: 1.4;
   padding: .55rem .7rem; border-radius: 9px; box-shadow: var(--shadow);
-  opacity: 0; visibility: hidden; transition: opacity .18s var(--ease), transform .18s var(--ease); z-index: 30; pointer-events: none;
+  opacity: 0; visibility: hidden; transition: opacity .18s var(--ease); pointer-events: none;
 }
-.stat .tip::after { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: var(--ink); }
-.stat:hover .tip, .stat:focus .tip, .stat:focus-within .tip, .stat.open .tip { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+.stat:hover .tip, .stat:focus .tip, .stat:focus-within .tip, .stat.open .tip { opacity: 1; visibility: visible; }
 
 /* home extras */
 .home-links { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2rem; }
@@ -293,6 +301,11 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .sec-title h2 { font-size: var(--fs-2xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin: 0; }
 .sec-title .more-link { font-size: var(--fs-xs); font-weight: 600; color: var(--blue-600); }
 .sec-title .more-link:hover { color: var(--blue-700); }
+/* home page tabs ("Recent publications" / "Latest classes"): plain title case,
+   no small-caps eyebrow treatment */
+#home-panel-pubs .sec-title h2, #home-panel-yt .sec-title h2 {
+  font-size: var(--fs-md); font-weight: 700; letter-spacing: normal; text-transform: none; color: var(--ink);
+}
 
 /* ---------- Publications ---------- */
 .orcid-note {
@@ -570,9 +583,6 @@ h1.title em { font-style: normal; color: var(--blue-700); }
   .socials { gap: .1rem; }
   .foot-meta { overflow-wrap: anywhere; line-height: 1.6; }
   .card, .row, .stat { padding: .9rem 1rem; }
-  .stat .tip { left: 0; transform: translate(0, 4px); max-width: min(78vw, 240px); }
-  .stat .tip::after { left: 24px; }
-  .stat:hover .tip, .stat:focus .tip, .stat:focus-within .tip, .stat.open .tip { transform: translate(0, 0); }
 }
 /* guarantee a comfortable side margin on small phones, independent of viewport-width rounding */
 @media (max-width: 480px) {
@@ -607,6 +617,29 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 }
 .cv-tab:hover { background: var(--sky-1); color: var(--blue-600); }
 .cv-tab.on { color: var(--blue); border-bottom-color: var(--blue); }
+
+/* ---------- YouTube "Latest classes" tab (home page) ---------- */
+.yt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: .9rem; }
+.yt-card {
+  display: flex; flex-direction: column; min-width: 0; height: 100%; background: var(--panel);
+  border: 1px solid var(--line); border-left: 3px solid var(--blue);
+  border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm);
+  transition: border-color .18s var(--ease), box-shadow .18s var(--ease), transform .18s var(--ease);
+}
+.yt-card:hover { border-color: var(--line-2); border-left-color: var(--blue-700); box-shadow: var(--shadow-lift); transform: translateY(-2px); }
+.yt-thumb { display: block; width: 100%; aspect-ratio: 16 / 9; background: var(--sky-1); overflow: hidden; flex: none; }
+.yt-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* padding lives on the outer .yt-title (a plain block, never clipped); the
+   2-line clamp is applied only to the inner .yt-title-t span, so the bottom
+   padding can never get eaten by the clamp box's own overflow:hidden */
+.yt-title {
+  padding: 1rem .95rem 1.3rem; display: block; flex: none;
+}
+.yt-title-t {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  font-size: var(--fs-sm); font-weight: 600; color: var(--ink); line-height: 1.55;
+  overflow: hidden; overflow-wrap: anywhere; word-break: break-word;
+}
 
 /* ---------- Toolbox cards (tools / software / databases) ---------- */
 .toolbox { display: grid; grid-template-columns: repeat(auto-fill, minmax(248px, 1fr)); gap: .75rem; }

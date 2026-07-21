@@ -63,7 +63,8 @@
       loadFail: "Could not load data. Serve the site with a local server (python3 -m http.server) instead of opening the file directly.",
       orcidFail: "Could not reach ORCID. Showing the curated list instead.",
       dlAll: "Download all publications (Word)", pubsExportTitle: "Publications", pubsExportSub: "APA 7th Edition",
-      pubsExportGenerated: (d) => `Generated on ${d}`, dlPreparing: "Preparing…", contact: "Contact"
+      pubsExportGenerated: (d) => `Generated on ${d}`, dlPreparing: "Preparing…", contact: "Contact",
+      ytEmpty: "No videos yet.", ytFail: "Could not load the videos. Watch them on YouTube instead."
     },
     es: {
       journal: "Revista", conference: "Congreso", software: "Software", book: "Capítulo de libro",
@@ -91,7 +92,8 @@
       loadFail: "No se pudieron cargar los datos. Sirve el sitio con un servidor local (python3 -m http.server).",
       orcidFail: "No se pudo conectar con ORCID. Se muestra la lista curada.",
       dlAll: "Descargar todas las publicaciones (Word)", pubsExportTitle: "Publicaciones", pubsExportSub: "Edición APA 7",
-      pubsExportGenerated: (d) => `Generado el ${d}`, dlPreparing: "Preparando…", contact: "Contacto"
+      pubsExportGenerated: (d) => `Generado el ${d}`, dlPreparing: "Preparando…", contact: "Contacto",
+      ytEmpty: "Aún no hay videos.", ytFail: "No se pudieron cargar los videos. Míralos directo en YouTube."
     }
   }[LANG];
 
@@ -101,7 +103,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().trim();
 
-  const VER = "54";
+  const VER = "65";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -782,6 +784,36 @@ ${refsHtml}
     }
   }[LANG];
 
+  // Positions a metric's tooltip bubble with real viewport pixels right before
+  // it's shown (mouseenter/focus/click). The bubble is `position: fixed` (see
+  // style.css), so this is the only thing that places it — no CSS transform,
+  // no percentages, nothing that can drift out of sync or end up painted
+  // behind the sticky header or another pill.
+  function fitTip(stat) {
+    const tip = stat.querySelector(".tip"); if (!tip) return;
+    const margin = 10, gap = 8;
+    const sr = stat.getBoundingClientRect();
+    const tipW = tip.offsetWidth, tipH = tip.offsetHeight;
+
+    // don't place it above anything it would cover: the sticky header, or
+    // whatever content sits right before the stats grid (e.g. the intro text)
+    const header = $(".topbar");
+    const grid = stat.closest("#stat-grid") || stat.parentElement;
+    const prev = grid && grid.previousElementSibling;
+    const headerLimit = header ? header.getBoundingClientRect().bottom : 0;
+    const prevLimit = prev ? prev.getBoundingClientRect().bottom : 0;
+    const topLimit = Math.max(headerLimit, prevLimit);
+
+    let top = sr.top - gap - tipH;
+    if (top < topLimit + margin) top = sr.bottom + gap; // no room above: show it below instead
+
+    let left = sr.left + sr.width / 2 - tipW / 2;
+    if (left < margin) left = margin;
+    else if (left + tipW > window.innerWidth - margin) left = window.innerWidth - margin - tipW;
+
+    tip.style.top = `${Math.round(top)}px`;
+    tip.style.left = `${Math.round(left)}px`;
+  }
   function renderMetrics(metrics) {
     const grid = $("#stat-grid"); if (!grid) return;
     grid.innerHTML = METRICS.map((mm) => `
@@ -791,8 +823,11 @@ ${refsHtml}
         <div class="tip">${esc(METRIC_DESC[mm.k] || "")}</div>
       </div>`).join("");
     grid.querySelectorAll(".stat").forEach((s) => {
+      s.addEventListener("mouseenter", () => fitTip(s));
+      s.addEventListener("focus", () => fitTip(s));
       s.addEventListener("click", (e) => {
         e.stopPropagation();
+        fitTip(s);
         s.classList.toggle("open");
       });
     });
@@ -845,6 +880,54 @@ ${refsHtml}
     // numbers once the live ORCID (and OpenAlex) data has loaded, so nothing
     // stale from the local backup file is ever shown, even briefly.
     renderMetrics({ pubs: 0, cites: 0, h: 0, i10: 0, g: 0, m: 0, cpp: 0, app: 0, first: 0, cited: 0 });
+    wireHomeTabs(profile.youtube && profile.youtube.channelId);
+  }
+
+  /* ---------- YouTube latest videos (home page "Latest classes" tab) ----------
+     Reads the channel's public RSS feed through rss2json (no API key, no server)
+     and shows the newest few videos as cards. Lazy-loaded only when the tab is
+     opened, and only fetched once per page view. */
+  function fetchYouTubeVideos(channelId, limit) {
+    const rss = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+    const api = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rss)}`;
+    return fetch(api).then((r) => r.json()).then((d) => {
+      if (d.status !== "ok" || !Array.isArray(d.items)) throw new Error("yt-feed");
+      return d.items.slice(0, limit).map((it) => {
+        const fromDesc = it.description && (it.description.match(/src="([^"]+)"/) || [])[1];
+        return { title: it.title, link: it.link, thumb: it.thumbnail || fromDesc || "" };
+      });
+    });
+  }
+  function renderYouTube(videos) {
+    const wrap = $("#yt-list"); if (!wrap) return;
+    if (!videos.length) { wrap.innerHTML = `<p class="loading">${T.ytEmpty}</p>`; return; }
+    wrap.innerHTML = videos.map((v) => `
+      <a class="yt-card" href="${esc(v.link)}" target="_blank" rel="noopener">
+        <span class="yt-thumb"><img src="${esc(v.thumb)}" alt="" loading="lazy"></span>
+        <span class="yt-title"><span class="yt-title-t">${esc(v.title)}</span></span>
+      </a>`).join("");
+  }
+  let ytLoaded = false;
+  function loadYouTubeOnce(channelId) {
+    if (ytLoaded) return;
+    ytLoaded = true;
+    const wrap = $("#yt-list"); if (!wrap) return;
+    if (!channelId) { wrap.innerHTML = `<p class="loading">${T.ytEmpty}</p>`; return; }
+    fetchYouTubeVideos(channelId, 5).then(renderYouTube)
+      .catch(() => { wrap.innerHTML = `<p class="loading">${T.ytFail}</p>`; });
+  }
+  function wireHomeTabs(channelId) {
+    const tabsEl = $("#home-tabs"); if (!tabsEl) return;
+    const tabs = $$(".cv-tab", tabsEl);
+    const panels = { pubs: $("#home-panel-pubs"), yt: $("#home-panel-yt") };
+    tabs.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const key = btn.dataset.tab;
+        tabs.forEach((b) => b.classList.toggle("on", b === btn));
+        Object.keys(panels).forEach((k) => { if (panels[k]) panels[k].hidden = k !== key; });
+        if (key === "yt") loadYouTubeOnce(channelId);
+      });
+    });
   }
   function fillAbout(profile) {
     const bio = $("#bio"); if (bio) bio.innerHTML = md(pick(profile.bio));
