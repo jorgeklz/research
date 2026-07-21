@@ -103,7 +103,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().trim();
 
-  const VER = "68";
+  const VER = "69";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -823,12 +823,20 @@ ${refsHtml}
         <div class="tip">${esc(METRIC_DESC[mm.k] || "")}</div>
       </div>`).join("");
     grid.querySelectorAll(".stat").forEach((s) => {
-      s.addEventListener("mouseenter", () => fitTip(s));
-      s.addEventListener("focus", () => fitTip(s));
+      s.addEventListener("mouseenter", () => {
+        grid.querySelectorAll(".stat.open").forEach((o) => { if (o !== s) o.classList.remove("open"); });
+        fitTip(s);
+      });
+      s.addEventListener("focus", () => {
+        grid.querySelectorAll(".stat.open").forEach((o) => { if (o !== s) o.classList.remove("open"); });
+        fitTip(s);
+      });
       s.addEventListener("click", (e) => {
         e.stopPropagation();
+        const willOpen = !s.classList.contains("open");
+        grid.querySelectorAll(".stat.open").forEach((o) => { if (o !== s) o.classList.remove("open"); });
         fitTip(s);
-        s.classList.toggle("open");
+        s.classList.toggle("open", willOpen);
       });
     });
     if (!renderMetrics._outsideClickBound) {
