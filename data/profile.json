@@ -5,6 +5,10 @@
   "orcid": "0000-0001-8558-9122",
   "scopusAuthorId": "57193428877",
   "scopusProxy": "https://scopus-proxy-blond.vercel.app/api/scopus?author_id=57193428877",
+  "youtube": {
+    "channelId": "UC6xuRZFNAyGiPub8VXhaclA",
+    "url": "https://www.youtube.com/jorgeklz"
+  },
   "email": "jorge.parraga@utm.edu.ec",
   "location": {
     "en": "Portoviejo, Ecuador",
