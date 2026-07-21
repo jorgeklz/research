@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
-<link rel="stylesheet" href="assets/style.css?v=54">
+<link rel="stylesheet" href="assets/style.css?v=65">
 </head>
 <body data-page="home" data-root=".">
 
@@ -44,16 +44,31 @@
   <div class="stat-grid" id="stat-grid"></div>
 
   <section style="margin-top:2rem">
-    <div class="sec-title">
-      <h2>Recent publications</h2>
-      <a class="more-link" href="publications.html">All &amp; filters →</a>
+    <div class="cv-tabs" id="home-tabs">
+      <button class="cv-tab on" type="button" data-tab="pubs">Publications</button>
+      <button class="cv-tab" type="button" data-tab="yt">Latest classes</button>
     </div>
-    <div class="orcid-note" id="orcid-note"><span class="dot"></span><span class="txt">Loading publications from ORCID…</span></div>
-    <div class="pubs" id="pub-list"><p class="loading">Loading…</p></div>
-    <div class="pagination" id="pub-pagination" style="display:none">
-      <button id="pag-prev" type="button">← Prev</button>
-      <span class="info" id="pag-info"></span>
-      <button id="pag-next" type="button">Next →</button>
+
+    <div id="home-panel-pubs">
+      <div class="sec-title">
+        <h2>Recent publications</h2>
+        <a class="more-link" href="publications.html">All &amp; filters →</a>
+      </div>
+      <div class="orcid-note" id="orcid-note"><span class="dot"></span><span class="txt">Loading publications from ORCID…</span></div>
+      <div class="pubs" id="pub-list"><p class="loading">Loading…</p></div>
+      <div class="pagination" id="pub-pagination" style="display:none">
+        <button id="pag-prev" type="button">← Prev</button>
+        <span class="info" id="pag-info"></span>
+        <button id="pag-next" type="button">Next →</button>
+      </div>
+    </div>
+
+    <div id="home-panel-yt" hidden>
+      <div class="sec-title">
+        <h2>Latest classes</h2>
+        <a class="more-link" href="https://www.youtube.com/jorgeklz" target="_blank" rel="noopener">YouTube channel →</a>
+      </div>
+      <div class="yt-grid" id="yt-list"><p class="loading">Loading…</p></div>
     </div>
   </section>
 </main>
@@ -65,6 +80,6 @@
   </div>
 </footer>
 
-<script src="assets/app.js?v=54"></script>
+<script src="assets/app.js?v=65"></script>
 </body>
 </html>
