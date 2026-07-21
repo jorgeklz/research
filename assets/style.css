@@ -475,8 +475,14 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .meta a.share-wa svg { color: #25d366; }
 .meta a.share-wa:hover { color: var(--blue-600); }
 .meta a.share-wa:hover svg { color: #1ebe5b; }
-.backlink { font-size: var(--fs-xs); font-weight: 600; color: var(--ink-2); padding: 1.6rem 0 0; display: inline-flex; align-items: center; gap: .3rem; }
-.backlink:hover { color: var(--blue-600); }
+.backlink {
+  font-size: var(--fs-xs); font-weight: 700; color: var(--ink-2);
+  margin-top: 1.6rem; display: inline-flex; align-items: center; gap: .4rem;
+  background: var(--panel); border: 1px solid var(--line-2); border-radius: 100px;
+  padding: .6rem 1.15rem; box-shadow: var(--shadow-sm);
+  transition: all .18s var(--ease);
+}
+.backlink:hover { color: var(--blue-600); border-color: var(--blue); box-shadow: var(--shadow); transform: translateY(-1px); }
 
 .loading { font-size: var(--fs-sm); color: var(--ink-3); padding: 1rem 0; }
 
@@ -690,11 +696,11 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 /* ---------- consistent light-sky hover for interactive elements ---------- */
 .pub .act a:hover, .pub .act button:hover,
 .card .more:hover, .sec-title .more-link:hover,
-.post-links a:hover, .backlink:hover,
+.post-links a:hover,
 .tool-card .topen:hover, .ds-dl:hover, .ds-cite:hover {
   background: var(--sky-1); border-radius: 6px;
 }
-.pub .act a, .pub .act button, .card .more, .sec-title .more-link, .post-links a, .backlink,
+.pub .act a, .pub .act button, .card .more, .sec-title .more-link, .post-links a,
 .tool-card .topen, .ds-dl, .ds-cite { padding: .12rem .3rem; margin: -.12rem -.3rem; border-radius: 6px; }
 .filters button:hover, .pagination button:hover:not(:disabled) { background: var(--sky-1); }
 
