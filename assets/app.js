@@ -103,7 +103,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().trim();
 
-  const VER = "69";
+  const VER = "76";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -494,11 +494,11 @@ body { font-family: 'Times New Roman', serif; color:#000000; }
 </style>
 </head>
 <body>
-<div style="border-bottom:3px solid #2563eb;padding-bottom:14pt;margin-bottom:26pt;">
-  <div style="font-family:Calibri,Arial,sans-serif;font-size:9pt;letter-spacing:2pt;text-transform:uppercase;color:#2563eb;font-weight:bold;margin-bottom:6pt;">${esc(T.pubsExportSub)}</div>
-  <div style="font-family:Calibri,Arial,sans-serif;font-size:22pt;font-weight:bold;color:#0f2748;">${esc(profile.name)}</div>
-  <div style="font-family:Calibri,Arial,sans-serif;font-size:12pt;color:#1d4ed8;font-weight:bold;margin-top:2pt;">${esc(T.pubsExportTitle)}</div>
-  <div style="font-family:Calibri,Arial,sans-serif;font-size:9.5pt;color:#4a5c78;margin-top:8pt;">${esc(T.pubsExportGenerated(dateStr))} · ${sorted.length} ${esc(T.worksTotal)}</div>
+<div style="border-bottom:3px solid #43795f;padding-bottom:14pt;margin-bottom:26pt;">
+  <div style="font-family:Calibri,Arial,sans-serif;font-size:9pt;letter-spacing:2pt;text-transform:uppercase;color:#43795f;font-weight:bold;margin-bottom:6pt;">${esc(T.pubsExportSub)}</div>
+  <div style="font-family:Calibri,Arial,sans-serif;font-size:22pt;font-weight:bold;color:#1c2a24;">${esc(profile.name)}</div>
+  <div style="font-family:Calibri,Arial,sans-serif;font-size:12pt;color:#305744;font-weight:bold;margin-top:2pt;">${esc(T.pubsExportTitle)}</div>
+  <div style="font-family:Calibri,Arial,sans-serif;font-size:9.5pt;color:#45564e;margin-top:8pt;">${esc(T.pubsExportGenerated(dateStr))} · ${sorted.length} ${esc(T.worksTotal)}</div>
 </div>
 ${refsHtml}
 </body>

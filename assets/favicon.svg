@@ -19,12 +19,12 @@
       }
 
       .st3 {
-        fill: #38bdf8;
+        fill: #3f7767;
       }
     </style>
     <linearGradient id="Degradado_sin_nombre" data-name="Degradado sin nombre" x1="-471.02" y1="537.52" x2="-471.02" y2="536.52" gradientTransform="translate(30177 34401) scale(64 -64)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#0f2748"/>
-      <stop offset="1" stop-color="#0b1d38"/>
+      <stop offset="0" stop-color="#18414a"/>
+      <stop offset="1" stop-color="#0e3444"/>
     </linearGradient>
   </defs>
   <rect class="st0" width="64" height="64" rx="16" ry="16"/>

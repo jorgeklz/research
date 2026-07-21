@@ -1,6 +1,6 @@
 /* =============================================================
    Jorge Parraga-Alava — researcher profile
-   Premium minimalist · original blue / white / sky palette · Avenir
+   Premium minimalist · Aberdeen palette (navy / sea green / mint) · Avenir
    Publications live from ORCID · dynamic post generation
    ============================================================= */
 
@@ -8,25 +8,30 @@
   --white: #ffffff;
   --bg: #ffffff;
   --panel: #ffffff;
-  --sky-1: #eef5ff;
-  --sky-2: #e0ecfd;
-  --sky-line: #d6e6fb;
-  /* exactly three blues: title, subtitle, links (hovers reuse these) */
-  --blue: #1e40af;       /* subtitle / secondary accent */
-  --blue-600: #1a3a7a;   /* links */
-  --blue-700: #1b3a94;   /* title */
-  /* accent used on card left borders and small decorations, kept within the trio */
-  --sky: #1e40af;
-  --navy: #0f2748;
-  --navy-2: #0b1d38;
-  --navy-line: #24406a;
-  --navy-ink: #eaf1fb;
-  --navy-ink-2: #9fb6d8;
-  --ink: #11294c;
-  --ink-2: #4a5c78;
-  --ink-3: #8496b3;
-  --line: #e6edf7;
-  --line-2: #d3e0f1;
+  /* Aberdeen palette: deep navy-slate chrome, sea/forest green accent,
+     mint highlight, on a near-white grey body. Variable names kept from
+     the old blue theme so the whole site reskins from this block. */
+  --sky-1: #edf4ef;
+  --sky-2: #dcebe1;
+  --sky-line: #cde2d5;
+  /* three greens: title, subtitle, links (hovers reuse these) */
+  --blue: #43795f;       /* subtitle / secondary accent (sea green) */
+  --blue-600: #38664f;   /* links (deeper green) */
+  --blue-700: #305744;   /* title (darkest green) */
+  /* accent used on card left borders and small decorations */
+  --sky: #43795f;
+  --mint: #8fd3a6;       /* mint highlight: underlines, active markers */
+  --green-900: #21402d;  /* deep forest green: publication/post/card titles, metric values */
+  --navy: #16302a;
+  --navy-2: #0f2820;
+  --navy-line: #2c4a40;
+  --navy-ink: #e9f2ec;
+  --navy-ink-2: #9bb8a9;
+  --ink: #1c2a24;
+  --ink-2: #45564e;
+  --ink-3: #7c8d84;
+  --line: #e5ece8;
+  --line-2: #d5e2db;
 
   /* type scale — one consistent set of sizes for the whole site.
      fs-nav sits one step above fs-base so the menu reads slightly
@@ -48,9 +53,9 @@
   --ease-quick: cubic-bezier(.2, 0, 0, 1);
   --wrap: 940px;
   --radius: 12px;
-  --shadow: 0 1px 1px rgba(15,39,72,.04), 0 3px 8px rgba(15,39,72,.06), 0 24px 46px -16px rgba(15,39,72,.22);
-  --shadow-sm: 0 1px 1px rgba(15,39,72,.03), 0 7px 18px -8px rgba(15,39,72,.11);
-  --shadow-lift: 0 3px 6px rgba(15,39,72,.07), 0 34px 60px -18px rgba(15,39,72,.28);
+  --shadow: 0 1px 1px rgba(16,36,31,.04), 0 3px 8px rgba(16,36,31,.06), 0 24px 46px -16px rgba(16,36,31,.22);
+  --shadow-sm: 0 1px 1px rgba(16,36,31,.03), 0 7px 18px -8px rgba(16,36,31,.11);
+  --shadow-lift: 0 3px 6px rgba(16,36,31,.07), 0 34px 60px -18px rgba(16,36,31,.28);
 }
 
 * { box-sizing: border-box; }
@@ -88,12 +93,12 @@ img, svg, video, iframe, canvas {
   position: sticky; top: 0; z-index: 40;
   background: var(--white);
   border-bottom: 1px solid var(--line);
-  box-shadow: 0 8px 22px -14px rgba(15,39,72,.18);
+  box-shadow: 0 8px 22px -14px rgba(16,36,31,.18);
 }
 /* upper utility strip with academic-profile links (icon+text on desktop,
    icon-only on mobile), on the navy background of the old top bar */
 .topbar-social {
-  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+  background: linear-gradient(115deg, var(--navy) 0%, #1f3a34 55%, #305749 100%);
   border-bottom: 1px solid var(--navy-line);
 }
 .topbar-social-in {
@@ -149,10 +154,10 @@ img, svg, video, iframe, canvas {
 }
 /* target-language flag, line style (no color): ES link → Ecuador, EN link → USA */
 .nav a.lang[hreflang="es"]::before {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 16' fill='none' stroke='%234a5c78' stroke-width='1.3' stroke-linejoin='round'%3E%3Crect x='1' y='1.5' width='22' height='13' rx='1.5'/%3E%3Cline x1='1' y1='8' x2='23' y2='8'/%3E%3Cline x1='1' y1='11.5' x2='23' y2='11.5'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 16' fill='none' stroke='%2345564e' stroke-width='1.3' stroke-linejoin='round'%3E%3Crect x='1' y='1.5' width='22' height='13' rx='1.5'/%3E%3Cline x1='1' y1='8' x2='23' y2='8'/%3E%3Cline x1='1' y1='11.5' x2='23' y2='11.5'/%3E%3C/svg%3E");
 }
 .nav a.lang[hreflang="en"]::before {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 16' fill='none' stroke='%234a5c78' stroke-width='1.2' stroke-linejoin='round'%3E%3Crect x='1' y='1.5' width='22' height='13' rx='1.5'/%3E%3Crect x='1' y='1.5' width='10' height='7'/%3E%3Cline x1='11.5' y1='4.5' x2='23' y2='4.5'/%3E%3Cline x1='1' y1='11.3' x2='23' y2='11.3'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 16' fill='none' stroke='%2345564e' stroke-width='1.2' stroke-linejoin='round'%3E%3Crect x='1' y='1.5' width='22' height='13' rx='1.5'/%3E%3Crect x='1' y='1.5' width='10' height='7'/%3E%3Cline x1='11.5' y1='4.5' x2='23' y2='4.5'/%3E%3Cline x1='1' y1='11.3' x2='23' y2='11.3'/%3E%3C/svg%3E");
 }
 .nav a.lang:hover { border-color: var(--blue); color: var(--blue-600); background: var(--sky-1); }
 
@@ -181,15 +186,16 @@ img, svg, video, iframe, canvas {
 .nav-toggle-bars { display: flex; flex-direction: column; gap: 5px; flex: none; }
 .nav-toggle-bars span {
   display: block; width: 19px; height: 2px; border-radius: 2px;
-  background: var(--ink); transition: transform .28s var(--ease), opacity .18s var(--ease), width .18s var(--ease);
+  background: var(--blue-700); transition: transform .28s var(--ease), opacity .18s var(--ease), width .18s var(--ease);
 }
 .nav-toggle:hover { background: var(--sky-1); }
 .nav-toggle:hover .nav-toggle-bars span { width: 22px; }
 
-/* ---------- Page banner (third strip: navy band with the page title) ---------- */
+/* ---------- Page banner (third strip: teal-green band with the page title,
+   echoing the University of Aberdeen profile hero) ---------- */
 .page-banner {
-  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
-  border-bottom: 1px solid var(--navy-line);
+  background: linear-gradient(115deg, var(--navy) 0%, #1f3a34 55%, #305749 100%);
+  border-bottom: 2px solid var(--mint);
 }
 .page-banner-t {
   margin: 0; padding: 1.15rem 0; color: #fff; font-weight: 700;
@@ -222,7 +228,7 @@ img, svg, video, iframe, canvas {
 .eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--sky); flex: none; }
 h1.title {
   font-weight: 700; font-size: clamp(1.3rem, 2.1vw, 1.6rem); line-height: 1.22;
-  letter-spacing: -.015em; margin: 0 0 .9rem; color: var(--ink); text-wrap: balance;
+  letter-spacing: -.015em; margin: 0 0 .9rem; color: var(--green-900); text-wrap: balance;
 }
 /* .big only constrains the line length of the homepage headline now —
    it no longer renders larger than the h1 on every other page. */
@@ -260,8 +266,8 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .stat-hd svg { width: 13px; height: 13px; flex: none; }
 .stat .l { font-size: var(--fs-2xs); font-weight: 700; letter-spacing: .01em; color: var(--ink-3); line-height: 1.25; text-transform: none; }
 .stat .l .ab { color: var(--blue-600); font-weight: 700; }
-.stat .n { font-weight: 700; font-size: clamp(1.24rem, 2.1vw, 1.55rem); line-height: 1; color: var(--ink); letter-spacing: -.02em; margin-top: auto; }
-.stat .n small { color: var(--blue); font-size: .55em; vertical-align: baseline; font-weight: 700; }
+.stat .n { font-weight: 700; font-size: clamp(1.24rem, 2.1vw, 1.55rem); line-height: 1; color: var(--green-900); letter-spacing: -.02em; margin-top: auto; }
+.stat .n small { color: var(--green-900); font-size: .55em; vertical-align: baseline; font-weight: 700; }
 /* metric contextual tooltip */
 .stat { position: relative; cursor: help; }
 /* no transform here on purpose: a transformed ancestor becomes the
@@ -341,7 +347,7 @@ h1.title em { font-style: normal; color: var(--blue-700); }
   transition: border-color .18s var(--ease), box-shadow .18s var(--ease), transform .18s var(--ease);
 }
 .pub:hover { border-color: var(--line-2); border-left-color: var(--blue-700); box-shadow: var(--shadow-lift); transform: translateY(-2px); }
-.pub h3 { font-weight: 700; font-size: var(--fs-lg); line-height: 1.38; letter-spacing: -.01em; margin: 0 0 .35rem; color: var(--ink); }
+.pub h3 { font-weight: 700; font-size: var(--fs-lg); line-height: 1.38; letter-spacing: -.01em; margin: 0 0 .35rem; color: var(--green-900); }
 .pub h3 a:hover { color: var(--blue-600); }
 .pub .auth { font-size: var(--fs-sm); color: var(--ink-2); margin: 0 0 .2rem; }
 .pub .auth b { color: var(--ink); font-weight: 700; }
@@ -376,7 +382,7 @@ h1.title em { font-style: normal; color: var(--blue-700); }
   font: inherit; font-weight: 600; color: var(--ink); cursor: pointer;
   border: 1px solid var(--line-2); background: var(--panel); border-radius: 7px;
   padding: .32rem 1.6rem .32rem .6rem; appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%231e40af' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%2343795f' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
   background-repeat: no-repeat; background-position: right .5rem center;
 }
 .pagination .goto select:hover { border-color: var(--blue); }
@@ -391,7 +397,7 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 }
 .row:hover { border-color: var(--line-2); border-left-color: var(--blue-700); box-shadow: var(--shadow-lift); transform: translateY(-2px); }
 .row .when { font-size: var(--fs-xs); font-weight: 700; letter-spacing: .03em; color: var(--blue-600); }
-.row .what .t { font-weight: 700; font-size: var(--fs-sm); color: var(--ink); }
+.row .what .t { font-weight: 700; font-size: var(--fs-sm); color: var(--green-900); }
 .row .what .o { font-size: var(--fs-sm); color: var(--ink-2); margin-top: .18rem; }
 .row .what .badge {
   display: inline-block; margin-left: .45rem; font-size: var(--fs-2xs); font-weight: 700;
@@ -416,7 +422,7 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .chip { font-size: var(--fs-2xs); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; border: 1px solid var(--line-2); color: var(--ink-2); padding: .14rem .5rem; border-radius: 6px; }
 .chip.paper { background: var(--navy); border-color: var(--navy); color: #fff; }
 .chip.conference { background: var(--sky-1); border-color: var(--sky-line); color: var(--blue-700); }
-.card h3 { font-weight: 700; font-size: var(--fs-lg); line-height: 1.3; letter-spacing: -.01em; margin: 0 0 .45rem; color: var(--ink); text-wrap: balance; }
+.card h3 { font-weight: 700; font-size: var(--fs-lg); line-height: 1.3; letter-spacing: -.01em; margin: 0 0 .45rem; color: var(--green-900); text-wrap: balance; }
 .card h3 a:hover { color: var(--blue-600); }
 .card p { margin: 0; color: var(--ink-2); font-size: var(--fs-base); max-width: 64ch; line-height: 1.65; }
 .card .more { font-size: var(--fs-xs); font-weight: 700; color: var(--blue-600); margin-top: .8rem; display: inline-flex; align-items: center; gap: .3rem; transition: gap .18s var(--ease); }
@@ -443,7 +449,7 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .post-hero { padding-bottom: 1.6rem; border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
 .post-hero h1 + .meta { margin-top: 1.4rem; }
 .post-hero .meta { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; font-size: var(--fs-xs); color: var(--ink-3); font-weight: 600; margin-bottom: .2rem; }
-.post-hero h1 { font-weight: 700; font-size: clamp(1.35rem, 2.4vw, 1.75rem); line-height: 1.2; letter-spacing: -.01em; margin: 0; max-width: 26ch; text-wrap: balance; }
+.post-hero h1 { font-weight: 700; font-size: clamp(1.35rem, 2.4vw, 1.75rem); line-height: 1.2; letter-spacing: -.01em; margin: 0; max-width: 26ch; text-wrap: balance; color: var(--green-900); }
 /* subtle text link (not a button), in the site blue */
 .read-paper {
   display: inline-flex; align-items: center; gap: .4rem; margin-top: 1rem;
@@ -466,7 +472,7 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 }
 .related .rel:first-child { border-top: none; }
 .related .rel-main { flex: 1; min-width: 0; }
-.related .rel-t { display: block; font-size: var(--fs-sm); font-weight: 600; color: var(--ink); line-height: 1.35; }
+.related .rel-t { display: block; font-size: var(--fs-sm); font-weight: 600; color: var(--green-900); line-height: 1.35; }
 .related .rel-main:hover .rel-t { color: var(--blue-600); }
 .related .rel-m { display: block; font-size: var(--fs-2xs); color: var(--ink-3); margin-top: .25rem; }
 .related .rel-doi {
@@ -508,8 +514,8 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 
 .loading { font-size: var(--fs-sm); color: var(--ink-3); padding: 1rem 0; }
 
-/* ---------- Footer (navy) with social icons ---------- */
-.site-foot { border-top: 1px solid var(--navy-line); margin-top: 1rem; background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%); }
+/* ---------- Footer (teal-green band, matching the top strip and banner) ---------- */
+.site-foot { border-top: 2px solid var(--mint); margin-top: 1rem; background: linear-gradient(115deg, var(--navy) 0%, #1f3a34 55%, #305749 100%); }
 .site-foot-in {
   max-width: var(--wrap); margin: 0 auto; padding: 1.8rem clamp(1.1rem, 3vw, 2rem);
   display: flex; flex-direction: column; align-items: center; text-align: center; gap: .6rem;
@@ -560,7 +566,7 @@ h1.title em { font-style: normal; color: var(--blue-700); }
     background: var(--white);
     border: 1px solid var(--line-2);
     border-radius: 16px;
-    box-shadow: 0 22px 42px -14px rgba(15,39,72,.28), 0 4px 12px rgba(15,39,72,.12);
+    box-shadow: 0 22px 42px -14px rgba(16,36,31,.28), 0 4px 12px rgba(16,36,31,.12);
     padding: 0 .55rem;
     max-height: 0; overflow: hidden; opacity: 0;
     transition: max-height .32s var(--ease), opacity .22s var(--ease), padding .32s var(--ease);
@@ -625,7 +631,7 @@ h1.title em { font-style: normal; color: var(--blue-700); }
   transition: background .12s var(--ease-quick), color .12s var(--ease-quick);
 }
 .cv-tab:hover { background: var(--sky-1); color: var(--blue-600); }
-.cv-tab.on { color: var(--blue); border-bottom-color: var(--blue); }
+.cv-tab.on { color: var(--blue-700); border-bottom: 3px solid var(--mint); }
 
 /* ---------- YouTube "Latest classes" tab (home page) ---------- */
 .yt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: .9rem; }
@@ -666,7 +672,7 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .tool-badge.tool { background: var(--sky-1); border: 1px solid var(--sky-line); color: var(--blue-700); }
 .tool-badge.software { background: var(--navy); color: #fff; }
 .tool-badge.database { background: var(--blue); color: #fff; }
-.tool-card .tt { font-weight: 700; font-size: var(--fs-lg); line-height: 1.3; color: var(--ink); overflow-wrap: anywhere; }
+.tool-card .tt { font-weight: 700; font-size: var(--fs-lg); line-height: 1.3; color: var(--green-900); overflow-wrap: anywhere; }
 .tool-card .tmeta { font-size: var(--fs-2xs); font-weight: 600; letter-spacing: .02em; color: var(--ink-3); }
 .tool-card .td { margin: 0; font-size: var(--fs-sm); color: var(--ink-2); line-height: 1.55; }
 .tool-card .topen {
@@ -722,7 +728,7 @@ h1.title em { font-style: normal; color: var(--blue-700); }
   .ds-used-menu {
     position: fixed; left: .9rem; right: .9rem; bottom: .9rem; top: auto;
     width: auto; max-width: none;
-    box-shadow: 0 -6px 30px rgba(15,39,72,.22), 0 4px 14px rgba(15,39,72,.14);
+    box-shadow: 0 -6px 30px rgba(16,36,31,.22), 0 4px 14px rgba(16,36,31,.14);
   }
   .ds-used-menu a { font-size: var(--fs-sm); }
 }
