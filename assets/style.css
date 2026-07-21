@@ -159,25 +159,32 @@ img, svg, video, iframe, canvas {
 /* active nav item is marked only by the subtle background pill above —
    no colored underline. */
 
-/* ---------- Mobile menu toggle (hamburger, top-right) ---------- */
+/* ---------- Mobile menu toggle (hamburger + "Menú" label, top-right) ---------- */
 /* Pure-CSS toggle: pair with this markup inside .topbar-in, after .brand —
    <input type="checkbox" id="nav-toggle" class="nav-toggle-input" hidden>
-   <label for="nav-toggle" class="nav-toggle" aria-label="Abrir menú"><span></span><span></span><span></span></label>
+   <label for="nav-toggle" class="nav-toggle" aria-label="Abrir menú">
+     <span class="nav-toggle-bars"><span></span><span></span><span></span></span>
+     <span class="nav-toggle-txt">Menú</span>
+   </label>
    ...then the existing <nav class="nav"> as the next sibling. */
 .nav-toggle-input { display: none; }
 .nav-toggle {
   display: none; flex: none; align-items: center; justify-content: center;
-  flex-direction: column; gap: 5px;
-  width: 38px; height: 38px; margin-left: .4rem;
+  flex-direction: row; gap: .4rem;
+  width: auto; height: 38px; margin-left: .4rem; padding: 0 .55rem;
   border-radius: 8px; cursor: pointer;
   transition: background .18s var(--ease);
 }
-.nav-toggle span {
+.nav-toggle-txt {
+  font-size: var(--fs-sm); font-weight: 600; color: var(--ink-2); white-space: nowrap;
+}
+.nav-toggle-bars { display: flex; flex-direction: column; gap: 5px; flex: none; }
+.nav-toggle-bars span {
   display: block; width: 19px; height: 2px; border-radius: 2px;
   background: var(--ink); transition: transform .28s var(--ease), opacity .18s var(--ease), width .18s var(--ease);
 }
 .nav-toggle:hover { background: var(--sky-1); }
-.nav-toggle:hover span { width: 22px; }
+.nav-toggle:hover .nav-toggle-bars span { width: 22px; }
 
 /* ---------- Page banner (third strip: navy band with the page title) ---------- */
 .page-banner {
@@ -538,9 +545,9 @@ h1.title em { font-style: normal; color: var(--blue-700); }
   .nav a.active { border-radius: 10px; }
   .nav a.lang { margin: .3rem 0 .05rem; align-self: stretch; justify-content: center; }
   /* hamburger → close icon */
-  .nav-toggle-input:checked ~ .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .nav-toggle-input:checked ~ .nav-toggle span:nth-child(2) { opacity: 0; width: 0; }
-  .nav-toggle-input:checked ~ .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-toggle-input:checked ~ .nav-toggle .nav-toggle-bars span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle-input:checked ~ .nav-toggle .nav-toggle-bars span:nth-child(2) { opacity: 0; width: 0; }
+  .nav-toggle-input:checked ~ .nav-toggle .nav-toggle-bars span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
   .row { grid-template-columns: 1fr; gap: .25rem; }
   .post-layout { grid-template-columns: 1fr; }
@@ -573,7 +580,7 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 /* comfortable tap targets on touch devices */
 @media (hover: none) and (pointer: coarse) {
   .nav a, .cv-tab, .filters button, .pagination button, .pub .act a, .pub .act button, .socials a { min-height: 40px; display: inline-flex; align-items: center; }
-  .nav-toggle { width: 42px; height: 42px; }
+  .nav-toggle { min-height: 42px; }
   .stat { cursor: pointer; }
 }
 /* never let long titles or DOIs break the layout */
