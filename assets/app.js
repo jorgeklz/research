@@ -1171,7 +1171,7 @@ ${refsHtml}
     const extra = (post.links || []).filter((l) => l.url !== doiURL);
     if (links) links.innerHTML = extra.map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${ICON.external} ${esc(l.label)}</a>`).join("");
     if (post._posts) renderRelated(post._posts, post);
-    const sw = $(".nav a.lang");
+    const sw = $(".lang-top");
     if (sw) { const base = sw.getAttribute("href").split("?")[0]; sw.href = base + location.search; }
   }
 

@@ -100,7 +100,7 @@ img, svg, video, iframe, canvas {
 /* ---------- Top bar: navy social strip + navy main row ---------- */
 .topbar {
   position: sticky; top: 0; z-index: 40;
-  background: linear-gradient(115deg, #11262c 0%, #1a3a44 55%, #265564 100%);
+  background: linear-gradient(115deg, var(--navy) 0%, #1f3a34 55%, #305749 100%);
   border-bottom: 1px solid var(--navy-line);
   box-shadow: 0 8px 22px -14px rgba(16,36,31,.18);
 }
