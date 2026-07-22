@@ -100,14 +100,14 @@ img, svg, video, iframe, canvas {
 /* ---------- Top bar: navy social strip + navy main row ---------- */
 .topbar {
   position: sticky; top: 0; z-index: 40;
-  background: linear-gradient(115deg, #19333e 0%, #19393e 55%, #193e3d 100%);
+  background: linear-gradient(115deg, #11262c 0%, #1a3a44 55%, #265564 100%);
   border-bottom: 1px solid var(--navy-line);
   box-shadow: 0 8px 22px -14px rgba(16,36,31,.18);
 }
 /* upper utility strip with academic-profile links (icon+text on desktop,
    icon-only on mobile), on the navy background of the old top bar */
 .topbar-social {
-  background: linear-gradient(115deg, #19283e 0%, #192e3e 55%, #19333e 100%);
+  background: linear-gradient(115deg, #111d2c 0%, #1a2c44 55%, #264164 100%);
   border-bottom: 1px solid var(--navy-line);
 }
 .topbar-social-in {
@@ -214,7 +214,7 @@ img, svg, video, iframe, canvas {
 /* ---------- Page banner (third strip: teal-green band with the page title,
    echoing the University of Aberdeen profile hero) ---------- */
 .page-banner {
-  background: linear-gradient(115deg, #193e3d 0%, #193e39 55%, #193e34 100%);
+  background: linear-gradient(115deg, #112c29 0%, #1a443f 55%, #26645c 100%);
   border-bottom: 2px solid var(--mint);
 }
 .page-banner-t {
