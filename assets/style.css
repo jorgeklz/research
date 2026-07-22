@@ -791,6 +791,9 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .pub .act a, .pub .act button, .card .more, .sec-title .more-link, .post-links a,
 .tool-card .topen, .ds-dl, .ds-cite { padding: .12rem .3rem; margin: -.12rem -.3rem; border-radius: 6px; }
 .filters button:hover, .pagination button:hover:not(:disabled) { background: var(--sky-1); }
+/* selected filter/tab button must stay dark+white even if :hover gets "stuck"
+   after a tap on touch devices — otherwise it reads white-on-near-white */
+.filters button.on:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
 
 /* ---------- related DOI badge ---------- */
 .related .rel-doi {
