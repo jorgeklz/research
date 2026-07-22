@@ -101,13 +101,13 @@ img, svg, video, iframe, canvas {
 .topbar {
   position: sticky; top: 0; z-index: 40;
   background: linear-gradient(115deg, var(--navy) 0%, #1f3a34 55%, #305749 100%);
-  border-bottom: 1px solid var(--navy-line);
+  border-bottom: 2px solid var(--mint);
   box-shadow: 0 8px 22px -14px rgba(16,36,31,.18);
 }
 /* upper utility strip with academic-profile links (icon+text on desktop,
    icon-only on mobile), on the navy background of the old top bar */
 .topbar-social {
-  background: linear-gradient(115deg, #111d2c 0%, #1a2c44 55%, #264164 100%);
+  background: linear-gradient(115deg, var(--navy-2) 0%, var(--navy) 55%, #1f3a34 100%);
   border-bottom: 1px solid var(--navy-line);
 }
 .topbar-social-in {
@@ -215,7 +215,7 @@ img, svg, video, iframe, canvas {
    echoing the University of Aberdeen profile hero) ---------- */
 .page-banner {
   background: var(--white);
-  border-bottom: 2px solid var(--mint);
+  border-bottom: 1px solid var(--line);
 }
 .page-banner-t {
   margin: 0; padding: .86rem 0; color: var(--green-900); font-weight: 700;
@@ -224,7 +224,7 @@ img, svg, video, iframe, canvas {
 
 /* ---------- Content ---------- */
 .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 clamp(1.1rem, 3vw, 2rem); }
-.content { padding-top: clamp(1.8rem, 4vw, 3rem); padding-bottom: 1.5rem; min-width: 0; }
+.content { padding-top: clamp(1rem, 2.4vw, 1.6rem); padding-bottom: 1.5rem; min-width: 0; }
 
 /* ---------- home hero decoration (abstract data/network motif, no photo) ---------- */
 .hero-wrap { position: relative; }
@@ -785,11 +785,11 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .pub .act a:hover, .pub .act button:hover,
 .card .more:hover, .sec-title .more-link:hover,
 .post-links a:hover,
-.tool-card .topen:hover, .ds-dl:hover, .ds-cite:hover {
+.tool-card .topen:hover, .ds-dl:hover, .ds-cite:hover, .ds-gh:hover, .ds-used-btn:hover {
   background: var(--sky-1); border-radius: 6px;
 }
 .pub .act a, .pub .act button, .card .more, .sec-title .more-link, .post-links a,
-.tool-card .topen, .ds-dl, .ds-cite { padding: .12rem .3rem; margin: -.12rem -.3rem; border-radius: 6px; }
+.tool-card .topen, .ds-dl, .ds-cite, .ds-gh, .ds-used-btn { padding: .12rem .3rem; margin: -.12rem -.3rem; border-radius: 6px; }
 .filters button:hover, .pagination button:hover:not(:disabled) { background: var(--sky-1); }
 /* selected filter/tab button must stay dark+white even if :hover gets "stuck"
    after a tap on touch devices — otherwise it reads white-on-near-white */
