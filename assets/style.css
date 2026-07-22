@@ -214,11 +214,11 @@ img, svg, video, iframe, canvas {
 /* ---------- Page banner (third strip: teal-green band with the page title,
    echoing the University of Aberdeen profile hero) ---------- */
 .page-banner {
-  background: linear-gradient(115deg, #112c29 0%, #1a443f 55%, #26645c 100%);
+  background: var(--white);
   border-bottom: 2px solid var(--mint);
 }
 .page-banner-t {
-  margin: 0; padding: .86rem 0; color: #fff; font-weight: 700;
+  margin: 0; padding: .86rem 0; color: var(--green-900); font-weight: 700;
   font-size: clamp(.95rem, 1.5vw, 1.16rem); letter-spacing: -.015em; text-wrap: balance;
 }
 
