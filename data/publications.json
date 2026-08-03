@@ -20,7 +20,8 @@
         "deep-learning",
         "machine-learning"
       ],
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 0
     },
     {
       "id": "ici2st2025-population",
@@ -41,7 +42,8 @@
         "health",
         "machine-learning"
       ],
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 0
     },
     {
       "id": "iti2026-bibliometric",
@@ -63,7 +65,8 @@
         "software"
       ],
       "pages": "11-22",
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 0
     },
     {
       "id": "iti2026-rust-alzheimer",
@@ -84,7 +87,8 @@
         "machine-learning"
       ],
       "pages": "23-34",
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 0
     },
     {
       "id": "cisti2026-oop",
@@ -103,7 +107,8 @@
         "education",
         "data-mining"
       ],
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 0
     },
     {
       "id": "iwinac2026-hijacking",
@@ -125,15 +130,16 @@
         "computer-vision"
       ],
       "pages": "73-83",
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 0
     },
     {
       "id": "enfoqueute2026-har",
       "doi": "10.29019/enfoqueute.1266",
       "title": "Human Action Recognition Based on Computer Vision: A Comprehensive Review (2020-2025)",
       "authors": [
-        "Jorge Parraga-Alava",
-        "Lenin Cedeño Morales"
+        "Lenin Cedeño Morales",
+        "Jorge Parraga-Alava"
       ],
       "venue": "Enfoque UTE",
       "type": "journal",
@@ -145,7 +151,8 @@
         "deep-learning",
         "review"
       ],
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 0
     },
     {
       "id": "enfoqueute2026-iot-agri",
@@ -165,7 +172,8 @@
         "iot",
         "review"
       ],
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 0
     },
     {
       "id": "cran2026-momst",
@@ -184,7 +192,8 @@
         "clustering",
         "software"
       ],
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 0
     },
     {
       "id": "simpa2026-mstknnclust",
@@ -206,7 +215,8 @@
         "bioinformatics"
       ],
       "pages": "100845",
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 0
     },
     {
       "id": "engreports2025-ct",
@@ -225,7 +235,8 @@
         "education",
         "data-mining"
       ],
-      "citations": 1
+      "citations": 1,
+      "scholarCitations": 2
     },
     {
       "id": "computation2025-dropout",
@@ -248,7 +259,8 @@
         "machine-learning",
         "review"
       ],
-      "citations": 3
+      "citations": 3,
+      "scholarCitations": 10
     },
     {
       "id": "artiis2025-solar",
@@ -269,7 +281,8 @@
         "machine-learning"
       ],
       "pages": "335-350",
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 0
     },
     {
       "id": "smc2025-helmet",
@@ -291,7 +304,8 @@
         "safety"
       ],
       "pages": "4900-4905",
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 0
     },
     {
       "id": "etcm2025-aphids",
@@ -313,7 +327,8 @@
         "deep-learning",
         "agriculture"
       ],
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 0
     },
     {
       "id": "jpr2025-mentalhealth",
@@ -335,7 +350,8 @@
         "health"
       ],
       "pages": "112150",
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 4
     },
     {
       "id": "csl2024-twitter",
@@ -356,7 +372,8 @@
         "nlp",
         "social-media"
       ],
-      "citations": 9
+      "citations": 9,
+      "scholarCitations": 17
     },
     {
       "id": "heliyon2024-housing-fuzzy",
@@ -379,7 +396,8 @@
         "recommender-systems"
       ],
       "pages": "e26444",
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 19
     },
     {
       "id": "hbet2024-applab",
@@ -400,7 +418,8 @@
       "topics": [
         "education"
       ],
-      "citations": 3
+      "citations": 3,
+      "scholarCitations": 4
     },
     {
       "id": "enfoqueute2024-ann",
@@ -419,7 +438,8 @@
         "deep-learning",
         "review"
       ],
-      "citations": 7
+      "citations": 7,
+      "scholarCitations": 12
     },
     {
       "id": "rte2024-law",
@@ -440,7 +460,8 @@
         "text-mining",
         "law"
       ],
-      "citations": 1
+      "citations": 1,
+      "scholarCitations": 5
     },
     {
       "id": "etcm2024-power",
@@ -460,7 +481,8 @@
         "machine-learning",
         "optimization"
       ],
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 0
     },
     {
       "id": "icedeg2024-stress",
@@ -482,7 +504,8 @@
         "review",
         "machine-learning"
       ],
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 9
     },
     {
       "id": "stsa2023-ga-emergency",
@@ -504,7 +527,8 @@
         "optimization",
         "nlp"
       ],
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 1
     },
     {
       "id": "dib2023-cbcovid",
@@ -528,7 +552,8 @@
         "health",
         "dataset"
       ],
-      "citations": 7
+      "citations": 7,
+      "scholarCitations": 9
     },
     {
       "id": "cienciamatria2023-busuu",
@@ -546,7 +571,8 @@
       "topics": [
         "education"
       ],
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 0
     },
     {
       "id": "episteme2022-web20",
@@ -564,7 +590,8 @@
       "topics": [
         "education"
       ],
-      "citations": 0
+      "citations": 0,
+      "scholarCitations": 0
     },
     {
       "id": "lnns2022-elderly",
@@ -584,7 +611,8 @@
         "health",
         "big-data"
       ],
-      "citations": 1
+      "citations": 1,
+      "scholarCitations": 1
     },
     {
       "id": "data2021-lelephid",
@@ -609,7 +637,8 @@
         "computer-vision",
         "dataset"
       ],
-      "citations": 20
+      "citations": 20,
+      "scholarCitations": 23
     },
     {
       "id": "sst2021-social-emergency",
@@ -630,7 +659,8 @@
         "social-media",
         "nlp"
       ],
-      "citations": 2
+      "citations": 2,
+      "scholarCitations": 3
     },
     {
       "id": "dib2020-power",
@@ -652,7 +682,8 @@
         "energy",
         "dataset"
       ],
-      "citations": 3
+      "citations": 3,
+      "scholarCitations": 10
     },
     {
       "id": "jbcb2020-gene",
@@ -670,7 +701,8 @@
         "clustering",
         "bioinformatics"
       ],
-      "citations": 1
+      "citations": 1,
+      "scholarCitations": 1
     },
     {
       "id": "ijms2020-tgct",
@@ -688,7 +720,8 @@
         "health",
         "bioinformatics"
       ],
-      "citations": 14
+      "citations": 14,
+      "scholarCitations": 15
     },
     {
       "id": "dib2019-rocole",
@@ -709,7 +742,8 @@
         "computer-vision",
         "dataset"
       ],
-      "citations": 96
+      "citations": 96,
+      "scholarCitations": 163
     }
   ]
 }
