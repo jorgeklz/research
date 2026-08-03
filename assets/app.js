@@ -64,7 +64,9 @@
       orcidFail: "Could not reach ORCID. Showing the curated list instead.",
       dlAll: "Download all publications (Word)", pubsExportTitle: "Publications", pubsExportSub: "APA 7th Edition",
       pubsExportGenerated: (d) => `Generated on ${d}`, dlPreparing: "Preparing…", contact: "Contact",
-      ytEmpty: "No videos yet.", ytFail: "Could not load the videos. Watch them on YouTube instead."
+      ytEmpty: "No videos yet.", ytFail: "Could not load the videos. Watch them on YouTube instead.",
+      citedByScholar: (n) => `${n} ${n === 1 ? "citation" : "citations"} (Scholar)`,
+      citedByOpenAlex: (n) => `${n} ${n === 1 ? "citation" : "citations"} (OpenAlex)`
     },
     es: {
       journal: "Revista", conference: "Congreso", software: "Software", book: "Capítulo de libro",
@@ -93,7 +95,9 @@
       orcidFail: "No se pudo conectar con ORCID. Se muestra la lista curada.",
       dlAll: "Descargar todas las publicaciones (Word)", pubsExportTitle: "Publicaciones", pubsExportSub: "Edición APA 7",
       pubsExportGenerated: (d) => `Generado el ${d}`, dlPreparing: "Preparando…", contact: "Contacto",
-      ytEmpty: "Aún no hay videos.", ytFail: "No se pudieron cargar los videos. Míralos directo en YouTube."
+      ytEmpty: "Aún no hay videos.", ytFail: "No se pudieron cargar los videos. Míralos directo en YouTube.",
+      citedByScholar: (n) => `${n} ${n === 1 ? "cita" : "citas"} (Scholar)`,
+      citedByOpenAlex: (n) => `${n} ${n === 1 ? "cita" : "citas"} (OpenAlex)`
     }
   }[LANG];
 
@@ -103,7 +107,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().trim();
 
-  const VER = "82";
+  const VER = "84";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -383,6 +387,8 @@
       <div class="meta">
         <span class="yrchip">${p.year || "—"} · ${esc(typeLabel(p.type))}</span>
         ${p.venue ? `<span class="ven">${esc(p.venue)}${p.pages ? ", " + esc(p.pages) : ""}</span>` : ""}
+        ${typeof p.scholarCitations === "number" ? `<span class="cites-chip cites-scholar">${ICON.mCite} ${T.citedByScholar(p.scholarCitations)}</span>` : ""}
+        ${typeof p.citations === "number" ? `<span class="cites-chip">${ICON.mCite} ${T.citedByOpenAlex(p.citations)}</span>` : ""}
       </div>
       <div class="act">
         ${doiURL ? `<a href="${doiURL}" target="_blank" rel="noopener">${ICON.external} ${T.doi}</a>` : ""}
@@ -578,13 +584,19 @@ ${refsHtml}
         all = merged;
         if (note) note.querySelector(".txt").textContent = `${merged.length} ${T.worksTotal} · ${T.syncedOrcid}`;
         apply();
-        // metrics computed strictly over the publications shown on the site — render
-        // once with the real citation counts, so nothing intermediate ever flickers by
-        if ($("#stat-grid")) {
-          fetchOpenAlexMap()
-            .then((map) => renderMetrics(computeMetrics(shownMetricList(merged, map))))
-            .catch(() => renderMetrics(computeMetrics(shownMetricList(merged, null))));
-        }
+        // OpenAlex citation counts: merged into each item (shown as a chip on every
+        // card) and also fed into the home page's aggregate metrics stat grid.
+        fetchOpenAlexMap()
+          .then((map) => {
+            merged.forEach((p) => {
+              const doi = normDoi(p.doi);
+              const oa = doi && map.get(doi);
+              if (oa) p.citations = oa.cites;
+            });
+            apply();
+            if ($("#stat-grid")) renderMetrics(computeMetrics(shownMetricList(merged, map)));
+          })
+          .catch(() => { if ($("#stat-grid")) renderMetrics(computeMetrics(shownMetricList(merged, null))); });
       })
       .catch(() => { if (note) note.querySelector(".txt").textContent = T.orcidFail; });
   }

@@ -379,6 +379,17 @@ h1.title em { font-style: normal; color: var(--blue-700); }
   padding: .1rem .5rem; border-radius: 4px;
 }
 .pub .ven { font-size: var(--fs-sm); color: var(--ink-3); font-style: italic; }
+.pub .cites-chip {
+  display: inline-flex; align-items: center; gap: .3rem;
+  font-size: var(--fs-2xs); font-weight: 700; letter-spacing: .02em;
+  color: var(--blue); background: transparent; border: 1px solid var(--line-2);
+  padding: .1rem .5rem; border-radius: 4px;
+}
+.pub .cites-chip svg { width: 11px; height: 11px; flex: none; }
+/* Scholar chip: filled mint tint so it reads as the primary citation source */
+.pub .cites-chip.cites-scholar {
+  color: var(--blue-700); background: var(--sky-1); border-color: var(--sky-line);
+}
 .pub .act { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: .35rem; font-size: var(--fs-xs); font-weight: 600; }
 .pub .act a, .pub .act button {
   background: none; border: none; padding: 0; font: inherit; font-weight: 600; cursor: pointer;
