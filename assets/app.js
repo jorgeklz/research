@@ -107,7 +107,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().trim();
 
-  const VER = "85";
+  const VER = "86";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -1194,6 +1194,13 @@ ${refsHtml}
     if (id) {
       const post = posts.items.find((p) => p.id === id);
       if (post) { post._posts = posts; return renderPost(profile, pubs, post); }
+    }
+    if (doi) {
+      // If a curated post already exists for this DOI, always show it — even when the
+      // page was reached through a ?doi= link instead of ?id=. This keeps hand-written
+      // posts from being replaced by the generic auto-generated fallback.
+      const curatedByDoi = posts.items.find((p) => p.doi && normDoi(p.doi) === normDoi(doi));
+      if (curatedByDoi) { curatedByDoi._posts = posts; return renderPost(profile, pubs, curatedByDoi); }
     }
     if (doi) {
       // Dynamic generation from metadata. Works for ANY publication with a DOI,
