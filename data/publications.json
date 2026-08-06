@@ -1,50 +1,6 @@
 {
-  "updated": "2026-07-13",
+  "updated": "2026-08-06",
   "items": [
-    {
-      "id": "etcm2025-braintumor",
-      "doi": "10.1109/ETCM67548.2025.11304324",
-      "title": "Brain Tumor Detection in Magnetic Resonance Imaging Using Class Balancing Techniques and Pretrained Neural Networks",
-      "authors": [
-        "Jesus Zambrano",
-        "Jorge Parraga-Alava",
-        "Carlos Silva-Villafuerte"
-      ],
-      "venue": "ETCM 2025, Quito, Ecuador",
-      "type": "conference",
-      "year": 2025,
-      "openAccess": false,
-      "postId": "post-etcm2025-braintumor",
-      "topics": [
-        "health",
-        "deep-learning",
-        "machine-learning"
-      ],
-      "citations": 0,
-      "scholarCitations": 0
-    },
-    {
-      "id": "ici2st2025-population",
-      "doi": "10.1109/ICI2ST68465.2025.00018",
-      "title": "Impact of social factors on population growth in Ecuador, based on time-series algorithms",
-      "authors": [
-        "Winter Meza-Jiménez",
-        "Jorge Herrera-Tapia",
-        "Jorge Parraga-Alava",
-        "Iván García-Santillán"
-      ],
-      "venue": "ICI2ST 2025, Quito, Ecuador",
-      "type": "conference",
-      "year": 2025,
-      "openAccess": false,
-      "postId": "post-ici2st2025-population",
-      "topics": [
-        "health",
-        "machine-learning"
-      ],
-      "citations": 0,
-      "scholarCitations": 0
-    },
     {
       "id": "iti2026-bibliometric",
       "doi": "10.53591/iti.v18i25.3172",
@@ -69,24 +25,26 @@
       "scholarCitations": 0
     },
     {
-      "id": "iti2026-rust-alzheimer",
-      "doi": "10.53591/iti.v18i25.3232",
-      "title": "Modelo basado en Rust en la detección eficiente de Alzheimer en imágenes de resonancia magnética cerebral",
+      "id": "bdr2026-emergency-labelling",
+      "doi": "10.1016/j.bdr.2026.100630",
+      "title": "A graph-based semi-supervised approach for automatic text corpus emergency events labelling in X (Twitter)",
       "authors": [
-        "Joel García Arteaga",
-        "Jorge Parraga-Alava"
+        "Jorge Parraga-Alava",
+        "Jorge Rodas-Silva",
+        "Jandry Franco",
+        "María-José Vélez"
       ],
-      "venue": "Investigación, Tecnología e Innovación, Vol. 18 No. 25 (2026)",
+      "venue": "Big Data Research",
       "type": "journal",
       "year": 2026,
-      "openAccess": true,
-      "postId": "post-iti2026-rust-alzheimer",
+      "openAccess": false,
+      "postId": "post-bdr2026-emergency-labelling",
       "topics": [
-        "health",
-        "deep-learning",
+        "nlp",
+        "social-media",
         "machine-learning"
       ],
-      "pages": "23-34",
+      "pages": "100630",
       "citations": 0,
       "scholarCitations": 0
     },
@@ -176,6 +134,28 @@
       "scholarCitations": 0
     },
     {
+      "id": "iti2026-rust-alzheimer",
+      "doi": "10.53591/iti.v18i25.3232",
+      "title": "Modelo basado en Rust en la detección eficiente de Alzheimer en imágenes de resonancia magnética cerebral",
+      "authors": [
+        "Joel García Arteaga",
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "Investigación, Tecnología e Innovación, Vol. 18 No. 25 (2026)",
+      "type": "journal",
+      "year": 2026,
+      "openAccess": true,
+      "postId": "post-iti2026-rust-alzheimer",
+      "topics": [
+        "health",
+        "deep-learning",
+        "machine-learning"
+      ],
+      "pages": "23-34",
+      "citations": 0,
+      "scholarCitations": 0
+    },
+    {
       "id": "cran2026-momst",
       "doi": "10.32614/cran.package.momst",
       "title": "momst: Multi-Objective Minimum Spanning Tree via NSGA-II with Local Search",
@@ -219,113 +199,23 @@
       "scholarCitations": 0
     },
     {
-      "id": "engreports2025-ct",
-      "doi": "10.1002/eng2.70203",
-      "title": "Computational Thinking and Academic Performance Across Different Instructional Modalities in Pre-University Courses: A Data-Driven Study",
+      "id": "etcm2025-braintumor",
+      "doi": "10.1109/ETCM67548.2025.11304324",
+      "title": "Brain Tumor Detection in Magnetic Resonance Imaging Using Class Balancing Techniques and Pretrained Neural Networks",
       "authors": [
+        "Jesus Zambrano",
         "Jorge Parraga-Alava",
-        "Jorge Rodas-Silva"
+        "Carlos Silva-Villafuerte"
       ],
-      "venue": "Engineering Reports",
-      "type": "journal",
-      "year": 2025,
-      "openAccess": false,
-      "postId": "post-engreports2025-ct",
-      "topics": [
-        "education",
-        "data-mining"
-      ],
-      "citations": 1,
-      "scholarCitations": 2
-    },
-    {
-      "id": "computation2025-dropout",
-      "doi": "10.3390/computation13080198",
-      "title": "Factors, Prediction, Explainability, and Simulating University Dropout Through Machine Learning: A Systematic Review, 2012-2024",
-      "authors": [
-        "Mauricio Quimiz-Moreira",
-        "Rosa Delgadillo",
-        "Jorge Parraga-Alava",
-        "Nelson Maculan",
-        "David Mauricio"
-      ],
-      "venue": "Computation, 13(8), 198",
-      "type": "journal",
-      "year": 2025,
-      "openAccess": true,
-      "postId": "post-computation2025-dropout",
-      "topics": [
-        "education",
-        "machine-learning",
-        "review"
-      ],
-      "citations": 3,
-      "scholarCitations": 10
-    },
-    {
-      "id": "artiis2025-solar",
-      "doi": "10.1007/978-3-031-83210-9_25",
-      "title": "Predicting Solar Radiation in Manabi: A Machine Learning Approach",
-      "authors": [
-        "Daniel Arteaga-Subiaga",
-        "Jorge Parraga-Alava",
-        "Lucía Rivadeneira"
-      ],
-      "venue": "ARTIIS 2024, Santiago de Chile, Chile (CCIS)",
+      "venue": "ETCM 2025, Quito, Ecuador",
       "type": "conference",
       "year": 2025,
       "openAccess": false,
-      "postId": "post-artiis2025-solar",
+      "postId": "post-etcm2025-braintumor",
       "topics": [
-        "energy",
+        "health",
+        "deep-learning",
         "machine-learning"
-      ],
-      "pages": "335-350",
-      "citations": 0,
-      "scholarCitations": 0
-    },
-    {
-      "id": "smc2025-helmet",
-      "doi": "10.1109/smc58881.2025.11343106",
-      "title": "Enhanced Helmet Detection using a CNN and Genetic Algorithm for Personal Protective Equipment Compliance",
-      "authors": [
-        "Jorge Rodas-Silva",
-        "Jorge Parraga-Alava"
-      ],
-      "venue": "SMC 2025, Vienna, Austria (IEEE)",
-      "type": "conference",
-      "year": 2025,
-      "openAccess": false,
-      "postId": "post-smc2025-helmet",
-      "topics": [
-        "computer-vision",
-        "deep-learning",
-        "optimization",
-        "safety"
-      ],
-      "pages": "4900-4905",
-      "citations": 0,
-      "scholarCitations": 0
-    },
-    {
-      "id": "etcm2025-aphids",
-      "doi": "10.1109/ETCM67548.2025.11304406",
-      "title": "Deep Learning for Aphids Detection: A Comparative CNNs Study on Lemon Leaves Images",
-      "authors": [
-        "Jorge Parraga-Alava",
-        "Jorge Rodas-Silva",
-        "Joseph Chávez Reyes",
-        "Gema Bravo Navarrete"
-      ],
-      "venue": "ETCM 2025, Quito, Ecuador (IEEE)",
-      "type": "conference",
-      "year": 2025,
-      "openAccess": false,
-      "postId": "post-etcm2025-aphids",
-      "topics": [
-        "computer-vision",
-        "deep-learning",
-        "agriculture"
       ],
       "citations": 0,
       "scholarCitations": 0
@@ -354,6 +244,140 @@
       "scholarCitations": 4
     },
     {
+      "id": "engreports2025-ct",
+      "doi": "10.1002/eng2.70203",
+      "title": "Computational Thinking and Academic Performance Across Different Instructional Modalities in Pre-University Courses: A Data-Driven Study",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Jorge Rodas-Silva"
+      ],
+      "venue": "Engineering Reports",
+      "type": "journal",
+      "year": 2025,
+      "openAccess": false,
+      "postId": "post-engreports2025-ct",
+      "topics": [
+        "education",
+        "data-mining"
+      ],
+      "citations": 1,
+      "scholarCitations": 2
+    },
+    {
+      "id": "etcm2025-aphids",
+      "doi": "10.1109/ETCM67548.2025.11304406",
+      "title": "Deep Learning for Aphids Detection: A Comparative CNNs Study on Lemon Leaves Images",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Jorge Rodas-Silva",
+        "Joseph Chávez Reyes",
+        "Gema Bravo Navarrete"
+      ],
+      "venue": "ETCM 2025, Quito, Ecuador (IEEE)",
+      "type": "conference",
+      "year": 2025,
+      "openAccess": false,
+      "postId": "post-etcm2025-aphids",
+      "topics": [
+        "computer-vision",
+        "deep-learning",
+        "agriculture"
+      ],
+      "citations": 0,
+      "scholarCitations": 0
+    },
+    {
+      "id": "smc2025-helmet",
+      "doi": "10.1109/smc58881.2025.11343106",
+      "title": "Enhanced Helmet Detection using a CNN and Genetic Algorithm for Personal Protective Equipment Compliance",
+      "authors": [
+        "Jorge Rodas-Silva",
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "SMC 2025, Vienna, Austria (IEEE)",
+      "type": "conference",
+      "year": 2025,
+      "openAccess": false,
+      "postId": "post-smc2025-helmet",
+      "topics": [
+        "computer-vision",
+        "deep-learning",
+        "optimization",
+        "safety"
+      ],
+      "pages": "4900-4905",
+      "citations": 0,
+      "scholarCitations": 0
+    },
+    {
+      "id": "computation2025-dropout",
+      "doi": "10.3390/computation13080198",
+      "title": "Factors, Prediction, Explainability, and Simulating University Dropout Through Machine Learning: A Systematic Review, 2012-2024",
+      "authors": [
+        "Mauricio Quimiz-Moreira",
+        "Rosa Delgadillo",
+        "Jorge Parraga-Alava",
+        "Nelson Maculan",
+        "David Mauricio"
+      ],
+      "venue": "Computation, 13(8), 198",
+      "type": "journal",
+      "year": 2025,
+      "openAccess": true,
+      "postId": "post-computation2025-dropout",
+      "topics": [
+        "education",
+        "machine-learning",
+        "review"
+      ],
+      "citations": 3,
+      "scholarCitations": 10
+    },
+    {
+      "id": "ici2st2025-population",
+      "doi": "10.1109/ICI2ST68465.2025.00018",
+      "title": "Impact of social factors on population growth in Ecuador, based on time-series algorithms",
+      "authors": [
+        "Winter Meza-Jiménez",
+        "Jorge Herrera-Tapia",
+        "Jorge Parraga-Alava",
+        "Iván García-Santillán"
+      ],
+      "venue": "ICI2ST 2025, Quito, Ecuador",
+      "type": "conference",
+      "year": 2025,
+      "openAccess": false,
+      "postId": "post-ici2st2025-population",
+      "topics": [
+        "health",
+        "machine-learning"
+      ],
+      "citations": 0,
+      "scholarCitations": 0
+    },
+    {
+      "id": "artiis2025-solar",
+      "doi": "10.1007/978-3-031-83210-9_25",
+      "title": "Predicting Solar Radiation in Manabi: A Machine Learning Approach",
+      "authors": [
+        "Daniel Arteaga-Subiaga",
+        "Jorge Parraga-Alava",
+        "Lucía Rivadeneira"
+      ],
+      "venue": "ARTIIS 2024, Santiago de Chile, Chile (CCIS)",
+      "type": "conference",
+      "year": 2025,
+      "openAccess": false,
+      "postId": "post-artiis2025-solar",
+      "topics": [
+        "energy",
+        "machine-learning"
+      ],
+      "pages": "335-350",
+      "citations": 0,
+      "scholarCitations": 0
+    },
+    {
       "id": "csl2024-twitter",
       "doi": "10.1016/j.csl.2023.101579",
       "title": "An effective approach for identifying keywords as high-quality filters to get emergency-implicated Twitter Spanish data",
@@ -374,30 +398,6 @@
       ],
       "citations": 9,
       "scholarCitations": 17
-    },
-    {
-      "id": "heliyon2024-housing-fuzzy",
-      "doi": "10.1016/j.heliyon.2024.e26444",
-      "title": "Housing fuzzy recommender system: A systematic literature review",
-      "authors": [
-        "Emanuel G. Muñoz",
-        "Jorge Parraga-Alava",
-        "Jaime Meza",
-        "Jonathan Josue Proaño Morales",
-        "Sebastian Ventura"
-      ],
-      "venue": "Heliyon, 10(5), e26444",
-      "type": "journal",
-      "year": 2024,
-      "openAccess": true,
-      "postId": "post-heliyon2024-housing-fuzzy",
-      "topics": [
-        "review",
-        "recommender-systems"
-      ],
-      "pages": "e26444",
-      "citations": 0,
-      "scholarCitations": 19
     },
     {
       "id": "hbet2024-applab",
@@ -483,6 +483,30 @@
       ],
       "citations": 0,
       "scholarCitations": 0
+    },
+    {
+      "id": "heliyon2024-housing-fuzzy",
+      "doi": "10.1016/j.heliyon.2024.e26444",
+      "title": "Housing fuzzy recommender system: A systematic literature review",
+      "authors": [
+        "Emanuel G. Muñoz",
+        "Jorge Parraga-Alava",
+        "Jaime Meza",
+        "Jonathan Josue Proaño Morales",
+        "Sebastian Ventura"
+      ],
+      "venue": "Heliyon, 10(5), e26444",
+      "type": "journal",
+      "year": 2024,
+      "openAccess": true,
+      "postId": "post-heliyon2024-housing-fuzzy",
+      "topics": [
+        "review",
+        "recommender-systems"
+      ],
+      "pages": "e26444",
+      "citations": 0,
+      "scholarCitations": 19
     },
     {
       "id": "icedeg2024-stress",

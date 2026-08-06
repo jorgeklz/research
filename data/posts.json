@@ -680,6 +680,36 @@
           "url": "https://doi.org/10.1155/2024/4918351"
         }
       ]
+    },
+    {
+      "id": "post-bdr2026-emergency-labelling",
+      "date": "2026-08-06",
+      "type": "paper",
+      "doi": "10.1016/j.bdr.2026.100630",
+      "auto": false,
+      "topics": [
+        "nlp",
+        "social-media",
+        "machine-learning"
+      ],
+      "title": {
+        "en": "Teaching a computer to flag emergency tweets on its own",
+        "es": "Enseñar a una computadora a detectar tuits de emergencia por su cuenta"
+      },
+      "summary": {
+        "en": "With Jorge Rodas-Silva, Jandry Franco and María-José Vélez, a semi-supervised method that auto-labels Spanish posts on X (Twitter) as emergency or not, cutting the manual tagging work.",
+        "es": "Con Jorge Rodas-Silva, Jandry Franco y María-José Vélez, un método semisupervisado que etiqueta solo las publicaciones en español de X (Twitter) como emergencia o no, y reduce el trabajo manual de anotación."
+      },
+      "body": {
+        "en": "When a flood, an earthquake, or a fire happens, some of the fastest updates come from ordinary people posting on X (Twitter). For a computer to learn to spot those emergency messages on its own, someone first has to read thousands of posts by hand and tag each one as \"emergency\" or \"not an emergency.\" That tagging, called **labelling**, is slow, costly, and tedious, and social media makes it worse with its slang and typos.\n\nWith Jorge Rodas-Silva, Jandry Franco, and María-José Vélez, we built a method that does most of that tagging automatically. It is **semi-supervised**, meaning it starts from a small batch of posts a person has already labelled and then stretches those labels to many more unlabelled posts. To decide which posts should share a label, it measures how similar their wording is and links each post to its closest neighbours using the **kNN** algorithm (k-nearest neighbours, a simple rule that groups an item with the handful most like it).\n\nThe pipeline runs in five phases: collect Spanish posts through the X (Twitter) search API, clean them, measure how similar they are, spread the labels across similar posts, and produce the final emergency / non-emergency tags. The payoff is practical: annotation teams spend far less time and money preparing crisis datasets, which makes it easier to build tools that surface real emergencies from the flood of everyday chatter.",
+        "es": "Cuando ocurre una inundación, un terremoto o un incendio, algunas de las noticias más rápidas llegan de gente común que publica en X (Twitter). Para que una computadora aprenda a reconocer esos mensajes de emergencia por su cuenta, primero alguien tiene que leer miles de publicaciones a mano y marcar cada una como «emergencia» o «no emergencia». Ese marcado, o **etiquetado**, es lento, costoso y agotador, y las redes lo complican con su jerga y sus errores de tipeo.\n\nJunto con Jorge Rodas-Silva, Jandry Franco y María-José Vélez, construimos un método que hace gran parte de ese etiquetado solo. Es **semisupervisado**: parte de un grupo pequeño de publicaciones que una persona ya etiquetó y luego extiende esas etiquetas a muchas más sin marcar. Para decidir qué publicaciones deben compartir etiqueta, mide qué tan parecido es su texto y conecta cada una con las más cercanas mediante el algoritmo **kNN** (k vecinos más cercanos, una regla sencilla que agrupa un elemento con los pocos que más se le parecen).\n\nEl proceso tiene cinco fases: recolectar publicaciones en español con la API de búsqueda de X (Twitter), limpiarlas, medir la similitud entre ellas, propagar las etiquetas entre las parecidas y entregar las etiquetas finales de emergencia o no emergencia. La ganancia es concreta: los equipos de anotación gastan mucho menos tiempo y dinero preparando datos sobre crisis, lo que facilita crear herramientas que detecten emergencias reales entre el ruido cotidiano."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.bdr.2026.100630"
+        }
+      ]
     }
   ]
 }
