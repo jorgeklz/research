@@ -107,7 +107,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().trim();
 
-  const VER = "84";
+  const VER = "85";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -1196,23 +1196,48 @@ ${refsHtml}
       if (post) { post._posts = posts; return renderPost(profile, pubs, post); }
     }
     if (doi) {
-      // dynamic generation from metadata
+      // Dynamic generation from metadata. Works for ANY publication with a DOI,
+      // including brand-new ORCID works that are not in the local curated JSON and
+      // not yet indexed by Crossref. We gather metadata from every source we can
+      // (local JSON → live ORCID → Crossref → OpenAlex) and ALWAYS build a post,
+      // so the page never renders blank.
       const local = pubs.items.find((p) => normDoi(p.doi) === normDoi(doi));
       hero.innerHTML = `<div class="meta"><span class="chip paper">${T.paper}</span></div><h1>${esc(local ? local.title : "")}</h1>`;
       body.innerHTML = `<p class="loading">${T.generating}</p>`;
-      crossref(doi).then((m) => {
-        if (local) { m.title = local.title || m.title; if (local.authors && local.authors.length) m.authors = local.authors; if (local.venue) m.venue = local.venue; }
-        m.topics = local ? local.topics : [];
-        const finish = (meta) => {
-          const post = buildPost(meta, doi);
-          post._ref = { title: meta.title, authors: meta.authors, venue: meta.venue, year: meta.year };
-          renderPost(profile, pubs, post);
+
+      const finish = (meta) => {
+        const post = buildPost(meta, doi);
+        post._ref = { title: meta.title, authors: meta.authors, venue: meta.venue, year: meta.year };
+        renderPost(profile, pubs, post);
+      };
+
+      // If the DOI isn't in the local JSON, look it up in the live ORCID list so we
+      // always have a real title/authors/venue/year even when Crossref has nothing.
+      const orcidP = local
+        ? Promise.resolve(local)
+        : fetchLivePubs(pubs).then((list) => list.find((p) => normDoi(p.doi) === normDoi(doi)) || null).catch(() => null);
+
+      Promise.all([crossref(doi).catch(() => null), orcidP]).then(([cr, orc]) => {
+        const base = local || orc || null;
+        // nothing anywhere about this DOI → genuine not-found
+        if (!base && !cr) { hero.innerHTML = `<h1>${T.notFound}</h1>`; body.innerHTML = ""; return; }
+        // merge fields: prefer curated/ORCID metadata, fall back to Crossref
+        const meta = {
+          title: (base && base.title) || (cr && cr.title) || "",
+          authors: (base && base.authors && base.authors.length ? base.authors : (cr && cr.authors)) || [],
+          venue: (base && base.venue) || (cr && cr.venue) || "",
+          year: (base && base.year) || (cr && cr.year) || null,
+          type: (cr && cr.type && cr.type !== "other") ? cr.type : ((base && base.type) || "journal"),
+          openAccess: (cr && cr.openAccess) || (base && base.openAccess) || false,
+          topics: (base && base.topics) || [],
+          abstract: (cr && cr.abstract) || ""
         };
-        if (m.abstract) { finish(m); }
-        else { openAlexAbstract(doi).then((abs) => { m.abstract = abs; finish(m); }); }
+        if (meta.abstract) finish(meta);
+        else openAlexAbstract(doi).then((abs) => { meta.abstract = abs; finish(meta); }).catch(() => finish(meta));
       }).catch(() => {
-        if (local) { const post = buildPost({ title: local.title, authors: local.authors, venue: local.venue, year: local.year, abstract: "", topics: local.topics }, doi); renderPost(profile, pubs, post); }
-        else hero.innerHTML = `<h1>${T.notFound}</h1>`, body.innerHTML = "";
+        // last resort: build from whatever local/ORCID metadata we managed to get
+        if (local) finish({ title: local.title, authors: local.authors, venue: local.venue, year: local.year, type: local.type, openAccess: local.openAccess, topics: local.topics, abstract: "" });
+        else { hero.innerHTML = `<h1>${T.notFound}</h1>`; body.innerHTML = ""; }
       });
       return;
     }
