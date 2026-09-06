@@ -344,18 +344,27 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 }
 @media (max-width: 860px) { .stat-advanced-grid { grid-template-columns: repeat(2, 1fr); } }
 
-/* Contextual tooltip */
+/* Contextual tooltip — absolute-positioned relative to each .stat card */
 .stat .tip {
-  position: fixed; z-index: 200;
+  position: absolute; z-index: 200;
+  bottom: calc(100% + 7px);
+  left: 50%; transform: translateX(-50%);
   width: max-content; max-width: min(78vw, 240px);
   background: var(--ink); color: #fff; font-size: var(--fs-xs); font-weight: 500; line-height: 1.4;
   padding: .55rem .7rem; border-radius: 9px; box-shadow: var(--shadow);
-  opacity: 0; visibility: hidden; transition: opacity .18s var(--ease); pointer-events: none;
+  opacity: 0; visibility: hidden;
+  transition: opacity .18s var(--ease), visibility .18s var(--ease);
+  pointer-events: none;
+  white-space: normal;
 }
-.stat.open .tip { opacity: 1; visibility: visible; }
-@media (hover: hover) and (pointer: fine) {
-  .stat:hover .tip, .stat:focus .tip, .stat:focus-within .tip { opacity: 1; visibility: visible; }
+/* Small arrow pointing down */
+.stat .tip::after {
+  content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+  border: 5px solid transparent; border-top-color: var(--ink);
 }
+.stat.open .tip,
+.stat:hover .tip,
+.stat:focus-within .tip { opacity: 1; visibility: visible; }
 
 /* ---------- Trajectory Chart Card ---------- */
 .metrics-chart-card {
@@ -376,6 +385,11 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .leg-dot { width: 9px; height: 9px; border-radius: 2px; flex: none; }
 .leg-pubs .leg-dot { background: var(--blue); }
 .leg-cites .leg-dot { background: var(--mint); }
+.leg-dash {
+  width: 16px; height: 2px; flex: none; border-radius: 1px;
+  background: repeating-linear-gradient(to right, var(--blue) 0, var(--blue) 4px, transparent 4px, transparent 7px);
+  opacity: .65;
+}
 
 .chart-body { position: relative; width: 100%; min-height: 140px; }
 .chart-loading { font-size: var(--fs-xs); color: var(--ink-3); padding: 2rem 0; text-align: center; }
@@ -388,10 +402,15 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .chart-group:hover .cbar-pubs, .chart-group:focus .cbar-pubs { fill: var(--blue-700); opacity: 1; }
 .chart-group:hover .cbar-cites, .chart-group:focus .cbar-cites { fill: #48a66d; opacity: 1; }
 .chart-yr-txt { fill: var(--ink-3); font-size: 11px; font-weight: 600; font-family: var(--font); }
+.chart-axis-txt { fill: var(--ink-3); font-size: 10px; font-weight: 600; font-family: var(--font); }
+.chart-trend-line {
+  stroke: var(--blue); stroke-width: 1.5; stroke-dasharray: 5 3; opacity: .55;
+  stroke-linecap: round;
+}
 
 .chart-tooltip {
   position: absolute; pointer-events: none; opacity: 0;
-  transform: translate(-50%, -100%);
+  transform: translateX(-50%);
   background: var(--ink); color: #fff; padding: .5rem .75rem; border-radius: 8px;
   font-size: var(--fs-xs); box-shadow: var(--shadow); z-index: 100;
   transition: opacity .15s var(--ease); white-space: nowrap;

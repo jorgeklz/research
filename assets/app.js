@@ -896,27 +896,9 @@ ${refsHtml}
   }[LANG];
 
   function fitTip(stat) {
-    const tip = stat.querySelector(".tip"); if (!tip) return;
-    const margin = 10, gap = 8;
-    const sr = stat.getBoundingClientRect();
-    const tipW = tip.offsetWidth, tipH = tip.offsetHeight;
-
-    const header = $(".topbar");
-    const grid = stat.closest("#stat-grid, #stat-hero-grid") || stat.parentElement;
-    const prev = grid && grid.previousElementSibling;
-    const headerLimit = header ? header.getBoundingClientRect().bottom : 0;
-    const prevLimit = prev ? prev.getBoundingClientRect().bottom : 0;
-    const topLimit = Math.max(headerLimit, prevLimit);
-
-    let top = sr.top - gap - tipH;
-    if (top < topLimit + margin) top = sr.bottom + gap;
-
-    let left = sr.left + sr.width / 2 - tipW / 2;
-    if (left < margin) left = margin;
-    else if (left + tipW > window.innerWidth - margin) left = window.innerWidth - margin - tipW;
-
-    tip.style.top = `${Math.round(top)}px`;
-    tip.style.left = `${Math.round(left)}px`;
+    // CSS position:absolute handles placement — just toggle class
+    $$(".stat.open").forEach((o) => { if (o !== stat) o.classList.remove("open"); });
+    stat.classList.add("open");
   }
 
   function animateCountUp(el, targetVal, k) {
@@ -964,8 +946,8 @@ ${refsHtml}
     const maxPubs = Math.max(...yearly.map((d) => d.pubs), 1);
     const maxCites = Math.max(...yearly.map((d) => d.cites), 1);
 
-    const W = 680, H = 170;
-    const padL = 34, padR = 24, padT = 20, padB = 32;
+    const W = 680, H = 185;
+    const padL = 36, padR = 16, padT = 18, padB = 30;
     const plotW = W - padL - padR;
     const plotH = H - padT - padB;
 
@@ -973,10 +955,36 @@ ${refsHtml}
     const colW = plotW / n;
     const barW = Math.max(7, Math.min(16, (colW - 12) / 2));
 
-    const gridLines = [0.33, 0.66, 1.0].map((frac) => {
-      const y = padT + plotH * (1 - frac);
-      return `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${(W - padR).toFixed(1)}" y2="${y.toFixed(1)}" stroke="var(--line)" stroke-dasharray="3 3" stroke-width="1"/>`;
+    // Y-axis grid lines & labels (based on publications scale)
+    const yTicks = [0, Math.round(maxPubs * 0.33), Math.round(maxPubs * 0.66), maxPubs];
+    const uniqueTicks = [...new Set(yTicks)];
+    const gridLines = uniqueTicks.map((val) => {
+      const frac = val / maxPubs;
+      const y = (padT + plotH * (1 - frac)).toFixed(1);
+      const label = val;
+      return [
+        `<line x1="${padL}" y1="${y}" x2="${(W - padR).toFixed(1)}" y2="${y}" stroke="var(--line)" stroke-dasharray="3 3" stroke-width="1"/>`,
+        `<text class="chart-axis-txt" x="${(padL - 4).toFixed(1)}" y="${y}" text-anchor="end" dominant-baseline="middle">${label}</text>`
+      ].join("");
     }).join("");
+
+    // Trend line for publications (linear regression)
+    const xs = yearly.map((_, i) => padL + i * colW + colW / 2);
+    const ys_pubs = yearly.map((d) => padT + plotH - Math.max(4, (d.pubs / maxPubs) * plotH));
+    // We use the bar tops (centre of bar) for trend
+    const ys_raw = yearly.map((d) => padT + plotH - (d.pubs / maxPubs) * plotH);
+    const sumX = xs.reduce((a, v) => a + v, 0);
+    const sumY = ys_raw.reduce((a, v) => a + v, 0);
+    const sumXY = xs.reduce((a, v, i) => a + v * ys_raw[i], 0);
+    const sumXX = xs.reduce((a, v) => a + v * v, 0);
+    const nn = xs.length;
+    const slope = (nn * sumXY - sumX * sumY) / (nn * sumXX - sumX * sumX);
+    const intercept = (sumY - slope * sumX) / nn;
+    const trendX1 = xs[0];
+    const trendX2 = xs[xs.length - 1];
+    const trendY1 = Math.min(padT + plotH, Math.max(padT, slope * trendX1 + intercept));
+    const trendY2 = Math.min(padT + plotH, Math.max(padT, slope * trendX2 + intercept));
+    const trendLine = `<line class="chart-trend-line" x1="${trendX1.toFixed(1)}" y1="${trendY1.toFixed(1)}" x2="${trendX2.toFixed(1)}" y2="${trendY2.toFixed(1)}"/>`;
 
     const colsHtml = yearly.map((d, i) => {
       const cx = padL + i * colW + colW / 2;
@@ -1003,6 +1011,7 @@ ${refsHtml}
       <div class="chart-svg-wrap">
         <svg viewBox="0 0 ${W} ${H}" class="metrics-svg" preserveAspectRatio="xMidYMid meet">
           <g class="chart-grid">${gridLines}</g>
+          <g class="chart-trend">${trendLine}</g>
           <g class="chart-cols">${colsHtml}</g>
         </svg>
         <div class="chart-tooltip" id="chart-tooltip" role="tooltip"></div>
@@ -1024,12 +1033,19 @@ ${refsHtml}
           <div class="tip-row"><span class="dot-c"></span>${cites} ${LANG === "es" ? (cites === "1" ? "cita" : "citas") : (cites === "1" ? "citation" : "citations")}</div>
         `;
         tip.classList.add("visible");
-        const wrapRect = wrap.getBoundingClientRect();
+        // Position relative to the chart-svg-wrap container
+        const svgWrap = wrap.querySelector(".chart-svg-wrap");
+        const wrapRect = svgWrap ? svgWrap.getBoundingClientRect() : wrap.getBoundingClientRect();
         const gRect = g.getBoundingClientRect();
+        const tipW = tip.offsetWidth || 160;
+        const tipH = tip.offsetHeight || 60;
         let left = (gRect.left + gRect.width / 2) - wrapRect.left;
-        let top = gRect.top - wrapRect.top - 10;
-        if (left < 70) left = 70;
-        if (left > wrapRect.width - 70) left = wrapRect.width - 70;
+        let top = gRect.top - wrapRect.top - tipH - 6;
+        // Clamp horizontally
+        if (left - tipW / 2 < 4) left = tipW / 2 + 4;
+        if (left + tipW / 2 > wrapRect.width - 4) left = wrapRect.width - tipW / 2 - 4;
+        // If above top of wrap, flip below bar
+        if (top < 2) top = (gRect.bottom - wrapRect.top) + 6;
         tip.style.left = `${Math.round(left)}px`;
         tip.style.top = `${Math.round(top)}px`;
       }
@@ -1072,16 +1088,24 @@ ${refsHtml}
         $$(".stat.open").forEach((o) => { if (o !== s) o.classList.remove("open"); });
         fitTip(s);
       });
+      s.addEventListener("mouseleave", () => {
+        s.classList.remove("open");
+      });
       s.addEventListener("focus", () => {
         $$(".stat.open").forEach((o) => { if (o !== s) o.classList.remove("open"); });
         fitTip(s);
       });
+      s.addEventListener("blur", () => {
+        s.classList.remove("open");
+      });
       s.addEventListener("click", (e) => {
         e.stopPropagation();
-        const willOpen = !s.classList.contains("open");
-        $$(".stat.open").forEach((o) => { if (o !== s) o.classList.remove("open"); });
-        fitTip(s);
-        s.classList.toggle("open", willOpen);
+        if (s.classList.contains("open")) {
+          s.classList.remove("open");
+        } else {
+          $$(".stat.open").forEach((o) => { if (o !== s) o.classList.remove("open"); });
+          fitTip(s);
+        }
       });
     });
 
