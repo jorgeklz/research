@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg?v=4">
-<link rel="stylesheet" href="../assets/style.css?v=93">
+<link rel="stylesheet" href="../assets/style.css?v=94">
 </head>
 <body data-page="home" data-root="..">
 
@@ -43,7 +43,49 @@
     </div>
   </div>
 
-  <div class="stat-grid" id="stat-grid"></div>
+  <section class="metrics-section" aria-label="Métricas de investigación">
+    <div class="stat-hero-grid" id="stat-hero-grid"></div>
+
+    <div class="stat-actions">
+      <button type="button" class="stat-toggle-btn" id="stat-toggle-btn" aria-expanded="false">
+        <span class="btn-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        <span class="btn-txt">Ver métricas bibliométricas avanzadas</span>
+        <span class="btn-badge">8 más</span>
+      </button>
+    </div>
+
+    <div class="stat-advanced-wrap" id="stat-advanced-wrap" hidden>
+      <div class="stat-grid stat-advanced-grid" id="stat-grid"></div>
+    </div>
+
+    <div class="metrics-chart-card" id="metrics-chart-card">
+      <div class="chart-header">
+        <div class="chart-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span class="chart-t">Trayectoria científica (2018–2026)</span>
+        </div>
+        <div class="chart-legend">
+          <span class="leg-item leg-pubs"><span class="leg-dot"></span><span class="leg-l">Publicaciones</span></span>
+          <span class="leg-item leg-cites"><span class="leg-dot"></span><span class="leg-l">Citas</span></span>
+        </div>
+      </div>
+      <div class="chart-body" id="metrics-chart-body">
+        <div class="chart-loading">Cargando datos de trayectoria…</div>
+      </div>
+    </div>
+
+    <div class="metrics-footer">
+      <span class="sync-status">
+        <span class="pulse-dot"></span>
+        <span id="metrics-sync-txt">Calculado en vivo vía OpenAlex y ORCID</span>
+      </span>
+      <span class="source-links">
+        <a href="https://scholar.google.com/citations?user=d_kH4-oAAAAJ" target="_blank" rel="noopener" class="src-link">Google Scholar ↗</a>
+        <a href="https://www.scopus.com/authid/detail.uri?authorId=57193428877" target="_blank" rel="noopener" class="src-link">Scopus ↗</a>
+        <a href="https://orcid.org/0000-0001-8558-9122" target="_blank" rel="noopener" class="src-link">ORCID ↗</a>
+      </span>
+    </div>
+  </section>
 
   <section style="margin-top:2rem">
     <div class="filters" id="home-tabs">
@@ -84,6 +126,6 @@
   </div>
 </footer>
 
-<script src="../assets/app.js?v=88"></script>
+<script src="../assets/app.js?v=94"></script>
 </body>
 </html>
