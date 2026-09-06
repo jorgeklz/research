@@ -66,7 +66,20 @@
       pubsExportGenerated: (d) => `Generated on ${d}`, dlPreparing: "Preparing…", contact: "Contact",
       ytEmpty: "No videos yet.", ytFail: "Could not load the videos. Watch them on YouTube instead.",
       citedByScholar: (n) => `${n} ${n === 1 ? "citation" : "citations"} (Scholar)`,
-      citedByOpenAlex: (n) => `${n} ${n === 1 ? "citation" : "citations"} (OpenAlex)`
+      citedByOpenAlex: (n) => `${n} ${n === 1 ? "citation" : "citations"} (OpenAlex)`,
+      advMetricsShow: "Show advanced bibliometrics",
+      advMetricsHide: "Hide advanced bibliometrics",
+      advMetricsBadge: "8 more",
+      sortLabel: "Sort by:",
+      sortRecent: "Newest first",
+      sortCites: "Most cited",
+      sortTitle: "Title (A–Z)",
+      summaryCount: (shown, total, cites) => `Showing ${shown} of ${total} publications · ${cites} citations`,
+      liveSyncText: "Calculated live via OpenAlex & ORCID",
+      chartTitle: "Scientific trajectory (2018–2026)",
+      chartPubs: "Publications",
+      chartCites: "Citations",
+      chartOa: "Open Access"
     },
     es: {
       journal: "Revista", conference: "Congreso", software: "Software", book: "Capítulo de libro",
@@ -97,7 +110,20 @@
       pubsExportGenerated: (d) => `Generado el ${d}`, dlPreparing: "Preparando…", contact: "Contacto",
       ytEmpty: "Aún no hay videos.", ytFail: "No se pudieron cargar los videos. Míralos directo en YouTube.",
       citedByScholar: (n) => `${n} ${n === 1 ? "cita" : "citas"} (Scholar)`,
-      citedByOpenAlex: (n) => `${n} ${n === 1 ? "cita" : "citas"} (OpenAlex)`
+      citedByOpenAlex: (n) => `${n} ${n === 1 ? "cita" : "citas"} (OpenAlex)`,
+      advMetricsShow: "Ver métricas bibliométricas avanzadas",
+      advMetricsHide: "Ocultar métricas avanzadas",
+      advMetricsBadge: "8 más",
+      sortLabel: "Ordenar por:",
+      sortRecent: "Más recientes",
+      sortCites: "Más citadas",
+      sortTitle: "Título (A–Z)",
+      summaryCount: (shown, total, cites) => `Mostrando ${shown} de ${total} publicaciones · ${cites} citas`,
+      liveSyncText: "Calculado en vivo vía OpenAlex y ORCID",
+      chartTitle: "Trayectoria científica (2018–2026)",
+      chartPubs: "Publicaciones",
+      chartCites: "Citas",
+      chartOa: "Acceso Abierto"
     }
   }[LANG];
 
@@ -107,7 +133,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().trim();
 
-  const VER = "86";
+  const VER = "94";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -145,13 +171,17 @@
     mPub: svg('<path d="M4 4h9l3 3v13H4z"/><path d="M13 4v3h3"/><line x1="7" y1="12" x2="13" y2="12"/><line x1="7" y1="16" x2="12" y2="16"/>'),
     mCite: svg('<path d="M7 7H4v5h3v5l3-3V7zM17 7h-3v5h3v5l3-3V7z"/>'),
     mH: svg('<line x1="4" y1="20" x2="20" y2="20"/><rect x="5" y="12" width="3.5" height="8"/><rect x="10.5" y="7" width="3.5" height="13"/><rect x="16" y="14" width="3.5" height="6"/>'),
+    mOa: svg('<rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/><circle cx="12" cy="15.5" r="1.3"/>'),
     mCpp: svg('<line x1="7" y1="18" x2="17" y2="6"/><circle cx="7.5" cy="7.5" r="1.6"/><circle cx="16.5" cy="16.5" r="1.6"/>'),
     mI10: svg('<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.4"/><circle cx="12" cy="12" r="0.6" fill="currentColor"/>'),
     mG: svg('<circle cx="12" cy="12" r="8"/><path d="M15.5 9.5A4 4 0 1 0 16 14h-3"/>'),
     mM: svg('<polyline points="4 16 10 10 13 13 20 6"/><polyline points="15 6 20 6 20 11"/>'),
     mAuth: svg('<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 6a3 3 0 0 1 0 6"/><path d="M17 14.5a5.5 5.5 0 0 1 3.5 5.5"/>'),
     mFirst: svg('<polygon points="12 3 14.5 9 21 9.5 16 13.7 17.6 20 12 16.5 6.4 20 8 13.7 3 9.5 9.5 9"/>'),
-    mCited: svg('<circle cx="12" cy="12" r="9"/><polyline points="8 12.5 11 15.5 16 9"/>')
+    mIntl: svg('<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14.5 14.5 0 0 1 0 18"/><path d="M12 3a14.5 14.5 0 0 0 0 18"/>'),
+    mCited: svg('<circle cx="12" cy="12" r="9"/><polyline points="8 12.5 11 15.5 16 9"/>'),
+    mChart: svg('<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>'),
+    chevronDown: svg('<path d="m6 9 6 6 6-6"/>', 13)
   };
   function socialIcon(label) {
     const k = label.toLowerCase();
@@ -381,14 +411,24 @@
     // only offer an explanatory post for curated ones or 2024+ publications
     const postHref = curated ? `${POST_PAGE}?id=${encodeURIComponent(p.postId)}`
       : (p.doi && (p.year || 0) >= 2024 ? `${POST_PAGE}?doi=${encodeURIComponent(p.doi)}` : null);
+    const qBadge = p.quartile ? `<span class="badge-quartile badge-${esc(p.quartile.toLowerCase())}">${esc(p.quartile)}</span>` : "";
+    const oaBadge = p.openAccess ? `<span class="badge-oa">${ICON.oa} ${T.openAccess}</span>` : "";
+    const openAlexUrl = p.doi ? `https://openalex.org/works?filter=doi:${encodeURIComponent(normDoi(p.doi))}` : null;
+    const citesChip = typeof p.citations === "number"
+      ? (openAlexUrl
+          ? `<a class="cites-chip" href="${openAlexUrl}" target="_blank" rel="noopener" title="${LANG === 'es' ? 'Ver en OpenAlex' : 'View on OpenAlex'}">${ICON.mCite} ${T.citedByOpenAlex(p.citations)} ↗</a>`
+          : `<span class="cites-chip">${ICON.mCite} ${T.citedByOpenAlex(p.citations)}</span>`)
+      : "";
     el.innerHTML = `
       <h3>${doiURL ? `<a href="${doiURL}" target="_blank" rel="noopener">` : ""}${esc(p.title)}${doiURL ? "</a>" : ""}</h3>
       ${p.authors && p.authors.length ? `<p class="auth">${boldSelf(p.authors)}</p>` : ""}
       <div class="meta">
         <span class="yrchip">${p.year || "—"} · ${esc(typeLabel(p.type))}</span>
+        ${qBadge}
+        ${oaBadge}
         ${p.venue ? `<span class="ven">${esc(p.venue)}${p.pages ? ", " + esc(p.pages) : ""}</span>` : ""}
         ${typeof p.scholarCitations === "number" ? `<span class="cites-chip cites-scholar">${ICON.mCite} ${T.citedByScholar(p.scholarCitations)}</span>` : ""}
-        ${typeof p.citations === "number" ? `<span class="cites-chip">${ICON.mCite} ${T.citedByOpenAlex(p.citations)}</span>` : ""}
+        ${citesChip}
       </div>
       <div class="act">
         ${doiURL ? `<a href="${doiURL}" target="_blank" rel="noopener">${ICON.external} ${T.doi}</a>` : ""}
@@ -522,14 +562,33 @@ ${refsHtml}
     const list = $("#pub-list"), fw = $("#pub-filters"), byId = indexPosts(posts);
     const pag = $("#pub-pagination"), info = $("#pag-info");
     const prev = $("#pag-prev"), next = $("#pag-next"), note = $("#orcid-note");
+    const sortSelect = $("#pub-sort-select"), sumEl = $("#pub-summary");
 
-    let all = [], filtered = [], type = "all", page = 0;
+    let all = [], filtered = [], type = "all", sort = "recent", page = 0;
 
     const dlBtn = $("#dl-pubs");
     if (dlBtn) dlBtn.addEventListener("click", () => exportPublicationsWord(profile, all, dlBtn));
 
+    if (sortSelect) {
+      sortSelect.addEventListener("change", (e) => {
+        sort = e.target.value;
+        apply();
+      });
+    }
+
     function apply() {
-      filtered = type === "all" ? all : all.filter((p) => p.type === type);
+      filtered = type === "all" ? [...all] : all.filter((p) => p.type === type);
+      if (sort === "cites") {
+        filtered.sort((a, b) => (b.citations || 0) - (a.citations || 0) || (b.year || 0) - (a.year || 0));
+      } else if (sort === "title") {
+        filtered.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
+      } else {
+        filtered.sort((a, b) => (b.year || 0) - (a.year || 0) || (b.citations || 0) - (a.citations || 0));
+      }
+      if (sumEl) {
+        const sumCites = filtered.reduce((acc, p) => acc + (p.citations || 0), 0);
+        sumEl.innerHTML = `<span class="sum-badge">${esc(T.summaryCount(filtered.length, all.length, sumCites))}</span>`;
+      }
       page = 0; render();
     }
     function render() {
@@ -711,31 +770,39 @@ ${refsHtml}
   }
 
   // ---------- bibliometrics computed from the full ORCID publication set ----------
-  const METRIC_ICON = { pubs: ICON.mPub, cites: ICON.mCite, h: ICON.mH, cpp: ICON.mCpp,
-    i10: ICON.mI10, g: ICON.mG, m: ICON.mM, app: ICON.mAuth, first: ICON.mFirst, cited: ICON.mCited };
+  const METRIC_ICON = {
+    pubs: ICON.mPub, cites: ICON.mCite, h: ICON.mH, oa: ICON.mOa,
+    cpp: ICON.mCpp, i10: ICON.mI10, g: ICON.mG, m: ICON.mM,
+    app: ICON.mAuth, first: ICON.mFirst, intl: ICON.mIntl, cited: ICON.mCited
+  };
+
   const METRICS = {
     en: [
-      { k: "pubs", label: "Publications", abbr: "P" },
-      { k: "cites", label: "Citations", abbr: "C" },
-      { k: "h", label: "h-index", abbr: "h" },
+      { k: "pubs", label: "Publications", abbr: "P", hero: true },
+      { k: "cites", label: "Citations", abbr: "C", hero: true },
+      { k: "h", label: "h-index", abbr: "h", hero: true },
+      { k: "oa", label: "Open Access", abbr: "OA", hero: true },
       { k: "cpp", label: "Citations per publication", abbr: "C/P" },
       { k: "i10", label: "i10-index", abbr: "i10" },
       { k: "g", label: "g-index", abbr: "g" },
       { k: "m", label: "m-index", abbr: "m" },
       { k: "app", label: "Authors per publication", abbr: "A/P" },
       { k: "first", label: "First-author share", abbr: "1A" },
+      { k: "intl", label: "International collaboration", abbr: "Intl" },
       { k: "cited", label: "Cited publications", abbr: "≥1 cit" }
     ],
     es: [
-      { k: "pubs", label: "Publicaciones", abbr: "P" },
-      { k: "cites", label: "Citas", abbr: "C" },
-      { k: "h", label: "Índice h", abbr: "h" },
+      { k: "pubs", label: "Publicaciones", abbr: "P", hero: true },
+      { k: "cites", label: "Citas", abbr: "C", hero: true },
+      { k: "h", label: "Índice h", abbr: "h", hero: true },
+      { k: "oa", label: "Acceso Abierto", abbr: "OA", hero: true },
       { k: "cpp", label: "Citas por publicación", abbr: "C/P" },
       { k: "i10", label: "Índice i10", abbr: "i10" },
       { k: "g", label: "Índice g", abbr: "g" },
       { k: "m", label: "Índice m", abbr: "m" },
       { k: "app", label: "Autores por publicación", abbr: "A/P" },
       { k: "first", label: "Como primer autor", abbr: "1A" },
+      { k: "intl", label: "Colaboración internacional", abbr: "Intl" },
       { k: "cited", label: "Con al menos 1 cita", abbr: "≥1 cit" }
     ]
   }[LANG];
@@ -758,66 +825,91 @@ ${refsHtml}
     const wa = list.filter((x) => x.hasAuthorInfo);
     const first = wa.length ? Math.round(100 * wa.filter((x) => x.first).length / wa.length) : null;
     const cited = Math.round(100 * list.filter((x) => (x.citations || 0) >= 1).length / n);
-    return { pubs: n, cites, h, i10, g, m, cpp, app, first, cited };
+
+    // Open access share
+    const oaCount = list.filter((x) => x.isOa).length;
+    const oa = Math.round(100 * oaCount / n);
+
+    // International collaboration: coauthors from countries outside Ecuador (EC)
+    const withInst = list.filter((x) => x.countries && x.countries.length > 0);
+    const intlPubs = withInst.filter((x) => x.countries.some((c) => c !== "EC")).length;
+    const intl = withInst.length ? Math.round(100 * intlPubs / withInst.length) : null;
+
+    const distinctCountries = new Set();
+    list.forEach((x) => (x.countries || []).forEach((c) => { if (c && c !== "EC") distinctCountries.add(c); }));
+    const intlCountries = distinctCountries.size;
+
+    // Yearly breakdown for interactive chart (2018 to current year)
+    const currYr = new Date().getFullYear();
+    const minYr = 2018;
+    const byYr = {};
+    for (let y = minYr; y <= currYr; y++) byYr[y] = { year: y, pubs: 0, cites: 0, oa: 0 };
+    list.forEach((x) => {
+      if (x.year && x.year >= minYr && x.year <= currYr) {
+        byYr[x.year].pubs += 1;
+        byYr[x.year].cites += (x.citations || 0);
+        if (x.isOa) byYr[x.year].oa += 1;
+      }
+    });
+    const yearly = Object.values(byYr).sort((a, b) => a.year - b.year);
+
+    return { pubs: n, cites, h, oa, cpp, i10, g, m, app, first, intl, intlCountries, cited, yearly };
   }
 
   function fmtMetric(k, v) {
     if (v == null) return "—";
     if (k === "cpp" || k === "app") return v.toFixed(1);
     if (k === "m") return v.toFixed(2);
-    if (k === "first" || k === "cited") return v + "<small>%</small>";
-    return String(v);
+    if (k === "oa" || k === "first" || k === "cited" || k === "intl") return v + "<small>%</small>";
+    return typeof v === "number" ? v.toLocaleString() : String(v);
   }
 
   const METRIC_DESC = {
     en: {
-      pubs: "Total number of publications shown on this site.",
-      cites: "Total citations received across those publications.",
+      pubs: "Total number of publications shown on this site (synced live with ORCID).",
+      cites: "Total citations received across those publications according to OpenAlex.",
       h: "h-index: h publications with at least h citations each.",
+      oa: "Share of publications freely accessible under Open Access licenses.",
       cpp: "Average citations per publication (total citations divided by publications).",
       i10: "i10-index: number of publications with at least 10 citations.",
       g: "g-index: the largest g such that the top g publications together gather at least g² citations.",
       m: "m-index: the h-index divided by the number of years since the first publication.",
       app: "Average number of authors per publication.",
       first: "Share of publications where he appears as the first author.",
+      intl: "Share of publications coauthored with researchers outside Ecuador.",
       cited: "Share of publications with at least one citation."
     },
     es: {
-      pubs: "Número total de publicaciones mostradas en este sitio.",
-      cites: "Total de citas recibidas por esas publicaciones.",
+      pubs: "Número total de publicaciones mostradas en este sitio (sincronizado con ORCID).",
+      cites: "Total de citas recibidas por esas publicaciones según OpenAlex.",
       h: "Índice h: h publicaciones con al menos h citas cada una.",
+      oa: "Porcentaje de publicaciones disponibles en acceso abierto sin barreras de pago.",
       cpp: "Promedio de citas por publicación (citas totales dividido entre publicaciones).",
       i10: "Índice i10: número de publicaciones con al menos 10 citas.",
       g: "Índice g: el mayor g tal que las g mejores publicaciones reúnen al menos g² citas.",
       m: "Índice m: el índice h dividido entre los años transcurridos desde la primera publicación.",
       app: "Número promedio de autores por publicación.",
       first: "Porcentaje de publicaciones donde figura como primer autor.",
+      intl: "Porcentaje de publicaciones en coautoría con investigadores internacionales (fuera de Ecuador).",
       cited: "Porcentaje de publicaciones con al menos una cita."
     }
   }[LANG];
 
-  // Positions a metric's tooltip bubble with real viewport pixels right before
-  // it's shown (mouseenter/focus/click). The bubble is `position: fixed` (see
-  // style.css), so this is the only thing that places it — no CSS transform,
-  // no percentages, nothing that can drift out of sync or end up painted
-  // behind the sticky header or another pill.
   function fitTip(stat) {
     const tip = stat.querySelector(".tip"); if (!tip) return;
     const margin = 10, gap = 8;
     const sr = stat.getBoundingClientRect();
     const tipW = tip.offsetWidth, tipH = tip.offsetHeight;
 
-    // don't place it above anything it would cover: the sticky header, or
-    // whatever content sits right before the stats grid (e.g. the intro text)
     const header = $(".topbar");
-    const grid = stat.closest("#stat-grid") || stat.parentElement;
+    const grid = stat.closest("#stat-grid, #stat-hero-grid") || stat.parentElement;
     const prev = grid && grid.previousElementSibling;
     const headerLimit = header ? header.getBoundingClientRect().bottom : 0;
     const prevLimit = prev ? prev.getBoundingClientRect().bottom : 0;
     const topLimit = Math.max(headerLimit, prevLimit);
 
     let top = sr.top - gap - tipH;
-    if (top < topLimit + margin) top = sr.bottom + gap; // no room above: show it below instead
+    if (top < topLimit + margin) top = sr.bottom + gap;
 
     let left = sr.left + sr.width / 2 - tipW / 2;
     if (left < margin) left = margin;
@@ -826,43 +918,216 @@ ${refsHtml}
     tip.style.top = `${Math.round(top)}px`;
     tip.style.left = `${Math.round(left)}px`;
   }
+
+  function animateCountUp(el, targetVal, k) {
+    if (!el || targetVal == null) return;
+    if (typeof targetVal !== "number" || isNaN(targetVal)) {
+      el.innerHTML = fmtMetric(k, targetVal);
+      return;
+    }
+    const isPercent = (k === "oa" || k === "first" || k === "cited" || k === "intl");
+    const isDecimal = (k === "cpp" || k === "app" || k === "m");
+    const decimals = k === "m" ? 2 : 1;
+    const duration = 800;
+    const startTime = performance.now();
+
+    function frame(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = targetVal * eased;
+      if (progress >= 1) {
+        el.innerHTML = fmtMetric(k, targetVal);
+      } else {
+        if (isPercent) {
+          el.innerHTML = Math.round(current) + "<small>%</small>";
+        } else if (isDecimal) {
+          el.innerHTML = current.toFixed(decimals);
+        } else {
+          el.innerHTML = Math.round(current).toLocaleString();
+        }
+        requestAnimationFrame(frame);
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ---------- interactive SVG trajectory chart (2018-2026) ---------- */
+  function renderYearlyChart(yearly) {
+    const wrap = $("#metrics-chart-body");
+    if (!wrap) return;
+    if (!yearly || !yearly.length) {
+      wrap.innerHTML = `<p class="loading">${T.empty}</p>`;
+      return;
+    }
+
+    const maxPubs = Math.max(...yearly.map((d) => d.pubs), 1);
+    const maxCites = Math.max(...yearly.map((d) => d.cites), 1);
+
+    const W = 680, H = 170;
+    const padL = 34, padR = 24, padT = 20, padB = 32;
+    const plotW = W - padL - padR;
+    const plotH = H - padT - padB;
+
+    const n = yearly.length;
+    const colW = plotW / n;
+    const barW = Math.max(7, Math.min(16, (colW - 12) / 2));
+
+    const gridLines = [0.33, 0.66, 1.0].map((frac) => {
+      const y = padT + plotH * (1 - frac);
+      return `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${(W - padR).toFixed(1)}" y2="${y.toFixed(1)}" stroke="var(--line)" stroke-dasharray="3 3" stroke-width="1"/>`;
+    }).join("");
+
+    const colsHtml = yearly.map((d, i) => {
+      const cx = padL + i * colW + colW / 2;
+      const x1 = cx - barW - 1.5;
+      const x2 = cx + 1.5;
+
+      const hPubs = Math.max(4, (d.pubs / maxPubs) * plotH);
+      const yPubs = padT + plotH - hPubs;
+
+      const hCites = d.cites > 0 ? Math.max(4, (d.cites / maxCites) * plotH) : 0;
+      const yCites = padT + plotH - hCites;
+
+      return `
+        <g class="chart-group" tabindex="0" data-year="${d.year}" data-pubs="${d.pubs}" data-oa="${d.oa}" data-cites="${d.cites}">
+          <rect class="chart-hit" x="${(padL + i * colW).toFixed(1)}" y="${padT}" width="${colW.toFixed(1)}" height="${plotH + padB}" fill="transparent"/>
+          <rect class="cbar cbar-pubs" x="${x1.toFixed(1)}" y="${yPubs.toFixed(1)}" width="${barW.toFixed(1)}" height="${hPubs.toFixed(1)}" rx="3"/>
+          ${hCites > 0 ? `<rect class="cbar cbar-cites" x="${x2.toFixed(1)}" y="${yCites.toFixed(1)}" width="${barW.toFixed(1)}" height="${hCites.toFixed(1)}" rx="3"/>` : ""}
+          <text class="chart-yr-txt" x="${cx.toFixed(1)}" y="${(H - 8).toFixed(1)}" text-anchor="middle">${d.year}</text>
+        </g>
+      `;
+    }).join("");
+
+    wrap.innerHTML = `
+      <div class="chart-svg-wrap">
+        <svg viewBox="0 0 ${W} ${H}" class="metrics-svg" preserveAspectRatio="xMidYMid meet">
+          <g class="chart-grid">${gridLines}</g>
+          <g class="chart-cols">${colsHtml}</g>
+        </svg>
+        <div class="chart-tooltip" id="chart-tooltip" role="tooltip"></div>
+      </div>
+    `;
+
+    const tip = $("#chart-tooltip", wrap);
+    if (!tip) return;
+    const groups = $$(".chart-group", wrap);
+    groups.forEach((g) => {
+      function show() {
+        const yr = g.dataset.year;
+        const pubs = g.dataset.pubs;
+        const oa = g.dataset.oa;
+        const cites = g.dataset.cites;
+        tip.innerHTML = `
+          <div class="tip-yr">${yr}</div>
+          <div class="tip-row"><span class="dot-p"></span>${pubs} ${LANG === "es" ? "publicaciones" : "publications"} <small>(${oa} OA)</small></div>
+          <div class="tip-row"><span class="dot-c"></span>${cites} ${LANG === "es" ? (cites === "1" ? "cita" : "citas") : (cites === "1" ? "citation" : "citations")}</div>
+        `;
+        tip.classList.add("visible");
+        const wrapRect = wrap.getBoundingClientRect();
+        const gRect = g.getBoundingClientRect();
+        let left = (gRect.left + gRect.width / 2) - wrapRect.left;
+        let top = gRect.top - wrapRect.top - 10;
+        if (left < 70) left = 70;
+        if (left > wrapRect.width - 70) left = wrapRect.width - 70;
+        tip.style.left = `${Math.round(left)}px`;
+        tip.style.top = `${Math.round(top)}px`;
+      }
+      function hide() { tip.classList.remove("visible"); }
+      g.addEventListener("mouseenter", show);
+      g.addEventListener("mouseleave", hide);
+      g.addEventListener("focus", show);
+      g.addEventListener("blur", hide);
+      g.addEventListener("click", (e) => { e.stopPropagation(); show(); });
+    });
+  }
+
   function renderMetrics(metrics) {
-    const grid = $("#stat-grid"); if (!grid) return;
-    grid.innerHTML = METRICS.map((mm) => `
-      <div class="stat" tabindex="0">
+    const heroGrid = $("#stat-hero-grid");
+    const advGrid = $("#stat-grid");
+    if (!heroGrid && !advGrid) return;
+
+    const hasRealData = metrics && (metrics.pubs > 0 || metrics.cites > 0);
+
+    const makeCard = (mm, isHero) => `
+      <div class="stat ${isHero ? "stat-hero" : ""}" tabindex="0">
         <div class="stat-hd"><span class="ic">${METRIC_ICON[mm.k] || ""}</span><span class="l">${esc(mm.label)} <span class="ab">(${esc(mm.abbr)})</span></span></div>
         <div class="n" id="m-${mm.k}">${metrics ? fmtMetric(mm.k, metrics[mm.k]) : "—"}</div>
         <div class="tip">${esc(METRIC_DESC[mm.k] || "")}</div>
-      </div>`).join("");
-    grid.querySelectorAll(".stat").forEach((s) => {
+      </div>`;
+
+    const heroMetrics = METRICS.filter((m) => m.hero);
+    const advMetrics = METRICS.filter((m) => !m.hero);
+
+    if (heroGrid) {
+      heroGrid.innerHTML = heroMetrics.map((m) => makeCard(m, true)).join("");
+      if (advGrid) advGrid.innerHTML = advMetrics.map((m) => makeCard(m, false)).join("");
+    } else if (advGrid) {
+      advGrid.innerHTML = METRICS.map((m) => makeCard(m, false)).join("");
+    }
+
+    // Bind tooltip handlers to all cards
+    $$(".stat", document).forEach((s) => {
       s.addEventListener("mouseenter", () => {
-        grid.querySelectorAll(".stat.open").forEach((o) => { if (o !== s) o.classList.remove("open"); });
+        $$(".stat.open").forEach((o) => { if (o !== s) o.classList.remove("open"); });
         fitTip(s);
       });
       s.addEventListener("focus", () => {
-        grid.querySelectorAll(".stat.open").forEach((o) => { if (o !== s) o.classList.remove("open"); });
+        $$(".stat.open").forEach((o) => { if (o !== s) o.classList.remove("open"); });
         fitTip(s);
       });
       s.addEventListener("click", (e) => {
         e.stopPropagation();
         const willOpen = !s.classList.contains("open");
-        grid.querySelectorAll(".stat.open").forEach((o) => { if (o !== s) o.classList.remove("open"); });
+        $$(".stat.open").forEach((o) => { if (o !== s) o.classList.remove("open"); });
         fitTip(s);
         s.classList.toggle("open", willOpen);
       });
     });
+
     if (!renderMetrics._outsideClickBound) {
       renderMetrics._outsideClickBound = true;
       document.addEventListener("click", () => {
-        document.querySelectorAll(".stat.open").forEach((s) => s.classList.remove("open"));
+        $$(".stat.open").forEach((s) => s.classList.remove("open"));
       });
+    }
+
+    // Toggle button for advanced bibliometrics
+    const toggleBtn = $("#stat-toggle-btn");
+    const advWrap = $("#stat-advanced-wrap");
+    if (toggleBtn && advWrap && !renderMetrics._toggleBound) {
+      renderMetrics._toggleBound = true;
+      toggleBtn.addEventListener("click", () => {
+        const isExpanded = toggleBtn.getAttribute("aria-expanded") === "true";
+        const willExpand = !isExpanded;
+        toggleBtn.setAttribute("aria-expanded", String(willExpand));
+        advWrap.hidden = !willExpand;
+        const txtEl = toggleBtn.querySelector(".btn-txt");
+        if (txtEl) txtEl.textContent = willExpand ? T.advMetricsHide : T.advMetricsShow;
+        toggleBtn.classList.toggle("on", willExpand);
+      });
+    }
+
+    // Run count-up animations on live data
+    if (hasRealData) {
+      METRICS.forEach((mm) => {
+        const el = $(`#m-${mm.k}`);
+        if (el && typeof metrics[mm.k] === "number") {
+          animateCountUp(el, metrics[mm.k], mm.k);
+        }
+      });
+    }
+
+    // Render trajectory chart
+    if (metrics && metrics.yearly) {
+      renderYearlyChart(metrics.yearly);
     }
   }
 
-  // OpenAlex citation/author info keyed by DOI, used to enrich the shown publication set
+  // OpenAlex citation/author/OA/country info keyed by DOI
   function fetchOpenAlexMap() {
     const url = "https://api.openalex.org/works?filter=author.orcid:" + ORCID_ID +
-      "&per-page=200&select=doi,cited_by_count,authorships&mailto=jorge.parraga@utm.edu.ec";
+      "&per-page=200&select=doi,cited_by_count,authorships,open_access,publication_year&mailto=jorge.parraga@utm.edu.ec";
     return fetch(url).then((r) => { if (!r.ok) throw new Error("openalex " + r.status); return r.json(); })
       .then((data) => {
         const m = new Map();
@@ -872,7 +1137,21 @@ ${refsHtml}
           const a = w.authorships || [];
           const fa = a.find((x) => x.author_position === "first");
           const isSelf = (au) => au && ((au.orcid || "").indexOf(ORCID_ID) >= 0 || /parraga|párraga/i.test(au.display_name || ""));
-          m.set(doi, { cites: w.cited_by_count || 0, nAuthors: a.length, first: fa ? isSelf(fa.author) : false });
+          const countries = new Set();
+          a.forEach((auth) => {
+            (auth.institutions || []).forEach((inst) => {
+              if (inst.country_code) countries.add(inst.country_code.toUpperCase());
+            });
+          });
+          const isOa = !!(w.open_access && w.open_access.is_oa);
+          m.set(doi, {
+            cites: w.cited_by_count || 0,
+            nAuthors: a.length,
+            first: fa ? isSelf(fa.author) : false,
+            isOa: isOa,
+            countries: Array.from(countries),
+            year: w.publication_year || null
+          });
         });
         return m;
       });
@@ -885,21 +1164,22 @@ ${refsHtml}
       const oa = doi && oaMap && oaMap.get(doi);
       const localAuthors = Array.isArray(p.authors) && p.authors.length ? p.authors : null;
       return {
-        year: p.year,
+        year: p.year || (oa ? oa.year : null),
         citations: oa ? oa.cites : (p.citations || 0),
         nAuthors: oa ? oa.nAuthors : (localAuthors ? localAuthors.length : 0),
         hasAuthorInfo: oa ? oa.nAuthors > 0 : !!localAuthors,
-        first: oa ? oa.first : (localAuthors ? /parraga|párraga/i.test(localAuthors[0] || "") : false)
+        first: oa ? oa.first : (localAuthors ? /parraga|párraga/i.test(localAuthors[0] || "") : false),
+        isOa: (oa && typeof oa.isOa === "boolean") ? oa.isOa : !!p.openAccess,
+        countries: (oa && oa.countries) || [],
+        type: p.type || "journal",
+        quartile: p.quartile || null
       };
     });
   }
 
   function fillHome(profile, pubs) {
     const say = $("#say"); if (say) say.textContent = pick(profile.tagline);
-    // Start every metric at 0; fillPublications() overwrites these with the real
-    // numbers once the live ORCID (and OpenAlex) data has loaded, so nothing
-    // stale from the local backup file is ever shown, even briefly.
-    renderMetrics({ pubs: 0, cites: 0, h: 0, i10: 0, g: 0, m: 0, cpp: 0, app: 0, first: 0, cited: 0 });
+    renderMetrics({ pubs: 0, cites: 0, h: 0, oa: 0, cpp: 0, i10: 0, g: 0, m: 0, app: 0, first: 0, intl: 0, cited: 0 });
     wireHomeTabs(profile.youtube && profile.youtube.channelId);
   }
 

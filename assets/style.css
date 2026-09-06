@@ -266,18 +266,46 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 }
 .tag:hover { border-color: var(--blue); color: var(--blue-600); }
 
-/* stats */
-.stat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: .7rem; margin-top: 1.8rem; }
-@media (max-width: 900px) { .stat-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 560px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
-/* metric pills get a barely-there mint tint so they read as subtly distinct
-   from the plain-white publication cards, while staying inside the palette */
+/* ---------- Metrics System (Hero Grid, Advanced Grid, and Trajectory Chart) ---------- */
+.metrics-section { margin-top: 1.8rem; margin-bottom: 2.2rem; }
+
+/* 4-column Hero Cards for primary metrics */
+.stat-hero-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .85rem;
+}
+@media (max-width: 860px) { .stat-hero-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 460px) { .stat-hero-grid { grid-template-columns: 1fr; } }
+
+/* Base stat card */
 .stat {
+  position: relative; cursor: help;
   background: linear-gradient(160deg, #fefffe 0%, #fbfdfc 100%);
-  border: 1px solid var(--line); border-left: 3px solid var(--blue); border-radius: var(--radius); padding: 1.4rem 1.5rem;
-  box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: .6rem;
+  border: 1px solid var(--line); border-left: 3px solid var(--blue); border-radius: var(--radius); padding: 1.25rem 1.4rem;
+  box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: .55rem;
   transition: border-color .18s var(--ease), box-shadow .18s var(--ease), transform .18s var(--ease);
 }
+.stat:hover, .stat.open { border-color: var(--line-2); border-left-color: var(--blue-700); box-shadow: var(--shadow-lift); }
+
+/* Hero Cards: larger typography and elevated appearance */
+.stat-hero {
+  background: linear-gradient(145deg, #ffffff 0%, #f6faf7 100%);
+  border: 1px solid var(--sky-line); border-left: 4px solid var(--blue);
+  padding: 1.35rem 1.45rem;
+  box-shadow: 0 2px 10px rgba(22,48,42,.06);
+}
+.stat-hero:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(22,48,42,.11); border-left-color: var(--blue-700); }
+.stat-hero .stat-hd .ic {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: var(--sky-1); color: var(--blue-700);
+}
+.stat-hero .stat-hd .ic svg { width: 15px; height: 15px; }
+.stat-hero .n {
+  font-weight: 700; font-size: clamp(1.85rem, 2.6vw, 2.4rem); line-height: 1;
+  color: var(--green-900); letter-spacing: -.03em; margin-top: auto;
+}
+
 .stat-hd { display: flex; align-items: center; gap: .5rem; }
 .stat-hd .ic {
   display: inline-flex; align-items: center; justify-content: center; flex: none;
@@ -288,35 +316,115 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .stat .l { font-size: var(--fs-2xs); font-weight: 700; letter-spacing: .01em; color: var(--ink-3); line-height: 1.25; text-transform: none; }
 .stat .l .ab { color: var(--blue-600); font-weight: 700; }
 .stat .n { font-weight: 700; font-size: clamp(1.24rem, 2.1vw, 1.55rem); line-height: 1; color: var(--green-900); letter-spacing: -.02em; margin-top: auto; }
-.stat .n small { color: var(--green-900); font-size: .55em; vertical-align: baseline; font-weight: 700; }
-/* metric contextual tooltip */
-.stat { position: relative; cursor: help; }
-/* no transform here on purpose: a transformed ancestor becomes the
-   containing block for any position:fixed descendant, which is exactly
-   what broke the tooltip's fixed positioning (it was landing relative to
-   .stat instead of the real viewport, hence appearing near the bottom of
-   the page). Border + shadow still give clear hover feedback without it. */
-.stat:hover, .stat.open { border-color: var(--line-2); border-left-color: var(--blue-700); box-shadow: var(--shadow-lift); }
+.stat .n small { color: var(--green-900); font-size: .55em; vertical-align: baseline; font-weight: 700; margin-left: 1px; }
+
+/* Toggle button for advanced bibliometrics */
+.stat-actions { display: flex; justify-content: center; margin: 1.15rem 0; }
+.stat-toggle-btn {
+  display: inline-flex; align-items: center; gap: .55rem;
+  padding: .55rem 1.15rem; background: var(--panel); border: 1px solid var(--line-2);
+  border-radius: 100px; font-family: inherit; font-size: var(--fs-xs); font-weight: 600;
+  color: var(--ink-2); cursor: pointer; box-shadow: var(--shadow-sm);
+  transition: all .2s var(--ease);
+}
+.stat-toggle-btn:hover { border-color: var(--blue); color: var(--blue-600); transform: translateY(-1px); box-shadow: var(--shadow); }
+.stat-toggle-btn .btn-ic { display: inline-flex; align-items: center; justify-content: center; transition: transform .22s var(--ease); }
+.stat-toggle-btn.on .btn-ic { transform: rotate(180deg); }
+.stat-toggle-btn .btn-badge {
+  background: var(--sky-1); color: var(--blue-700); font-size: var(--fs-2xs); font-weight: 700;
+  padding: .12rem .48rem; border-radius: 100px;
+}
+
+/* Advanced metrics grid (collapsible) */
+.stat-advanced-wrap { margin-bottom: 1.4rem; animation: fadeIn .22s var(--ease); }
+.stat-advanced-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .75rem;
+}
+@media (max-width: 860px) { .stat-advanced-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* Contextual tooltip */
 .stat .tip {
-  /* position: fixed, with top/left set in px by fitTip() in app.js, right
-     before it's shown (on hover/focus/click). Fixed to the viewport (not to
-     .stat) and with a z-index above the sticky header, so it can never end up
-     hidden behind the header or another pill no matter where it lands. */
   position: fixed; z-index: 200;
   width: max-content; max-width: min(78vw, 240px);
   background: var(--ink); color: #fff; font-size: var(--fs-xs); font-weight: 500; line-height: 1.4;
   padding: .55rem .7rem; border-radius: 9px; box-shadow: var(--shadow);
   opacity: 0; visibility: hidden; transition: opacity .18s var(--ease); pointer-events: none;
 }
-/* the tap-to-open state: this is the only thing driving visibility on touch
-   devices, so it's the only thing that has to close on an outside tap (see
-   the document click listener in app.js) — no CSS :hover involved there */
 .stat.open .tip { opacity: 1; visibility: visible; }
-/* hover-to-preview is a bonus for real mouse pointers only. On touch, iOS/
-   Android can "stick" a :hover state after a tap until something else is
-   tapped, which is exactly what made the tooltip refuse to close before */
 @media (hover: hover) and (pointer: fine) {
   .stat:hover .tip, .stat:focus .tip, .stat:focus-within .tip { opacity: 1; visibility: visible; }
+}
+
+/* ---------- Trajectory Chart Card ---------- */
+.metrics-chart-card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow-sm); padding: 1.35rem 1.6rem; margin-top: 1.2rem;
+}
+.chart-header {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .8rem;
+  margin-bottom: .8rem; padding-bottom: .7rem; border-bottom: 1px solid var(--line);
+}
+.chart-title {
+  display: inline-flex; align-items: center; gap: .45rem;
+  font-size: var(--fs-2xs); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3);
+}
+.chart-title svg { color: var(--blue-600); }
+.chart-legend { display: inline-flex; align-items: center; gap: 1.1rem; font-size: var(--fs-xs); font-weight: 600; color: var(--ink-2); }
+.leg-item { display: inline-flex; align-items: center; gap: .4rem; }
+.leg-dot { width: 9px; height: 9px; border-radius: 2px; flex: none; }
+.leg-pubs .leg-dot { background: var(--blue); }
+.leg-cites .leg-dot { background: var(--mint); }
+
+.chart-body { position: relative; width: 100%; min-height: 140px; }
+.chart-loading { font-size: var(--fs-xs); color: var(--ink-3); padding: 2rem 0; text-align: center; }
+.chart-svg-wrap { position: relative; width: 100%; }
+.metrics-svg { width: 100%; height: auto; display: block; overflow: visible; }
+
+.cbar { cursor: pointer; transition: opacity .16s var(--ease), fill .16s var(--ease); }
+.cbar-pubs { fill: var(--blue); opacity: .88; }
+.cbar-cites { fill: var(--mint); opacity: .9; }
+.chart-group:hover .cbar-pubs, .chart-group:focus .cbar-pubs { fill: var(--blue-700); opacity: 1; }
+.chart-group:hover .cbar-cites, .chart-group:focus .cbar-cites { fill: #48a66d; opacity: 1; }
+.chart-yr-txt { fill: var(--ink-3); font-size: 11px; font-weight: 600; font-family: var(--font); }
+
+.chart-tooltip {
+  position: absolute; pointer-events: none; opacity: 0;
+  transform: translate(-50%, -100%);
+  background: var(--ink); color: #fff; padding: .5rem .75rem; border-radius: 8px;
+  font-size: var(--fs-xs); box-shadow: var(--shadow); z-index: 100;
+  transition: opacity .15s var(--ease); white-space: nowrap;
+}
+.chart-tooltip.visible { opacity: 1; }
+.chart-tooltip .tip-yr { font-weight: 700; margin-bottom: .25rem; font-size: var(--fs-xs); color: #fff; }
+.chart-tooltip .tip-row { display: flex; align-items: center; gap: .4rem; font-size: var(--fs-2xs); color: #e1ede6; margin-top: .15rem; }
+.chart-tooltip .tip-row small { color: #9bb8a9; }
+.dot-p { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--mint); }
+.dot-c { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #ffffff; }
+
+/* ---------- Live Sync Footer ---------- */
+.metrics-footer {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .8rem;
+  margin-top: .9rem; padding: .4rem .3rem 0; font-size: var(--fs-2xs); color: var(--ink-3);
+}
+.sync-status { display: inline-flex; align-items: center; gap: .45rem; font-weight: 600; }
+.pulse-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: #22c55e;
+  box-shadow: 0 0 0 0 rgba(34,197,94,.5); animation: pulseGreen 2s infinite;
+}
+@keyframes pulseGreen {
+  0% { box-shadow: 0 0 0 0 rgba(34,197,94,.6); }
+  70% { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+  100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+}
+.source-links { display: inline-flex; align-items: center; gap: .75rem; }
+.src-link { color: var(--blue-600); font-weight: 600; text-decoration: none; transition: color .15s; }
+.src-link:hover { color: var(--blue-700); text-decoration: underline; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* home extras */
@@ -351,7 +459,12 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .orcid-note .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--sky); box-shadow: 0 0 0 0 rgba(67,121,95,.5); animation: pulse 2s infinite; }
 @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(67,121,95,.45); } 70% { box-shadow: 0 0 0 7px rgba(67,121,95,0); } 100% { box-shadow: 0 0 0 0 rgba(67,121,95,0); } }
 
-.filters { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
+/* Publication toolbar with filters, summary, and sort control */
+.pub-toolbar {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .9rem;
+  margin-bottom: 1.3rem; padding-bottom: .4rem; border-bottom: 1px solid var(--line);
+}
+.filters { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 0; }
 .filters button {
   font: inherit; font-size: var(--fs-xs); font-weight: 600; cursor: pointer;
   background: var(--panel); color: var(--ink-2);
@@ -359,6 +472,22 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 }
 .filters button:hover { border-color: var(--blue); color: var(--blue-600); }
 .filters button.on { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+.pub-controls { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-left: auto; }
+.pub-summary { font-size: var(--fs-xs); font-weight: 600; color: var(--ink-3); }
+.pub-summary .sum-badge {
+  display: inline-flex; align-items: center;
+  background: var(--sky-1); border: 1px solid var(--sky-line); color: var(--blue-700);
+  padding: .25rem .7rem; border-radius: 100px; font-size: var(--fs-2xs); font-weight: 700;
+}
+
+.pub-sort-wrap { display: inline-flex; align-items: center; gap: .45rem; font-size: var(--fs-xs); font-weight: 600; color: var(--ink-2); }
+.pub-sort-select {
+  font-family: inherit; font-size: var(--fs-xs); font-weight: 600; color: var(--ink);
+  background: var(--panel); border: 1px solid var(--line-2); border-radius: 8px;
+  padding: .35rem .65rem; cursor: pointer; transition: all .15s var(--ease);
+}
+.pub-sort-select:hover, .pub-sort-select:focus { border-color: var(--blue); outline: none; box-shadow: var(--shadow-sm); }
 
 .pubs { display: grid; gap: .75rem; }
 .pub {
@@ -378,13 +507,30 @@ h1.title em { font-style: normal; color: var(--blue-700); }
   color: var(--blue-700); background: var(--sky-1); border: 1px solid var(--sky-line);
   padding: .1rem .5rem; border-radius: 4px;
 }
+.pub .badge-quartile {
+  font-size: var(--fs-2xs); font-weight: 800; letter-spacing: .04em;
+  padding: .1rem .45rem; border-radius: 4px; text-transform: uppercase;
+}
+.pub .badge-quartile.badge-q1 {
+  background: #dcfce7; color: #15803d; border: 1px solid #86efac;
+}
+.pub .badge-quartile.badge-q2 {
+  background: #e0f2fe; color: #0369a1; border: 1px solid #7dd3fc;
+}
+.pub .badge-oa {
+  display: inline-flex; align-items: center; gap: .25rem;
+  background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0;
+  padding: .1rem .45rem; border-radius: 4px; font-size: var(--fs-2xs); font-weight: 700;
+}
+.pub .badge-oa svg { width: 11px; height: 11px; flex: none; color: #16a34a; }
 .pub .ven { font-size: var(--fs-sm); color: var(--ink-3); font-style: italic; }
 .pub .cites-chip {
   display: inline-flex; align-items: center; gap: .3rem;
   font-size: var(--fs-2xs); font-weight: 700; letter-spacing: .02em;
   color: var(--blue); background: transparent; border: 1px solid var(--line-2);
-  padding: .1rem .5rem; border-radius: 4px;
+  padding: .1rem .5rem; border-radius: 4px; text-decoration: none; transition: all .14s var(--ease);
 }
+.pub .cites-chip:hover { border-color: var(--blue); color: var(--blue-700); background: var(--sky-1); }
 .pub .cites-chip svg { width: 11px; height: 11px; flex: none; }
 /* Scholar chip: filled mint tint so it reads as the primary citation source */
 .pub .cites-chip.cites-scholar {
