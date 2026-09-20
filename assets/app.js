@@ -133,7 +133,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().trim();
 
-  const VER = "95";
+  const VER = "97";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -1211,16 +1211,45 @@ ${refsHtml}
      Reads the channel's public RSS feed through rss2json (no API key, no server)
      and shows the newest few videos as cards. Lazy-loaded only when the tab is
      opened, and only fetched once per page view. */
+  // derive a thumbnail straight from a YouTube watch link (…?v=ID)
+  function ytThumbFromLink(link) {
+    const m = (link || "").match(/[?&]v=([^&]+)/) || (link || "").match(/youtu\.be\/([^?&]+)/);
+    return m ? `https://i.ytimg.com/vi/${m[1]}/hqdefault.jpg` : "";
+  }
+  // parse the raw YouTube channel RSS (Atom XML) into our simple video shape
+  function parseYtFeedXml(xml, limit) {
+    const doc = new DOMParser().parseFromString(xml, "text/xml");
+    if (doc.getElementsByTagName("parsererror").length) throw new Error("yt-xml");
+    const entries = Array.prototype.slice.call(doc.getElementsByTagName("entry"), 0, limit);
+    const out = entries.map((e) => {
+      const t = e.getElementsByTagName("title")[0];
+      const title = t ? t.textContent : "";
+      const linkEl = e.getElementsByTagName("link")[0];
+      const link = linkEl ? (linkEl.getAttribute("href") || "") : "";
+      const mt = e.getElementsByTagName("media:thumbnail")[0] || e.getElementsByTagName("thumbnail")[0];
+      const thumb = (mt && mt.getAttribute("url")) || ytThumbFromLink(link);
+      return { title, link, thumb };
+    }).filter((v) => v.link);
+    if (!out.length) throw new Error("yt-empty");
+    return out;
+  }
+  // Load the channel feed with several fallbacks, so one failing proxy does not
+  // break the tab: rss2json first, then two CORS proxies that return the raw RSS.
   function fetchYouTubeVideos(channelId, limit) {
     const rss = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
-    const api = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rss)}`;
-    return fetch(api).then((r) => r.json()).then((d) => {
-      if (d.status !== "ok" || !Array.isArray(d.items)) throw new Error("yt-feed");
-      return d.items.slice(0, limit).map((it) => {
-        const fromDesc = it.description && (it.description.match(/src="([^"]+)"/) || [])[1];
-        return { title: it.title, link: it.link, thumb: it.thumbnail || fromDesc || "" };
+    const viaRss2json = () => fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rss)}`)
+      .then((r) => r.json()).then((d) => {
+        if (d.status !== "ok" || !Array.isArray(d.items) || !d.items.length) throw new Error("yt-feed");
+        return d.items.slice(0, limit).map((it) => {
+          const fromDesc = it.description && (it.description.match(/src="([^"]+)"/) || [])[1];
+          return { title: it.title, link: it.link, thumb: it.thumbnail || fromDesc || ytThumbFromLink(it.link) };
+        });
       });
-    });
+    const viaAllOrigins = () => fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(rss)}`)
+      .then((r) => r.text()).then((xml) => parseYtFeedXml(xml, limit));
+    const viaCorsProxy = () => fetch(`https://corsproxy.io/?url=${encodeURIComponent(rss)}`)
+      .then((r) => r.text()).then((xml) => parseYtFeedXml(xml, limit));
+    return viaRss2json().catch(viaAllOrigins).catch(viaCorsProxy);
   }
   function renderYouTube(videos) {
     const wrap = $("#yt-list"); if (!wrap) return;
