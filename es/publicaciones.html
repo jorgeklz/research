@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg?v=4">
-<link rel="stylesheet" href="../assets/style.css?v=93">
+<link rel="stylesheet" href="../assets/style.css?v=94">
 </head>
 <body data-page="publications" data-root="..">
 
@@ -43,7 +43,20 @@
 
   <div class="orcid-note" id="orcid-note"><span class="dot"></span><span class="txt">Cargando publicaciones desde ORCID…</span></div>
 
-  <div class="filters" id="pub-filters"></div>
+  <div class="pub-toolbar">
+    <div class="filters" id="pub-filters"></div>
+    <div class="pub-controls">
+      <div class="pub-summary" id="pub-summary"><span class="sum-badge">Cargando…</span></div>
+      <div class="pub-sort-wrap">
+        <label for="pub-sort-select" class="sort-label">Ordenar por:</label>
+        <select id="pub-sort-select" class="pub-sort-select">
+          <option value="recent">📅 Más recientes</option>
+          <option value="cites">📈 Más citadas</option>
+          <option value="title">🔤 Título (A–Z)</option>
+        </select>
+      </div>
+    </div>
+  </div>
   <div class="pubs" id="pub-list"><p class="loading">Cargando…</p></div>
 
   <div class="pagination" id="pub-pagination" style="display:none">
@@ -62,6 +75,6 @@
   </div>
 </footer>
 
-<script src="../assets/app.js?v=88"></script>
+<script src="../assets/app.js?v=94"></script>
 </body>
 </html>

@@ -710,6 +710,35 @@
           "url": "https://doi.org/10.1016/j.bdr.2026.100630"
         }
       ]
+    },
+    {
+      "id": "post-dib2026-meteocoast",
+      "date": "2026-09-19",
+      "type": "paper",
+      "doi": "10.1016/j.dib.2026.113233",
+      "auto": false,
+      "topics": [
+        "dataset",
+        "agriculture"
+      ],
+      "title": {
+        "en": "A public weather record for Ecuador's coast, hour by hour",
+        "es": "Un registro público del clima de la costa ecuatoriana, hora por hora"
+      },
+      "summary": {
+        "en": "With Edison Solorzano, Emilio Jarre-Castro, Jose Zambrano and Ezequiel Zamora-Ledezma, an open, hourly dataset from automatic weather stations along coastal Ecuador.",
+        "es": "Con Edison Solorzano, Emilio Jarre-Castro, Jose Zambrano y Ezequiel Zamora-Ledezma, un conjunto de datos abierto y por hora de estaciones meteorológicas automáticas en la costa de Ecuador."
+      },
+      "body": {
+        "en": "Farmers, city planners, and researchers on Ecuador's coast all need the same basic thing to decide well: reliable weather data, measured often and close to home. But detailed local records are scarce, and when they exist they are often locked away, patchy, or hard to reuse. That gap matters more as El Niño years bring heavier rains and longer dry spells.\n\nWith Edison Solorzano, Emilio Jarre-Castro, Jose Zambrano, and Ezequiel Zamora-Ledezma, we put together **MeteoCoast-EC**, an openly available dataset of hourly weather readings collected by **automatic weather stations** (self-running instruments that record conditions around the clock without anyone present) placed along the Ecuadorian coast. Because the measurements are hourly, they capture the daily rhythm of the weather, not just a single daily average that hides the extremes.\n\nBefore publishing, the readings were cleaned and checked following international quality-control guidelines, so odd or impossible values do not quietly corrupt later analysis. And because it is open access, anyone can download and reuse it: to plan planting and irrigation, to study how the coastal climate is shifting, to train prediction models, or to prepare for extreme events. The full dataset and its documentation are available through the link below.",
+        "es": "Agricultores, planificadores urbanos e investigadores en la costa de Ecuador necesitan lo mismo para decidir bien: datos del clima confiables, medidos con frecuencia y cerca de casa. Pero los registros locales detallados escasean, y cuando existen suelen estar encerrados, incompletos o difíciles de reutilizar. Ese vacío pesa más cuando los años de El Niño traen lluvias más fuertes y sequías más largas.\n\nJunto con Edison Solorzano, Emilio Jarre-Castro, Jose Zambrano y Ezequiel Zamora-Ledezma, armamos **MeteoCoast-EC**, un conjunto de datos de acceso abierto con lecturas del clima cada hora, tomadas por **estaciones meteorológicas automáticas** (instrumentos que registran las condiciones por sí solos, de día y de noche, sin que nadie esté presente) ubicadas en la costa ecuatoriana. Al ser por hora, capturan el ritmo diario del clima y no solo un promedio del día que esconde los extremos.\n\nAntes de publicarlos, las lecturas se limpiaron y revisaron siguiendo guías internacionales de control de calidad, para que valores raros o imposibles no dañen en silencio los análisis posteriores. Y como es de acceso abierto, cualquiera puede descargarlo y reutilizarlo: para planificar siembra y riego, estudiar cómo cambia el clima costero, entrenar modelos de predicción o prepararse ante eventos extremos. El conjunto completo y su documentación están disponibles en el enlace de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.dib.2026.113233"
+        }
+      ]
     }
   ]
 }
