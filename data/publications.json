@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-06",
+  "updated": "2026-09-19",
   "items": [
     {
       "id": "iti2026-bibliometric",
@@ -36,6 +36,7 @@
       ],
       "venue": "Big Data Research",
       "type": "journal",
+      "quartile": "Q1",
       "year": 2026,
       "openAccess": false,
       "postId": "post-bdr2026-emergency-labelling",
@@ -134,6 +135,30 @@
       "scholarCitations": 0
     },
     {
+      "id": "dib2026-meteocoast",
+      "doi": "10.1016/j.dib.2026.113233",
+      "title": "MeteoCoast-EC: An open-access hourly meteorological dataset from automatic weather stations in coastal Ecuador",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Edison Solorzano",
+        "Emilio Jarre-Castro",
+        "Jose Zambrano",
+        "Ezequiel Zamora-Ledezma"
+      ],
+      "venue": "Data in Brief, 69, 113233",
+      "type": "journal",
+      "year": 2026,
+      "openAccess": true,
+      "postId": "post-dib2026-meteocoast",
+      "topics": [
+        "dataset",
+        "agriculture"
+      ],
+      "pages": "113233",
+      "citations": 0,
+      "scholarCitations": 0
+    },
+    {
       "id": "iti2026-rust-alzheimer",
       "doi": "10.53591/iti.v18i25.3232",
       "title": "Modelo basado en Rust en la detección eficiente de Alzheimer en imágenes de resonancia magnética cerebral",
@@ -186,6 +211,7 @@
       ],
       "venue": "Software Impacts, 29, 100845",
       "type": "journal",
+      "quartile": "Q2",
       "year": 2026,
       "openAccess": true,
       "postId": "post-simpa2026-mstknnclust",
@@ -233,6 +259,7 @@
       ],
       "venue": "Journal of Psychosomatic Research, 194, 112150",
       "type": "journal",
+      "quartile": "Q1",
       "year": 2025,
       "openAccess": false,
       "postId": "post-jpr2025-mentalhealth",
@@ -389,6 +416,7 @@
       ],
       "venue": "Computer Speech & Language, 84, 101579",
       "type": "journal",
+      "quartile": "Q1",
       "year": 2024,
       "openAccess": false,
       "postId": "post-csl2024-twitter",
@@ -497,6 +525,7 @@
       ],
       "venue": "Heliyon, 10(5), e26444",
       "type": "journal",
+      "quartile": "Q1",
       "year": 2024,
       "openAccess": true,
       "postId": "post-heliyon2024-housing-fuzzy",
@@ -569,6 +598,7 @@
       ],
       "venue": "Data in Brief",
       "type": "journal",
+      "quartile": "Q2",
       "year": 2023,
       "openAccess": false,
       "postId": null,
@@ -700,6 +730,7 @@
       ],
       "venue": "Data in Brief",
       "type": "journal",
+      "quartile": "Q2",
       "year": 2020,
       "openAccess": false,
       "topics": [
@@ -738,6 +769,7 @@
       ],
       "venue": "International Journal of Molecular Sciences",
       "type": "journal",
+      "quartile": "Q1",
       "year": 2020,
       "openAccess": true,
       "topics": [
@@ -759,6 +791,7 @@
       ],
       "venue": "Data in Brief",
       "type": "journal",
+      "quartile": "Q2",
       "year": 2019,
       "openAccess": false,
       "topics": [
