@@ -1,6 +1,48 @@
 {
-  "updated": "2026-09-19",
+  "updated": "2026-10-02",
   "items": [
+    {
+      "id": "acmlc2026-vlm-coffee",
+      "doi": "10.1109/acmlc70381.2026.11700499",
+      "title": "Evaluating Zero-Shot and Few-Shot Vision-Language Models Against Supervised CNNs for Coffee Leaf Rust Classification",
+      "authors": [
+        "Jorge Rodas-Silva",
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "2026 8th Asia Conference on Machine Learning and Computing (ACMLC), IEEE",
+      "type": "conference",
+      "year": 2026,
+      "openAccess": false,
+      "postId": "post-acmlc2026-vlm-coffee",
+      "topics": [
+        "agriculture",
+        "deep-learning",
+        "computer-vision"
+      ],
+      "citations": 0,
+      "scholarCitations": 0
+    },
+    {
+      "id": "scientometrics2026-utm",
+      "doi": "10.1007/s11192-026-05818-4",
+      "title": "Growth, concentration, and internationalisation of research output at a post-reform regional university in Ecuador: bibliometric evidence from Scopus (2016–2025)",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Jorge Rodas-Silva"
+      ],
+      "venue": "Scientometrics (2026)",
+      "type": "journal",
+      "year": 2026,
+      "openAccess": false,
+      "postId": "post-scientometrics2026-utm",
+      "topics": [
+        "bibliometrics",
+        "higher-education",
+        "data-science"
+      ],
+      "citations": 0,
+      "scholarCitations": 0
+    },
     {
       "id": "iti2026-bibliometric",
       "doi": "10.53591/iti.v18i25.3172",
