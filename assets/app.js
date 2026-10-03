@@ -12,14 +12,22 @@
       const bar = document.createElement("div");
       bar.id = "scroll-progress";
       document.body.appendChild(bar);
+      let ticking = false;
       function update() {
         const h = document.documentElement;
         const scrollTop = h.scrollTop || document.body.scrollTop;
         const height = h.scrollHeight - h.clientHeight;
         bar.style.width = (height > 0 ? (scrollTop / height) * 100 : 0) + "%";
+        ticking = false;
       }
-      document.addEventListener("scroll", update, { passive: true });
-      window.addEventListener("resize", update);
+      function onScroll() {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }
+      document.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll);
       update();
     }
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
@@ -28,6 +36,29 @@
 
   const LANG = document.documentElement.lang === "es" ? "es" : "en";
   const ROOT = document.body.dataset.root || ".";
+
+  // PWA
+  const manifestLink = document.createElement("link");
+  manifestLink.rel = "manifest";
+  manifestLink.href = ROOT + "/manifest.json";
+  document.head.appendChild(manifestLink);
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register(ROOT + '/sw.js').catch(()=>{});
+
+  // Language Memory
+  if (document.documentElement.lang === "es") localStorage.setItem("lang", "es");
+  else if (document.documentElement.lang === "en") localStorage.setItem("lang", "en");
+  
+  if (localStorage.getItem("lang") === "es" && document.documentElement.lang === "en" && window.location.pathname.endsWith("index.html") && !window.location.pathname.includes("/es/")) {
+    window.location.href = "es/index.html";
+  }
+
+  // Fade Up Observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+
   const PAGE = document.body.dataset.page;
   const POST_PAGE = LANG === "es" ? "entrada.html" : "post.html";
   const ORCID_ID = "0000-0001-8558-9122";
@@ -133,13 +164,13 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = "107";
+  const VER = "108";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
 
   /* ---------- line icons (stroke = currentColor) ---------- */
-  const svg = (inner, w) => `<svg width="${w || 15}" height="${w || 15}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+  const svg = (inner, w) => `<svg width="${w || 15}" height="${w || 15}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
   const ICON = {
     scholar: svg('<path d="M12 3 2 8l10 5 10-5-10-5Z"/><path d="M5 10v5c0 1.5 3.1 3 7 3s7-1.5 7-3v-5"/><path d="M22 8v5"/>'),
     scopus: svg('<circle cx="12" cy="12" r="9"/><path d="M15 9.2a4 4 0 1 0 0 5.6"/>'),
@@ -588,7 +619,15 @@ ${refsHtml}
     const prev = $("#pag-prev"), next = $("#pag-next"), note = $("#orcid-note");
     const sortSelect = $("#pub-sort-select"), sumEl = $("#pub-summary");
 
-    let all = [], filtered = [], type = "all", sort = "recent", page = 0;
+    let all = [], filtered = [], type = "all", sort = "recent", page = 0, searchQuery = "";
+
+    const searchInput = $("#pub-search");
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        searchQuery = e.target.value.toLowerCase();
+        apply();
+      });
+    }
 
     const dlBtn = $("#dl-pubs");
     if (dlBtn) dlBtn.addEventListener("click", () => exportPublicationsWord(profile, all, dlBtn));
@@ -602,6 +641,14 @@ ${refsHtml}
 
     function apply() {
       filtered = type === "all" ? [...all] : all.filter((p) => p.type === type);
+      if (searchQuery) {
+        filtered = filtered.filter((p) => {
+          const t = (p.title || "").toLowerCase();
+          const a = (p.authors || []).join(" ").toLowerCase();
+          const v = (p.venue || "").toLowerCase();
+          return t.includes(searchQuery) || a.includes(searchQuery) || v.includes(searchQuery);
+        });
+      }
       if (sort === "cites") {
         filtered.sort((a, b) => (b.citations || 0) - (a.citations || 0) || (b.year || 0) - (a.year || 0));
       } else if (sort === "title") {
@@ -622,7 +669,10 @@ ${refsHtml}
       const slice = filtered.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
       if (!slice.length) { list.innerHTML = `<p class="loading">${T.empty}</p>`; }
       slice.forEach((p) => {
-        const el = pubEl(p, byId); list.appendChild(el);
+        const el = pubEl(p, byId);
+        el.classList.add('fade-up');
+        observer.observe(el);
+        list.appendChild(el);
         if (p._needsEnrich && p.doi) enrich(p, el);
       });
       if (pag) {
@@ -1477,7 +1527,12 @@ ${refsHtml}
       page = Math.min(page, pages - 1);
       wrap.innerHTML = "";
       if (!s.length) { wrap.innerHTML = `<p class="loading">${T.empty}</p>`; }
-      s.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE).forEach((p) => wrap.appendChild(cardEl(p, pubs)));
+      s.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE).forEach((p) => {
+        const c = cardEl(p, pubs);
+        c.classList.add("fade-up");
+        wrap.appendChild(c);
+        observer.observe(c);
+      });
       if (pag) {
         pag.style.display = s.length > PAGE_SIZE ? "flex" : "none";
         info.textContent = T.pageOf(page + 1, pages);

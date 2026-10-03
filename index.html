@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=4">
-<link rel="stylesheet" href="assets/style.css?v=107">
+<link rel="stylesheet" href="assets/style.css?v=108">
 </head>
 <body data-page="home" data-root=".">
 
@@ -68,7 +68,7 @@
         </div>
       </div>
       <div class="chart-body" id="metrics-chart-body">
-        <div class="chart-loading">Loading trajectory data…</div>
+        <div class="chart-loading skeleton" style="width: 100%; height: 100px;"></div>
       </div>
     </div>
 
@@ -95,7 +95,7 @@
         <a class="more-link" href="publications.html">All &amp; filters →</a>
       </div>
       <div class="orcid-note" id="orcid-note"><span class="dot"></span><span class="txt">Loading publications from ORCID…</span></div>
-      <div class="pubs" id="pub-list"><p class="loading">Loading…</p></div>
+      <div class="pubs" id="pub-list"><p class="loading skeleton" style="width: 100%; height: 60px;"></p></div>
       <div class="pagination" id="pub-pagination" style="display:none">
         <button id="pag-prev" type="button">← Prev</button>
         <span class="info" id="pag-info"></span>
@@ -108,7 +108,7 @@
         <h2>Latest classes</h2>
         <a class="more-link" href="https://www.youtube.com/jorgeklz" target="_blank" rel="noopener">YouTube channel →</a>
       </div>
-      <div class="yt-grid" id="yt-list"><p class="loading">Loading…</p></div>
+      <div class="yt-grid" id="yt-list"><p class="loading skeleton" style="width: 100%; height: 60px;"></p></div>
     </div>
   </section>
 </main>
@@ -122,6 +122,6 @@
   </div>
 </footer>
 
-<script src="assets/app.js?v=107"></script>
+<script src="assets/app.js?v=108"></script>
 </body>
 </html>

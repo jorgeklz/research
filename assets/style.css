@@ -483,7 +483,10 @@ h1.title em { font-style: normal; color: var(--blue-700); }
   display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .9rem;
   margin-bottom: 1.3rem; padding-bottom: .4rem; border-bottom: 1px solid var(--line);
 }
-.filters { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 0; }
+.filters { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+#home-tabs { margin-bottom: 2.5rem; }
+.pub-search { padding: 0.4rem 0.8rem; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); font-family: inherit; font-size: var(--fs-sm); width: 250px; }
+@media (max-width: 640px) { .pub-search { width: 100%; margin-bottom: 1rem; } }
 .filters button {
   font: inherit; font-size: var(--fs-xs); font-weight: 600; cursor: pointer;
   background: var(--panel); color: var(--ink-2);
@@ -990,3 +993,48 @@ h1.title em { font-style: normal; color: var(--blue-700); }
     transition-duration: .001ms !important; scroll-behavior: auto !important;
   }
 }
+
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121212;
+    --panel: #1e1e1e;
+    --sky-1: #1a2621;
+    --sky-2: #21332a;
+    --sky-line: #2b4539;
+    --blue: #8fd3a6;
+    --blue-600: #a7e0ba;
+    --blue-700: #c2ecd1;
+    --sky: #8fd3a6;
+    --mint: #43795f;
+    --green-900: #e5ece8;
+    --ink: #e5ece8;
+    --ink-2: #9bb8a9;
+    --ink-3: #7c8d84;
+    --line: #2b4539;
+    --line-2: #385c4b;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--sky-1) 25%, var(--sky-2) 50%, var(--sky-1) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite linear;
+  border-radius: var(--radius);
+  color: transparent !important;
+  display: inline-block;
+  min-height: 1em;
+}
+.skeleton * {
+  visibility: hidden;
+}
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+
+.fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.pub-search { padding: 0.4rem 0.8rem; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); font-family: inherit; font-size: var(--fs-sm); width: 250px; }
+@media (max-width: 640px) { .pub-search { width: 100%; margin-bottom: 1rem; } }
