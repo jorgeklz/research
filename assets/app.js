@@ -802,7 +802,7 @@ ${refsHtml}
       ${locHtml}
       <span class="mi">${ICON.clock}${mins} ${esc(T.minRead)}</span>
       ${viewsHtml}
-      <span class="mi" title="Comentarios">${ICON.comments} <span class="gc-count" data-gc-id="${post.id || post.doi || "unknown"}">${post.commentsCount !== undefined ? post.commentsCount : 0}</span></span>
+      <span class="mi" title="Comentarios">${ICON.comments} <span class="gc-counter" data-uid="${post.id || post.doi || "unknown"}">${post.commentsCount !== undefined ? post.commentsCount : 0}</span></span>
       ${shareHtml}
     </div>`;
   }
@@ -1638,6 +1638,16 @@ ${refsHtml}
 
     const sw = $(".lang-top");
     if (sw) { const base = sw.getAttribute("href").split("?")[0]; sw.href = base + location.search; }
+    
+    // Force GraphComment to recount by reloading the count script
+    const oldCount = document.getElementById("gc-count-script");
+    if (oldCount) oldCount.remove();
+    const gcCount = document.createElement('script');
+    gcCount.id = "gc-count-script";
+    gcCount.type = 'text/javascript';
+    gcCount.async = true;
+    gcCount.src = 'https://graphcomment.com/js/integration.js?' + Date.now();
+    document.head.appendChild(gcCount);
   }
 
   function fillPost(profile, pubs, posts) {
