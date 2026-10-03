@@ -133,7 +133,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = "101";
+  const VER = "102";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -471,11 +471,18 @@
           if (local) return Object.assign({}, local);
           return { title, year: year ? Number(year) : null, venue: jt, doi, type, authors: [], _needsEnrich: !!doi };
         }).filter((w) => w.title);
-        // dedupe by doi/title — the shown list is exactly what ORCID reports (enriched
-        // with local data by DOI when available), so it can never exceed ORCID's count
+        // dedupe by doi/title
         const seen = new Set();
         const merged = [];
         works.forEach((w) => { if (isExcluded(w)) return; const k = normDoi(w.doi) || w.title.toLowerCase(); if (!seen.has(k)) { seen.add(k); merged.push(w); } });
+        (pubs.items || []).forEach((p) => {
+          if (isExcluded(p)) return;
+          const k = normDoi(p.doi) || (p.title || "").toLowerCase();
+          if (k && !seen.has(k)) {
+            seen.add(k);
+            merged.push(p);
+          }
+        });
         merged.sort((a, b) => (b.year || 0) - (a.year || 0));
         return merged;
       });
@@ -1443,11 +1450,9 @@ ${refsHtml}
         summary: { en: T.autoSummary, es: T.autoSummary }
       });
     });
-    // posts with no linked DOI at all (e.g. software posts) go last, newest first.
-    // A post that DOES have a doi but wasn't matched above means ORCID didn't confirm
-    // that publication — it's correctly left out, same as the Publications page.
+    // Remaining curated posts (e.g. software, or newly added papers) go next, newest first.
     const usedIds = new Set(out.map((x) => x.id).filter(Boolean));
-    const leftover = (posts.items || []).filter((p) => !p.doi && !usedIds.has(p.id))
+    const leftover = (posts.items || []).filter((p) => !usedIds.has(p.id))
       .sort((a, b) => (a.date < b.date ? 1 : -1));
     return out.concat(leftover);
   }
