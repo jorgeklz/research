@@ -816,7 +816,7 @@ h1.title em { font-style: normal; color: var(--blue-700); }
   .site-foot-in { gap: .7rem; }
   .socials { gap: .1rem; }
   .foot-meta { overflow-wrap: anywhere; line-height: 1.6; }
-  .card, .row, .stat { padding: .9rem 1rem; }
+  .card, .row, .stat, .metrics-chart-card { padding: .9rem 1rem; }
 }
 /* guarantee a comfortable side margin on small phones, independent of viewport-width rounding */
 @media (max-width: 480px) {
