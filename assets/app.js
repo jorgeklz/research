@@ -802,7 +802,7 @@ ${refsHtml}
       ${locHtml}
       <span class="mi">${ICON.clock}${mins} ${esc(T.minRead)}</span>
       ${viewsHtml}
-      <span class="mi" title="Comentarios">${ICON.comments} <span class="gc-count" data-gc-uid="${post.id || post.doi || "unknown"}">${post.commentsCount !== undefined ? post.commentsCount : 0}</span></span>
+      <span class="mi" title="Comentarios">${ICON.comments} <span class="gc-count" data-gc-id="${post.id || post.doi || "unknown"}">${post.commentsCount !== undefined ? post.commentsCount : 0}</span></span>
       ${shareHtml}
     </div>`;
   }
