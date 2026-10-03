@@ -1541,6 +1541,7 @@ ${refsHtml}
         prev.disabled = page === 0; next.disabled = page >= pages - 1;
         updateGoto(pag, pages, page, (i) => { page = Math.max(0, Math.min(i, pages - 1)); render(); window.scrollTo({ top: 0, behavior: "smooth" }); });
       }
+      setTimeout(window.reloadGraphCommentCounts, 100);
     }
     if (prev) prev.addEventListener("click", () => { if (page > 0) { page--; render(); window.scrollTo({ top: 0, behavior: "smooth" }); } });
     if (next) next.addEventListener("click", () => { page++; render(); window.scrollTo({ top: 0, behavior: "smooth" }); });
@@ -1639,15 +1640,7 @@ ${refsHtml}
     const sw = $(".lang-top");
     if (sw) { const base = sw.getAttribute("href").split("?")[0]; sw.href = base + location.search; }
     
-    // Force GraphComment to recount by reloading the count script
-    const oldCount = document.getElementById("gc-count-script");
-    if (oldCount) oldCount.remove();
-    const gcCount = document.createElement('script');
-    gcCount.id = "gc-count-script";
-    gcCount.type = 'text/javascript';
-    gcCount.async = true;
-    gcCount.src = 'https://graphcomment.com/js/integration.js?' + Date.now();
-    document.head.appendChild(gcCount);
+    window.reloadGraphCommentCounts();
   }
 
   function fillPost(profile, pubs, posts) {
@@ -1713,6 +1706,21 @@ ${refsHtml}
     }
     hero.innerHTML = `<h1>${T.notFound}</h1>`;
   }
+
+  window.reloadGraphCommentCounts = function() {
+    document.querySelectorAll(".gc-counter").forEach(span => {
+      const uid = span.getAttribute("data-uid");
+      if (!uid) return;
+      fetch("https://graphcomment.com/api/pub/numberOfComments?website=Personal-research-site&uid=" + encodeURIComponent(uid) + "&url=/")
+        .then(r => r.json())
+        .then(data => {
+          if (data && data.count !== undefined) {
+            span.textContent = data.count;
+          }
+        })
+        .catch(err => console.error("Error fetching comment count", err));
+    });
+  };
 
   /* ---------- boot ---------- */
   Promise.all([fetchJSON("profile"), fetchJSON("publications"), fetchJSON("posts")])
