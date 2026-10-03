@@ -133,7 +133,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = "106";
+  const VER = "107";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -450,7 +450,7 @@
 
   /* ---------- shared: curated list + ORCID live fetch/merge (used by Publications and News pages) ---------- */
   function curatedPubsSorted(pubs) {
-    return [...pubs.items].sort((a, b) => (b.year || 0) - (a.year || 0));
+    return [...pubs.items].sort((a, b) => (b.year || 0) - (a.year || 0) || (b.date || "").localeCompare(a.date || "") || (b.citations || 0) - (a.citations || 0));
   }
   function fetchLivePubs(pubs) {
     const localByDoi = {}; pubs.items.forEach((p) => { if (p.doi) localByDoi[normDoi(p.doi)] = p; });
@@ -461,6 +461,9 @@
         const works = groups.map((g) => g["work-summary"] && g["work-summary"][0]).filter(Boolean).map((w) => {
           const title = (w.title && w.title.title && w.title.title.value) || "";
           const year = (w["publication-date"] && w["publication-date"].year && w["publication-date"].year.value) || null;
+          const month = (w["publication-date"] && w["publication-date"].month && w["publication-date"].month.value) || null;
+          const day = (w["publication-date"] && w["publication-date"].day && w["publication-date"].day.value) || null;
+          const date = year ? `${year}-${String(month || 1).padStart(2, "0")}-${String(day || 1).padStart(2, "0")}` : null;
           const jt = (w["journal-title"] && w["journal-title"].value) || "";
           let doi = null;
           const ids = (w["external-ids"] && w["external-ids"]["external-id"]) || [];
@@ -468,13 +471,12 @@
           const wtype = (w.type || "").toLowerCase();
           const type = wtype.includes("journal") ? "journal" : (wtype.includes("conference") || wtype.includes("proceed")) ? "conference" : (wtype.includes("book") ? "book" : "other");
           const local = doi && localByDoi[normDoi(doi)];
-          if (local) return Object.assign({}, local);
-          return { title, year: year ? Number(year) : null, venue: jt, doi, type, authors: [], _needsEnrich: !!doi };
+          if (local) return Object.assign({}, local, { date: local.date || date });
+          return { title, year: year ? Number(year) : null, date, venue: jt, doi, type, authors: [], _needsEnrich: !!doi };
         }).filter((w) => w.title);
         // dedupe by doi/title
         const seen = new Set();
         const merged = [];
-        works.forEach((w) => { if (isExcluded(w)) return; const k = normDoi(w.doi) || w.title.toLowerCase(); if (!seen.has(k)) { seen.add(k); merged.push(w); } });
         (pubs.items || []).forEach((p) => {
           if (isExcluded(p)) return;
           const k = normDoi(p.doi) || (p.title || "").toLowerCase();
@@ -483,7 +485,15 @@
             merged.push(p);
           }
         });
-        merged.sort((a, b) => (b.year || 0) - (a.year || 0));
+        works.forEach((w) => {
+          if (isExcluded(w)) return;
+          const k = normDoi(w.doi) || w.title.toLowerCase();
+          if (!seen.has(k)) {
+            seen.add(k);
+            merged.push(w);
+          }
+        });
+        merged.sort((a, b) => (b.year || 0) - (a.year || 0) || (b.date || "").localeCompare(a.date || "") || (b.citations || 0) - (a.citations || 0));
         return merged;
       });
   }
@@ -597,7 +607,7 @@ ${refsHtml}
       } else if (sort === "title") {
         filtered.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
       } else {
-        filtered.sort((a, b) => (b.year || 0) - (a.year || 0) || (b.citations || 0) - (a.citations || 0));
+        filtered.sort((a, b) => (b.year || 0) - (a.year || 0) || (b.date || "").localeCompare(a.date || "") || (b.citations || 0) - (a.citations || 0));
       }
       if (sumEl) {
         const sumCites = filtered.reduce((acc, p) => acc + (p.citations || 0), 0);
