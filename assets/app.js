@@ -212,6 +212,7 @@
     mIntl: svg('<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14.5 14.5 0 0 1 0 18"/><path d="M12 3a14.5 14.5 0 0 0 0 18"/>'),
     mCited: svg('<circle cx="12" cy="12" r="9"/><polyline points="8 12.5 11 15.5 16 9"/>'),
     mChart: svg('<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>'),
+    comments: svg('<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>'),
     chevronDown: svg('<path d="m6 9 6 6 6-6"/>', 13)
   };
   function socialIcon(label) {
@@ -801,6 +802,7 @@ ${refsHtml}
       ${locHtml}
       <span class="mi">${ICON.clock}${mins} ${esc(T.minRead)}</span>
       ${viewsHtml}
+      <span class="mi" title="Comentarios">${ICON.comments} ${post.commentsCount !== undefined ? post.commentsCount : 0}</span>
       ${shareHtml}
     </div>`;
   }
@@ -1593,6 +1595,47 @@ ${refsHtml}
     const extra = (post.links || []).filter((l) => l.url !== doiURL);
     if (links) links.innerHTML = extra.map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${ICON.external} ${esc(l.label)}</a>`).join("");
     if (post._posts) renderRelated(post._posts, post);
+    
+    // Inject GraphComment widget
+    const commentsSec = $("#comments-section");
+    if (commentsSec) {
+      commentsSec.innerHTML = `<h3 style="font-size: 1.2rem; color: var(--navy); margin-bottom: 1rem;">${LANG === "es" ? "Comentarios" : "Comments"}</h3>
+      <div id="graphcomment"></div>`;
+      
+      const graphCommentId = "Personal-research-site";
+      const pageId = post.id || post.doi || "unknown";
+
+      window.__semio__params = {
+        graphcommentId: graphCommentId,
+        behaviour: {
+          uid: pageId,
+          language: LANG === "es" ? "es" : "en"
+        }
+      };
+
+      if (!window.__semio__onload_defined) {
+        window.__semio__onload = function() {
+          if (window.__semio__gc_graphlogin) {
+            window.__semio__gc_graphlogin(window.__semio__params);
+          }
+        };
+        window.__semio__onload_defined = true;
+      }
+
+      if (!document.getElementById("graphcomment-script")) {
+        const gc = document.createElement('script'); 
+        gc.id = "graphcomment-script";
+        gc.type = 'text/javascript'; 
+        gc.async = true; 
+        gc.defer = true;
+        gc.onload = window.__semio__onload;
+        gc.src = 'https://integration.graphcomment.com/gc_graphlogin.js?' + Date.now();
+        (document.head || document.body).appendChild(gc);
+      } else if (window.__semio__gc_graphlogin) {
+        window.__semio__gc_graphlogin(window.__semio__params);
+      }
+    }
+
     const sw = $(".lang-top");
     if (sw) { const base = sw.getAttribute("href").split("?")[0]; sw.href = base + location.search; }
   }
@@ -1671,10 +1714,91 @@ ${refsHtml}
       else if (PAGE === "publications") fillPublications(profile, pubs, posts);
       else if (PAGE === "news") fillNews(profile, pubs, posts);
       else if (PAGE === "post") fillPost(profile, pubs, posts);
+      
+      setTimeout(() => {
+        if (PAGE === "home" && typeof initNetworkGraph === "function") {
+          initNetworkGraph(pubs.items, ROOT);
+        }
+        if (typeof VanillaTilt !== 'undefined') {
+          VanillaTilt.init(document.querySelectorAll(".card"), { max: 3, speed: 400, glare: true, "max-glare": 0.05 });
+        }
+      }, 500);
     })
     .catch((err) => {
       console.error(err);
       const c = $(".content");
       if (c) { const p = document.createElement("p"); p.className = "loading"; p.textContent = T.loadFail; c.prepend(p); }
     });
+
+  // Global Comment Logic
+  const commentBody = document.getElementById("comment-body");
+  if (commentBody) {
+    commentBody.addEventListener("input", (e) => {
+      const words = e.target.value.trim() === "" ? 0 : e.target.value.trim().split(/\s+/).length;
+      document.getElementById("word-count").textContent = words;
+      document.getElementById("word-count").style.color = words > 150 ? "var(--red-600)" : "inherit";
+    });
+  }
+
+  window.submitComment = async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById("comment-btn");
+    const status = document.getElementById("comment-status");
+    const name = document.getElementById("comment-name").value;
+    const email = document.getElementById("comment-email").value;
+    const body = document.getElementById("comment-body").value;
+    
+    const words = body.trim().split(/\s+/).length;
+    if (words > 150) {
+      status.style.display = "block"; status.style.color = "var(--red-600)";
+      status.textContent = LANG === "es" ? "El comentario excede las 150 palabras." : "Comment exceeds 150 words.";
+      return;
+    }
+
+    btn.disabled = true; btn.textContent = LANG === "es" ? "Enviando..." : "Sending...";
+    
+    try {
+      let location = "Unknown Location";
+      try {
+        const ipRes = await fetch("https://ipapi.co/json/");
+        const ipData = await ipRes.json();
+        location = `${ipData.city || "Unknown"}, ${ipData.country_name || "Unknown"} (IP: ${ipData.ip || "Unknown"})`;
+      } catch(err) {}
+
+      const params = new URLSearchParams(window.location.search);
+      const postId = params.get("id") || params.get("doi") || "Unknown Post";
+
+      // Formspree API (User must replace URL)
+      const res = await fetch("https://formspree.io/f/mljdqadg", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ post: postId, name, _replyto: email, location, message: body })
+      });
+      
+      status.style.display = "block";
+      status.style.padding = "0.8rem";
+      status.style.borderRadius = "4px";
+      if (res.ok) {
+        status.style.color = "var(--navy)";
+        status.style.background = "var(--bg)";
+        status.style.border = "1px solid var(--mint)";
+        status.textContent = LANG === "es" ? "Su comentario fue enviado y está pendiente de moderación." : "Your comment was submitted and is pending moderation.";
+        e.target.reset(); document.getElementById("word-count").textContent = "0";
+      } else {
+        status.style.color = "var(--ink)";
+        status.style.background = "var(--bg)";
+        status.style.border = "1px solid var(--line-2)";
+        status.textContent = LANG === "es" ? "Ocurrió un error al enviar el comentario." : "An error occurred while sending the comment.";
+      }
+    } catch (err) {
+      status.style.display = "block";
+      status.style.padding = "0.8rem";
+      status.style.borderRadius = "4px";
+      status.style.color = "var(--ink)";
+      status.style.background = "var(--bg)";
+      status.style.border = "1px solid var(--line-2)";
+      status.textContent = LANG === "es" ? "Error de conexión." : "Connection error.";
+    }
+    btn.disabled = false; btn.textContent = LANG === "es" ? "Enviar comentario" : "Send Comment";
+  };
+
 })();

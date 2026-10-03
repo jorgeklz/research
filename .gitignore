@@ -6,3 +6,6 @@ research/
 *.bak
 .Rhistory
 scratch/
+README.md
+admin.html
+admin_server.py

@@ -72,13 +72,22 @@
       </div>
     </div>
 
+    <div class="metrics-chart-card" id="network-chart-card" style="margin-top: 1.5rem;">
+      <div class="chart-header">
+        <div class="chart-title"><span class="chart-t">Co-author Network</span></div>
+      </div>
+      <div class="chart-body" id="network-chart-body" style="height: 300px; position: relative;">
+        <div class="chart-loading skeleton" style="width: 100%; height: 100px;"></div>
+      </div>
+    </div>
+
     <div class="metrics-footer">
       <span class="sync-status">
         <span class="pulse-dot"></span>
         <span id="metrics-sync-txt">Calculated live via OpenAlex &amp; ORCID</span>
       </span>
       <span class="source-links">
-        <a href="https://scholar.google.com/citations?user=d_kH4-oAAAAJ" target="_blank" rel="noopener" class="src-link">Google Scholar ↗</a>
+        <a href="https://scholar.google.com/citations?user=w8fiGu0AAAAJ" target="_blank" rel="noopener" class="src-link">Google Scholar ↗</a>
         <a href="https://www.scopus.com/authid/detail.uri?authorId=57193428877" target="_blank" rel="noopener" class="src-link">Scopus ↗</a>
         <a href="https://orcid.org/0000-0001-8558-9122" target="_blank" rel="noopener" class="src-link">ORCID ↗</a>
       </span>
@@ -122,6 +131,9 @@
   </div>
 </footer>
 
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+<script src="assets/network.js?v=108"></script>
 <script src="assets/app.js?v=108"></script>
 </body>
 </html>
