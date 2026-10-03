@@ -616,7 +616,7 @@
       "type": "conference",
       "year": 2023,
       "openAccess": false,
-      "postId": null,
+      "postId": "post-smarttech2023-emergency-tuning",
       "topics": [
         "social-media",
         "optimization",
@@ -643,7 +643,7 @@
       "quartile": "Q2",
       "year": 2023,
       "openAccess": false,
-      "postId": null,
+      "postId": "post-dib2023-cbcovid19ec",
       "topics": [
         "health",
         "dataset"
@@ -663,7 +663,7 @@
       "type": "journal",
       "year": 2023,
       "openAccess": false,
-      "postId": null,
+      "postId": "post-cm2023-busuu-english",
       "topics": [
         "education"
       ],
@@ -682,7 +682,7 @@
       "type": "journal",
       "year": 2022,
       "openAccess": false,
-      "postId": null,
+      "postId": "post-ek2022-web20-creative",
       "topics": [
         "education"
       ],
@@ -702,7 +702,7 @@
       "type": "conference",
       "year": 2022,
       "openAccess": false,
-      "postId": null,
+      "postId": "post-ci3-2022-elderly-diseases",
       "topics": [
         "health",
         "big-data"
@@ -727,7 +727,7 @@
       "type": "journal",
       "year": 2021,
       "openAccess": true,
-      "postId": null,
+      "postId": "post-data2021-lelephid",
       "topics": [
         "agriculture",
         "computer-vision",
@@ -750,7 +750,7 @@
       "type": "conference",
       "year": 2021,
       "openAccess": false,
-      "postId": null,
+      "postId": "post-citis2021-emergency-detection",
       "topics": [
         "social-media",
         "nlp"
@@ -780,7 +780,8 @@
         "dataset"
       ],
       "citations": 3,
-      "scholarCitations": 10
+      "scholarCitations": 10,
+      "postId": "post-dib2020-pcstcol-power"
     },
     {
       "id": "jbcb2020-gene",
@@ -799,7 +800,8 @@
         "bioinformatics"
       ],
       "citations": 1,
-      "scholarCitations": 1
+      "scholarCitations": 1,
+      "postId": "post-jbcb2020-gene-clustering"
     },
     {
       "id": "ijms2020-tgct",
@@ -819,7 +821,8 @@
         "bioinformatics"
       ],
       "citations": 14,
-      "scholarCitations": 15
+      "scholarCitations": 15,
+      "postId": "post-ijms2020-tgct-genetics"
     },
     {
       "id": "dib2019-rocole",
@@ -842,7 +845,56 @@
         "dataset"
       ],
       "citations": 96,
-      "scholarCitations": 163
+      "scholarCitations": 163,
+      "postId": "post-dib2019-rocole-coffee"
+    },
+    {
+      "id": "aip2024-wsn-sensors",
+      "doi": "10.1063/5.0187487",
+      "title": "Evaluation of a wireless sensor network design for the measurement of environmental variables",
+      "authors": [
+        "Leopoldo Andrés Vera Pico",
+        "Marely del Rosario Cruz Felipe",
+        "Jorge Antonio Párraga Álava",
+        "Dannyll Michellc Zambrano Zambrano",
+        "Yohanna Daniela Daza Álava"
+      ],
+      "venue": "AIP Conference Proceedings, Vol. 2994 (2024)",
+      "type": "conference",
+      "year": 2024,
+      "openAccess": false,
+      "postId": "post-aip2024-wsn-sensors",
+      "topics": [
+        "iot",
+        "sensors",
+        "hardware",
+        "manabi"
+      ],
+      "citations": 0,
+      "scholarCitations": 0
+    },
+    {
+      "id": "encriptar2023-emergency-annotation",
+      "doi": "10.56124/encriptar.v6i11.0001",
+      "title": "Anotado semiautomático de eventos de emergencia reportados en X basado en aprendizaje automático y computación evolutiva",
+      "authors": [
+        "Jesús Zambrano-Zambrano",
+        "Joel Garcia-Arteaga",
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "Revista Científica de Informática ENCRIPTAR, Vol. 6 No. 11 (2023)",
+      "type": "journal",
+      "year": 2023,
+      "openAccess": true,
+      "postId": "post-encriptar2023-emergency-annotation",
+      "topics": [
+        "emergency",
+        "nlp",
+        "machine-learning",
+        "optimization"
+      ],
+      "citations": 0,
+      "scholarCitations": 0
     }
   ]
 }

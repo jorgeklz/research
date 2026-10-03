@@ -131,9 +131,9 @@
   const $$ = (s, el) => Array.from((el || document).querySelectorAll(s));
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
-  const normDoi = (d) => (d || "").toLowerCase().trim();
+  const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = "99";
+  const VER = "101";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -258,7 +258,14 @@
     let t = $("#toast"); if (!t) { t = document.createElement("div"); t.id = "toast"; document.body.appendChild(t); }
     t.textContent = msg; t.classList.add("show"); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 1700);
   }
-  const indexPosts = (posts) => { const m = {}; (posts.items || []).forEach((p) => m[p.id] = p); return m; };
+  const indexPosts = (posts) => {
+    const m = {};
+    (posts.items || []).forEach((p) => {
+      if (p.id) m[p.id] = p;
+      if (p.doi) m[normDoi(p.doi)] = p;
+    });
+    return m;
+  };
 
 
   function updateGoto(container, pages, current, onGo) {
@@ -407,9 +414,9 @@
     const el = document.createElement("article");
     el.className = "pub";
     const doiURL = p.doi ? "https://doi.org/" + p.doi : null;
-    const curated = p.postId && byId[p.postId];
+    const curated = (p.postId && byId[p.postId]) || (p.doi && byId[normDoi(p.doi)]);
     // only offer an explanatory post for curated ones or 2024+ publications
-    const postHref = curated ? `${POST_PAGE}?id=${encodeURIComponent(p.postId)}`
+    const postHref = curated ? `${POST_PAGE}?id=${encodeURIComponent(curated.id)}`
       : (p.doi && (p.year || 0) >= 2024 ? `${POST_PAGE}?doi=${encodeURIComponent(p.doi)}` : null);
     const qBadge = p.quartile ? `<span class="badge-quartile badge-${esc(p.quartile.toLowerCase())}">${esc(p.quartile)}</span>` : "";
     const oaBadge = p.openAccess ? `<span class="badge-oa">${ICON.oa} ${T.openAccess}</span>` : "";

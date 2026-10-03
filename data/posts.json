@@ -1151,6 +1151,68 @@
           "url": "https://doi.org/10.1109/acmlc70381.2026.11700499"
         }
       ]
+    },
+    {
+      "id": "post-aip2024-wsn-sensors",
+      "date": "2024-01-17",
+      "type": "paper",
+      "doi": "10.1063/5.0187487",
+      "auto": false,
+      "topics": [
+        "iot",
+        "sensors",
+        "hardware",
+        "manabi"
+      ],
+      "title": {
+        "en": "Monitoring environmental variables with low-cost wireless sensor networks",
+        "es": "Monitoreo de variables ambientales con redes de sensores inalámbricos de bajo costo"
+      },
+      "summary": {
+        "en": "With Leopoldo Andrés Vera Pico, Marely del Rosario Cruz Felipe and student coauthors, designing and evaluating a wireless sensor network to monitor microclimate variables across Manabí.",
+        "es": "Con Leopoldo Andrés Vera Pico, Marely del Rosario Cruz Felipe y coautores estudiantes, diseñamos y evaluamos una red de sensores inalámbricos para monitorear variables microclimáticas en Manabí."
+      },
+      "body": {
+        "en": "Monitoring environmental conditions such as ambient temperature, relative humidity, and atmospheric quality is essential for agricultural management, public health, and civil protection. In many developing regions, commercial weather stations are prohibitively expensive to purchase and maintain, leaving large geographical areas without localized microclimate data. Designing reliable, low-cost sensor nodes that can operate autonomously is a practical engineering challenge.\n\nWorking with **Leopoldo Andrés Vera Pico**, **Marely del Rosario Cruz Felipe**, **Dannyll Michellc Zambrano Zambrano**, and **Yohanna Daniela Daza Álava** at the Universidad Técnica de Manabí, we developed and evaluated a prototype wireless sensor network (WSN) tailored to local environmental monitoring needs. The system connects distributed hardware nodes equipped with environmental sensors to a central gateway using energy-efficient wireless communication protocols.\n\nWe validated the design through extensive empirical testing in Portoviejo, Manabí, analyzing data transmission stability, packet loss rates across varying distances, battery consumption profiles, and measurement consistency against calibrated reference devices. The experimental results confirmed that modular, low-power nodes can maintain dependable real-time data acquisition even in warm, humid tropical conditions without requiring costly commercial infrastructure.\n\nDeploying accessible sensor networks allows rural communities and academic campuses to gather real-time environmental indicators for climate resilience and agricultural planning. We presented this work at the VI International Scientific Convention of Universidad Técnica de Manabí, published in **AIP Conference Proceedings**.",
+        "es": "El monitoreo continuo de variables ambientales como la temperatura, la humedad relativa y la calidad del aire resulta determinante para la producción agrícola, la gestión del agua y la prevención de riesgos locales. Sin embargo, las estaciones meteorológicas comerciales importadas tienen costos muy altos de adquisición y repuestos, lo que provoca que extensas zonas rurales y urbanas carezcan de información climática localizada. Desarrollar redes inalámbricas accesibles y de bajo consumo representa una necesidad tecnológica urgente.\n\nJunto a **Leopoldo Andrés Vera Pico**, **Marely del Rosario Cruz Felipe**, **Dannyll Michellc Zambrano Zambrano** y **Yohanna Daniela Daza Álava** en la Universidad Técnica de Manabí, diseñamos y evaluamos un prototipo de red de sensores inalámbricos (WSN) concebido para capturar datos ambientales en tiempo real. La arquitectura integra nodos sensoriales de bajo costo que transmiten sus lecturas hacia un punto de recolección central mediante protocolos de comunicación eficientes.\n\nRealizamos pruebas de campo exhaustivas en Portoviejo, provincia de Manabí, evaluando la estabilidad en la transmisión inalámbrica, la tasa de pérdida de paquetes a diferentes distancias, la autonomía energética de los nodos y la precisión de las mediciones frente a instrumentos de referencia calibrados. Los ensayos comprobaron que los nodos mantienen una recolección continua y confiable bajo las condiciones climáticas del trópico húmedo.\n\nImplementar redes de sensores de costo asequible permite a comunidades agrícolas, campus universitarios y municipios disponer de datos microclimáticos precisos para una mejor toma de decisiones productivas y ambientales. Presentamos esta investigación en la VI Convención Científica Internacional de la UTM, publicada en **AIP Conference Proceedings**."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1063/5.0187487"
+        }
+      ]
+    },
+    {
+      "id": "post-encriptar2023-emergency-annotation",
+      "date": "2023-12-30",
+      "type": "paper",
+      "doi": "10.56124/encriptar.v6i11.0001",
+      "auto": false,
+      "topics": [
+        "emergency",
+        "nlp",
+        "machine-learning",
+        "optimization"
+      ],
+      "title": {
+        "en": "Semiautomating emergency tweet annotation with evolutionary machine learning",
+        "es": "Anotación semiautomática de tuits de emergencia con machine learning evolutivo"
+      },
+      "summary": {
+        "en": "With Jesús Zambrano-Zambrano and Joel Garcia-Arteaga, combining supervised learning with evolutionary computing to solve the data labeling bottleneck for emergency tweets.",
+        "es": "Con Jesús Zambrano-Zambrano y Joel Garcia-Arteaga, combinamos aprendizaje supervisado con computación evolutiva para resolver el cuello de botella del etiquetado de tuits de emergencia."
+      },
+      "body": {
+        "en": "Supervised artificial intelligence models cannot learn to detect emergency messages without thousands of verified training examples. Yet manually reading, verifying, and labeling messages published on social networks like X (formerly Twitter) is an exhausting, slow, and expensive process. Because human annotation creates a major bottleneck in natural language processing research, creating automated or semiautomated labeling workflows is crucial for developing crisis response tools.\n\nTogether with **Jesús Zambrano-Zambrano** and **Joel Garcia-Arteaga**, we proposed an innovative **semiautomatic text annotation** framework specifically engineered to identify emergency incidents reported by citizens in Spanish. The methodology blends supervised classification algorithms with evolutionary computing techniques, searching for the most informative classification boundaries while minimizing human annotation intervention.\n\nThe system operates iteratively: machine learning models evaluate unlabeled message streams, assign preliminary confidence scores, and pass uncertain cases to human reviewers for confirmation. Evolutionary parameter tuning continuously refines feature selection and model thresholds, steadily reducing the volume of text that requires manual review while maintaining high annotation accuracy and label consistency.\n\nAccelerating the creation of high-quality crisis datasets enables researchers to train faster, more dependable situational awareness models for emergency agencies. The study was published in open-access format in the journal **Revista Científica de Informática ENCRIPTAR**.",
+        "es": "Los modelos de inteligencia artificial no pueden aprender a identificar publicaciones de emergencia sin miles de ejemplos previamente etiquetados. Sin embargo, revisar y clasificar mensajes publicados en redes sociales como X (antes Twitter) de forma totalmente manual representa un proceso extenuante, lento y costoso. La falta de bancos de texto anotados constituye el principal cuello de botella para entrenar sistemas de alerta temprana en situaciones de crisis.\n\nJunto a **Jesús Zambrano-Zambrano** y **Joel Garcia-Arteaga** propusimos un método de **anotado semiautomático** orientado a detectar eventos de emergencia reportados por ciudadanos en español. La metodología combina algoritmos de aprendizaje supervisado con computación evolutiva, logrando un filtrado progresivo que reduce notablemente la necesidad de intervención humana constante.\n\nEl esquema opera de manera interactiva: los algoritmos analizan los mensajes no clasificados, asignan puntuaciones de probabilidad y remiten a validación humana únicamente aquellos casos ambiguos o limítrofes. La optimización evolutiva ajusta de forma continua los umbrales de decisión y los patrones lingüísticos, garantizando una alta calidad en las etiquetas finales con una fracción del esfuerzo habitual.\n\nAcelerar la construcción de corpus lingüísticos confiables permite entrenar mejores detectores de desastres y accidentes para organismos de socorro. El trabajo fue publicado en modalidad de acceso abierto en la **Revista Científica de Informática ENCRIPTAR**."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.56124/encriptar.v6i11.0001"
+        }
+      ]
     }
   ]
 }
