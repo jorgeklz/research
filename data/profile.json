@@ -222,7 +222,7 @@
       "type": "tool",
       "platform": "r",
       "name": "momst",
-      "year": "2025",
+      "year": "2026",
       "meta": { "en": "R package · CRAN", "es": "Paquete de R · CRAN" },
       "desc": {
         "en": "Multi-objective model selection with NSGA-II: returns the set of best trade-off models.",
@@ -279,7 +279,7 @@
   "datasets": [
     {
       "name": "MeteoCoast-EC",
-      "year": "2025",
+      "year": "2026",
       "authors": ["Parraga-Alava, Jorge"],
       "domain": { "en": "Meteorology · Climate", "es": "Meteorología · Clima" },
       "desc": {
