@@ -1213,6 +1213,681 @@
           "url": "https://doi.org/10.56124/encriptar.v6i11.0001"
         }
       ]
+    },
+    {
+      "id": "post-housing-fuzzy-recommender-system-a-syste",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.2139/ssrn.4598319",
+      "auto": true,
+      "title": {
+        "en": "New paper: Housing Fuzzy Recommender System: A Systematic Literature Review",
+        "es": "Nuevo artículo: Housing Fuzzy Recommender System: A Systematic Literature Review"
+      },
+      "summary": {
+        "en": "New publication in a peer-reviewed venue (2023).",
+        "es": "Nueva publicación en un medio arbitrado (2023)."
+      },
+      "body": {
+        "en": "This is a new journal article in 2023.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva artículo de revista en 2023.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.2139/ssrn.4598319"
+        }
+      ]
+    },
+    {
+      "id": "post-predicting-academic-performance-of-low-i",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.5220/0012086300003541",
+      "auto": true,
+      "title": {
+        "en": "New paper: Predicting Academic Performance of Low-Income Students in Public Ecuadorian Online Universities: An Educational Data Mining Approach",
+        "es": "Nuevo artículo: Predicting Academic Performance of Low-Income Students in Public Ecuadorian Online Universities: An Educational Data Mining Approach"
+      },
+      "summary": {
+        "en": "New publication in Proceedings of the 12th International Conference on Data Science, Technology and Applications (2023).",
+        "es": "Nueva publicación en Proceedings of the 12th International Conference on Data Science, Technology and Applications (2023)."
+      },
+      "body": {
+        "en": "This is a new conference paper, published in *Proceedings of the 12th International Conference on Data Science, Technology and Applications* in 2023.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva ponencia de congreso, publicada en *Proceedings of the 12th International Conference on Data Science, Technology and Applications* en 2023.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.5220/0012086300003541"
+        }
+      ]
+    },
+    {
+      "id": "post-cbcovid19ec-a-dataset-complete-blood-cou",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.17632/7bmfgkkm3z.3",
+      "auto": true,
+      "title": {
+        "en": "New paper: CBCovid19EC: A dataset Complete Blood Count and PCR test for COVID-19 detection in Ecuadorian population",
+        "es": "Nuevo artículo: CBCovid19EC: A dataset Complete Blood Count and PCR test for COVID-19 detection in Ecuadorian population"
+      },
+      "summary": {
+        "en": "New publication in a peer-reviewed venue (2022).",
+        "es": "Nueva publicación en un medio arbitrado (2022)."
+      },
+      "body": {
+        "en": "This is a new conference paper in 2022.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva ponencia de congreso en 2022.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.17632/7bmfgkkm3z.3"
+        }
+      ]
+    },
+    {
+      "id": "post-feature-selection-reveal-peripheral-bloo",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.1016/j.meegid.2022.105228",
+      "auto": true,
+      "title": {
+        "en": "New paper: Feature selection reveal peripheral blood parameter's changes between COVID-19 infections patients from Brazil and Ecuador",
+        "es": "Nuevo artículo: Feature selection reveal peripheral blood parameter's changes between COVID-19 infections patients from Brazil and Ecuador"
+      },
+      "summary": {
+        "en": "New publication in Infection, Genetics and Evolution (2022).",
+        "es": "Nueva publicación en Infection, Genetics and Evolution (2022)."
+      },
+      "body": {
+        "en": "This is a new journal article, published in *Infection, Genetics and Evolution* in 2022.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva artículo de revista, publicada en *Infection, Genetics and Evolution* en 2022.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.meegid.2022.105228"
+        }
+      ]
+    },
+    {
+      "id": "post-monitoring-of-air-pollution-levels-with",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": null,
+      "auto": true,
+      "title": {
+        "en": "New paper: Monitoring of Air Pollution Levels with Long Range Transmission Technology,Monitoreo de Niveles de Polución del Aire con Tecnología de transmisión de Largo Alcance",
+        "es": "Nuevo artículo: Monitoring of Air Pollution Levels with Long Range Transmission Technology,Monitoreo de Niveles de Polución del Aire con Tecnología de transmisión de Largo Alcance"
+      },
+      "summary": {
+        "en": "New publication in a peer-reviewed venue (2022).",
+        "es": "Nueva publicación en un medio arbitrado (2022)."
+      },
+      "body": {
+        "en": "This is a new journal article in 2022.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva artículo de revista en 2022.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": []
+    },
+    {
+      "id": "post-testicular-germ-cell-tumors-type-2-have",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.4103/aja.aja_4_21",
+      "auto": true,
+      "title": {
+        "en": "New paper: Testicular germ cell tumors type 2 have high RNA expression of LDHB, the gene for lactate dehydrogenase subunit B",
+        "es": "Nuevo artículo: Testicular germ cell tumors type 2 have high RNA expression of LDHB, the gene for lactate dehydrogenase subunit B"
+      },
+      "summary": {
+        "en": "New publication in Asian Journal of Andrology (2021).",
+        "es": "Nueva publicación en Asian Journal of Andrology (2021)."
+      },
+      "body": {
+        "en": "This is a new journal article, published in *Asian Journal of Andrology* in 2021.\n\n**What it is about.** This study analyzed RNA expression of genes for three serum tumor markers, alpha fetoprotein (AFP), human chorionic gonadotropin (hCG), and lactate dehydrogenase (LDH), in patients with testicular germ cell tumors (TGCT) type 2. The gene AFP encodes AFP, the gene for chorionic gonadotropin beta polypeptide 5 ( CGB5 ) encodes a major part of the specific beta subunit of hCG, and the genes for LDH subunit A ( LDHA ), LDH subunit B ( LDHB ), and LDH subunit C ( LDHC ) encode three different subunits of LDH. LDHB encodes the LDHB subunit present as a tetramer in LDH isoenzyme 1 (LDH-1). We examine…\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva artículo de revista, publicada en *Asian Journal of Andrology* en 2021.\n\n**De qué trata.** This study analyzed RNA expression of genes for three serum tumor markers, alpha fetoprotein (AFP), human chorionic gonadotropin (hCG), and lactate dehydrogenase (LDH), in patients with testicular germ cell tumors (TGCT) type 2. The gene AFP encodes AFP, the gene for chorionic gonadotropin beta polypeptide 5 ( CGB5 ) encodes a major part of the specific beta subunit of hCG, and the genes for LDH subunit A ( LDHA ), LDH subunit B ( LDHB ), and LDH subunit C ( LDHC ) encode three different subunits of LDH. LDHB encodes the LDHB subunit present as a tetramer in LDH isoenzyme 1 (LDH-1). We examine…\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.4103/aja.aja_4_21"
+        }
+      ]
+    },
+    {
+      "id": "post-evaluation-of-lora-technology-for-aquacu",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.1007/978-3-030-90241-4_8",
+      "auto": true,
+      "title": {
+        "en": "New paper: Evaluation of LoRa Technology for Aquaculture Pool Monitoring",
+        "es": "Nuevo artículo: Evaluation of LoRa Technology for Aquaculture Pool Monitoring"
+      },
+      "summary": {
+        "en": "New publication in Communications in Computer and Information Science (2021).",
+        "es": "Nueva publicación en Communications in Computer and Information Science (2021)."
+      },
+      "body": {
+        "en": "This is a new conference paper, published in *Communications in Computer and Information Science* in 2021.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva ponencia de congreso, publicada en *Communications in Computer and Information Science* en 2021.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1007/978-3-030-90241-4_8"
+        }
+      ]
+    },
+    {
+      "id": "post-opinion-and-sentiment-analysis-of-twitte",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.5220/0010651000003058",
+      "auto": true,
+      "title": {
+        "en": "New paper: Opinion and Sentiment Analysis of Twitter Users during the 2021 Ecuador Presidential Election",
+        "es": "Nuevo artículo: Opinion and Sentiment Analysis of Twitter Users during the 2021 Ecuador Presidential Election"
+      },
+      "summary": {
+        "en": "New publication in Proceedings of the 17th International Conference on Web Information Systems and Technologies (2021).",
+        "es": "Nueva publicación en Proceedings of the 17th International Conference on Web Information Systems and Technologies (2021)."
+      },
+      "body": {
+        "en": "This is a new conference paper, published in *Proceedings of the 17th International Conference on Web Information Systems and Technologies* in 2021.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva ponencia de congreso, publicada en *Proceedings of the 17th International Conference on Web Information Systems and Technologies* en 2021.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.5220/0010651000003058"
+        }
+      ]
+    },
+    {
+      "id": "post-urbangency-an-emergency-events-dataset-b",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.1016/j.dib.2020.106693",
+      "auto": true,
+      "title": {
+        "en": "New paper: UrbangEnCy: An emergency events dataset based on citizen sensors for monitoring urban scenarios in Ecuador",
+        "es": "Nuevo artículo: UrbangEnCy: An emergency events dataset based on citizen sensors for monitoring urban scenarios in Ecuador"
+      },
+      "summary": {
+        "en": "New publication in Data in Brief (2021).",
+        "es": "Nueva publicación en Data in Brief (2021)."
+      },
+      "body": {
+        "en": "This is a new journal article, published in *Data in Brief* in 2021.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva artículo de revista, publicada en *Data in Brief* en 2021.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.dib.2020.106693"
+        }
+      ]
+    },
+    {
+      "id": "post-aphids-detection-on-lemons-leaf-image-us",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.1007/978-3-030-59194-6_2",
+      "auto": true,
+      "title": {
+        "en": "New paper: Aphids Detection on Lemons Leaf Image Using Convolutional Neural Networks",
+        "es": "Nuevo artículo: Aphids Detection on Lemons Leaf Image Using Convolutional Neural Networks"
+      },
+      "summary": {
+        "en": "New publication in Advances in Intelligent Systems and Computing (2021).",
+        "es": "Nueva publicación en Advances in Intelligent Systems and Computing (2021)."
+      },
+      "body": {
+        "en": "This is a new conference paper, published in *Advances in Intelligent Systems and Computing* in 2021.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva ponencia de congreso, publicada en *Advances in Intelligent Systems and Computing* en 2021.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1007/978-3-030-59194-6_2"
+        }
+      ]
+    },
+    {
+      "id": "post-urbangency",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.17632/4x37zz82k8.2",
+      "auto": true,
+      "title": {
+        "en": "New paper: urbangEnCy",
+        "es": "Nuevo artículo: urbangEnCy"
+      },
+      "summary": {
+        "en": "New publication in a peer-reviewed venue (2020).",
+        "es": "Nueva publicación en un medio arbitrado (2020)."
+      },
+      "body": {
+        "en": "This is a new conference paper in 2020.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva ponencia de congreso en 2020.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.17632/4x37zz82k8.2"
+        }
+      ]
+    },
+    {
+      "id": "post-lelephid-a-small-images-dataset-for-aphi",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.17632/4b6vr2zkbm.1",
+      "auto": true,
+      "title": {
+        "en": "New paper: LeLePhid: A Small Images Dataset for Aphids Detection and Area Counting on Lemons Leaf",
+        "es": "Nuevo artículo: LeLePhid: A Small Images Dataset for Aphids Detection and Area Counting on Lemons Leaf"
+      },
+      "summary": {
+        "en": "New publication in a peer-reviewed venue (2020).",
+        "es": "Nueva publicación en un medio arbitrado (2020)."
+      },
+      "body": {
+        "en": "This is a new conference paper in 2020.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva ponencia de congreso en 2020.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.17632/4b6vr2zkbm.1"
+        }
+      ]
+    },
+    {
+      "id": "post-pcstcol-power-consumption-data-from-an-a",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.17632/xbt7scz5ny.1",
+      "auto": true,
+      "title": {
+        "en": "New paper: PCSTCOL: Power consumption data from an area of southern Colombia",
+        "es": "Nuevo artículo: PCSTCOL: Power consumption data from an area of southern Colombia"
+      },
+      "summary": {
+        "en": "New publication in a peer-reviewed venue (2019).",
+        "es": "Nueva publicación en un medio arbitrado (2019)."
+      },
+      "body": {
+        "en": "This is a new conference paper in 2019.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva ponencia de congreso en 2019.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.17632/xbt7scz5ny.1"
+        }
+      ]
+    },
+    {
+      "id": "post-an-unsupervised-learning-approach-for-au",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.1109/sccc49216.2019.8966443",
+      "auto": true,
+      "title": {
+        "en": "New paper: An Unsupervised Learning Approach for Automatically to Categorize Potential Suicide Messages in Social Media",
+        "es": "Nuevo artículo: An Unsupervised Learning Approach for Automatically to Categorize Potential Suicide Messages in Social Media"
+      },
+      "summary": {
+        "en": "New publication in 2019 38th International Conference of the Chilean Computer Science Society (SCCC) (2019).",
+        "es": "Nueva publicación en 2019 38th International Conference of the Chilean Computer Science Society (SCCC) (2019)."
+      },
+      "body": {
+        "en": "This is a new conference paper, published in *2019 38th International Conference of the Chilean Computer Science Society (SCCC)* in 2019.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva ponencia de congreso, publicada en *2019 38th International Conference of the Chilean Computer Science Society (SCCC)* en 2019.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1109/sccc49216.2019.8966443"
+        }
+      ]
+    },
+    {
+      "id": "post-gene-expression-of-genes-for-tumour-mark",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.1016/s1569-9056(19)32569-2",
+      "auto": true,
+      "title": {
+        "en": "New paper: Gene expression of genes for tumour markers in testicular germ cell tumours",
+        "es": "Nuevo artículo: Gene expression of genes for tumour markers in testicular germ cell tumours"
+      },
+      "summary": {
+        "en": "New publication in European Urology Supplements (2019).",
+        "es": "Nueva publicación en European Urology Supplements (2019)."
+      },
+      "body": {
+        "en": "This is a new journal article, published in *European Urology Supplements* in 2019.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva artículo de revista, publicada en *European Urology Supplements* en 2019.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/s1569-9056(19)32569-2"
+        }
+      ]
+    },
+    {
+      "id": "post-gene-signatures-for-testicular-germ-cell",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.1016/s1569-9056(19)32555-2",
+      "auto": true,
+      "title": {
+        "en": "New paper: Gene signatures for testicular germ cell tumours",
+        "es": "Nuevo artículo: Gene signatures for testicular germ cell tumours"
+      },
+      "summary": {
+        "en": "New publication in European Urology Supplements (2019).",
+        "es": "Nueva publicación en European Urology Supplements (2019)."
+      },
+      "body": {
+        "en": "This is a new journal article, published in *European Urology Supplements* in 2019.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva artículo de revista, publicada en *European Urology Supplements* en 2019.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/s1569-9056(19)32555-2"
+        }
+      ]
+    },
+    {
+      "id": "post-moc-gapbk-multi-objective-clustering-alg",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.32614/cran.package.moc.gapbk",
+      "auto": true,
+      "title": {
+        "en": "New paper: moc.gapbk: Multi-Objective Clustering Algorithm Guided by a-Priori Biological Knowledge",
+        "es": "Nuevo artículo: moc.gapbk: Multi-Objective Clustering Algorithm Guided by a-Priori Biological Knowledge"
+      },
+      "summary": {
+        "en": "New publication in CRAN: Contributed Packages (2019).",
+        "es": "Nueva publicación en CRAN: Contributed Packages (2019)."
+      },
+      "body": {
+        "en": "This is a new conference paper, published in *CRAN: Contributed Packages* in 2019.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva ponencia de congreso, publicada en *CRAN: Contributed Packages* en 2019.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.32614/cran.package.moc.gapbk"
+        }
+      ]
+    },
+    {
+      "id": "post-multi-objective-genetic-algorithms-are-t",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": null,
+      "auto": true,
+      "title": {
+        "en": "New paper: Multi-objective genetic algorithms: Are they useful for tuning parameters in agent-based simulation?",
+        "es": "Nuevo artículo: Multi-objective genetic algorithms: Are they useful for tuning parameters in agent-based simulation?"
+      },
+      "summary": {
+        "en": "New publication in a peer-reviewed venue (2019).",
+        "es": "Nueva publicación en un medio arbitrado (2019)."
+      },
+      "body": {
+        "en": "This is a new journal article in 2019.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva artículo de revista en 2019.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": []
+    },
+    {
+      "id": "post-unsupervised-pattern-recognition-for-geo",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.1109/sccc.2018.8705248",
+      "auto": true,
+      "title": {
+        "en": "New paper: Unsupervised Pattern Recognition for Geographical Clustering of Seismic Events Post M W 7.8 Ecuador Earthquake",
+        "es": "Nuevo artículo: Unsupervised Pattern Recognition for Geographical Clustering of Seismic Events Post M W 7.8 Ecuador Earthquake"
+      },
+      "summary": {
+        "en": "New publication in 2018 37th International Conference of the Chilean Computer Science Society (SCCC) (2018).",
+        "es": "Nueva publicación en 2018 37th International Conference of the Chilean Computer Science Society (SCCC) (2018)."
+      },
+      "body": {
+        "en": "This is a new conference paper, published in *2018 37th International Conference of the Chilean Computer Science Society (SCCC)* in 2018.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva ponencia de congreso, publicada en *2018 37th International Conference of the Chilean Computer Science Society (SCCC)* en 2018.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1109/sccc.2018.8705248"
+        }
+      ]
+    },
+    {
+      "id": "post-how-predicting-the-academic-success-of-s",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.1109/etcm.2018.8580296",
+      "auto": true,
+      "title": {
+        "en": "New paper: How Predicting The Academic Success of Students of the ESPAM MFL?: A Preliminary Decision Trees Based Study",
+        "es": "Nuevo artículo: How Predicting The Academic Success of Students of the ESPAM MFL?: A Preliminary Decision Trees Based Study"
+      },
+      "summary": {
+        "en": "New publication in 2018 IEEE Third Ecuador Technical Chapters Meeting (ETCM) (2018).",
+        "es": "Nueva publicación en 2018 IEEE Third Ecuador Technical Chapters Meeting (ETCM) (2018)."
+      },
+      "body": {
+        "en": "This is a new conference paper, published in *2018 IEEE Third Ecuador Technical Chapters Meeting (ETCM)* in 2018.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva ponencia de congreso, publicada en *2018 IEEE Third Ecuador Technical Chapters Meeting (ETCM)* en 2018.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1109/etcm.2018.8580296"
+        }
+      ]
+    },
+    {
+      "id": "post-a-multi-objective-gene-clustering-algori",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.1186/s13040-018-0178-4",
+      "auto": true,
+      "title": {
+        "en": "New paper: A multi-objective gene clustering algorithm guided by apriori biological knowledge with intensification and diversification strategies",
+        "es": "Nuevo artículo: A multi-objective gene clustering algorithm guided by apriori biological knowledge with intensification and diversification strategies"
+      },
+      "summary": {
+        "en": "New publication in BioData Mining (2018).",
+        "es": "Nueva publicación en BioData Mining (2018)."
+      },
+      "body": {
+        "en": "This is a new journal article, published in *BioData Mining* in 2018.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva artículo de revista, publicada en *BioData Mining* en 2018.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1186/s13040-018-0178-4"
+        }
+      ]
+    },
+    {
+      "id": "post-propuesta-metodol-gica-para-proyectos-de",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": null,
+      "auto": true,
+      "title": {
+        "en": "New paper: Propuesta Metodológica para Proyectos de Infraestructura Tecnológica en Trabajos de Titulación",
+        "es": "Nuevo artículo: Propuesta Metodológica para Proyectos de Infraestructura Tecnológica en Trabajos de Titulación"
+      },
+      "summary": {
+        "en": "New publication in a peer-reviewed venue (2018).",
+        "es": "Nueva publicación en un medio arbitrado (2018)."
+      },
+      "body": {
+        "en": "This is a new conference paper in 2018.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva ponencia de congreso en 2018.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": []
+    },
+    {
+      "id": "post-methodological-proposal-for-technologica",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": null,
+      "auto": true,
+      "title": {
+        "en": "New paper: Methodological proposal for technological infrastructure projects in degree thesis,Propuesta metodológica para proyectos de infraestructura tecnológica en trabajos de titulación",
+        "es": "Nuevo artículo: Methodological proposal for technological infrastructure projects in degree thesis,Propuesta metodológica para proyectos de infraestructura tecnológica en trabajos de titulación"
+      },
+      "summary": {
+        "en": "New publication in a peer-reviewed venue (2018).",
+        "es": "Nueva publicación en un medio arbitrado (2018)."
+      },
+      "body": {
+        "en": "This is a new journal article in 2018.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva artículo de revista en 2018.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": []
+    },
+    {
+      "id": "post-unsupervised-pattern-recognition-for-geo-2018",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": null,
+      "auto": true,
+      "title": {
+        "en": "New paper: Unsupervised Pattern Recognition for Geographical Clustering of Seismic Events Post <i>M<sub>W</sub></i> 7.8 Ecuador Earthquake",
+        "es": "Nuevo artículo: Unsupervised Pattern Recognition for Geographical Clustering of Seismic Events Post <i>M<sub>W</sub></i> 7.8 Ecuador Earthquake"
+      },
+      "summary": {
+        "en": "New publication in a peer-reviewed venue (2018).",
+        "es": "Nueva publicación en un medio arbitrado (2018)."
+      },
+      "body": {
+        "en": "This is a new journal article in 2018.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva artículo de revista en 2018.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": []
+    },
+    {
+      "id": "post-a-bi-objective-clustering-algorithm-for",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.19153/cleiej.20.2.4",
+      "auto": true,
+      "title": {
+        "en": "New paper: A Bi-Objective Clustering Algorithm for Gene Expression Data",
+        "es": "Nuevo artículo: A Bi-Objective Clustering Algorithm for Gene Expression Data"
+      },
+      "summary": {
+        "en": "New publication in CLEI Electronic Journal (2017).",
+        "es": "Nueva publicación en CLEI Electronic Journal (2017)."
+      },
+      "body": {
+        "en": "This is a new journal article, published in *CLEI Electronic Journal* in 2017.\n\n**What it is about.** Clustering algorithms are a common method for data analysis in many science field. They have become popular among biologists because of ease to discovery similar cellular functions in gene expression data. Most approaches consider the gene clustering as an optimization problem, where an ad-hoc cluster quality index is optimized which can be defined regarding gene expression data or biological information. However, these approaches may not be sufficient since they cannot guarantee to generate clusters with similar expression patterns and biological coherence. In this paper, we propose a bi-obje…\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva artículo de revista, publicada en *CLEI Electronic Journal* en 2017.\n\n**De qué trata.** Clustering algorithms are a common method for data analysis in many science field. They have become popular among biologists because of ease to discovery similar cellular functions in gene expression data. Most approaches consider the gene clustering as an optimization problem, where an ad-hoc cluster quality index is optimized which can be defined regarding gene expression data or biological information. However, these approaches may not be sufficient since they cannot guarantee to generate clusters with similar expression patterns and biological coherence. In this paper, we propose a bi-obje…\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.19153/cleiej.20.2.4"
+        }
+      ]
+    },
+    {
+      "id": "post-using-local-search-strategies-to-improve",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.1109/cec.2017.7969432",
+      "auto": true,
+      "title": {
+        "en": "New paper: Using local search strategies to improve the performance of NSGA-II for the Multi-Criteria Minimum Spanning Tree problem",
+        "es": "Nuevo artículo: Using local search strategies to improve the performance of NSGA-II for the Multi-Criteria Minimum Spanning Tree problem"
+      },
+      "summary": {
+        "en": "New publication in 2017 IEEE Congress on Evolutionary Computation (CEC) (2017).",
+        "es": "Nueva publicación en 2017 IEEE Congress on Evolutionary Computation (CEC) (2017)."
+      },
+      "body": {
+        "en": "This is a new conference paper, published in *2017 IEEE Congress on Evolutionary Computation (CEC)* in 2017.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva ponencia de congreso, publicada en *2017 IEEE Congress on Evolutionary Computation (CEC)* en 2017.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1109/cec.2017.7969432"
+        }
+      ]
+    },
+    {
+      "id": "post-a-bi-objective-model-for-gene-clustering",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.1109/clei.2016.7833327",
+      "auto": true,
+      "title": {
+        "en": "New paper: A bi-objective model for gene clustering combining expression data and external biological knowledge",
+        "es": "Nuevo artículo: A bi-objective model for gene clustering combining expression data and external biological knowledge"
+      },
+      "summary": {
+        "en": "New publication in 2016 XLII Latin American Computing Conference (CLEI) (2016).",
+        "es": "Nueva publicación en 2016 XLII Latin American Computing Conference (CLEI) (2016)."
+      },
+      "body": {
+        "en": "This is a new conference paper, published in *2016 XLII Latin American Computing Conference (CLEI)* in 2016.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva ponencia de congreso, publicada en *2016 XLII Latin American Computing Conference (CLEI)* en 2016.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1109/clei.2016.7833327"
+        }
+      ]
+    },
+    {
+      "id": "post-genes-involved-in-the-seminoma-testicula",
+      "date": "2026-10-05",
+      "type": "paper",
+      "doi": "10.33333/rp.v38i1.449",
+      "auto": true,
+      "title": {
+        "en": "New paper: Genes Involved in the Seminoma Testicular Cancer: A Bioinformatic Study",
+        "es": "Nuevo artículo: Genes Involved in the Seminoma Testicular Cancer: A Bioinformatic Study"
+      },
+      "summary": {
+        "en": "New publication in a peer-reviewed venue (2016).",
+        "es": "Nueva publicación en un medio arbitrado (2016)."
+      },
+      "body": {
+        "en": "This is a new journal article in 2016.\n\nA clear plain-language summary is being prepared.\n\n**Why it matters.** It adds to the research on artificial intelligence, machine learning and data science featured across this site. The full paper is available through the DOI below.",
+        "es": "Esta es una nueva artículo de revista en 2016.\n\nSe está preparando un resumen claro en lenguaje llano.\n\n**Por qué importa.** Se suma a la investigación en inteligencia artificial, machine learning y ciencia de datos presente en este sitio. El artículo completo está disponible a través del DOI de abajo."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.33333/rp.v38i1.449"
+        }
+      ]
     }
   ]
 }

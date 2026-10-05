@@ -1,51 +1,6 @@
 {
-  "updated": "2026-10-02",
+  "updated": "2026-10-05",
   "items": [
-    {
-      "id": "scientometrics2026-utm",
-      "doi": "10.1007/s11192-026-05818-4",
-      "title": "Growth, concentration, and internationalisation of research output at a post-reform regional university in Ecuador: bibliometric evidence from Scopus (2016-2025)",
-      "authors": [
-        "Jorge Parraga-Alava",
-        "Jorge Rodas-Silva"
-      ],
-      "venue": "Scientometrics",
-      "type": "journal",
-      "quartile": "Q1",
-      "year": 2026,
-      "date": "2026-09-23",
-      "openAccess": false,
-      "postId": "post-scientometrics2026-utm",
-      "topics": [
-        "bibliometrics",
-        "higher-education",
-        "data-science"
-      ],
-      "citations": 0,
-      "scholarCitations": 0
-    },
-    {
-      "id": "acmlc2026-vlm-coffee",
-      "doi": "10.1109/acmlc70381.2026.11700499",
-      "title": "Evaluating Zero-Shot and Few-Shot Vision-Language Models Against Supervised CNNs for Coffee Leaf Rust Classification",
-      "authors": [
-        "Jorge Rodas-Silva",
-        "Jorge Parraga-Alava"
-      ],
-      "venue": "2026 8th Asia Conference on Machine Learning and Computing (ACMLC), IEEE",
-      "type": "conference",
-      "year": 2026,
-      "date": "2026-07-15",
-      "openAccess": false,
-      "postId": "post-acmlc2026-vlm-coffee",
-      "topics": [
-        "agriculture",
-        "deep-learning",
-        "computer-vision"
-      ],
-      "citations": 0,
-      "scholarCitations": 0
-    },
     {
       "id": "iti2026-bibliometric",
       "doi": "10.53591/iti.v18i25.3172",
@@ -134,6 +89,51 @@
         "computer-vision"
       ],
       "pages": "73-83",
+      "citations": 0,
+      "scholarCitations": 0
+    },
+    {
+      "id": "acmlc2026-vlm-coffee",
+      "doi": "10.1109/acmlc70381.2026.11700499",
+      "title": "Evaluating Zero-Shot and Few-Shot Vision-Language Models Against Supervised CNNs for Coffee Leaf Rust Classification",
+      "authors": [
+        "Jorge Rodas-Silva",
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "2026 8th Asia Conference on Machine Learning and Computing (ACMLC), IEEE",
+      "type": "conference",
+      "year": 2026,
+      "date": "2026-07-15",
+      "openAccess": false,
+      "postId": "post-acmlc2026-vlm-coffee",
+      "topics": [
+        "agriculture",
+        "deep-learning",
+        "computer-vision"
+      ],
+      "citations": 0,
+      "scholarCitations": 0
+    },
+    {
+      "id": "scientometrics2026-utm",
+      "doi": "10.1007/s11192-026-05818-4",
+      "title": "Growth, concentration, and internationalisation of research output at a post-reform regional university in Ecuador: bibliometric evidence from Scopus (2016-2025)",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Jorge Rodas-Silva"
+      ],
+      "venue": "Scientometrics",
+      "type": "journal",
+      "quartile": "Q1",
+      "year": 2026,
+      "date": "2026-09-23",
+      "openAccess": false,
+      "postId": "post-scientometrics2026-utm",
+      "topics": [
+        "bibliometrics",
+        "higher-education",
+        "data-science"
+      ],
       "citations": 0,
       "scholarCitations": 0
     },
@@ -558,6 +558,31 @@
       "scholarCitations": 0
     },
     {
+      "id": "aip2024-wsn-sensors",
+      "doi": "10.1063/5.0187487",
+      "title": "Evaluation of a wireless sensor network design for the measurement of environmental variables",
+      "authors": [
+        "Leopoldo Andrés Vera Pico",
+        "Marely del Rosario Cruz Felipe",
+        "Jorge Antonio Párraga Álava",
+        "Dannyll Michellc Zambrano Zambrano",
+        "Yohanna Daniela Daza Álava"
+      ],
+      "venue": "AIP Conference Proceedings, Vol. 2994 (2024)",
+      "type": "conference",
+      "year": 2024,
+      "openAccess": false,
+      "postId": "post-aip2024-wsn-sensors",
+      "topics": [
+        "iot",
+        "sensors",
+        "hardware",
+        "manabi"
+      ],
+      "citations": 0,
+      "scholarCitations": 0
+    },
+    {
       "id": "heliyon2024-housing-fuzzy",
       "doi": "10.1016/j.heliyon.2024.e26444",
       "title": "Housing fuzzy recommender system: A systematic literature review",
@@ -629,6 +654,29 @@
       "scholarCitations": 1
     },
     {
+      "id": "encriptar2023-emergency-annotation",
+      "doi": "10.56124/encriptar.v6i11.0001",
+      "title": "Anotado semiautomático de eventos de emergencia reportados en X basado en aprendizaje automático y computación evolutiva",
+      "authors": [
+        "Jesús Zambrano-Zambrano",
+        "Joel Garcia-Arteaga",
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "Revista Científica de Informática ENCRIPTAR, Vol. 6 No. 11 (2023)",
+      "type": "journal",
+      "year": 2023,
+      "openAccess": true,
+      "postId": "post-encriptar2023-emergency-annotation",
+      "topics": [
+        "emergency",
+        "nlp",
+        "machine-learning",
+        "optimization"
+      ],
+      "citations": 0,
+      "scholarCitations": 0
+    },
+    {
       "id": "dib2023-cbcovid",
       "doi": "10.1016/j.dib.2023.109016",
       "title": "CBCovid19EC: A dataset complete blood count and PCR test for COVID-19 detection in Ecuadorian population",
@@ -655,6 +703,24 @@
       "scholarCitations": 9
     },
     {
+      "id": "housing-fuzzy-recommender-system-a-syste-2023",
+      "doi": "10.2139/ssrn.4598319",
+      "title": "Housing Fuzzy Recommender System: A Systematic Literature Review",
+      "authors": [
+        "Emanuel  Guillermo Muñoz",
+        "Jonathan  Josue Proaño",
+        "Jorge Parraga Alava",
+        "Jaime Meza",
+        "Sebastian Ventura"
+      ],
+      "venue": "",
+      "type": "journal",
+      "year": 2023,
+      "pages": null,
+      "openAccess": false,
+      "postId": "post-housing-fuzzy-recommender-system-a-syste"
+    },
+    {
       "id": "cienciamatria2023-busuu",
       "doi": "10.35381/cm.v9i2.1158",
       "title": "La plataforma digital Busuu en la enseñanza del idioma inglés en Educación General Básica, Ecuador",
@@ -672,6 +738,35 @@
       ],
       "citations": 0,
       "scholarCitations": 0
+    },
+    {
+      "id": "predicting-academic-performance-of-low-i-2023",
+      "doi": "10.5220/0012086300003541",
+      "title": "Predicting Academic Performance of Low-Income Students in Public Ecuadorian Online Universities: An Educational Data Mining Approach",
+      "authors": [
+        "Jorge Rodas-Silva",
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "Proceedings of the 12th International Conference on Data Science, Technology and Applications",
+      "type": "conference",
+      "year": 2023,
+      "pages": "52-63",
+      "openAccess": false,
+      "postId": "post-predicting-academic-performance-of-low-i"
+    },
+    {
+      "id": "cbcovid19ec-a-dataset-complete-blood-cou-2022",
+      "doi": "10.17632/7bmfgkkm3z.3",
+      "title": "CBCovid19EC: A dataset Complete Blood Count and PCR test for COVID-19 detection in Ecuadorian population",
+      "authors": [
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "",
+      "type": "conference",
+      "year": 2022,
+      "pages": null,
+      "openAccess": false,
+      "postId": "post-cbcovid19ec-a-dataset-complete-blood-cou"
     },
     {
       "id": "episteme2022-web20",
@@ -693,6 +788,40 @@
       "scholarCitations": 0
     },
     {
+      "id": "feature-selection-reveal-peripheral-bloo-2022",
+      "doi": "10.1016/j.meegid.2022.105228",
+      "title": "Feature selection reveal peripheral blood parameter's changes between COVID-19 infections patients from Brazil and Ecuador",
+      "authors": [
+        "Bruno César Feltes",
+        "Igor Araújo Vieira",
+        "Jorge Parraga-Alava",
+        "Jaime Meza",
+        "Edy Portmann",
+        "Luis Terán",
+        "Márcio Dorn"
+      ],
+      "venue": "Infection, Genetics and Evolution",
+      "type": "journal",
+      "year": 2022,
+      "pages": "105228",
+      "openAccess": true,
+      "postId": "post-feature-selection-reveal-peripheral-bloo"
+    },
+    {
+      "id": "monitoring-of-air-pollution-levels-with-2022",
+      "doi": null,
+      "title": "Monitoring of Air Pollution Levels with Long Range Transmission Technology,Monitoreo de Niveles de Polución del Aire con Tecnología de transmisión de Largo Alcance",
+      "authors": [
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "",
+      "type": "journal",
+      "year": 2022,
+      "pages": null,
+      "openAccess": false,
+      "postId": "post-monitoring-of-air-pollution-levels-with"
+    },
+    {
       "id": "lnns2022-elderly",
       "doi": "10.1007/978-3-031-11438-0_48",
       "title": "Prediction of Diseases in the Elderly in Manabí Through Big Data Technologies",
@@ -712,6 +841,38 @@
       ],
       "citations": 1,
       "scholarCitations": 1
+    },
+    {
+      "id": "aphids-detection-on-lemons-leaf-image-us-2021",
+      "doi": "10.1007/978-3-030-59194-6_2",
+      "title": "Aphids Detection on Lemons Leaf Image Using Convolutional Neural Networks",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Roberth Alcivar-Cevallos",
+        "Jaime A. Riascos",
+        "Miguel A. Becerra"
+      ],
+      "venue": "Advances in Intelligent Systems and Computing",
+      "type": "conference",
+      "year": 2021,
+      "pages": "16-27",
+      "openAccess": false,
+      "postId": "post-aphids-detection-on-lemons-leaf-image-us"
+    },
+    {
+      "id": "evaluation-of-lora-technology-for-aquacu-2021",
+      "doi": "10.1007/978-3-030-90241-4_8",
+      "title": "Evaluation of LoRa Technology for Aquaculture Pool Monitoring",
+      "authors": [
+        "Cristhian Alava-Troya",
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "Communications in Computer and Information Science",
+      "type": "conference",
+      "year": 2021,
+      "pages": "93-105",
+      "openAccess": false,
+      "postId": "post-evaluation-of-lora-technology-for-aquacu"
     },
     {
       "id": "data2021-lelephid",
@@ -740,6 +901,39 @@
       "scholarCitations": 23
     },
     {
+      "id": "opinion-and-sentiment-analysis-of-twitte-2021",
+      "doi": "10.5220/0010651000003058",
+      "title": "Opinion and Sentiment Analysis of Twitter Users during the 2021 Ecuador Presidential Election",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Jorge Rodas-Silva",
+        "Iván Quimi",
+        "Roberth Alcivar-Cevallos"
+      ],
+      "venue": "Proceedings of the 17th International Conference on Web Information Systems and Technologies",
+      "type": "conference",
+      "year": 2021,
+      "pages": "257-266",
+      "openAccess": false,
+      "postId": "post-opinion-and-sentiment-analysis-of-twitte"
+    },
+    {
+      "id": "testicular-germ-cell-tumors-type-2-have-2021",
+      "doi": "10.4103/aja.aja_4_21",
+      "title": "Testicular germ cell tumors type 2 have high RNA expression of LDHB, the gene for lactate dehydrogenase subunit B",
+      "authors": [
+        "Finn Edler von Eyben",
+        "Jorge Parraga-Alava",
+        "Shi-Ming Tu"
+      ],
+      "venue": "Asian Journal of Andrology",
+      "type": "journal",
+      "year": 2021,
+      "pages": "357-362",
+      "openAccess": false,
+      "postId": "post-testicular-germ-cell-tumors-type-2-have"
+    },
+    {
       "id": "sst2021-social-emergency",
       "doi": "10.1007/978-981-16-4126-8_25",
       "title": "Toward a Social Media Emergency Events Detection Based on Supervised Learning",
@@ -760,6 +954,23 @@
       ],
       "citations": 2,
       "scholarCitations": 3
+    },
+    {
+      "id": "urbangency-an-emergency-events-dataset-b-2021",
+      "doi": "10.1016/j.dib.2020.106693",
+      "title": "UrbangEnCy: An emergency events dataset based on citizen sensors for monitoring urban scenarios in Ecuador",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Roberth Alcivar-Cevallos",
+        "Leticia Vaca-Cardenas",
+        "Jaime Meza"
+      ],
+      "venue": "Data in Brief",
+      "type": "journal",
+      "year": 2021,
+      "pages": "106693",
+      "openAccess": true,
+      "postId": "post-urbangency-an-emergency-events-dataset-b"
     },
     {
       "id": "dib2020-power",
@@ -807,6 +1018,20 @@
       "postId": "post-jbcb2020-gene-clustering"
     },
     {
+      "id": "lelephid-a-small-images-dataset-for-aphi-2020",
+      "doi": "10.17632/4b6vr2zkbm.1",
+      "title": "LeLePhid: A Small Images Dataset for Aphids Detection and Area Counting on Lemons Leaf",
+      "authors": [
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "",
+      "type": "conference",
+      "year": 2020,
+      "pages": null,
+      "openAccess": false,
+      "postId": "post-lelephid-a-small-images-dataset-for-aphi"
+    },
+    {
       "id": "ijms2020-tgct",
       "doi": "10.3390/ijms21124487",
       "title": "Meta-Analysis of Gene Expressions in Testicular Germ Cell Tumor Histologies",
@@ -826,6 +1051,96 @@
       "citations": 14,
       "scholarCitations": 15,
       "postId": "post-ijms2020-tgct-genetics"
+    },
+    {
+      "id": "urbangency-2020",
+      "doi": "10.17632/4x37zz82k8.2",
+      "title": "urbangEnCy",
+      "authors": [
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "",
+      "type": "conference",
+      "year": 2020,
+      "pages": null,
+      "openAccess": false,
+      "postId": "post-urbangency"
+    },
+    {
+      "id": "an-unsupervised-learning-approach-for-au-2019",
+      "doi": "10.1109/sccc49216.2019.8966443",
+      "title": "An Unsupervised Learning Approach for Automatically to Categorize Potential Suicide Messages in Social Media",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Roberto Acuna Caicedo",
+        "Jose Manuel Gomez",
+        "Mario Inostroza-Ponta"
+      ],
+      "venue": "2019 38th International Conference of the Chilean Computer Science Society (SCCC)",
+      "type": "conference",
+      "year": 2019,
+      "pages": "1-8",
+      "openAccess": false,
+      "postId": "post-an-unsupervised-learning-approach-for-au"
+    },
+    {
+      "id": "gene-expression-of-genes-for-tumour-mark-2019",
+      "doi": "10.1016/s1569-9056(19)32569-2",
+      "title": "Gene expression of genes for tumour markers in testicular germ cell tumours",
+      "authors": [
+        "F.E. von Eyben",
+        "J. Parraga-Alava",
+        "S.-M. Tu"
+      ],
+      "venue": "European Urology Supplements",
+      "type": "journal",
+      "year": 2019,
+      "pages": "41",
+      "openAccess": false,
+      "postId": "post-gene-expression-of-genes-for-tumour-mark"
+    },
+    {
+      "id": "gene-signatures-for-testicular-germ-cell-2019",
+      "doi": "10.1016/s1569-9056(19)32555-2",
+      "title": "Gene signatures for testicular germ cell tumours",
+      "authors": [
+        "F.E. von Eyben",
+        "J. Parraga-Alava"
+      ],
+      "venue": "European Urology Supplements",
+      "type": "journal",
+      "year": 2019,
+      "pages": "36",
+      "openAccess": false,
+      "postId": "post-gene-signatures-for-testicular-germ-cell"
+    },
+    {
+      "id": "multi-objective-genetic-algorithms-are-t-2019",
+      "doi": null,
+      "title": "Multi-objective genetic algorithms: Are they useful for tuning parameters in agent-based simulation?",
+      "authors": [
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "",
+      "type": "journal",
+      "year": 2019,
+      "pages": null,
+      "openAccess": false,
+      "postId": "post-multi-objective-genetic-algorithms-are-t"
+    },
+    {
+      "id": "pcstcol-power-consumption-data-from-an-a-2019",
+      "doi": "10.17632/xbt7scz5ny.1",
+      "title": "PCSTCOL: Power consumption data from an area of southern Colombia",
+      "authors": [
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "",
+      "type": "conference",
+      "year": 2019,
+      "pages": null,
+      "openAccess": false,
+      "postId": "post-pcstcol-power-consumption-data-from-an-a"
     },
     {
       "id": "dib2019-rocole",
@@ -852,52 +1167,170 @@
       "postId": "post-dib2019-rocole-coffee"
     },
     {
-      "id": "aip2024-wsn-sensors",
-      "doi": "10.1063/5.0187487",
-      "title": "Evaluation of a wireless sensor network design for the measurement of environmental variables",
+      "id": "moc-gapbk-multi-objective-clustering-alg-2019",
+      "doi": "10.32614/cran.package.moc.gapbk",
+      "title": "moc.gapbk: Multi-Objective Clustering Algorithm Guided by a-Priori Biological Knowledge",
       "authors": [
-        "Leopoldo Andrés Vera Pico",
-        "Marely del Rosario Cruz Felipe",
-        "Jorge Antonio Párraga Álava",
-        "Dannyll Michellc Zambrano Zambrano",
-        "Yohanna Daniela Daza Álava"
+        "Jorge Parraga-Alava",
+        "Marcio Dorn",
+        "Mario Inostroza-Ponta"
       ],
-      "venue": "AIP Conference Proceedings, Vol. 2994 (2024)",
+      "venue": "CRAN: Contributed Packages",
       "type": "conference",
-      "year": 2024,
+      "year": 2019,
+      "pages": null,
       "openAccess": false,
-      "postId": "post-aip2024-wsn-sensors",
-      "topics": [
-        "iot",
-        "sensors",
-        "hardware",
-        "manabi"
-      ],
-      "citations": 0,
-      "scholarCitations": 0
+      "postId": "post-moc-gapbk-multi-objective-clustering-alg"
     },
     {
-      "id": "encriptar2023-emergency-annotation",
-      "doi": "10.56124/encriptar.v6i11.0001",
-      "title": "Anotado semiautomático de eventos de emergencia reportados en X basado en aprendizaje automático y computación evolutiva",
+      "id": "a-multi-objective-gene-clustering-algori-2018",
+      "doi": "10.1186/s13040-018-0178-4",
+      "title": "A multi-objective gene clustering algorithm guided by apriori biological knowledge with intensification and diversification strategies",
       "authors": [
-        "Jesús Zambrano-Zambrano",
-        "Joel Garcia-Arteaga",
+        "Jorge Parraga-Alava",
+        "Marcio Dorn",
+        "Mario Inostroza-Ponta"
+      ],
+      "venue": "BioData Mining",
+      "type": "journal",
+      "year": 2018,
+      "pages": null,
+      "openAccess": true,
+      "postId": "post-a-multi-objective-gene-clustering-algori"
+    },
+    {
+      "id": "how-predicting-the-academic-success-of-s-2018",
+      "doi": "10.1109/etcm.2018.8580296",
+      "title": "How Predicting The Academic Success of Students of the ESPAM MFL?: A Preliminary Decision Trees Based Study",
+      "authors": [
+        "Jessica Morales Carrillo",
         "Jorge Parraga-Alava"
       ],
-      "venue": "Revista Científica de Informática ENCRIPTAR, Vol. 6 No. 11 (2023)",
-      "type": "journal",
-      "year": 2023,
-      "openAccess": true,
-      "postId": "post-encriptar2023-emergency-annotation",
-      "topics": [
-        "emergency",
-        "nlp",
-        "machine-learning",
-        "optimization"
+      "venue": "2018 IEEE Third Ecuador Technical Chapters Meeting (ETCM)",
+      "type": "conference",
+      "year": 2018,
+      "pages": "1-6",
+      "openAccess": false,
+      "postId": "post-how-predicting-the-academic-success-of-s"
+    },
+    {
+      "id": "methodological-proposal-for-technologica-2018",
+      "doi": null,
+      "title": "Methodological proposal for technological infrastructure projects in degree thesis,Propuesta metodológica para proyectos de infraestructura tecnológica en trabajos de titulación",
+      "authors": [
+        "Jorge Parraga-Alava"
       ],
-      "citations": 0,
-      "scholarCitations": 0
+      "venue": "",
+      "type": "journal",
+      "year": 2018,
+      "pages": null,
+      "openAccess": false,
+      "postId": "post-methodological-proposal-for-technologica"
+    },
+    {
+      "id": "propuesta-metodol-gica-para-proyectos-de-2018",
+      "doi": null,
+      "title": "Propuesta Metodológica para Proyectos de Infraestructura Tecnológica en Trabajos de Titulación",
+      "authors": [
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "",
+      "type": "conference",
+      "year": 2018,
+      "pages": null,
+      "openAccess": false,
+      "postId": "post-propuesta-metodol-gica-para-proyectos-de"
+    },
+    {
+      "id": "unsupervised-pattern-recognition-for-geo-2018",
+      "doi": null,
+      "title": "Unsupervised Pattern Recognition for Geographical Clustering of Seismic Events Post <i>M<sub>W</sub></i> 7.8 Ecuador Earthquake",
+      "authors": [
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "",
+      "type": "journal",
+      "year": 2018,
+      "pages": null,
+      "openAccess": false,
+      "postId": "post-unsupervised-pattern-recognition-for-geo-2018"
+    },
+    {
+      "id": "unsupervised-pattern-recognition-for-geo-2018",
+      "doi": "10.1109/sccc.2018.8705248",
+      "title": "Unsupervised Pattern Recognition for Geographical Clustering of Seismic Events Post M W 7.8 Ecuador Earthquake",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Gustavo Molina Garzon",
+        "Roberth Alcivar Cevallos",
+        "Mario Inostroza-Ponta"
+      ],
+      "venue": "2018 37th International Conference of the Chilean Computer Science Society (SCCC)",
+      "type": "conference",
+      "year": 2018,
+      "pages": "1-8",
+      "openAccess": false,
+      "postId": "post-unsupervised-pattern-recognition-for-geo"
+    },
+    {
+      "id": "a-bi-objective-clustering-algorithm-for-2017",
+      "doi": "10.19153/cleiej.20.2.4",
+      "title": "A Bi-Objective Clustering Algorithm for Gene Expression Data",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Mario Inostroza-Ponta"
+      ],
+      "venue": "CLEI Electronic Journal",
+      "type": "journal",
+      "year": 2017,
+      "pages": null,
+      "openAccess": true,
+      "postId": "post-a-bi-objective-clustering-algorithm-for"
+    },
+    {
+      "id": "using-local-search-strategies-to-improve-2017",
+      "doi": "10.1109/cec.2017.7969432",
+      "title": "Using local search strategies to improve the performance of NSGA-II for the Multi-Criteria Minimum Spanning Tree problem",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Marcio Dorn",
+        "Mario Inostroza-Ponta"
+      ],
+      "venue": "2017 IEEE Congress on Evolutionary Computation (CEC)",
+      "type": "conference",
+      "year": 2017,
+      "pages": "1119-1126",
+      "openAccess": false,
+      "postId": "post-using-local-search-strategies-to-improve"
+    },
+    {
+      "id": "a-bi-objective-model-for-gene-clustering-2016",
+      "doi": "10.1109/clei.2016.7833327",
+      "title": "A bi-objective model for gene clustering combining expression data and external biological knowledge",
+      "authors": [
+        "Jorge Parraga-Alava",
+        "Mario Inostroza-Ponta"
+      ],
+      "venue": "2016 XLII Latin American Computing Conference (CLEI)",
+      "type": "conference",
+      "year": 2016,
+      "pages": "1-12",
+      "openAccess": false,
+      "postId": "post-a-bi-objective-model-for-gene-clustering"
+    },
+    {
+      "id": "genes-involved-in-the-seminoma-testicula-2016",
+      "doi": "10.33333/rp.v38i1.449",
+      "title": "Genes Involved in the Seminoma Testicular Cancer: A Bioinformatic Study",
+      "authors": [
+        "Jorge Parraga-Alava"
+      ],
+      "venue": "",
+      "type": "journal",
+      "year": 2016,
+      "pages": null,
+      "openAccess": false,
+      "postId": "post-genes-involved-in-the-seminoma-testicula"
     }
   ]
 }
