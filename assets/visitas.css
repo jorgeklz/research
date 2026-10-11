@@ -1,0 +1,74 @@
+/* ---------------- Contador de visitas ----------------
+   Pastillas al final de la franja superior oscura (.topbar-social) y un popover blanco
+   con la paleta verde del sitio. Lo arma assets/visitas.js. */
+.visitas { display: flex; align-items: center; gap: .4rem; margin-left: .45rem; flex: 0 1 auto; min-width: 0; }
+/* La franja mide lo mismo que el contenido (940 px): los enlaces no saltan de línea y la
+   pastilla de "visita reciente" se encoge con puntos suspensivos para caber al lado. */
+.topbar-social .socials { flex-wrap: nowrap; flex: none; }
+@media (min-width: 901px) { .topbar-social .socials a { padding: .35rem .42rem; } }
+.vis-anchor, .vis-btn, .lang-top { flex: none; }
+.visitas[hidden] { display: none; }
+.vis-btn, .vis-reciente {
+  display: inline-flex; align-items: center; gap: .4rem; height: 30px; padding: 0 .7rem;
+  border: 1px solid rgba(255,255,255,.22); border-radius: 999px;
+  background: rgba(255,255,255,.08); color: var(--navy-ink);
+  font: 600 var(--fs-xs)/1 var(--font); white-space: nowrap; cursor: pointer;
+  transition: background .14s var(--ease-quick), border-color .14s var(--ease-quick), transform .14s var(--ease-quick);
+}
+.vis-btn:hover, .vis-reciente:hover, .vis-btn[aria-expanded="true"] {
+  background: rgba(255,255,255,.14); border-color: var(--mint); transform: translateY(-1px);
+}
+.vis-btn .vis-ic { width: 16px; height: 16px; color: var(--mint); flex: none; }
+.vis-btn b { color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; }
+.vis-reciente { max-width: 250px; min-width: 0; flex: 0 1 auto; background: rgba(255,255,255,.04); border-color: transparent; }
+.vis-reciente[hidden] { display: none; }
+.vis-reciente .vis-lugar { overflow: hidden; text-overflow: ellipsis; color: #fff; }
+.vis-reciente small { flex: none; color: var(--navy-ink-2); font-size: var(--fs-2xs); font-weight: 600; }
+.vis-reciente.entra .vis-lugar, .vis-reciente.entra small, .vis-reciente.entra .vis-bandera { animation: vis-entra .35s ease-out; }
+@keyframes vis-entra { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.vis-bandera { width: 18px; height: 13px; border-radius: 2px; object-fit: cover; flex: none; box-shadow: 0 0 0 1px rgba(0,0,0,.12); }
+.vis-bandera.vacia { display: inline-flex; align-items: center; justify-content: center; box-shadow: none; }
+.vis-bandera.vacia .vis-ic { width: 15px; height: 15px; }
+.vis-reciente .vis-bandera.vacia { color: var(--navy-ink-2); }
+
+.vis-anchor { position: relative; }
+.vis-pop {
+  position: absolute; top: calc(100% + 10px); right: 0; z-index: 60;
+  width: 310px; max-width: calc(100vw - 24px); padding: 14px 16px;
+  background: var(--white); color: var(--ink); text-align: left;
+  border: 1px solid var(--line-2); border-top: 3px solid var(--blue); border-radius: var(--radius);
+  box-shadow: var(--shadow-lift); font-size: var(--fs-sm); line-height: 1.4;
+}
+.vis-pop[hidden] { display: none; }
+.vis-titulo { font-weight: 700; font-size: var(--fs-lg); color: var(--blue-700); margin-bottom: 8px; }
+.vis-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin: 0 0 12px; }
+.vis-stats div { background: var(--sky-1); border-radius: 8px; padding: 8px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.vis-stats b { font-size: 1.15rem; color: var(--green-900); font-variant-numeric: tabular-nums; }
+.vis-stats span { font-size: var(--fs-2xs); font-weight: 700; color: var(--ink-3); text-transform: uppercase; letter-spacing: .04em; }
+.vis-sub { font-size: var(--fs-2xs); font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .07em; margin: 2px 0 6px; }
+.vis-lista { list-style: none; margin: 0 0 12px; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+.vis-lista li { display: flex; align-items: center; gap: 8px; color: var(--ink); min-width: 0; }
+.vis-lista .vis-lugar { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vis-lista small { color: var(--ink-3); font-size: var(--fs-2xs); white-space: nowrap; }
+.vis-lista .vis-bandera.vacia, .vis-chip .vis-bandera.vacia { color: var(--ink-3); }
+.vis-top { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.vis-chip { display: inline-flex; align-items: center; gap: 5px; background: var(--sky-1); border: 1px solid var(--sky-line); border-radius: 999px; padding: 3px 9px 3px 6px; font-size: var(--fs-xs); color: var(--ink-2); }
+.vis-chip b { color: var(--green-900); }
+.vis-nota { margin: 0; font-size: var(--fs-2xs); line-height: 1.5; color: var(--ink-3); }
+
+/* La pastilla de "visita reciente" solo en pantallas anchas. */
+@media (max-width: 900px) {
+  .vis-reciente { display: none !important; }
+  /* Sin espacio para los nombres: los perfiles quedan solo con su icono, como en teléfonos. */
+  .topbar-social .socials a span { display: none; }
+  .topbar-social .socials a { padding: .35rem .45rem; }
+}
+/* En teléfonos: pastilla más compacta y popover anclado a la pantalla para no desbordar. */
+@media (max-width: 640px) {
+  .visitas { margin-left: .2rem; }
+  .vis-btn { height: 28px; padding: 0 .55rem; gap: .3rem; }
+  .vis-btn .vis-ic { width: 15px; height: 15px; }
+  .vis-anchor { position: static; }
+  .topbar-social-in { position: relative; }
+  .vis-pop { position: absolute; left: 12px; right: 12px; width: auto; max-width: none; top: calc(100% + 6px); }
+}

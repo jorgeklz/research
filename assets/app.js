@@ -44,6 +44,22 @@
   document.head.appendChild(manifestLink);
   if ('serviceWorker' in navigator) navigator.serviceWorker.register(ROOT + '/sw.js').catch(()=>{});
 
+  // Contador de visitas (assets/visitas.js): se carga aquí para no repetirlo en cada página.
+  // Cambia VISITAS_V (AAAAMMDD-HHMM) cada vez que edites config.js, visitas.js o visitas.css.
+  const VISITAS_V = "20261011-1315";
+  (function cargarVisitas() {
+    const css = document.createElement("link");
+    css.rel = "stylesheet";
+    css.href = ROOT + "/assets/visitas.css?v=" + VISITAS_V;
+    document.head.appendChild(css);
+    ["config.js", "visitas.js"].forEach((f) => {
+      const s = document.createElement("script");
+      s.src = ROOT + "/assets/" + f + "?v=" + VISITAS_V;
+      s.async = false;  // config.js debe correr antes que visitas.js
+      document.body.appendChild(s);
+    });
+  })();
+
   // Language Memory
   if (document.documentElement.lang === "es") localStorage.setItem("lang", "es");
   else if (document.documentElement.lang === "en") localStorage.setItem("lang", "en");
