@@ -9,7 +9,7 @@
 window.SITE_CONFIG = {
   visitas: {
     // Proyecto "research" de Supabase: Project Settings → API Keys (o el botón "Connect").
-    url: "",                // https://XXXXXXXX.supabase.co
-    clave: ""               // sb_publishable_...
+    url: "https://vokuxcmimjqlrksdahds.supabase.co",
+    clave: "sb_publishable_oTrZCjZWsr2Ak0dUqa0Nhw_eIRw_BjQ"
   }
 };

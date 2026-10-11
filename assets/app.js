@@ -46,7 +46,7 @@
 
   // Contador de visitas (assets/visitas.js): se carga aquí para no repetirlo en cada página.
   // Cambia VISITAS_V (AAAAMMDD-HHMM) cada vez que edites config.js, visitas.js o visitas.css.
-  const VISITAS_V = "20261011-1400";
+  const VISITAS_V = "20261011-1415";
   (function cargarVisitas() {
     const css = document.createElement("link");
     css.rel = "stylesheet";
