@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------
  * app.js carga este archivo en todas las páginas. Aquí se arma el contador y se coloca al
  * final de la franja superior (.topbar-social-in), así el HTML de cada página no cambia.
- * Cada carga llama a registrar_visita con p_sitio = "research". El servidor toma la IP del
+ * Cada carga llama a registrar_visita en el proyecto "research" de Supabase. El servidor toma la IP del
  * encabezado de la petición, guarda solo su huella cifrada y decide si es una visita nueva
  * (la misma IP cuenta otra vez recién después de 6 horas). Recargar o cambiar de página no suma.
  * País y ciudad aproximados se piden a un servicio de geolocalización sin clave; si no
@@ -20,7 +20,6 @@
 
   var ES = document.documentElement.lang === "es";
   var LOCALE = ES ? "es-EC" : "en-US";
-  var SITIO = cfg.sitio || "research";
   var REFRESCO_MS = 120000;     // el resumen se actualiza cada 2 minutos
   var ROTACION_MS = 5000;       // la pastilla de "recientes" cambia cada 5 segundos
   var GEO_URL = "https://get.geojs.io/v1/ip/geo.json";
@@ -196,13 +195,13 @@
 
   function refrescar() {
     if (document.hidden || !datos) return;
-    rpc("resumen_visitas", { p_sitio: SITIO })
+    rpc("resumen_visitas")
       .then(function (r) { datos = r; pintar(); })
       .catch(function () { /* se reintenta en el próximo ciclo */ });
   }
 
   geolocalizar()
-    .then(function (geo) { geo.p_sitio = SITIO; return rpc("registrar_visita", geo); })
+    .then(function (geo) { return rpc("registrar_visita", geo); })
     .then(function (r) { datos = r; pintar(); })
     .catch(function (e) { caja.hidden = true; if (window.console) console.warn("Contador de visitas:", e.message); });
   setInterval(refrescar, REFRESCO_MS);

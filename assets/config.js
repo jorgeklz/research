@@ -8,9 +8,8 @@
  */
 window.SITE_CONFIG = {
   visitas: {
-    url: "https://syglkptimygybufswhmd.supabase.co",
-    clave: "sb_publishable_Y8spfv16sNIBd-bVk6lE6A_wuEITxvP",
-    // El proyecto lo comparte con Emergency Radar; cada sitio cuenta aparte.
-    sitio: "research"
+    // Proyecto "research" de Supabase: Project Settings → API Keys (o el botón "Connect").
+    url: "",                // https://XXXXXXXX.supabase.co
+    clave: ""               // sb_publishable_...
   }
 };
