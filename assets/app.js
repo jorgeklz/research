@@ -180,7 +180,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = "109";
+  const VER = "111";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -1352,13 +1352,24 @@ ${refsHtml}
         <span class="yt-title"><span class="yt-title-t">${esc(v.title)}</span></span>
       </a>`).join("");
   }
+  // Fisher-Yates shuffle on a copy
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
   let ytLoaded = false;
   function loadYouTubeOnce(channelId) {
     if (ytLoaded) return;
     ytLoaded = true;
     const wrap = $("#yt-list"); if (!wrap) return;
     if (!channelId) { wrap.innerHTML = `<p class="loading">${T.ytEmpty}</p>`; return; }
-    fetchYouTubeVideos(channelId, 5).then(renderYouTube)
+    // pull the whole feed (YouTube RSS returns up to 15 videos), shuffle it and
+    // show 5, so every class gets a turn instead of always the newest ones
+    fetchYouTubeVideos(channelId, 15).then((all) => renderYouTube(shuffle(all).slice(0, 5)))
       .catch(() => { wrap.innerHTML = `<p class="loading">${T.ytFail}</p>`; });
   }
   function wireHomeTabs(channelId) {
