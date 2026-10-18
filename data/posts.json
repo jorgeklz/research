@@ -1,6 +1,41 @@
 {
   "items": [
     {
+      "id": "post-dai2026-llm-helmet",
+      "date": "2026-10-17",
+      "type": "paper",
+      "doi": "10.1007/s44163-026-02501-8",
+      "auto": false,
+      "topics": [
+        "deep-learning",
+        "computer-vision",
+        "safety",
+        "llm"
+      ],
+      "title": {
+        "en": "Do more detailed prompts help LLMs build better neural networks?",
+        "es": "¿Un prompt más detallado ayuda a que un LLM construya mejores redes neuronales?"
+      },
+      "summary": {
+        "en": "With Jorge Rodas-Silva, a study in Discover Artificial Intelligence testing how ChatGPT, Claude, Gemini and Grok write CNNs for helmet compliance classification under three levels of prompt detail.",
+        "es": "Con Jorge Rodas-Silva, un estudio en Discover Artificial Intelligence que pone a prueba cómo ChatGPT, Claude, Gemini y Grok escriben CNNs para clasificar el uso de casco con tres niveles de detalle en el prompt."
+      },
+      "body": {
+        "en": "Can a chatbot design a working neural network for you? And if it can, does it help to give it more detailed instructions? We wanted to answer both questions on a problem with real consequences: checking whether workers in high-risk industrial settings are wearing their safety helmets, since skipping that piece of **personal protective equipment** (PPE) is still a frequent cause of serious injuries.\n\nWith **Jorge Rodas-Silva**, we asked four **large language models**, ChatGPT, Claude, Gemini and Grok, to write complete PyTorch scripts that build and train a **convolutional neural network** able to tell apart images of people with and without a helmet. Each model received prompts at three levels of detail, from a basic request up to a heavily specified one that fixed the architecture and training settings. We ran every resulting script 20 times on a balanced dataset of 972 images built for this study, and scored it on six classification metrics, four prompt quality metrics and three measures of computing cost.\n\nTen of the twelve combinations landed on a high and very similar level, with accuracy between 0.957 and 0.967 and AUC between 0.985 and 0.993. Claude with the simplest prompt reached the best accuracy (0.967) and the lowest CPU use (12.2%), while Gemini and Grok, also with the simplest prompt, produced the best calibrated models, the ones with the lowest test loss. The surprise came at the most detailed level: there, Gemini and Grok wrote scripts that ran without errors but whose networks failed to learn, stalling around 0.58 accuracy. Over-specifying the architecture and training can break the generated model even when the code looks perfectly valid.\n\nThe lesson is that more detailed prompts do not reliably give better networks. Which model you use matters more than how elaborate the prompt is, and basic or moderately structured prompts were the safest choice for building PPE compliance classifiers in this controlled, image-level setting. Each model and prompt level was represented by a single generated script, and testing in real industrial sites is still pending. The full article is open access in **Discover Artificial Intelligence** (Springer Nature).",
+        "es": "¿Puede un chatbot diseñar por ti una red neuronal que funcione? Y si puede, ¿le sirve recibir instrucciones más detalladas? Quisimos responder ambas preguntas sobre un problema con consecuencias reales: verificar si los trabajadores en entornos industriales de alto riesgo llevan puesto el casco, porque omitir ese **equipo de protección personal** (EPP) sigue siendo una causa frecuente de lesiones graves.\n\nCon **Jorge Rodas-Silva**, le pedimos a cuatro **modelos de lenguaje de gran tamaño**, ChatGPT, Claude, Gemini y Grok, que escribieran scripts completos en PyTorch para construir y entrenar una **red neuronal convolucional** capaz de distinguir imágenes de personas con casco y sin casco. Cada modelo recibió prompts en tres niveles de detalle, desde una petición básica hasta una muy especificada que fijaba la arquitectura y los parámetros de entrenamiento. Ejecutamos cada script 20 veces sobre un conjunto balanceado de 972 imágenes armado para este estudio, y lo evaluamos con seis métricas de clasificación, cuatro métricas de calidad del prompt y tres medidas de costo computacional.\n\nDiez de las doce combinaciones llegaron a un nivel alto y muy parecido, con exactitud entre 0,957 y 0,967 y AUC entre 0,985 y 0,993. Claude con el prompt más simple logró la mejor exactitud (0,967) y el menor uso de CPU (12,2%), mientras que Gemini y Grok, también con el prompt más simple, produjeron los modelos mejor calibrados, los de menor pérdida en prueba. La sorpresa llegó en el nivel más detallado: ahí Gemini y Grok escribieron scripts que corrían sin errores, pero sus redes no aprendían y se quedaban cerca de 0,58 de exactitud. Especificar de más la arquitectura y el entrenamiento puede romper el modelo generado aunque el código parezca correcto.\n\nLa lección es que un prompt más detallado no garantiza una mejor red. Pesa más qué modelo usas que lo elaborado del prompt, y los prompts básicos o de estructura moderada fueron la opción más segura para construir clasificadores de cumplimiento de EPP en este escenario controlado, a nivel de imagen. Cada combinación de modelo y nivel de prompt se representó con un solo script generado, y todavía falta validarlo en sitios industriales reales. El artículo completo está en acceso abierto en **Discover Artificial Intelligence** (Springer Nature)."
+      },
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1007/s44163-026-02501-8"
+        },
+        {
+          "label": "PDF",
+          "url": "https://link.springer.com/content/pdf/10.1007/s44163-026-02501-8.pdf"
+        }
+      ]
+    },
+    {
       "id": "post-etcm2025-braintumor",
       "date": "2025-10-21",
       "type": "paper",
