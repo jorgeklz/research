@@ -18,46 +18,104 @@
         "es": "Universidad Técnica de Manabí"
       },
       "title": {
-        "en": "Optimizing Artificial Intelligence Models on Multivariate and Image Datasets",
-        "es": "Optimización de Modelos de Inteligencia Artificial sobre Datos Multivariados e Imágenes"
+        "en": "Optimizing Artificial Intelligence Models on Numerical, Textual and Image Datasets",
+        "es": "Optimización de Modelos de Inteligencia Artificial sobre Conjuntos de Datos Numéricos, Textuales y de Imágenes"
       },
       "summary": {
         "en": [
-          "OPMIA studies how to build and tune artificial intelligence models that work well on multivariate data and on image data.",
-          "The project runs from January 2024 to December 2026 at Universidad Técnica de Manabí."
+          "OPMIA studies how to optimize artificial intelligence models on numerical, textual and image datasets, with priority on scenarios where computing resources are limited.",
+          "The work has three stages: a literature review and dataset selection, the application of advanced optimization techniques such as metaheuristics, and their evaluation on numerical, textual and image data.",
+          "The aim is more accurate models that adapt better to different data and need less time and computing power, so decisions based on large volumes of data become faster and cheaper."
         ],
         "es": [
-          "OPMIA estudia cómo construir y ajustar modelos de inteligencia artificial que funcionen bien con datos multivariados y con imágenes.",
-          "El proyecto se desarrolla entre enero de 2024 y diciembre de 2026 en la Universidad Técnica de Manabí."
+          "OPMIA estudia cómo optimizar modelos de inteligencia artificial sobre conjuntos de datos numéricos, textuales y de imágenes, con prioridad en escenarios de recursos computacionales limitados.",
+          "El trabajo tiene tres etapas: revisión de la literatura y selección de datos, aplicación de técnicas avanzadas de optimización como las metaheurísticas, y su evaluación sobre datos numéricos, textuales y de imágenes.",
+          "El objetivo son modelos más precisos, que se adapten mejor a datos distintos y requieran menos tiempo y capacidad de cómputo, para que las decisiones basadas en grandes volúmenes de datos sean más rápidas y económicas."
         ]
       },
-      "outputs": [],
+      "outputs": [
+        {
+          "doi": "10.1007/s44163-026-02501-8"
+        },
+        {
+          "doi": "10.1109/acmlc70381.2026.11700499"
+        },
+        {
+          "doi": "10.1016/j.bdr.2026.100630"
+        },
+        {
+          "doi": "10.1109/etcm67548.2025.11304324"
+        },
+        {
+          "doi": "10.1109/etcm67548.2025.11304406"
+        },
+        {
+          "doi": "10.1109/smc58881.2025.11343106"
+        }
+      ],
       "team": [],
       "related": []
     },
     {
       "id": "observaia",
       "short": "ObservaIA",
-      "status": "proposal",
+      "status": "ongoing",
       "since": 2026,
-      "period": null,
-      "role": null,
-      "funder": null,
+      "period": {
+        "en": "Aug 2026 to Jan 2029",
+        "es": "Ago 2026 a Ene 2029"
+      },
+      "role": {
+        "en": "Director",
+        "es": "Director"
+      },
+      "funder": {
+        "en": "Universidad Técnica de Manabí",
+        "es": "Universidad Técnica de Manabí"
+      },
       "title": {
-        "en": "A multi-thematic data observatory powered by analytics and artificial intelligence",
-        "es": "Un observatorio de datos multitemático impulsado por analítica e inteligencia artificial"
+        "en": "A general-purpose platform for multi-thematic data observatories, powered by analytics and artificial intelligence",
+        "es": "Una plataforma de propósito general para observatorios de datos multitemáticos, con analítica e inteligencia artificial"
       },
       "summary": {
         "en": [
-          "ObservaIA is a research funding proposal for a platform that can host many thematic data observatories.",
-          "A shared architecture reuses the same data pipeline, indicators and AI tools for each theme, so a new observatory does not start from zero."
+          "Institutions collect data on production, environment, health and education, but turning it into an observatory, a tool that tracks a phenomenon with indicators, alerts and analysis, is usually built from scratch each time. ObservaIA proposes a general-purpose platform that can serve as the base for observatories in different domains without repeating that work.",
+          "The platform integrates structured and semi-structured sources, checks data quality, applies descriptive analysis, forecasting and anomaly detection when the data allow it, and presents results in a configurable dashboard. It combines Design Science Research and CRISP-DM and is validated in three domains.",
+          "The project will deliver the platform, three demonstrator observatories, evaluated models, a software registration and scientific publications. It contributes to SDG 9 and 17 through cooperation among Universidad Técnica de Manabí, Universidad Bolivariana del Ecuador and Universidad Estatal de Milagro."
         ],
         "es": [
-          "ObservaIA es una propuesta de financiamiento para una plataforma que pueda alojar muchos observatorios temáticos de datos.",
-          "Una arquitectura compartida reutiliza el mismo flujo de datos, indicadores y herramientas de IA en cada tema, de modo que un nuevo observatorio no parte de cero."
+          "Las instituciones acumulan datos sobre producción, ambiente, salud y educación, pero convertirlos en un observatorio, una herramienta que sigue un fenómeno con indicadores, alertas y análisis, suele construirse desde cero cada vez. ObservaIA propone una plataforma de propósito general que sirva de base a observatorios de distintos dominios sin repetir ese trabajo.",
+          "La plataforma integra fuentes estructuradas y semiestructuradas, verifica la calidad de los datos, aplica análisis descriptivo, predicción y detección de anomalías cuando los datos lo permiten, y presenta los resultados en un dashboard configurable. Combina Design Science Research y CRISP-DM, y se valida en tres dominios.",
+          "El proyecto entregará la plataforma, tres observatorios demostradores, los modelos evaluados, un registro de software y publicaciones científicas. Contribuye a los ODS 9 y 17 mediante la cooperación entre la Universidad Técnica de Manabí, la Universidad Bolivariana del Ecuador y la Universidad Estatal de Milagro."
         ]
       },
-      "outputs": [],
+      "outputs": [
+        {
+          "type": "website",
+          "label": {
+            "en": "Investigadores UTM",
+            "es": "Investigadores UTM"
+          },
+          "meta": {
+            "en": "Web tool",
+            "es": "Herramienta web"
+          },
+          "url": "https://jorgeklz.github.io/perfiles-utm/",
+          "year": 2026
+        },
+        {
+          "type": "website",
+          "label": {
+            "en": "MeteoNet",
+            "es": "MeteoNet"
+          },
+          "meta": {
+            "en": "Web tool",
+            "es": "Herramienta web"
+          },
+          "url": "https://jorgeklz.github.io/meteonet/"
+        }
+      ],
       "team": [],
       "related": []
     }
