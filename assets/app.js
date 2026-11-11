@@ -1360,7 +1360,11 @@ ${refsHtml}
     if (!channelId) { wrap.innerHTML = `<p class="loading">${T.ytEmpty}</p>`; return; }
     // pull the whole feed (YouTube RSS returns up to 15 videos), shuffle it and
     // show 5, so every class gets a turn instead of always the newest ones
-    fetchYouTubeVideos(channelId, 15).then((all) => renderYouTube(shuffle(all).slice(0, 5)))
+    // data/youtube.json is refreshed weekly by the workflow; the public proxies are only a fallback
+    fetchJSON("youtube")
+      .then((d) => (d && Array.isArray(d.items) && d.items.length ? d.items : Promise.reject(new Error("yt-json-empty"))))
+      .catch(() => fetchYouTubeVideos(channelId, 15))
+      .then((all) => renderYouTube(shuffle(all).slice(0, 5)))
       .catch(() => { wrap.innerHTML = `<p class="loading">${T.ytFail}</p>`; });
   }
   function wireHomeTabs(channelId) {
