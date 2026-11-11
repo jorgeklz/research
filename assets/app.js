@@ -37,11 +37,7 @@
   const LANG = document.documentElement.lang === "es" ? "es" : "en";
   const ROOT = document.body.dataset.root || ".";
 
-  // PWA
-  const manifestLink = document.createElement("link");
-  manifestLink.rel = "manifest";
-  manifestLink.href = ROOT + "/manifest.json";
-  document.head.appendChild(manifestLink);
+  // PWA (the manifest link is declared in each page <head>)
   if ('serviceWorker' in navigator) navigator.serviceWorker.register(ROOT + '/sw.js').catch(()=>{});
 
   // Contador de visitas (assets/visitas.js): se carga aquí para no repetirlo en cada página.
