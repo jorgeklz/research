@@ -56,14 +56,6 @@
     });
   })();
 
-  // Language Memory
-  if (document.documentElement.lang === "es") localStorage.setItem("lang", "es");
-  else if (document.documentElement.lang === "en") localStorage.setItem("lang", "en");
-  
-  if (localStorage.getItem("lang") === "es" && document.documentElement.lang === "en" && window.location.pathname.endsWith("index.html") && !window.location.pathname.includes("/es/")) {
-    window.location.href = "es/index.html";
-  }
-
   // Fade Up Observer
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -119,7 +111,7 @@
       sortTitle: "Title (A–Z)",
       summaryCount: (shown, total, cites) => `Showing ${shown} of ${total} publications · ${cites} citations`,
       liveSyncText: "Calculated live via OpenAlex & ORCID",
-      chartTitle: "Scientific trajectory (2018–2026)",
+      chartTitle: (a, b) => `Scientific trajectory (${a}–${b})`,
       chartPubs: "Publications",
       chartCites: "Citations",
       chartOa: "Open Access"
@@ -163,7 +155,7 @@
       sortTitle: "Título (A–Z)",
       summaryCount: (shown, total, cites) => `Mostrando ${shown} de ${total} publicaciones · ${cites} citas`,
       liveSyncText: "Calculado en vivo vía OpenAlex y ORCID",
-      chartTitle: "Trayectoria científica (2018–2026)",
+      chartTitle: (a, b) => `Trayectoria científica (${a}–${b})`,
       chartPubs: "Publicaciones",
       chartCites: "Citas",
       chartOa: "Acceso Abierto"
@@ -1022,7 +1014,7 @@ ${refsHtml}
     requestAnimationFrame(frame);
   }
 
-  /* ---------- interactive SVG trajectory chart (2018-2026) ---------- */
+  /* ---------- interactive SVG trajectory chart ---------- */
   function renderYearlyChart(yearly) {
     const wrap = $("#metrics-chart-body");
     if (!wrap) return;
@@ -1030,6 +1022,9 @@ ${refsHtml}
       wrap.innerHTML = `<p class="loading">${T.empty}</p>`;
       return;
     }
+
+    const chartTitleEl = document.querySelector(".chart-t");
+    if (chartTitleEl) chartTitleEl.textContent = T.chartTitle(yearly[0].year, yearly[yearly.length - 1].year);
 
     const maxPubs = Math.max(...yearly.map((d) => d.pubs), 1);
     const maxCites = Math.max(...yearly.map((d) => d.cites), 1);
