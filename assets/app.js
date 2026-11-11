@@ -82,6 +82,10 @@
       cvProjects: "Research projects", projResearch: "Research projects", projSoftware: "Software",
       projRole: "Role", projFunder: "Funded by", projStatus: "Status", projReg: "Reg.",
       projNote: "Only the most notable projects are shown.", dsDownload: "Download", copiedCmd: "Copied",
+      projOpen: "Open project site", projLabel: "Research project", projBack: "All projects", projNone: "Project not found.",
+      stOngoing: "Ongoing", stProposal: "Proposal", stCompleted: "Completed",
+      projPeriod: "Period", projSummary: "Summary", projObjectives: "Objectives", projPlatform: "Platform", projObservatories: "Observatories",
+      projRoadmap: "Roadmap", projOutputs: "Outputs", projTeam: "Team", projRelated: "Related",
       cvToolbox: "Tools & databases",
       tbTool: "Tool", tbSoftware: "Software", tbDatabase: "Database",
       tbTools: "Tools & software", tbDatabases: "Datasets",
@@ -128,6 +132,10 @@
       cvProjects: "Proyectos de investigación", projResearch: "Proyectos de investigación", projSoftware: "Software",
       projRole: "Rol", projFunder: "Financia", projStatus: "Estado", projReg: "Reg.",
       projNote: "Se muestran solo los proyectos más destacados.", dsDownload: "Descargar", copiedCmd: "Copiado",
+      projOpen: "Abrir sitio del proyecto", projLabel: "Proyecto de investigación", projBack: "Todos los proyectos", projNone: "Proyecto no encontrado.",
+      stOngoing: "Vigente", stProposal: "Propuesta", stCompleted: "Finalizado",
+      projPeriod: "Periodo", projSummary: "Resumen", projObjectives: "Objetivos", projPlatform: "Plataforma", projObservatories: "Observatorios",
+      projRoadmap: "Cronograma", projOutputs: "Productos", projTeam: "Equipo", projRelated: "Relacionado",
       cvToolbox: "Herramientas y bases de datos",
       tbTool: "Herramienta", tbSoftware: "Software", tbDatabase: "Base de datos",
       tbTools: "Herramientas y software", tbDatabases: "Bases de datos",
@@ -172,7 +180,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = "114";
+  const VER = "117";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -1562,11 +1570,77 @@ ${refsHtml}
     wireUsedMenus(container);
   }
 
-  function fillCV(profile) {
+
+  /* ---------- research projects ---------- */
+  const PROJECT_PAGE = LANG === "es" ? "proyecto.html" : "project.html";
+  const projStatus = (st) => ({ ongoing: T.stOngoing, proposal: T.stProposal, completed: T.stCompleted }[st] || st || "");
+
+  function projectsCards(container, items) {
+    const rank = { ongoing: 0, proposal: 1, completed: 2 };
+    const list = (items || []).slice().sort((a, b) => (rank[a.status] ?? 3) - (rank[b.status] ?? 3) || (+b.since || 0) - (+a.since || 0));
+    if (!list.length) { container.innerHTML = ""; return; }
+    const card = (p) => {
+      const meta = [pick(p.period), pick(p.role)].filter(Boolean).join(" · ");
+      return `<article class="tool-card proj-card">
+        <div class="tool-hd"><span class="tool-ic">${ICON.doc}</span><div class="tt">${esc(p.short)}</div><span class="ds-yr">${esc(projStatus(p.status))}</span></div>
+        ${meta ? `<div class="tmeta">${esc(meta)}</div>` : ""}
+        <p class="td">${esc(pick(p.title))}</p>
+        <div class="ds-act"><a class="topen proj-open" href="${PROJECT_PAGE}?id=${encodeURIComponent(p.id)}">${esc(T.projOpen)} ${ICON.arrow}</a></div>
+      </article>`;
+    };
+    container.innerHTML = `<div class="cv-block" id="projects"><h2>${esc(T.cvProjects)}</h2><div class="toolbox">${list.map(card).join("")}</div></div>`;
+  }
+
+  function fillProject(profile, projects, pubs) {
+    const stage = $("#project-stage"); if (!stage) return;
+    const id = new URLSearchParams(location.search).get("id");
+    const items = projects.items || [];
+    const p = items.find((x) => x.id === id) || (!id ? items[0] : null);
+    const back = LANG === "es" ? "portafolio.html#projects" : "portfolio.html#projects";
+    if (!p) { stage.innerHTML = `<p class="loading">${esc(T.projNone)} <a href="${back}">${esc(T.projBack)}</a></p>`; return; }
+    document.title = `${p.short} | ${profile.name}`;
+    const lang = $(".lang-top"); if (lang) lang.setAttribute("href", lang.getAttribute("href").split("?")[0] + "?id=" + encodeURIComponent(p.id));
+
+    const facts = [[T.projPeriod, pick(p.period)], [T.projRole, pick(p.role)], [T.projFunder, pick(p.funder)], [T.projStatus, projStatus(p.status)]]
+      .filter((f) => f[1]);
+    const paras = pick(p.summary) || [];
+    const secs = [];
+    const sec = (key, label, html) => secs.push({ key, label, html });
+
+    if (paras.length) sec("summary", T.projSummary, paras.map((t) => `<p class="proj-p">${esc(t)}</p>`).join(""));
+    if (p.flow && p.flow.length) sec("platform", T.projPlatform, `<div class="proj-flow">${p.flow.map((f) => `<span>${esc(pick(f))}</span>`).join(`<i>${ICON.arrow}</i>`)}</div>`);
+    if (p.objectives && p.objectives.length) sec("objectives", T.projObjectives, `<ol class="proj-obj">${p.objectives.map((o) => `<li><b>${esc(pick(o.title))}</b><span>${esc(pick(o.desc))}</span></li>`).join("")}</ol>`);
+    if (p.observatories && p.observatories.length) sec("observatories", T.projObservatories, `<ul class="proj-list">${p.observatories.map((o) => `<li>${esc(pick(o.name))}${o.note ? `<span>${esc(pick(o.note))}</span>` : ""}</li>`).join("")}</ul>`);
+    if (p.roadmap && p.roadmap.length) sec("roadmap", T.projRoadmap, `<ol class="proj-tl">${p.roadmap.map((r) => `<li class="${r.done ? "done" : ""}"><b>${esc(pick(r.date))}</b> ${esc(pick(r.text))}</li>`).join("")}</ol>`);
+
+    const outs = [];
+    (p.outputs || []).forEach((o) => {
+      if (o.doi) {
+        const ref = (pubs.items || []).find((x) => normDoi(x.doi) === normDoi(o.doi));
+        outs.push({ label: ref ? ref.title : (pick(o.label) || o.doi), meta: ref ? [ref.venue, ref.year].filter(Boolean).join(", ") : "", url: "https://doi.org/" + normDoi(o.doi) });
+      } else outs.push({ label: pick(o.label), meta: pick(o.meta) || "", url: o.url });
+    });
+    if (outs.length) sec("outputs", T.projOutputs, `<ul class="proj-list">${outs.map((o) => `<li>${o.url ? `<a href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.label)}</a>` : esc(o.label)}${o.meta ? `<span>${esc(o.meta)}</span>` : ""}</li>`).join("")}</ul>`);
+    if (p.team && p.team.length) sec("team", T.projTeam, `<ul class="proj-list">${p.team.map((m) => `<li>${esc(m.name)}${m.role ? `<span>${esc(pick(m.role))}</span>` : ""}</li>`).join("")}</ul>`);
+    if (p.related && p.related.length) sec("related", T.projRelated, `<ul class="proj-list">${p.related.map((r) => `<li><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(pick(r.label))}</a></li>`).join("")}</ul>`);
+
+    stage.innerHTML = `<section class="proj-hero">
+        <div class="proj-eye">${esc(T.projLabel)} · ${esc(projStatus(p.status))}</div>
+        <h1>${esc(p.short)}</h1>
+        <p class="proj-tag">${esc(pick(p.title))}</p>
+        ${facts.length ? `<dl class="proj-facts">${facts.map((f) => `<div><dt>${esc(f[0])}</dt><dd>${esc(f[1])}</dd></div>`).join("")}</dl>` : ""}
+      </section>
+      ${secs.length > 1 ? `<nav class="proj-nav">${secs.map((x) => `<a href="#proj-${x.key}">${esc(x.label)}</a>`).join("")}</nav>` : ""}
+      <div class="proj-body">${secs.map((x) => `<section class="proj-sec" id="proj-${x.key}"><h2>${esc(x.label)}</h2><div>${x.html}</div></section>`).join("")}</div>
+      <a class="backlink" href="${back}">← ${esc(T.projBack)}</a>`;
+  }
+
+  function fillCV(profile, projects) {
     const stage = $("#cv-stage"); if (!stage) return;
     // no tabs anymore: the portfolio page shows only tools & databases
     const tabsEl = $("#cv-tabs"); if (tabsEl) tabsEl.remove();
-    stage.innerHTML = `<div id="cv-toolbox"></div><div id="cv-datasets"></div>`;
+    stage.innerHTML = `<div id="cv-projects"></div><div id="cv-toolbox"></div><div id="cv-datasets"></div>`;
+    projectsCards($("#cv-projects"), (projects && projects.items) || []);
     toolboxCards($("#cv-toolbox"), profile.toolbox || []);
     datasetsCards($("#cv-datasets"), profile.datasets || []);
   }
@@ -1809,12 +1883,14 @@ ${refsHtml}
   };
 
   /* ---------- boot ---------- */
-  Promise.all([fetchJSON("profile"), fetchJSON("publications"), fetchJSON("posts")])
-    .then(([profile, pubs, posts]) => {
+  Promise.all([fetchJSON("profile"), fetchJSON("publications"), fetchJSON("posts"),
+    (PAGE === "cv" || PAGE === "project") ? fetchJSON("projects").catch(() => ({ items: [] })) : Promise.resolve({ items: [] })])
+    .then(([profile, pubs, posts, projects]) => {
       fillChrome(profile);
       if (PAGE === "home") { fillHome(profile, pubs); fillPublications(profile, pubs, posts); }
       else if (PAGE === "about") fillAbout(profile);
-      else if (PAGE === "cv") fillCV(profile);
+      else if (PAGE === "cv") fillCV(profile, projects);
+      else if (PAGE === "project") fillProject(profile, projects, pubs);
       else if (PAGE === "publications") fillPublications(profile, pubs, posts);
       else if (PAGE === "news") fillNews(profile, pubs, posts);
       else if (PAGE === "post") fillPost(profile, pubs, posts);

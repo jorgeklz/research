@@ -1,0 +1,72 @@
+{
+  "items": [
+    {
+      "id": "opmia",
+      "short": "OPMIA",
+      "status": "ongoing",
+      "since": 2024,
+      "period": { "en": "2024 to 2026", "es": "2024 a 2026" },
+      "role": { "en": "Director", "es": "Director" },
+      "funder": { "en": "Universidad Técnica de Manabí", "es": "Universidad Técnica de Manabí" },
+      "title": {
+        "en": "Optimizing Artificial Intelligence Models on Multivariate and Image Datasets",
+        "es": "Optimización de Modelos de Inteligencia Artificial sobre Datos Multivariados e Imágenes"
+      },
+      "summary": {
+        "en": [
+          "OPMIA studies how to build and tune artificial intelligence models that work well on multivariate data and on image data.",
+          "The project runs from January 2024 to December 2026 at Universidad Técnica de Manabí."
+        ],
+        "es": [
+          "OPMIA estudia cómo construir y ajustar modelos de inteligencia artificial que funcionen bien con datos multivariados y con imágenes.",
+          "El proyecto se desarrolla entre enero de 2024 y diciembre de 2026 en la Universidad Técnica de Manabí."
+        ]
+      },
+      "objectives": [
+        { "title": { "en": "Optimize models", "es": "Optimizar modelos" }, "desc": { "en": "Search for models that balance accuracy and complexity.", "es": "Buscar modelos que equilibren precisión y complejidad." } },
+        { "title": { "en": "Multivariate data", "es": "Datos multivariados" }, "desc": { "en": "Work with tabular datasets from real applications.", "es": "Trabajar con conjuntos de datos tabulares de aplicaciones reales." } },
+        { "title": { "en": "Image data", "es": "Imágenes" }, "desc": { "en": "Classify and analyze images with deep learning.", "es": "Clasificar y analizar imágenes con aprendizaje profundo." } }
+      ],
+      "roadmap": [
+        { "date": { "en": "Jan 2024", "es": "Ene 2024" }, "text": { "en": "Project start", "es": "Inicio del proyecto" }, "done": true },
+        { "date": { "en": "Dec 2026", "es": "Dic 2026" }, "text": { "en": "Project end", "es": "Fin del proyecto" } }
+      ],
+      "outputs": [],
+      "team": [],
+      "related": []
+    },
+    {
+      "id": "observaia",
+      "short": "ObservaIA",
+      "status": "proposal",
+      "since": 2026,
+      "period": null,
+      "role": null,
+      "funder": null,
+      "title": {
+        "en": "A multi-thematic data observatory powered by analytics and artificial intelligence",
+        "es": "Un observatorio de datos multitemático impulsado por analítica e inteligencia artificial"
+      },
+      "summary": {
+        "en": [
+          "ObservaIA is a research funding proposal for a platform that can host many thematic data observatories.",
+          "A shared architecture reuses the same data pipeline, indicators and AI tools for each theme, so a new observatory does not start from zero."
+        ],
+        "es": [
+          "ObservaIA es una propuesta de financiamiento para una plataforma que pueda alojar muchos observatorios temáticos de datos.",
+          "Una arquitectura compartida reutiliza el mismo flujo de datos, indicadores y herramientas de IA en cada tema, de modo que un nuevo observatorio no parte de cero."
+        ]
+      },
+      "flow": [
+        { "en": "Data sources", "es": "Fuentes de datos" },
+        { "en": "Cleaning and integration", "es": "Limpieza e integración" },
+        { "en": "Analytics and AI", "es": "Analítica e IA" },
+        { "en": "Public dashboards", "es": "Tableros públicos" }
+      ],
+      "observatories": [],
+      "outputs": [],
+      "team": [],
+      "related": []
+    }
+  ]
+}
