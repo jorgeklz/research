@@ -75,7 +75,7 @@
     en: {
       journal: "Journal", conference: "Conference", software: "Software", book: "Book chapter",
       paper: "New paper", news: "Posts",
-      readMore: "Read the post", cite: "Cite", copied: "BibTeX copied", doi: "DOI",
+      readMore: "Read the post", cite: "BibTeX", copied: "BibTeX copied", doi: "DOI",
       openAccess: "Open access", all: "All", post: "Post", aboutPaper: "About the paper", readPaper: "Read the paper",
       readOriginalPaper: "Read the original paper",
       postLink: "Explanatory post", article: "Article", minRead: "min read", cvEdu: "Education", cvExp: "Academic experience", cvAwards: "Awards & recognition", cvBackground: "Background",
@@ -106,6 +106,7 @@
       advMetricsHide: "Hide advanced bibliometrics",
       advMetricsBadge: "8 more",
       sortLabel: "Sort by:",
+      yearLabel: "Year", allYears: "All years", quartileLabel: "Quartile", clearFilters: "Clear filters",
       sortRecent: "Newest first",
       sortCites: "Most cited",
       sortTitle: "Title (A–Z)",
@@ -120,7 +121,7 @@
     es: {
       journal: "Revista", conference: "Congreso", software: "Software", book: "Capítulo de libro",
       paper: "Nuevo artículo", news: "Posts",
-      readMore: "Leer el post", cite: "Citar", copied: "BibTeX copiado", doi: "DOI",
+      readMore: "Leer el post", cite: "BibTeX", copied: "BibTeX copiado", doi: "DOI",
       openAccess: "Acceso abierto", all: "Todas", post: "Post", aboutPaper: "Sobre el artículo", readPaper: "Leer el paper",
       readOriginalPaper: "Leer el paper original",
       postLink: "Post explicativo de la publicación", article: "Artículo", minRead: "min de lectura", cvEdu: "Educación", cvExp: "Experiencia académica", cvAwards: "Premios y reconocimientos", cvBackground: "Formación",
@@ -151,6 +152,7 @@
       advMetricsHide: "Ocultar métricas avanzadas",
       advMetricsBadge: "8 más",
       sortLabel: "Ordenar por:",
+      yearLabel: "Año", allYears: "Todos los años", quartileLabel: "Cuartil", clearFilters: "Quitar filtros",
       sortRecent: "Más recientes",
       sortCites: "Más citadas",
       sortTitle: "Título (A–Z)",
@@ -275,7 +277,7 @@
   };
   const fmtDate = (iso) => { try { return new Date(iso + "T12:00:00").toLocaleDateString(LANG === "es" ? "es-EC" : "en-GB", { year: "numeric", month: "short", day: "numeric" }); } catch (e) { return iso; } };
   const boldSelf = (a) => {
-    const marked = a.map((x) => /parraga|párraga/i.test(x) ? `<b>${esc(x)}</b>` : esc(x));
+    const marked = a.map((x) => /parraga|párraga/i.test(x) ? `<b>${esc("Jorge Párraga-Álava")}</b>` : esc(x));
     if (marked.length <= 1) return marked.join("");
     const conj = LANG === "es" ? " y " : " and ";
     return marked.slice(0, -1).join(", ") + conj + marked[marked.length - 1];
@@ -459,7 +461,7 @@
     const qBadge = p.quartile ? `<span class="badge-quartile badge-${esc(p.quartile.toLowerCase())}">${esc(p.quartile)}</span>` : "";
     const oaBadge = p.openAccess ? `<span class="badge-oa">${ICON.oa} ${T.openAccess}</span>` : "";
     const openAlexUrl = p.doi ? `https://openalex.org/works?filter=doi:${encodeURIComponent(normDoi(p.doi))}` : null;
-    const citesChip = typeof p.citations === "number"
+    const citesChip = typeof p.citations === "number" && p.citations > 0
       ? (openAlexUrl
           ? `<a class="cites-chip" href="${openAlexUrl}" target="_blank" rel="noopener" title="${LANG === 'es' ? 'Ver en OpenAlex' : 'View on OpenAlex'}">${ICON.mCite} ${T.citedByOpenAlex(p.citations)} ↗</a>`
           : `<span class="cites-chip">${ICON.mCite} ${T.citedByOpenAlex(p.citations)}</span>`)
@@ -471,14 +473,13 @@
         <span class="yrchip">${p.year || "—"} · ${esc(typeLabel(p.type))}</span>
         ${qBadge}
         ${oaBadge}
-        ${p.venue ? `<span class="ven">${esc(p.venue)}${p.pages ? ", " + esc(p.pages) : ""}</span>` : ""}
-        ${typeof p.scholarCitations === "number" ? `<span class="cites-chip cites-scholar">${ICON.mCite} ${T.citedByScholar(p.scholarCitations)}</span>` : ""}
+        ${p.venue ? `<span class="ven">${esc(p.venue)}${p.pages && !String(p.venue).includes(String(p.pages)) ? ", " + esc(p.pages) : ""}</span>` : ""}
+        ${typeof p.scholarCitations === "number" && p.scholarCitations > 0 ? `<span class="cites-chip cites-scholar">${ICON.mCite} ${T.citedByScholar(p.scholarCitations)}</span>` : ""}
         ${citesChip}
       </div>
       <div class="act">
         ${doiURL ? `<a href="${doiURL}" target="_blank" rel="noopener">${ICON.external} ${T.doi}</a>` : ""}
         <button type="button" class="bib">${ICON.cite} ${T.cite}</button>
-        ${p.openAccess ? `<a class="oa" href="${doiURL || "#"}" target="_blank" rel="noopener">${ICON.oa} ${T.openAccess}</a>` : ""}
         ${postHref ? `<a href="${postHref}">${ICON.doc} ${T.postLink}</a>` : ""}
       </div>`;
     el.querySelector("button.bib").addEventListener("click", () =>
@@ -627,6 +628,8 @@ ${refsHtml}
     const sortSelect = $("#pub-sort-select"), sumEl = $("#pub-summary");
 
     let all = [], filtered = [], type = "all", sort = "recent", page = 0, searchQuery = "";
+    let year = "all", quart = "all", oaOnly = false;
+    let yearSel = null, qWrap = null, oaBtn = null, clearBtn = null, yearsSig = "", quartSig = "";
 
     const searchInput = $("#pub-search");
     if (searchInput) {
@@ -646,8 +649,35 @@ ${refsHtml}
       });
     }
 
+    function syncFilterOptions() {
+      if (yearSel) {
+        const years = [...new Set(all.map((p) => p.year).filter(Boolean))].sort((x, y) => y - x);
+        if (years.join() !== yearsSig) {
+          yearsSig = years.join();
+          yearSel.innerHTML = `<option value="all">${T.allYears}</option>` + years.map((y) => `<option value="${y}">${y}</option>`).join("");
+          yearSel.value = years.map(String).includes(year) ? year : "all";
+          year = yearSel.value;
+        }
+      }
+      if (qWrap) {
+        const qs = ["Q1", "Q2", "Q3", "Q4"].filter((q) => all.some((p) => p.quartile === q));
+        if (qs.join() !== quartSig) {
+          quartSig = qs.join();
+          if (!qs.includes(quart)) quart = "all";
+          qWrap.innerHTML = [`<button type="button" data-q="all" class="${quart === "all" ? "on" : ""}">${T.all}</button>`]
+            .concat(qs.map((q) => `<button type="button" data-q="${q}" class="${quart === q ? "on" : ""}">${q}</button>`)).join("");
+          qWrap.parentElement.hidden = qs.length === 0;
+        }
+      }
+    }
     function apply() {
-      filtered = type === "all" ? [...all] : all.filter((p) => p.type === type);
+      syncFilterOptions();
+      filtered = all.filter((p) =>
+        (type === "all" || p.type === type) &&
+        (year === "all" || String(p.year) === year) &&
+        (quart === "all" || p.quartile === quart) &&
+        (!oaOnly || p.openAccess));
+      if (clearBtn) clearBtn.hidden = !(type !== "all" || year !== "all" || quart !== "all" || oaOnly || searchQuery);
       if (searchQuery) {
         filtered = filtered.filter((p) => {
           const t = (p.title || "").toLowerCase();
@@ -712,6 +742,43 @@ ${refsHtml}
         const b = e.target.closest("button"); if (!b) return;
         fw.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
         type = b.dataset.t; apply();
+      });
+    }
+
+    // extra filters (publications page only): year, quartile, open access, clear
+    const toolbar = $(".pub-toolbar");
+    if (fw && toolbar) {
+      const row = document.createElement("div");
+      row.className = "pub-filter-row";
+      row.innerHTML = `
+        <label class="sort-label" for="pub-year-select">${T.yearLabel}</label>
+        <select id="pub-year-select" class="pub-sort-select"></select>
+        <div class="pub-fgroup"><span class="sort-label">${T.quartileLabel}</span><div class="filters" id="pub-quartiles"></div></div>
+        <div class="filters"><button type="button" id="pub-oa-only" aria-pressed="false">${T.openAccess}</button></div>
+        <button type="button" class="pub-clear" id="pub-clear" hidden>${T.clearFilters}</button>`;
+      toolbar.after(row);
+      yearSel = $("#pub-year-select"); qWrap = $("#pub-quartiles"); oaBtn = $("#pub-oa-only"); clearBtn = $("#pub-clear");
+      yearSel.addEventListener("change", () => { year = yearSel.value; apply(); });
+      qWrap.addEventListener("click", (e) => {
+        const b = e.target.closest("button"); if (!b) return;
+        quart = b.dataset.q;
+        qWrap.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
+        apply();
+      });
+      oaBtn.addEventListener("click", () => {
+        oaOnly = !oaOnly;
+        oaBtn.classList.toggle("on", oaOnly);
+        oaBtn.setAttribute("aria-pressed", String(oaOnly));
+        apply();
+      });
+      clearBtn.addEventListener("click", () => {
+        type = "all"; year = "all"; quart = "all"; oaOnly = false; searchQuery = "";
+        if (searchInput) searchInput.value = "";
+        fw.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x.dataset.t === "all"));
+        oaBtn.classList.remove("on"); oaBtn.setAttribute("aria-pressed", "false");
+        yearSel.value = "all";
+        quartSig = ""; // rebuild the quartile chips with "All" selected
+        apply();
       });
     }
 

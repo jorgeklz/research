@@ -1072,3 +1072,12 @@ h1.title em { font-style: normal; color: var(--blue-700); }
   .net-host { height: 320px; }
   .net-list { border-left: 0; border-top: 1px solid var(--line); padding: .4rem 1.2rem 1rem; }
 }
+
+/* publications: second filter row (year, quartile, open access) */
+.pub-filter-row { display: flex; align-items: center; flex-wrap: wrap; gap: .6rem 1rem; margin: -.4rem 0 1.4rem; }
+.pub-filter-row .filters { margin-bottom: 0; }
+.pub-fgroup { display: inline-flex; align-items: center; gap: .5rem; }
+.pub-fgroup[hidden] { display: none; }
+.pub-clear { margin-left: auto; padding: .35rem .8rem; border: 0; background: transparent; color: var(--blue-600); font: inherit; font-size: var(--fs-xs); font-weight: 600; text-decoration: underline; cursor: pointer; }
+.pub-clear[hidden] { display: none; }
+.pub-clear:hover { color: var(--blue-700); }
