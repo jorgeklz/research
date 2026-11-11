@@ -1055,3 +1055,20 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
 .pub-search { padding: 0.4rem 0.8rem; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); font-family: inherit; font-size: var(--fs-sm); width: 250px; }
 @media (max-width: 640px) { .pub-search { width: 100%; margin-bottom: 1rem; } }
+
+/* co-author network: graph + list of top co-authors */
+.net-layout { display: grid; grid-template-columns: minmax(0, 1fr) 230px; align-items: stretch; }
+.net-host { position: relative; height: 380px; min-width: 0; overflow: hidden; }
+.net-list { padding: .4rem 1.4rem 1rem 1rem; border-left: 1px solid var(--line); }
+.net-list-t { margin: .6rem 0 .5rem; font-size: var(--fs-xs); font-weight: 700; color: var(--ink-2); }
+.net-list ul { list-style: none; margin: 0; padding: 0; }
+.net-row { display: flex; align-items: center; gap: .5rem; width: 100%; padding: .4rem .3rem; border: 0; border-bottom: 1px solid var(--line); background: transparent; font: inherit; font-size: var(--fs-xs); color: var(--ink); text-align: left; cursor: pointer; }
+.net-row:hover, .net-row:focus-visible { background: var(--bg); }
+.net-dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.net-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.net-count { color: var(--ink-3); font-weight: 600; }
+@media (max-width: 760px) {
+  .net-layout { grid-template-columns: minmax(0, 1fr); }
+  .net-host { height: 320px; }
+  .net-list { border-left: 0; border-top: 1px solid var(--line); padding: .4rem 1.2rem 1rem; }
+}
