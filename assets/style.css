@@ -384,7 +384,7 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .leg-item { display: inline-flex; align-items: center; gap: .4rem; }
 .leg-dot { width: 9px; height: 9px; border-radius: 2px; flex: none; }
 .leg-pubs .leg-dot { background: var(--blue); }
-.leg-cites .leg-dot { background: var(--mint); }
+.leg-cites .leg-dot { background: #48a66d; }
 .leg-dash {
   width: 16px; height: 2px; flex: none; border-radius: 1px;
   background: repeating-linear-gradient(to right, var(--blue) 0, var(--blue) 4px, transparent 4px, transparent 7px);
@@ -399,6 +399,19 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .cbar { cursor: pointer; transition: opacity .16s var(--ease), fill .16s var(--ease); }
 .cbar-pubs { fill: var(--blue); opacity: .88; }
 .cbar-cites { fill: var(--mint); opacity: .9; }
+/* trajectory chart: two panels, each with its own scale */
+.chart-panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; }
+.chart-panel-t { display: flex; align-items: center; gap: .45rem; font-size: var(--fs-xs); font-weight: 600; color: var(--ink-2); margin-bottom: .35rem; }
+.chart-panel-t .leg-dot.pt-pubs { background: var(--blue); }
+.chart-panel-t .leg-dot.pt-cites { background: #48a66d; }
+.chart-hit { fill: transparent; transition: fill .14s var(--ease); }
+.chart-group.is-on .chart-hit { fill: rgba(22, 48, 42, .06); }
+.chart-group { outline: none; }
+.chart-group:focus-visible .chart-hit { stroke: var(--blue); stroke-width: 1.5; }
+.cline { fill: none; stroke: #48a66d; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.cdot { fill: #48a66d; stroke: #fff; stroke-width: 2; cursor: pointer; transition: r .14s var(--ease); }
+.chart-group.is-on .cdot { r: 5.5; }
+@media (max-width: 640px) { .chart-panels { grid-template-columns: minmax(0, 1fr); gap: 1rem; } }
 .chart-group:hover .cbar-pubs, .chart-group:focus .cbar-pubs { fill: var(--blue-700); opacity: 1; }
 .chart-group:hover .cbar-cites, .chart-group:focus .cbar-cites { fill: #48a66d; opacity: 1; }
 .chart-yr-txt { fill: var(--ink-3); font-size: 11px; font-weight: 600; font-family: var(--font); }

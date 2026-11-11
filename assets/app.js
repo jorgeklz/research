@@ -114,6 +114,7 @@
       chartTitle: (a, b) => `Scientific trajectory (${a}–${b})`,
       chartPubs: "Publications",
       chartCites: "Citations",
+      perYear: "per year",
       chartOa: "Open Access"
     },
     es: {
@@ -158,6 +159,7 @@
       chartTitle: (a, b) => `Trayectoria científica (${a}–${b})`,
       chartPubs: "Publicaciones",
       chartCites: "Citas",
+      perYear: "por año",
       chartOa: "Acceso Abierto"
     }
   }[LANG];
@@ -1029,74 +1031,64 @@ ${refsHtml}
     const maxPubs = Math.max(...yearly.map((d) => d.pubs), 1);
     const maxCites = Math.max(...yearly.map((d) => d.cites), 1);
 
-    const W = 680, H = 185;
-    const padL = 36, padR = 16, padT = 18, padB = 30;
+    // two panels, each with its own y-axis: publications (bars + trend) and citations (line)
+    const W = 330, H = 170;
+    const padL = 32, padR = 10, padT = 14, padB = 28;
     const plotW = W - padL - padR;
     const plotH = H - padT - padB;
-
     const n = yearly.length;
     const colW = plotW / n;
-    const barW = Math.max(7, Math.min(16, (colW - 12) / 2));
+    const barW = Math.max(7, Math.min(18, colW - 10));
+    const cxOf = (i) => padL + i * colW + colW / 2;
+    const yearStep = n > 10 ? 2 : 1;
 
-    // Y-axis grid lines & labels (based on publications scale)
-    const yTicks = [0, Math.round(maxPubs * 0.33), Math.round(maxPubs * 0.66), maxPubs];
-    const uniqueTicks = [...new Set(yTicks)];
-    const gridLines = uniqueTicks.map((val) => {
-      const frac = val / maxPubs;
-      const y = (padT + plotH * (1 - frac)).toFixed(1);
-      const label = val;
-      return [
-        `<line x1="${padL}" y1="${y}" x2="${(W - padR).toFixed(1)}" y2="${y}" stroke="var(--line)" stroke-dasharray="3 3" stroke-width="1"/>`,
-        `<text class="chart-axis-txt" x="${(padL - 4).toFixed(1)}" y="${y}" text-anchor="end" dominant-baseline="middle">${label}</text>`
-      ].join("");
+    const gridFor = (max) => [...new Set([0, Math.round(max / 2), max])].map((val) => {
+      const y = (padT + plotH * (1 - val / max)).toFixed(1);
+      return `<line x1="${padL}" y1="${y}" x2="${(W - padR).toFixed(1)}" y2="${y}" stroke="var(--line)" stroke-dasharray="3 3" stroke-width="1"/>` +
+             `<text class="chart-axis-txt" x="${(padL - 5).toFixed(1)}" y="${y}" text-anchor="end" dominant-baseline="middle">${val}</text>`;
     }).join("");
 
-    // Trend line for publications (linear regression)
-    const xs = yearly.map((_, i) => padL + i * colW + colW / 2);
-    const ys_pubs = yearly.map((d) => padT + plotH - Math.max(4, (d.pubs / maxPubs) * plotH));
-    // We use the bar tops (centre of bar) for trend
-    const ys_raw = yearly.map((d) => padT + plotH - (d.pubs / maxPubs) * plotH);
-    const sumX = xs.reduce((a, v) => a + v, 0);
-    const sumY = ys_raw.reduce((a, v) => a + v, 0);
-    const sumXY = xs.reduce((a, v, i) => a + v * ys_raw[i], 0);
-    const sumXX = xs.reduce((a, v) => a + v * v, 0);
-    const nn = xs.length;
-    const slope = (nn * sumXY - sumX * sumY) / (nn * sumXX - sumX * sumX);
-    const intercept = (sumY - slope * sumX) / nn;
-    const trendX1 = xs[0];
-    const trendX2 = xs[xs.length - 1];
-    const trendY1 = Math.min(padT + plotH, Math.max(padT, slope * trendX1 + intercept));
-    const trendY2 = Math.min(padT + plotH, Math.max(padT, slope * trendX2 + intercept));
-    const trendLine = `<line class="chart-trend-line" x1="${trendX1.toFixed(1)}" y1="${trendY1.toFixed(1)}" x2="${trendX2.toFixed(1)}" y2="${trendY2.toFixed(1)}"/>`;
+    const groupFor = (d, i, inner) => `
+      <g class="chart-group" tabindex="0" data-year="${d.year}" data-pubs="${d.pubs}" data-oa="${d.oa}" data-cites="${d.cites}">
+        <rect class="chart-hit" x="${(padL + i * colW).toFixed(1)}" y="${padT}" width="${colW.toFixed(1)}" height="${plotH + padB}"/>
+        ${inner}
+        ${i % yearStep === 0 ? `<text class="chart-yr-txt" x="${cxOf(i).toFixed(1)}" y="${H - 8}" text-anchor="middle">${d.year}</text>` : ""}
+      </g>`;
 
-    const colsHtml = yearly.map((d, i) => {
-      const cx = padL + i * colW + colW / 2;
-      const x1 = cx - barW - 1.5;
-      const x2 = cx + 1.5;
-
-      const hPubs = Math.max(4, (d.pubs / maxPubs) * plotH);
-      const yPubs = padT + plotH - hPubs;
-
-      const hCites = d.cites > 0 ? Math.max(4, (d.cites / maxCites) * plotH) : 0;
-      const yCites = padT + plotH - hCites;
-
-      return `
-        <g class="chart-group" tabindex="0" data-year="${d.year}" data-pubs="${d.pubs}" data-oa="${d.oa}" data-cites="${d.cites}">
-          <rect class="chart-hit" x="${(padL + i * colW).toFixed(1)}" y="${padT}" width="${colW.toFixed(1)}" height="${plotH + padB}" fill="transparent"/>
-          <rect class="cbar cbar-pubs" x="${x1.toFixed(1)}" y="${yPubs.toFixed(1)}" width="${barW.toFixed(1)}" height="${hPubs.toFixed(1)}" rx="3"/>
-          ${hCites > 0 ? `<rect class="cbar cbar-cites" x="${x2.toFixed(1)}" y="${yCites.toFixed(1)}" width="${barW.toFixed(1)}" height="${hCites.toFixed(1)}" rx="3"/>` : ""}
-          <text class="chart-yr-txt" x="${cx.toFixed(1)}" y="${(H - 8).toFixed(1)}" text-anchor="middle">${d.year}</text>
-        </g>
-      `;
+    // publications: bars + linear trend
+    const ysRaw = yearly.map((d) => padT + plotH - (d.pubs / maxPubs) * plotH);
+    const xs = yearly.map((_, i) => cxOf(i));
+    const sumX = xs.reduce((s, v) => s + v, 0), sumY = ysRaw.reduce((s, v) => s + v, 0);
+    const sumXY = xs.reduce((s, v, i) => s + v * ysRaw[i], 0), sumXX = xs.reduce((s, v) => s + v * v, 0);
+    const den = n * sumXX - sumX * sumX;
+    const slope = den ? (n * sumXY - sumX * sumY) / den : 0;
+    const intercept = (sumY - slope * sumX) / n;
+    const clampY = (y) => Math.min(padT + plotH, Math.max(padT, y)).toFixed(1);
+    const trendLine = n > 1
+      ? `<line class="chart-trend-line" x1="${xs[0].toFixed(1)}" y1="${clampY(slope * xs[0] + intercept)}" x2="${xs[n - 1].toFixed(1)}" y2="${clampY(slope * xs[n - 1] + intercept)}"/>`
+      : "";
+    const pubsCols = yearly.map((d, i) => {
+      const h = d.pubs > 0 ? Math.max(4, (d.pubs / maxPubs) * plotH) : 0;
+      return groupFor(d, i, h ? `<rect class="cbar cbar-pubs" x="${(cxOf(i) - barW / 2).toFixed(1)}" y="${(padT + plotH - h).toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" rx="3"/>` : "");
     }).join("");
+
+    // citations: line + dots
+    const pts = yearly.map((d, i) => [cxOf(i), padT + plotH - (d.cites / maxCites) * plotH]);
+    const poly = pts.map((p) => p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" ");
+    const citesCols = yearly.map((d, i) => groupFor(d, i, `<circle class="cdot" cx="${pts[i][0].toFixed(1)}" cy="${pts[i][1].toFixed(1)}" r="4"/>`)).join("");
+
+    const panel = (cls, title, body) => `
+      <div class="chart-panel">
+        <div class="chart-panel-t"><span class="leg-dot ${cls}"></span>${title}</div>
+        <svg viewBox="0 0 ${W} ${H}" class="metrics-svg" preserveAspectRatio="xMidYMid meet">${body}</svg>
+      </div>`;
 
     wrap.innerHTML = `
-      <div class="chart-svg-wrap">
-        <svg viewBox="0 0 ${W} ${H}" class="metrics-svg" preserveAspectRatio="xMidYMid meet">
-          <g class="chart-grid">${gridLines}</g>
-          <g class="chart-trend">${trendLine}</g>
-          <g class="chart-cols">${colsHtml}</g>
-        </svg>
+      <div class="chart-svg-wrap chart-panels">
+        ${panel("pt-pubs", `${T.chartPubs} ${T.perYear}`,
+          `<g class="chart-grid">${gridFor(maxPubs)}</g><g class="chart-trend">${trendLine}</g><g class="chart-cols">${pubsCols}</g>`)}
+        ${panel("pt-cites", `${T.chartCites} ${T.perYear}`,
+          `<g class="chart-grid">${gridFor(maxCites)}</g><polyline class="cline" points="${poly}"/><g class="chart-cols">${citesCols}</g>`)}
         <div class="chart-tooltip" id="chart-tooltip" role="tooltip"></div>
       </div>
     `;
@@ -1116,6 +1108,7 @@ ${refsHtml}
           <div class="tip-row"><span class="dot-c"></span>${cites} ${LANG === "es" ? (cites === "1" ? "cita" : "citas") : (cites === "1" ? "citation" : "citations")}</div>
         `;
         tip.classList.add("visible");
+        groups.forEach((x) => x.classList.toggle("is-on", x.dataset.year === yr));
         // Position relative to the chart-svg-wrap container
         const svgWrap = wrap.querySelector(".chart-svg-wrap");
         const wrapRect = svgWrap ? svgWrap.getBoundingClientRect() : wrap.getBoundingClientRect();
@@ -1132,7 +1125,7 @@ ${refsHtml}
         tip.style.left = `${Math.round(left)}px`;
         tip.style.top = `${Math.round(top)}px`;
       }
-      function hide() { tip.classList.remove("visible"); }
+      function hide() { tip.classList.remove("visible"); groups.forEach((x) => x.classList.remove("is-on")); }
       g.addEventListener("mouseenter", show);
       g.addEventListener("mouseleave", hide);
       g.addEventListener("focus", show);
