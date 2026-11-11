@@ -23,14 +23,14 @@
       },
       "summary": {
         "en": [
-          "OPMIA studies how to optimize artificial intelligence models on numerical, textual and image datasets, with priority on scenarios where computing resources are limited.",
-          "The work has three stages: a literature review and dataset selection, the application of advanced optimization techniques such as metaheuristics, and their evaluation on numerical, textual and image data.",
-          "The aim is more accurate models that adapt better to different data and need less time and computing power, so decisions based on large volumes of data become faster and cheaper."
+          "Artificial intelligence models now take part in decisions in industry, health, agriculture and safety. But a model that works well on one dataset can fail on another, and tuning it takes time and computing power that many institutions do not have.",
+          "OPMIA looks for ways to make these models more accurate and more adaptable, and lighter to train and run. It works with numbers, text and images, and pays special attention to places where computing resources are limited.",
+          "So far the project has produced work on helmet compliance at work sites, coffee leaf rust, aphids on lemon leaves, brain tumor detection in MRI and emergency events reported on social media."
         ],
         "es": [
-          "OPMIA estudia cómo optimizar modelos de inteligencia artificial sobre conjuntos de datos numéricos, textuales y de imágenes, con prioridad en escenarios de recursos computacionales limitados.",
-          "El trabajo tiene tres etapas: revisión de la literatura y selección de datos, aplicación de técnicas avanzadas de optimización como las metaheurísticas, y su evaluación sobre datos numéricos, textuales y de imágenes.",
-          "El objetivo son modelos más precisos, que se adapten mejor a datos distintos y requieran menos tiempo y capacidad de cómputo, para que las decisiones basadas en grandes volúmenes de datos sean más rápidas y económicas."
+          "Los modelos de inteligencia artificial ya forman parte de decisiones en la industria, la salud, la agricultura y la seguridad. Pero un modelo que funciona bien con unos datos puede fallar con otros, y ajustarlo requiere tiempo y capacidad de cómputo que muchas instituciones no tienen.",
+          "OPMIA busca formas de que estos modelos sean más precisos y adaptables, y más livianos de entrenar y ejecutar. Trabaja con números, texto e imágenes, y presta especial atención a los lugares con recursos de cómputo limitados.",
+          "Hasta ahora el proyecto ha dado como resultado trabajos sobre el uso de casco en obras, la roya del café, los pulgones en hojas de limón, la detección de tumores cerebrales en resonancia magnética y los eventos de emergencia reportados en redes sociales."
         ]
       },
       "outputs": [
@@ -79,14 +79,14 @@
       },
       "summary": {
         "en": [
-          "Institutions collect data on production, environment, health and education, but turning it into an observatory, a tool that tracks a phenomenon with indicators, alerts and analysis, is usually built from scratch each time. ObservaIA proposes a general-purpose platform that can serve as the base for observatories in different domains without repeating that work.",
-          "The platform integrates structured and semi-structured sources, checks data quality, applies descriptive analysis, forecasting and anomaly detection when the data allow it, and presents results in a configurable dashboard. It combines Design Science Research and CRISP-DM and is validated in three domains.",
-          "The project will deliver the platform, three demonstrator observatories, evaluated models, a software registration and scientific publications. It contributes to SDG 9 and 17 through cooperation among Universidad Técnica de Manabí, Universidad Bolivariana del Ecuador and Universidad Estatal de Milagro."
+          "Institutions collect data on production, environment, health and education every day, but few can turn it into something that helps them decide. Building an observatory, a place where a topic is followed through indicators, alerts and analysis, usually means starting from zero each time, at a high cost and with little reuse.",
+          "ObservaIA is a platform designed to be reused. It brings in data from different sources, checks that it is reliable, and shows what is happening in a dashboard that each institution can configure, with forecasts and early warnings based on artificial intelligence.",
+          "The project is a joint effort of Universidad Técnica de Manabí, Universidad Bolivariana del Ecuador and Universidad Estatal de Milagro. Its goal is that setting up a new observatory takes configuration, not a new development."
         ],
         "es": [
-          "Las instituciones acumulan datos sobre producción, ambiente, salud y educación, pero convertirlos en un observatorio, una herramienta que sigue un fenómeno con indicadores, alertas y análisis, suele construirse desde cero cada vez. ObservaIA propone una plataforma de propósito general que sirva de base a observatorios de distintos dominios sin repetir ese trabajo.",
-          "La plataforma integra fuentes estructuradas y semiestructuradas, verifica la calidad de los datos, aplica análisis descriptivo, predicción y detección de anomalías cuando los datos lo permiten, y presenta los resultados en un dashboard configurable. Combina Design Science Research y CRISP-DM, y se valida en tres dominios.",
-          "El proyecto entregará la plataforma, tres observatorios demostradores, los modelos evaluados, un registro de software y publicaciones científicas. Contribuye a los ODS 9 y 17 mediante la cooperación entre la Universidad Técnica de Manabí, la Universidad Bolivariana del Ecuador y la Universidad Estatal de Milagro."
+          "Las instituciones recogen cada día datos sobre producción, ambiente, salud y educación, pero pocas logran convertirlos en algo que les ayude a decidir. Construir un observatorio, un lugar donde se sigue un tema con indicadores, alertas y análisis, suele significar empezar de cero cada vez, con un costo alto y poca reutilización.",
+          "ObservaIA es una plataforma pensada para reutilizarse. Recibe datos de distintas fuentes, comprueba que sean confiables y muestra lo que ocurre en un panel que cada institución puede configurar, con pronósticos y alertas tempranas basados en inteligencia artificial.",
+          "El proyecto es un esfuerzo conjunto de la Universidad Técnica de Manabí, la Universidad Bolivariana del Ecuador y la Universidad Estatal de Milagro. Su meta es que crear un nuevo observatorio sea cuestión de configuración y no de un nuevo desarrollo."
         ]
       },
       "outputs": [
