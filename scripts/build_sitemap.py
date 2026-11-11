@@ -34,6 +34,12 @@ def main():
         alts = [("en", BASE + en), ("es", BASE + es)]
         items.append(entry(BASE + en, alts, today))
         items.append(entry(BASE + es, alts, today))
+    projects = json.loads((ROOT / "data" / "projects.json").read_text(encoding="utf-8")).get("items", [])
+    for pr in projects:
+        q = quote(str(pr["id"]), safe="")
+        alts = [("en", f"{BASE}project.html?id={q}"), ("es", f"{BASE}es/proyecto.html?id={q}")]
+        items.append(entry(alts[0][1], alts, today))
+        items.append(entry(alts[1][1], alts, today))
     for p in posts:
         pid = p.get("id")
         if not pid:
