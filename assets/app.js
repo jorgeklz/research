@@ -261,16 +261,16 @@
     let s = String(t || "");
     // Crossref/OpenAlex sometimes double-escape JATS markup (e.g. "&amp;lt;jats:italic&amp;gt;");
     // decode entities repeatedly (bounded) so any nested escaping is fully resolved before we strip tags.
-    const d = document.createElement("div");
+    // DOMParser builds an inert document: unlike innerHTML on a detached element, it never loads
+    // images or runs handlers (<img onerror=...>) found in third-party abstracts.
+    const toText = (html) => new DOMParser().parseFromString(html, "text/html").body.textContent || "";
     for (let i = 0; i < 3; i++) {
-      d.innerHTML = s;
-      const decoded = d.textContent;
+      const decoded = toText(s);
       if (decoded === s) break;
       s = decoded;
     }
     // now remove any real/decoded tags (JATS <italic>, <sub>, <mml:...>, etc.)
-    d.innerHTML = s.replace(/<[^>]+>/g, " ");
-    s = d.textContent;
+    s = toText(s.replace(/<[^>]+>/g, " "));
     // normalize unicode (combining forms -> precomposed) so accents render consistently
     if (s.normalize) s = s.normalize("NFC");
     return s
