@@ -832,6 +832,10 @@ h1.title em { font-style: normal; color: var(--blue-700); }
   .nav a, .cv-tab, .filters button, .pagination button, .pub .act a, .pub .act button, .socials a { min-height: 40px; display: inline-flex; align-items: center; }
   .nav-toggle { min-height: 42px; }
   .stat { cursor: pointer; }
+  /* small controls: bigger touch target without changing the layout */
+  .lang-top, .vis-btn, .stat-toggle-btn, .pagination .goto select { min-height: 40px; }
+  .cites-chip, .more-link, .src-link { position: relative; }
+  .cites-chip::before, .more-link::before, .src-link::before { content: ""; position: absolute; inset: -10px -6px; }
 }
 /* never let long titles or DOIs break the layout */
 .pub h3, .card h3, .post-hero h1, .rel-t, .ven, .ref-cite,
