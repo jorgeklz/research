@@ -26,12 +26,15 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python3 scripts/update_publications.py
 
+      - name: Rebuild sitemap
+        run: python3 scripts/build_sitemap.py
+
       - name: Commit changes
         run: |
           git config user.name "site-bot"
           git config user.email "actions@github.com"
-          if ! git diff --quiet data/; then
-            git add data/
+          if ! git diff --quiet data/ sitemap.xml; then
+            git add data/ sitemap.xml
             git commit -m "auto: new publications and posts ($(date -u +%F))"
             git push
           else
