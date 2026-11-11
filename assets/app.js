@@ -85,7 +85,7 @@
       projOpen: "Open project site", projLabel: "Research project", projBack: "All projects", projNone: "Project not found.",
       stOngoing: "Ongoing", stProposal: "Proposal", stCompleted: "Completed",
       projSummary: "Summary",
-      projResults: "Results", projPapers: "Papers", projWebsites: "Websites", projNoResults: "Papers, software and websites from this project will be listed here as they are published.",
+      projResults: "Results", projPaper: "Paper", projWebsite: "Website", projNoResults: "Papers, software and websites from this project will be listed here as they are published.",
       cvToolbox: "Tools & databases",
       tbTool: "Tool", tbSoftware: "Software", tbDatabase: "Database",
       tbTools: "Tools & software", tbDatabases: "Datasets",
@@ -135,7 +135,7 @@
       projOpen: "Abrir sitio del proyecto", projLabel: "Proyecto de investigación", projBack: "Todos los proyectos", projNone: "Proyecto no encontrado.",
       stOngoing: "Vigente", stProposal: "Propuesta", stCompleted: "Finalizado",
       projSummary: "Resumen",
-      projResults: "Resultados", projPapers: "Artículos", projWebsites: "Sitios web", projNoResults: "Los artículos, el software y los sitios web de este proyecto se listarán aquí a medida que se publiquen.",
+      projResults: "Resultados", projPaper: "Artículo", projWebsite: "Sitio web", projNoResults: "Los artículos, el software y los sitios web de este proyecto se listarán aquí a medida que se publiquen.",
       cvToolbox: "Herramientas y bases de datos",
       tbTool: "Herramienta", tbSoftware: "Software", tbDatabase: "Base de datos",
       tbTools: "Herramientas y software", tbDatabases: "Bases de datos",
@@ -180,7 +180,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = "118";
+  const VER = "119";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -1605,25 +1605,28 @@ ${refsHtml}
 
     const meta = [pick(p.period), pick(p.role), pick(p.funder)].filter(Boolean).join(" · ");
     const paras = pick(p.summary) || [];
-    const host = (u) => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return ""; } };
-    const groups = { paper: [], software: [], website: [] };
+    const host = (u) => { try { const x = new URL(u); return (x.hostname.replace(/^www\./, "") + x.pathname).replace(/\/$/, ""); } catch (e) { return ""; } };
+    const ICO = {
+      paper: svg('<path d="M6 2h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z"/><path d="M15 2v5h5"/><line x1="9" y1="13" x2="16" y2="13"/><line x1="9" y1="17" x2="14" y2="17"/>', 14),
+      software: svg('<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>', 14),
+      website: svg('<circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>', 14)
+    };
+    const KIND = { paper: T.projPaper, software: T.projSoftware, website: T.projWebsite };
+    const ORDER = { paper: 0, software: 1, website: 2 };
+    const res = [];
     (p.outputs || []).forEach((o) => {
       if (o.doi) {
         const ref = (pubs.items || []).find((x) => normDoi(x.doi) === normDoi(o.doi));
-        groups.paper.push({ t: ref ? ref.title : (pick(o.label) || o.doi), m: ref ? [ref.venue, ref.year].filter(Boolean).join(" · ") : (pick(o.meta) || ""), u: "https://doi.org/" + normDoi(o.doi) });
-      } else if (groups[o.type]) {
-        const m = [pick(o.meta) || (o.type === "website" ? host(o.url) : ""), o.year].filter(Boolean).join(" · ");
-        groups[o.type].push({ t: pick(o.label), m, u: o.url });
+        res.push({ k: "paper", t: ref ? ref.title : (pick(o.label) || o.doi), m: ref ? ref.venue : (pick(o.meta) || ""), y: ref ? ref.year : o.year, u: "https://doi.org/" + normDoi(o.doi) });
+      } else if (ORDER[o.type] !== undefined) {
+        res.push({ k: o.type, t: pick(o.label), m: pick(o.meta) || (o.type === "website" ? host(o.url) : ""), y: o.year, u: o.url });
       }
     });
-    const cols = [
-      ["paper", T.projPapers, svg('<path d="M6 2h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z"/><path d="M15 2v5h5"/><line x1="9" y1="13" x2="16" y2="13"/><line x1="9" y1="17" x2="14" y2="17"/>', 17)],
-      ["software", T.projSoftware, svg('<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>', 17)],
-      ["website", T.projWebsites, svg('<circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>', 17)]
-    ].filter((c) => groups[c[0]].length);
-    const row = (r) => `<li>${r.u ? `<a href="${esc(r.u)}" target="_blank" rel="noopener">${esc(r.t)}</a>` : `<span class="proj-rt">${esc(r.t)}</span>`}${r.m ? `<span class="proj-rm">${esc(r.m)}</span>` : ""}</li>`;
-    const results = cols.length
-      ? `<div class="proj-cols">${cols.map((c) => `<div class="proj-col"><h3>${c[2]}<span>${esc(c[1])}</span><em>${groups[c[0]].length}</em></h3><ul>${groups[c[0]].map(row).join("")}</ul></div>`).join("")}</div>`
+    // newest year first; inside a year: papers, software, websites, in the order given
+    const years = [...new Set(res.map((r) => r.y || ""))].sort((a, b) => (+b || 0) - (+a || 0));
+    const item = (r) => `<div class="proj-ri">${r.u ? `<a href="${esc(r.u)}" target="_blank" rel="noopener">${esc(r.t)}</a>` : `<span class="proj-rt">${esc(r.t)}</span>`}<div class="proj-rk">${ICO[r.k]}<span>${esc([KIND[r.k], r.m].filter(Boolean).join(" · "))}</span></div></div>`;
+    const results = res.length
+      ? `<div class="proj-years">${years.map((y) => `<div class="proj-yr"><b>${esc(y)}</b><div>${res.filter((r) => (r.y || "") === y).sort((a, b) => ORDER[a.k] - ORDER[b.k]).map(item).join("")}</div></div>`).join("")}</div>`
       : `<p class="proj-empty">${esc(T.projNoResults)}</p>`;
     const extra = (p.related || []).length ? `<p class="proj-rel">${p.related.map((r) => `<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(pick(r.label))}</a>`).join(" · ")}</p>` : "";
 

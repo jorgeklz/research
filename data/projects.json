@@ -96,10 +96,6 @@
             "en": "Investigadores UTM",
             "es": "Investigadores UTM"
           },
-          "meta": {
-            "en": "Web tool",
-            "es": "Herramienta web"
-          },
           "url": "https://jorgeklz.github.io/perfiles-utm/",
           "year": 2026
         },
@@ -109,11 +105,8 @@
             "en": "MeteoNet",
             "es": "MeteoNet"
           },
-          "meta": {
-            "en": "Web tool",
-            "es": "Herramienta web"
-          },
-          "url": "https://jorgeklz.github.io/meteonet/"
+          "url": "https://jorgeklz.github.io/meteonet/",
+          "year": 2026
         }
       ],
       "team": [],
