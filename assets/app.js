@@ -1735,13 +1735,17 @@ ${refsHtml}
       const uid = span.getAttribute("data-uid");
       if (!uid) return;
       fetch("https://graphcomment.com/api/pub/numberOfComments?website=Personal-research-site&uid=" + encodeURIComponent(uid) + "&url=/")
-        .then(r => r.json())
-        .then(data => {
-          if (data && data.count !== undefined) {
-            span.textContent = data.count;
-          }
+        .then(r => {
+          if (!r.ok) throw new Error("graphcomment " + r.status);
+          return r.text();
         })
-        .catch(err => console.error("Error fetching comment count", err));
+        .then(txt => {
+          // the API answers with plain text ("not found") when the thread has no comments yet
+          let data = null;
+          try { data = JSON.parse(txt); } catch (e) { /* not JSON: leave the counter as is */ }
+          if (data && data.count !== undefined) span.textContent = data.count;
+        })
+        .catch(() => { /* counter is optional: stay silent */ });
     });
   };
 
