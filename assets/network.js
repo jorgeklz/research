@@ -203,7 +203,7 @@ function initNetworkGraph(pubs, ROOT) {
   btn("⟲", TX.reset, () => svg.transition().duration(300).call(zoom.transform, home));
 
   // list of the most frequent co-authors
-  const top = nodes.filter((n) => n.group !== 0).sort((a, b) => b.count - a.count || a.id.localeCompare(b.id)).slice(0, 6);
+  const top = nodes.filter((n) => n.group !== 0).sort((a, b) => b.count - a.count || a.id.localeCompare(b.id)).slice(0, 2);
   aside.append("h3").attr("class", "net-list-t").text(TX.top);
   const ul = aside.append("ul");
   top.forEach((n) => {
