@@ -91,26 +91,202 @@
       },
       "outputs": [
         {
-          "type": "website",
+          "type": "observatory",
           "label": {
             "en": "Investigadores UTM",
             "es": "Investigadores UTM"
           },
           "url": "https://jorgeklz.github.io/perfiles-utm/",
-          "year": 2026
+          "year": 2026,
+          "meta": null,
+          "sub": {
+            "en": "Research profiles",
+            "es": "Perfiles de investigadores"
+          }
         },
         {
-          "type": "website",
+          "type": "observatory",
           "label": {
             "en": "MeteoNet",
             "es": "MeteoNet"
           },
           "url": "https://jorgeklz.github.io/meteonet/",
-          "year": 2026
+          "year": 2026,
+          "meta": null,
+          "sub": {
+            "en": "Meteorology",
+            "es": "Meteorología"
+          }
+        },
+        {
+          "type": "observatory",
+          "pending": true,
+          "label": {
+            "en": "Third demonstrator observatory",
+            "es": "Tercer observatorio demostrador"
+          },
+          "sub": {
+            "en": "Domain to be defined",
+            "es": "Dominio por definir"
+          }
         }
       ],
-      "team": [],
-      "related": []
+      "team": [
+        {
+          "group": "pi",
+          "name": "Jorge Párraga-Álava",
+          "url": "https://www.linkedin.com/in/jorge-p-470a03302/"
+        },
+        {
+          "group": "res",
+          "name": "Emilio Jarre Castro",
+          "url": "https://www.linkedin.com/in/emilio-jarre-castro-b9758bba/"
+        },
+        {
+          "group": "res",
+          "name": "Ezequiel Zamora Ledezma",
+          "url": "https://www.linkedin.com/in/ezequiel-zamora-ledezma-979b402a/"
+        },
+        {
+          "group": "res",
+          "name": "Leticia Vaca Cárdenas",
+          "url": "https://www.linkedin.com/in/leticia-vaca-cárdenas/"
+        },
+        {
+          "group": "res",
+          "name": "Julio Barzola Monteses",
+          "url": "https://www.linkedin.com/in/julio-barzola-monteses-smieee-66344514/"
+        },
+        {
+          "group": "res",
+          "name": "Jorge Luis Rodas Silva",
+          "url": "#"
+        },
+        {
+          "group": "res",
+          "name": "José Zambrano Zambrano",
+          "url": "#"
+        },
+        {
+          "group": "phd",
+          "name": "Edison Solórzano Solórzano",
+          "url": "https://www.linkedin.com/in/edison-leonardo-solorzano-solorzano-13ba8a372/"
+        },
+        {
+          "group": "ms",
+          "name": "Madelayne Loor Vera",
+          "url": "https://www.linkedin.com/in/madelayne-loor-vera-550626192/"
+        },
+        {
+          "group": "ms",
+          "name": "Joan Sánchez Loor",
+          "url": "https://www.linkedin.com/in/joan-patricio-sánchez-loor-03a12b187/"
+        }
+      ],
+      "related": [],
+      "detail": {
+        "background": {
+          "en": "Institutions generate data in tables, event logs, time series, geographic files and forms. Every observatory repeats the same tasks, yet each is built as an isolated application, which raises the cost and makes it hard to maintain.",
+          "es": "Las instituciones generan datos en tablas, registros de eventos, series de tiempo, archivos geográficos y formularios. Cada observatorio repite las mismas tareas, pero se construye como una aplicación aislada, lo que eleva el costo y dificulta su mantenimiento."
+        },
+        "question": {
+          "en": "How far can a platform with a generic architecture and data model integrate, analyze, forecast and detect patterns in data from different domains, without being rebuilt for each one?",
+          "es": "¿En qué medida una plataforma con una arquitectura y un modelo de datos genéricos puede integrar, analizar, predecir y detectar patrones en datos de distintos dominios, sin reconstruirse para cada uno?"
+        },
+        "objectives": [
+          {
+            "t": {
+              "en": "Identify requirements and common data patterns",
+              "es": "Identificar requisitos y patrones de datos comunes"
+            },
+            "when": {
+              "en": "Aug 2026 to Jan 2027",
+              "es": "Ago 2026 a Ene 2027"
+            }
+          },
+          {
+            "t": {
+              "en": "Design the architecture, the generic data model and the dashboard",
+              "es": "Diseñar la arquitectura, el modelo de datos genérico y el panel"
+            },
+            "when": {
+              "en": "Oct 2026 to Mar 2027",
+              "es": "Oct 2026 a Mar 2027"
+            }
+          },
+          {
+            "t": {
+              "en": "Build the analytics, forecasting and alert modules",
+              "es": "Construir los módulos de analítica, pronóstico y alertas"
+            },
+            "when": {
+              "en": "Jan to Dec 2027",
+              "es": "Ene a Dic 2027"
+            }
+          },
+          {
+            "t": {
+              "en": "Evaluate the platform across domains",
+              "es": "Evaluar la plataforma en distintos dominios"
+            },
+            "when": {
+              "en": "Jul 2027 to Jan 2029",
+              "es": "Jul 2027 a Ene 2029"
+            }
+          }
+        ],
+        "alignment": [
+          {
+            "icon": "target",
+            "t": {
+              "en": "Sustainable Development Goals 9 and 17",
+              "es": "Objetivos de Desarrollo Sostenible 9 y 17"
+            }
+          },
+          {
+            "icon": "flag",
+            "t": {
+              "en": "National Development Plan of Ecuador 2025 to 2029",
+              "es": "Plan Nacional de Desarrollo de Ecuador 2025 a 2029"
+            }
+          }
+        ]
+      },
+      "partners": [
+        "Universidad Técnica de Manabí",
+        "Universidad Bolivariana del Ecuador",
+        "Universidad Estatal de Milagro"
+      ],
+      "expected": [
+        {
+          "icon": "dash",
+          "t": {
+            "en": "Configurable dashboard",
+            "es": "Panel configurable"
+          }
+        },
+        {
+          "icon": "code",
+          "t": {
+            "en": "Software registration",
+            "es": "Registro de software"
+          }
+        },
+        {
+          "icon": "book",
+          "t": {
+            "en": "Technical documentation",
+            "es": "Documentación técnica"
+          }
+        },
+        {
+          "icon": "paper",
+          "t": {
+            "en": "Journal and conference papers, Scopus or WoS",
+            "es": "Artículos en revistas y congresos, Scopus o WoS"
+          }
+        }
+      ]
     }
   ]
 }

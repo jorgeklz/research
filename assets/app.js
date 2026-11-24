@@ -85,6 +85,11 @@
       projOpen: "Open project site", projLabel: "Research project", projBack: "All projects", projNone: "Project not found.",
       stOngoing: "Ongoing", stProposal: "Proposal", stCompleted: "Completed",
       projSummary: "Summary",
+      projProject: "Project", projProjectSub: "Description and objectives", projTeam: "Team", projTeamSub: "People and institutions", projResultsSub: "Publications, observatories and expected production",
+      projSections: "Sections of the project", projBackground: "Background", projQuestion: "Question", projObjectives: "Objectives", projAlignment: "Alignment",
+      tmPI: "Principal investigator", tmRes: "Researchers", tmPhd: "PhD students", tmMs: "Master's students", tmBsc: "Undergraduate students", projPartners: "Partner institutions",
+      projPublications: "Publications", projObservatories: "Observatories", projSoftwareH: "Software", projWebsites: "Websites", projExpected: "Expected production", projObservatory: "Observatory",
+      projPubEmpty: "Papers from this project will be listed here as they are published.",
       projResults: "Results", projPaper: "Paper", projWebsite: "Website", projNoResults: "Papers, software and websites from this project will be listed here as they are published.",
       cvToolbox: "Tools & databases",
       tbTool: "Tool", tbSoftware: "Software", tbDatabase: "Database",
@@ -135,6 +140,11 @@
       projOpen: "Abrir sitio del proyecto", projLabel: "Proyecto de investigación", projBack: "Todos los proyectos", projNone: "Proyecto no encontrado.",
       stOngoing: "Vigente", stProposal: "Propuesta", stCompleted: "Finalizado",
       projSummary: "Resumen",
+      projProject: "Proyecto", projProjectSub: "Descripción y objetivos", projTeam: "Equipo", projTeamSub: "Personas e instituciones", projResultsSub: "Publicaciones, observatorios y producción esperada",
+      projSections: "Secciones del proyecto", projBackground: "Antecedentes", projQuestion: "Pregunta", projObjectives: "Objetivos", projAlignment: "Alineación",
+      tmPI: "Investigador principal", tmRes: "Investigadores", tmPhd: "Estudiantes de doctorado", tmMs: "Estudiantes de maestría", tmBsc: "Estudiantes de grado", projPartners: "Instituciones socias",
+      projPublications: "Publicaciones", projObservatories: "Observatorios", projSoftwareH: "Software", projWebsites: "Sitios web", projExpected: "Producción esperada", projObservatory: "Observatorio",
+      projPubEmpty: "Los artículos de este proyecto se listarán aquí a medida que se publiquen.",
       projResults: "Resultados", projPaper: "Artículo", projWebsite: "Sitio web", projNoResults: "Los artículos, el software y los sitios web de este proyecto se listarán aquí a medida que se publiquen.",
       cvToolbox: "Herramientas y bases de datos",
       tbTool: "Herramienta", tbSoftware: "Software", tbDatabase: "Base de datos",
@@ -180,7 +190,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = "119";
+  const VER = "120";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -1591,8 +1601,10 @@ ${refsHtml}
     container.innerHTML = `<div class="cv-block" id="projects"><h2>${esc(T.cvProjects)}</h2><div class="toolbox">${list.map(card).join("")}</div></div>`;
   }
 
-  // Project page: header, summary, then the results of the project in three columns
-  // (papers, software, websites). Papers given by DOI take title, venue and year from publications.json.
+  // Project page: header and summary, then (when the project has detail or a team) three
+  // axes beside an icon rail: Project, Team, Results and production. Papers given by DOI
+  // take title, venue and year from publications.json.
+  const LI_ICON = '<svg class="tm-li" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.77v8.37H6.46v-8.37M7.84 6.2a1.62 1.62 0 1 0 0 3.24 1.62 1.62 0 0 0 0-3.24z"/></svg>';
   function fillProject(profile, projects, pubs) {
     const stage = $("#project-stage"); if (!stage) return;
     const id = new URLSearchParams(location.search).get("id");
@@ -1609,26 +1621,83 @@ ${refsHtml}
     const ICO = {
       paper: svg('<path d="M6 2h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z"/><path d="M15 2v5h5"/><line x1="9" y1="13" x2="16" y2="13"/><line x1="9" y1="17" x2="14" y2="17"/>', 14),
       software: svg('<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>', 14),
-      website: svg('<circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>', 14)
+      code: svg('<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>', 14),
+      website: svg('<circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>', 14),
+      observatory: svg('<path d="M3 3v18h18"/><path d="m7 15 4-5 3 3 5-7"/>', 14),
+      pending: svg('<circle cx="12" cy="12" r="9" stroke-dasharray="3 3"/>', 14),
+      dash: svg('<rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/>', 14),
+      book: svg('<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5Z"/><path d="M4 19a2 2 0 0 1 2-2h13"/>', 14),
+      target: svg('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>', 15),
+      flag: svg('<path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/>', 15),
+      project: svg('<path d="M6 2h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z"/><path d="M15 2v5h5"/><line x1="9" y1="13" x2="16" y2="13"/><line x1="9" y1="17" x2="14" y2="17"/>', 24),
+      team: svg('<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.4"/><path d="M17 14.2c2.4.2 4 2 4 5"/>', 24),
+      results: svg('<circle cx="12" cy="9" r="5.5"/><path d="m8.5 13.5-1.7 7.5L12 18l5.2 3-1.7-7.5"/>', 24),
+      building: svg('<rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 8h2M13 8h2M9 12h2M13 12h2M10 21v-4h4v4"/>', 15)
     };
-    const KIND = { paper: T.projPaper, software: T.projSoftware, website: T.projWebsite };
-    const ORDER = { paper: 0, software: 1, website: 2 };
+    const KIND = { paper: T.projPaper, software: T.projSoftware, website: T.projWebsite, observatory: T.projObservatory };
+    const ORDER = { paper: 0, software: 1, observatory: 2, website: 3 };
     const res = [];
     (p.outputs || []).forEach((o) => {
       if (o.doi) {
         const ref = (pubs.items || []).find((x) => normDoi(x.doi) === normDoi(o.doi));
         res.push({ k: "paper", t: ref ? ref.title : (pick(o.label) || o.doi), m: ref ? ref.venue : (pick(o.meta) || ""), y: ref ? ref.year : o.year, u: "https://doi.org/" + normDoi(o.doi) });
       } else if (ORDER[o.type] !== undefined) {
-        res.push({ k: o.type, t: pick(o.label), m: pick(o.meta) || (o.type === "website" ? host(o.url) : ""), y: o.year, u: o.url });
+        res.push({ k: o.type, t: pick(o.label), m: pick(o.sub) || pick(o.meta) || host(o.url), y: o.year, u: o.url, pend: !!o.pending });
       }
     });
-    // newest year first; inside a year: papers, software, websites, in the order given
-    const years = [...new Set(res.map((r) => r.y || ""))].sort((a, b) => (+b || 0) - (+a || 0));
-    const item = (r) => `<div class="proj-ri">${r.u ? `<a href="${esc(r.u)}" target="_blank" rel="noopener">${esc(r.t)}</a>` : `<span class="proj-rt">${esc(r.t)}</span>`}<div class="proj-rk">${ICO[r.k]}<span>${esc([KIND[r.k], r.m].filter(Boolean).join(" · "))}</span></div></div>`;
-    const results = res.length
-      ? `<div class="proj-years">${years.map((y) => `<div class="proj-yr"><b>${esc(y)}</b><div>${res.filter((r) => (r.y || "") === y).sort((a, b) => ORDER[a.k] - ORDER[b.k]).map(item).join("")}</div></div>`).join("")}</div>`
-      : `<p class="proj-empty">${esc(T.projNoResults)}</p>`;
+    const item = (r) => `<div class="proj-ri${r.pend ? " pend" : ""}">${r.u ? `<a href="${esc(r.u)}" target="_blank" rel="noopener">${esc(r.t)}</a>` : `<span class="proj-rt">${esc(r.t)}</span>`}<div class="proj-rk">${ICO[r.pend ? "pending" : r.k]}<span>${esc([KIND[r.k], r.m].filter(Boolean).join(" · "))}</span></div></div>`;
+    // by year (newest first); items still planned go after the dated ones
+    const yearList = (list) => {
+      const dated = list.filter((r) => !r.pend), planned = list.filter((r) => r.pend);
+      const years = [...new Set(dated.map((r) => r.y || ""))].sort((a, b) => (+b || 0) - (+a || 0));
+      return `<div class="proj-years">${years.map((y) => `<div class="proj-yr"><b>${esc(y)}</b><div>${dated.filter((r) => (r.y || "") === y).map(item).join("")}</div></div>`).join("")}${planned.length ? `<div class="proj-yr"><b></b><div>${planned.map(item).join("")}</div></div>` : ""}</div>`;
+    };
+    const grp = (ic, title, n, body) => `<div class="proj-g">${ic}<span>${esc(title)}</span><small>${n}</small></div>${body}`;
+    const by = (k) => res.filter((r) => r.k === k);
+    const papers = by("paper"), soft = by("software"), obs = by("observatory"), web = by("website");
+    const exp = p.expected || [];
+    const showPubs = papers.length || p.detail;
+    let resHtml = "";
+    if (showPubs) resHtml += grp(ICO.paper, T.projPublications, papers.length, papers.length ? yearList(papers) : `<p class="proj-empty">${esc(T.projPubEmpty)}</p>`);
+    if (obs.length) resHtml += grp(ICO.observatory, T.projObservatories, obs.filter((r) => !r.pend).length, yearList(obs));
+    if (soft.length) resHtml += grp(ICO.software, T.projSoftwareH, soft.length, yearList(soft));
+    if (web.length) resHtml += grp(ICO.website, T.projWebsites, web.length, yearList(web));
+    if (exp.length) resHtml += grp(ICO.pending, T.projExpected, "", `<div class="proj-exp">${exp.map((e) => `<div>${ICO[e.icon] || ICO.pending}<span>${esc(pick(e.t))}</span></div>`).join("")}</div>`);
+    if (!resHtml) resHtml = `<p class="proj-empty">${esc(T.projNoResults)}</p>`;
     const extra = (p.related || []).length ? `<p class="proj-rel">${p.related.map((r) => `<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(pick(r.label))}</a>`).join(" · ")}</p>` : "";
+
+    // axis 1: project description
+    const d = p.detail;
+    let projHtml = "";
+    if (d) {
+      const row = (l, h) => `<div class="proj-row"><span>${esc(l)}</span><div>${h}</div></div>`;
+      projHtml = (d.background ? row(T.projBackground, `<p>${esc(pick(d.background))}</p>`) : "")
+        + (d.question ? row(T.projQuestion, `<p>${esc(pick(d.question))}</p>`) : "")
+        + ((d.objectives || []).length ? row(T.projObjectives, `<ol class="proj-ol">${d.objectives.map((o, i) => `<li><em>${i + 1}</em><span>${esc(pick(o.t))}</span><small>${esc(pick(o.when))}</small></li>`).join("")}</ol>`) : "")
+        + ((d.alignment || []).length ? row(T.projAlignment, `<div class="proj-align">${d.alignment.map((a) => `<span>${ICO[a.icon] || ""}${esc(pick(a.t))}</span>`).join("")}</div>`) : "");
+    }
+    // axis 2: team (LinkedIn chips in the same style as MeteoNet)
+    const team = p.team || [];
+    let teamHtml = "";
+    if (team.length || (p.partners || []).length) {
+      const chip = (m) => m.url === "#"
+        ? `<a class="tm-chip" href="#" title="LinkedIn: ${esc(m.name)}">${LI_ICON}<span>${esc(m.name)}</span></a>`
+        : `<a class="tm-chip" href="${esc(m.url)}" target="_blank" rel="noopener noreferrer" title="LinkedIn: ${esc(m.name)}">${LI_ICON}<span>${esc(m.name)}</span></a>`;
+      const GROUPS = [["pi", T.tmPI], ["res", T.tmRes], ["phd", T.tmPhd], ["ms", T.tmMs], ["bsc", T.tmBsc]];
+      teamHtml = GROUPS.map(([g, label]) => {
+        const ms = team.filter((m) => m.group === g);
+        return ms.length ? `<div class="proj-g"><span>${esc(label)}</span></div><div class="tm-grid">${ms.map(chip).join("")}</div>` : "";
+      }).join("");
+      if ((p.partners || []).length) teamHtml += `<div class="proj-g"><span>${esc(T.projPartners)}</span></div><div class="tm-grid">${p.partners.map((n) => `<span class="tm-inst">${ICO.building}<span>${esc(n)}</span></span>`).join("")}</div>`;
+    }
+
+    const axes = [];
+    if (projHtml) axes.push(["proj-project", "project", T.projProject, T.projProjectSub, projHtml]);
+    if (teamHtml) axes.push(["proj-team", "team", T.projTeam, T.projTeamSub, teamHtml]);
+    axes.push(["proj-results", "results", T.projResults, T.projResultsSub, resHtml + extra]);
+    const axis = (a) => `<section class="proj-ax" id="${a[0]}"><h2>${esc(a[2])}</h2><p class="proj-sub">${esc(a[3])}</p>${a[4]}</section>`;
+    const rail = axes.length > 1
+      ? `<nav class="proj-rail" aria-label="${esc(T.projSections)}">${axes.map((a, i) => `<a href="#${a[0]}"${i === 0 ? ' class="on"' : ""}>${ICO[a[1]]}<span>${esc(a[2])}</span></a>`).join("")}</nav>` : "";
 
     stage.innerHTML = `<header class="page-head proj-head">
         <p class="eyebrow">${esc(T.projLabel)} · ${esc(projStatus(p.status))}</p>
@@ -1636,9 +1705,18 @@ ${refsHtml}
         <p class="say">${esc(pick(p.title))}</p>
         ${meta ? `<p class="proj-meta">${esc(meta)}</p>` : ""}
       </header>
-      ${paras.length ? `<section class="cv-block proj-sum"><h2>${esc(T.projSummary)}</h2>${paras.map((t) => `<p>${esc(t)}</p>`).join("")}</section>` : ""}
-      <section class="cv-block proj-res"><h2>${esc(T.projResults)}</h2>${results}${extra}</section>
+      ${paras.length ? `<section class="cv-block proj-sum">${paras.map((t) => `<p>${esc(t)}</p>`).join("")}</section>` : ""}
+      <div class="proj-body${rail ? " has-rail" : ""}">${rail}<div class="proj-main">${axes.map(axis).join("")}</div></div>
       <a class="backlink" href="${back}">← ${esc(T.projBack)}</a>`;
+
+    // highlight the axis being read
+    const links = [...stage.querySelectorAll(".proj-rail a")];
+    if (links.length && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver((es) => es.forEach((e) => {
+        if (e.isIntersecting) links.forEach((a) => a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id));
+      }), { rootMargin: "-20% 0px -65% 0px" });
+      stage.querySelectorAll(".proj-ax").forEach((s) => io.observe(s));
+    }
   }
 
   function fillCV(profile, projects) {
