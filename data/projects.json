@@ -93,8 +93,8 @@
         {
           "type": "observatory",
           "label": {
-            "en": "Investigadores UTM",
-            "es": "Investigadores UTM"
+            "en": "Researchers portal",
+            "es": "Portal de investigadores"
           },
           "url": "https://jorgeklz.github.io/perfiles-utm/",
           "year": 2026,
