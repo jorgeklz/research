@@ -79,12 +79,10 @@
       },
       "summary": {
         "en": [
-          "Institutions collect data on production, environment, health and education every day, but few can turn it into something that helps them decide. Building an observatory, a place where a topic is followed through indicators, alerts and analysis, usually means starting from zero each time, at a high cost and with little reuse.",
           "ObservaIA is a platform designed to be reused. It brings in data from different sources, checks that it is reliable, and shows what is happening in a dashboard that each institution can configure, with forecasts and early warnings based on artificial intelligence.",
           "The project is a joint effort of Universidad Técnica de Manabí, Universidad Bolivariana del Ecuador and Universidad Estatal de Milagro. Its goal is that setting up a new observatory takes configuration, not a new development."
         ],
         "es": [
-          "Las instituciones recogen cada día datos sobre producción, ambiente, salud y educación, pero pocas logran convertirlos en algo que les ayude a decidir. Construir un observatorio, un lugar donde se sigue un tema con indicadores, alertas y análisis, suele significar empezar de cero cada vez, con un costo alto y poca reutilización.",
           "ObservaIA es una plataforma pensada para reutilizarse. Recibe datos de distintas fuentes, comprueba que sean confiables y muestra lo que ocurre en un panel que cada institución puede configurar, con pronósticos y alertas tempranas basados en inteligencia artificial.",
           "El proyecto es un esfuerzo conjunto de la Universidad Técnica de Manabí, la Universidad Bolivariana del Ecuador y la Universidad Estatal de Milagro. Su meta es que crear un nuevo observatorio sea cuestión de configuración y no de un nuevo desarrollo."
         ]
