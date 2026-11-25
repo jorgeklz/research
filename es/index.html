@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg?v=4">
-<link rel="stylesheet" href="../assets/style.css?v=125">
+<link rel="stylesheet" href="../assets/style.css?v=126">
 </head>
 <body data-page="home" data-root="..">
 
@@ -59,7 +59,7 @@
     </div>
   </div>
 
-  <div class="rl-body" data-rail>
+  <div class="rl-body" data-rail data-select>
    <div class="rl-main">
     <section class="rl-ax" id="sec-metrics" data-label="Métricas" data-icon="chart" data-title="Citas y productividad">
   <section class="metrics-section" aria-label="Métricas de investigación">
@@ -119,12 +119,13 @@
 
 
     </section>
-    <section class="rl-ax" id="sec-pubs" data-label="Publicaciones" data-icon="paper" data-title="Publicaciones recientes">
+    <section class="rl-ax" id="sec-pubs" data-label="Publicaciones" data-icon="paper" data-title="Artículos" data-sub="Más recientes primero">
     <div id="home-panel-pubs">
       <div class="sec-title">
         <a class="more-link" href="publicaciones.html">Todas y filtros →</a>
       </div>
       <div class="orcid-note" id="orcid-note"><span class="dot"></span><span class="txt">Cargando publicaciones desde ORCID…</span></div>
+      <div class="pub-bar"><div class="filters" id="pub-filters"></div><label class="pub-find"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="text" id="pub-search" class="pub-search" placeholder="Buscar artículos"></label></div>
       <div class="pubs" id="pub-list"><p class="loading">Cargando…</p></div>
       <div class="pagination" id="pub-pagination" style="display:none">
         <button id="pag-prev" type="button">← Ant.</button>
@@ -157,6 +158,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js" integrity="sha384-QQEAefmew0Un2GyadO5GSPVijOMu9zSE/p+OM1WgLr8sQp9f5ZXokako48B7Ytiw" crossorigin="anonymous"></script>
 <script src="../assets/network.js?v=116"></script>
-<script src="../assets/app.js?v=125"></script>
+<script src="../assets/app.js?v=126"></script>
 </body>
 </html>

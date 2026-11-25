@@ -192,7 +192,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = "125";
+  const VER = "126";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -641,6 +641,36 @@ ${refsHtml}
     setTimeout(() => URL.revokeObjectURL(url), 1500);
   }
 
+  // publication as a row for the by-year list: title, "type · venue" line, authors and links
+  const PUB_ICO = {
+    journal: svg('<path d="M6 2h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z"/><path d="M15 2v5h5"/><line x1="9" y1="13" x2="16" y2="13"/><line x1="9" y1="17" x2="14" y2="17"/>', 14),
+    conference: svg('<rect x="3" y="4" width="18" height="12" rx="1"/><path d="M12 16v4M8 20h8"/>', 14),
+    software: svg('<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>', 14)
+  };
+  function pubRow(p, byId) {
+    const el = document.createElement("div");
+    el.className = "proj-ri pr";
+    const doiURL = p.doi ? "https://doi.org/" + p.doi : null;
+    const curated = (p.postId && byId[p.postId]) || (p.doi && byId[normDoi(p.doi)]);
+    const postHref = curated ? `${POST_PAGE}?id=${encodeURIComponent(curated.id)}`
+      : (p.doi && (p.year || 0) >= 2024 ? `${POST_PAGE}?doi=${encodeURIComponent(p.doi)}` : null);
+    const venue = p.venue ? p.venue + (p.pages && !String(p.venue).includes(String(p.pages)) ? ", " + p.pages : "") : "";
+    const meta = [typeLabel(p.type), venue, p.quartile, p.openAccess ? T.openAccess : "",
+      typeof p.citations === "number" && p.citations > 0 ? T.citedByOpenAlex(p.citations) : "",
+      typeof p.scholarCitations === "number" && p.scholarCitations > 0 ? T.citedByScholar(p.scholarCitations) : ""].filter(Boolean).join(" · ");
+    el.innerHTML = `${doiURL ? `<a href="${doiURL}" target="_blank" rel="noopener">${esc(p.title)}</a>` : `<span class="proj-rt">${esc(p.title)}</span>`}
+      <div class="proj-rk">${PUB_ICO[p.type] || PUB_ICO.journal}<span>${esc(meta)}</span></div>
+      ${p.authors && p.authors.length ? `<div class="pr-au">${boldSelf(p.authors)}</div>` : ""}
+      <div class="pr-ls">
+        ${doiURL ? `<a href="${doiURL}" target="_blank" rel="noopener">${ICON.external} ${T.doi}</a>` : ""}
+        <button type="button" class="bib">${ICON.cite} ${T.cite}</button>
+        ${postHref ? `<a href="${postHref}">${ICON.doc} ${T.postLink}</a>` : ""}
+      </div>`;
+    el.querySelector("button.bib").addEventListener("click", () =>
+      navigator.clipboard.writeText(bibtex(p)).then(() => toast(T.copied)).catch(() => toast(T.copied)));
+    return el;
+  }
+
   function fillPublications(profile, pubs, posts) {
     const list = $("#pub-list"), fw = $("#pub-filters"), byId = indexPosts(posts);
     const pag = $("#pub-pagination"), info = $("#pag-info");
@@ -648,7 +678,7 @@ ${refsHtml}
     const sortSelect = $("#pub-sort-select"), sumEl = $("#pub-summary");
 
     let all = [], filtered = [], type = "all", sort = "recent", page = 0, searchQuery = "";
-    let year = "all", quart = "all", oaOnly = false;
+    let year = "all", quart = "all", oaOnly = false, topic = "all";
     let yearSel = null, qWrap = null, oaBtn = null, clearBtn = null, yearsSig = "", quartSig = "";
 
     const searchInput = $("#pub-search");
@@ -658,6 +688,24 @@ ${refsHtml}
         apply();
       });
     }
+
+    // topics section (Publications page): every research topic with its count; a click filters the papers
+    const topicsEl = $("#topics-list");
+    function renderTopics() {
+      if (!topicsEl) return;
+      const cnt = new Map();
+      all.forEach((p) => (p.topics || []).forEach((t) => cnt.set(t, (cnt.get(t) || 0) + 1)));
+      const rows = [...cnt.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+      topicsEl.innerHTML = rows.length
+        ? `<div class="tp-list">${rows.map(([t, n]) => `<button type="button" class="tp-row${t === topic ? " on" : ""}" data-t="${esc(t)}">${RL_ICON.tag}<span>${esc(topicLabel(t))}</span><small>${n}</small></button>`).join("")}</div>`
+        : `<p class="loading">${T.empty}</p>`;
+    }
+    if (topicsEl) topicsEl.addEventListener("click", (e) => {
+      const b = e.target.closest(".tp-row"); if (!b) return;
+      topic = topic === b.dataset.t ? "all" : b.dataset.t;
+      apply();
+      document.dispatchEvent(new CustomEvent("rl-open", { detail: "sec-papers" }));
+    });
 
     const dlBtn = $("#dl-pubs");
     if (dlBtn) dlBtn.addEventListener("click", () => exportPublicationsWord(profile, all, dlBtn));
@@ -696,8 +744,10 @@ ${refsHtml}
         (type === "all" || p.type === type) &&
         (year === "all" || String(p.year) === year) &&
         (quart === "all" || p.quartile === quart) &&
+        (topic === "all" || (p.topics || []).includes(topic)) &&
         (!oaOnly || p.openAccess));
-      if (clearBtn) clearBtn.hidden = !(type !== "all" || year !== "all" || quart !== "all" || oaOnly || searchQuery);
+      if (clearBtn) clearBtn.hidden = !(type !== "all" || year !== "all" || quart !== "all" || oaOnly || searchQuery || topic !== "all");
+      renderTopics();
       if (searchQuery) {
         filtered = filtered.filter((p) => {
           const t = (p.title || "").toLowerCase();
@@ -715,7 +765,7 @@ ${refsHtml}
       }
       if (sumEl) {
         const sumCites = filtered.reduce((acc, p) => acc + (p.citations || 0), 0);
-        sumEl.innerHTML = `<span class="sum-badge">${esc(T.summaryCount(filtered.length, all.length, sumCites))}</span>`;
+        sumEl.innerHTML = `<span class="sum-badge">${esc(T.summaryCount(filtered.length, all.length, sumCites) + (topic !== "all" ? " · " + topicLabel(topic) : ""))}</span>`;
       }
       page = 0; render();
     }
@@ -725,13 +775,21 @@ ${refsHtml}
       list.innerHTML = "";
       const slice = filtered.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
       if (!slice.length) { list.innerHTML = `<p class="loading">${T.empty}</p>`; }
+      // by-year rows: a new year block whenever the year changes along the list
+      const yrs = document.createElement("div"); yrs.className = "proj-years";
+      let grp = null, gy = null;
       slice.forEach((p) => {
-        const el = pubEl(p, byId);
-        el.classList.add('fade-up');
-        observer.observe(el);
-        list.appendChild(el);
+        if (!grp || gy !== p.year) {
+          gy = p.year;
+          const blk = document.createElement("div"); blk.className = "proj-yr";
+          blk.innerHTML = `<b>${esc(p.year || "")}</b><div></div>`;
+          yrs.appendChild(blk); grp = blk.lastElementChild;
+        }
+        const el = pubRow(p, byId);
+        grp.appendChild(el);
         if (p._needsEnrich && p.doi) enrich(p, el);
       });
+      if (slice.length) list.appendChild(yrs);
       if (pag) {
         pag.style.display = filtered.length > PAGE_SIZE ? "flex" : "none";
         info.textContent = T.pageOf(page + 1, pages);
@@ -747,7 +805,7 @@ ${refsHtml}
         if (m.pages) p.pages = m.pages;
         if (m.type !== "other") p.type = m.type;
         if (m.openAccess) p.openAccess = true;
-        const fresh = pubEl(p, byId);
+        const fresh = pubRow(p, byId);
         el.replaceWith(fresh);
       }).catch(() => {});
     }
@@ -792,7 +850,7 @@ ${refsHtml}
         apply();
       });
       clearBtn.addEventListener("click", () => {
-        type = "all"; year = "all"; quart = "all"; oaOnly = false; searchQuery = "";
+        type = "all"; year = "all"; quart = "all"; oaOnly = false; searchQuery = ""; topic = "all";
         if (searchInput) searchInput.value = "";
         fw.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x.dataset.t === "all"));
         oaBtn.classList.remove("on"); oaBtn.setAttribute("aria-pressed", "false");
@@ -1731,6 +1789,7 @@ ${refsHtml}
     video: svg('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9.5 5 2.5-5 2.5Z"/>', 24),
     flask: svg('<path d="M9 3h6"/><path d="M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21.5h11.6a2 2 0 0 0 1.7-3L14 9V3"/>', 24),
     code: svg('<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>', 24),
+    tag: svg('<path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z"/><circle cx="7.5" cy="7.5" r="1"/>', 18),
     database: svg('<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.6 3.1 3 7 3s7-1.4 7-3V6"/><path d="M5 12v6c0 1.6 3.1 3 7 3s7-1.4 7-3v-6"/>', 24)
   };
   // the top bar is sticky: its height keeps the rail and the anchors clear of it
@@ -1744,21 +1803,38 @@ ${refsHtml}
       secs.forEach((s) => {
         if (!s.hasAttribute("data-noh")) {
           const h = document.createElement("div"); h.className = "rl-hd";
-          h.innerHTML = `<h2>${esc(s.dataset.title || s.dataset.label)}</h2>`;
+          h.innerHTML = `<h2>${esc(s.dataset.title || s.dataset.label)}</h2>${s.dataset.sub ? `<p class="rl-sub">${esc(s.dataset.sub)}</p>` : ""}`;
           s.insertBefore(h, s.firstChild);
         }
         const top = document.createElement("div"); top.className = "to-top-wrap";
         top.innerHTML = `<a class="to-top" href="#top">${svg('<path d="M12 19V5"/><path d="M6 11l6-6 6 6"/>', 14)}<span>${esc(T.projTop)}</span></a>`;
         s.appendChild(top);
       });
-      if (secs.length > 1) {
-        const nav = document.createElement("nav"); nav.className = "rl-nav"; nav.setAttribute("aria-label", T.projSections);
-        nav.innerHTML = secs.map((s, i) => `<a href="#${s.id}"${i === 0 ? ' class="on"' : ""}>${RL_ICON[s.dataset.icon] || ""}<span>${esc(s.dataset.label)}</span></a>`).join("");
-        body.insertBefore(nav, body.firstChild); body.classList.add("has-rail");
-        const links = $$("a", nav);
+      if (secs.length < 2) return;
+      const nav = document.createElement("nav"); nav.className = "rl-nav"; nav.setAttribute("aria-label", T.projSections);
+      nav.innerHTML = secs.map((s, i) => `<a href="#${s.id}"${i === 0 ? ' class="on"' : ""}>${RL_ICON[s.dataset.icon] || ""}<span>${esc(s.dataset.label)}</span></a>`).join("");
+      body.insertBefore(nav, body.firstChild); body.classList.add("has-rail");
+      const links = $$("a", nav);
+      if (body.hasAttribute("data-select")) {
+        // one section at a time: the first one by default, the others only when picked
+        const open = (id, user) => {
+          let k = secs.findIndex((x) => x.id === id); if (k < 0) k = 0;
+          secs.forEach((x, i) => { x.hidden = i !== k; });
+          links.forEach((a, i) => a.classList.toggle("on", i === k));
+          document.dispatchEvent(new CustomEvent("rl-show", { detail: secs[k].id }));
+          if (user) {
+            const tb = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--tb-h"), 10) || 140;
+            const y = body.getBoundingClientRect().top - tb - 12;
+            if (y < 0) window.scrollBy({ top: y });
+          }
+        };
+        links.forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); open(a.getAttribute("href").slice(1), true); }));
+        document.addEventListener("rl-open", (e) => open(e.detail, true));
+        open((location.hash || "").slice(1));
+      } else {
         const spy = () => {
           const y = (parseInt(getComputedStyle(document.documentElement).getPropertyValue("--tb-h"), 10) || 140) + 90;
-          let cur = 0; secs.forEach((s, i) => { if (s.getBoundingClientRect().top <= y) cur = i; });
+          let cur = 0; secs.forEach((x, i) => { if (x.getBoundingClientRect().top <= y) cur = i; });
           links.forEach((a, i) => a.classList.toggle("on", i === cur));
         };
         window.addEventListener("scroll", spy, { passive: true }); spy();
@@ -1776,7 +1852,7 @@ ${refsHtml}
     if (prj.length) secs.push(["sec-projects", T.railProjects, "flask", "cv-projects"]);
     if (tools.length) secs.push(["sec-tools", T.railTools, "code", "cv-toolbox"]);
     if (ds.length) secs.push(["sec-data", T.railData, "database", "cv-datasets"]);
-    stage.innerHTML = `<div class="rl-body" data-rail><div class="rl-main">${secs.map((x) => `<section class="rl-ax" id="${x[0]}" data-label="${esc(x[1])}" data-icon="${x[2]}" data-noh><div id="${x[3]}"></div></section>`).join("")}</div></div>`;
+    stage.innerHTML = `<div class="rl-body" data-rail data-select><div class="rl-main">${secs.map((x) => `<section class="rl-ax" id="${x[0]}" data-label="${esc(x[1])}" data-icon="${x[2]}" data-noh><div id="${x[3]}"></div></section>`).join("")}</div></div>`;
     if (prj.length) projectsCards($("#cv-projects"), prj);
     if (tools.length) toolboxCards($("#cv-toolbox"), tools);
     if (ds.length) datasetsCards($("#cv-datasets"), ds);
@@ -2030,13 +2106,24 @@ ${refsHtml}
       else if (PAGE === "about") fillAbout(profile);
       else if (PAGE === "cv") fillCV(profile, projects);
       else if (PAGE === "project") fillProject(profile, projects, pubs);
-      else if (PAGE === "publications") fillPublications(profile, pubs, posts);
+      else if (PAGE === "publications") {
+        if ($("#stat-grid")) renderMetrics({ pubs: 0, cites: 0, h: 0, oa: 0, cpp: 0, i10: 0, g: 0, m: 0, app: 0, first: 0, intl: 0, cited: 0 });
+        fillPublications(profile, pubs, posts);
+      }
       else if (PAGE === "news") fillNews(profile, pubs, posts);
       else if (PAGE === "post") fillPost(profile, pubs, posts);
       
       setTimeout(() => {
         if (PAGE === "home" && typeof initNetworkGraph === "function") {
-          initNetworkGraph(pubs.items, ROOT);
+          // the network needs a visible container to measure itself: start it when its section opens
+          let netDone = false;
+          const startNet = () => {
+            const sec = $("#sec-network");
+            if (netDone || (sec && sec.hidden)) return;
+            netDone = true; initNetworkGraph(pubs.items, ROOT);
+          };
+          document.addEventListener("rl-show", (e) => { if (e.detail === "sec-network") setTimeout(startNet, 30); });
+          startNet();
         }
         if (typeof VanillaTilt !== 'undefined') {
           VanillaTilt.init(document.querySelectorAll(".card"), { max: 3, speed: 400, glare: true, "max-glare": 0.05 });
