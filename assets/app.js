@@ -1870,7 +1870,7 @@ ${refsHtml}
       if (body.hasAttribute("data-select")) {
         // one section at a time: the first one by default, the others only when picked
         const open = (id, user) => {
-          let k = secs.findIndex((x) => x.id === id); if (k < 0) k = 0;
+          let k = secs.findIndex((x) => x.id === id || x.id === "sec-" + id); if (k < 0) k = 0;
           secs.forEach((x, i) => { x.hidden = i !== k; });
           links.forEach((a, i) => a.classList.toggle("on", i === k));
           document.dispatchEvent(new CustomEvent("rl-show", { detail: secs[k].id }));
