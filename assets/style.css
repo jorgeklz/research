@@ -1324,3 +1324,20 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 .proj-refs li { margin: 0 0 .5rem; }
 .proj-refs a { font-weight: 600; color: var(--blue-600); }
 span.tm-chip .tm-li { color: var(--ink-3); }
+
+/* round 9: metrics on phones as minimal cards */
+@media (max-width: 720px) {
+  .rl-ax .stat-hero-grid, .rl-ax .stat-advanced-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
+  .rl-ax .stat, .rl-ax .stat-hero { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; box-shadow: none; padding: .75rem .85rem; gap: .45rem; }
+  .rl-ax .stat:hover, .rl-ax .stat.open, .rl-ax .stat-hero:hover { background: var(--panel); border: 1px solid var(--line-2); box-shadow: none; transform: none; }
+  .rl-ax .stat-hero .stat-hd .ic, .rl-ax .stat-hd .ic { width: auto; height: auto; background: none; border-radius: 0; color: var(--blue); }
+  .rl-ax .stat-hero .n, .rl-ax .stat .n { font-size: 1.5rem; }
+  .rl-ax .stat .l { font-size: var(--fs-xs); font-weight: 600; }
+  .rl-ax .stat-actions { margin: .8rem 0; }
+  .rl-ax .stat-toggle-btn { width: 100%; justify-content: center; border-radius: 10px; box-shadow: none; transform: none; }
+  .rl-ax .stat-advanced-wrap { margin-bottom: .9rem; }
+  .rl-ax .metrics-chart-card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; box-shadow: none; padding: .85rem .9rem; margin-top: .9rem; }
+  .rl-ax .chart-header { flex-direction: column; align-items: flex-start; gap: .5rem; margin-bottom: .6rem; padding-bottom: .55rem; }
+  .rl-ax .chart-legend { flex-wrap: wrap; gap: .3rem .9rem; }
+  .rl-ax .metrics-footer { flex-direction: column; align-items: flex-start; gap: .5rem; }
+}
