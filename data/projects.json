@@ -223,36 +223,6 @@
           "name": "Universidad Estatal de Milagro",
           "url": "https://unemi.edu.ec"
         }
-      ],
-      "expected": [
-        {
-          "icon": "dash",
-          "t": {
-            "en": "Configurable dashboard",
-            "es": "Panel configurable"
-          }
-        },
-        {
-          "icon": "code",
-          "t": {
-            "en": "Software registration",
-            "es": "Registro de software"
-          }
-        },
-        {
-          "icon": "book",
-          "t": {
-            "en": "Technical documentation",
-            "es": "Documentación técnica"
-          }
-        },
-        {
-          "icon": "paper",
-          "t": {
-            "en": "Journal and conference papers, Scopus or WoS",
-            "es": "Artículos en revistas y congresos, Scopus o WoS"
-          }
-        }
       ]
     }
   ]

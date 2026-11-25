@@ -85,10 +85,10 @@
       projOpen: "Open project site", projLabel: "Research project", projBack: "All projects", projNone: "Project not found.",
       stOngoing: "Ongoing", stProposal: "Proposal", stCompleted: "Completed",
       projSummary: "Summary",
-      projProject: "Project", projProjectSub: "Description and objective", projTeam: "Team", projTeamSub: "People and institutions", projResultsSub: "Publications, observatories and expected production",
+      projProject: "Project", projProjectSub: "Description and objective", projTeam: "Team", projTeamSub: "People and institutions", projResultsSub: "Publications and observatories",
       projSections: "Sections of the project", projBackground: "Background", projObjective: "General objective", projTop: "Top of page", projAlignment: "Alignment",
       tmPI: "Director", tmRes: "Researchers", tmPhd: "PhD students", tmMs: "Master's students", tmBsc: "Undergraduate students", projPartners: "Partner institutions",
-      projPublications: "Publications", projObservatories: "Observatories", projSoftwareH: "Software", projWebsites: "Websites", projExpected: "Expected production", projObservatory: "Observatory",
+      projPublications: "Publications", projObservatories: "Observatories", projSoftwareH: "Software", projWebsites: "Websites", projObservatory: "Observatory",
       projPubEmpty: "Papers from this project will be listed here as they are published.",
       projResults: "Results", projPaper: "Paper", projWebsite: "Website", projNoResults: "Papers, software and websites from this project will be listed here as they are published.",
       cvToolbox: "Tools & databases",
@@ -140,10 +140,10 @@
       projOpen: "Abrir sitio del proyecto", projLabel: "Proyecto de investigación", projBack: "Todos los proyectos", projNone: "Proyecto no encontrado.",
       stOngoing: "Vigente", stProposal: "Propuesta", stCompleted: "Finalizado",
       projSummary: "Resumen",
-      projProject: "Proyecto", projProjectSub: "Descripción y objetivo", projTeam: "Equipo", projTeamSub: "Personas e instituciones", projResultsSub: "Publicaciones, observatorios y producción esperada",
+      projProject: "Proyecto", projProjectSub: "Descripción y objetivo", projTeam: "Equipo", projTeamSub: "Personas e instituciones", projResultsSub: "Publicaciones y observatorios",
       projSections: "Secciones del proyecto", projBackground: "Antecedentes", projObjective: "Objetivo general", projTop: "Volver arriba", projAlignment: "Alineación",
       tmPI: "Director", tmRes: "Investigadores", tmPhd: "Estudiantes de doctorado", tmMs: "Estudiantes de maestría", tmBsc: "Estudiantes de grado", projPartners: "Instituciones socias",
-      projPublications: "Publicaciones", projObservatories: "Observatorios", projSoftwareH: "Software", projWebsites: "Sitios web", projExpected: "Producción esperada", projObservatory: "Observatorio",
+      projPublications: "Publicaciones", projObservatories: "Observatorios", projSoftwareH: "Software", projWebsites: "Sitios web", projObservatory: "Observatorio",
       projPubEmpty: "Los artículos de este proyecto se listarán aquí a medida que se publiquen.",
       projResults: "Resultados", projPaper: "Artículo", projWebsite: "Sitio web", projNoResults: "Los artículos, el software y los sitios web de este proyecto se listarán aquí a medida que se publiquen.",
       cvToolbox: "Herramientas y bases de datos",
@@ -190,7 +190,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = "122";
+  const VER = "123";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -1655,14 +1655,12 @@ ${refsHtml}
     const grp = (ic, title, n, body) => `<div class="proj-g">${ic}<span>${esc(title)}</span><small>${n}</small></div>${body}`;
     const by = (k) => res.filter((r) => r.k === k);
     const papers = by("paper"), soft = by("software"), obs = by("observatory"), web = by("website");
-    const exp = p.expected || [];
     const showPubs = papers.length || p.detail;
     let resHtml = "";
     if (showPubs) resHtml += grp(ICO.paper, T.projPublications, papers.length, papers.length ? yearList(papers) : `<p class="proj-empty">${esc(T.projPubEmpty)}</p>`);
     if (obs.length) resHtml += grp(ICO.observatory, T.projObservatories, obs.filter((r) => !r.pend).length, yearList(obs));
     if (soft.length) resHtml += grp(ICO.software, T.projSoftwareH, soft.length, yearList(soft));
     if (web.length) resHtml += grp(ICO.website, T.projWebsites, web.length, yearList(web));
-    if (exp.length) resHtml += grp(ICO.pending, T.projExpected, "", `<div class="proj-exp">${exp.map((e) => `<div>${ICO[e.icon] || ICO.pending}<span>${esc(pick(e.t))}</span></div>`).join("")}</div>`);
     if (!resHtml) resHtml = `<p class="proj-empty">${esc(T.projNoResults)}</p>`;
     const extra = (p.related || []).length ? `<p class="proj-rel">${p.related.map((r) => `<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(pick(r.label))}</a>`).join(" · ")}</p>` : "";
 
