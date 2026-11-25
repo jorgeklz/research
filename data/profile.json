@@ -233,7 +233,7 @@
     {
       "type": "tool",
       "platform": "web",
-      "name": "Investigadores UTM",
+      "name": { "en": "Researchers portal", "es": "Portal de investigadores" },
       "year": "2026",
       "meta": { "en": "Web tool", "es": "Herramienta web" },
       "desc": {

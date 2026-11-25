@@ -190,7 +190,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = "121";
+  const VER = "122";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -1533,7 +1533,7 @@ ${refsHtml}
         ? `<a class="topen" href="${esc(it.url)}" target="_blank" rel="noopener">${ICON.external} ${esc(T.tbOpen)}</a>` : "";
       const extras = itemExtras(it);
       return `<article class="tool-card">
-        <div class="tool-hd"><span class="tool-ic">${logo}</span><div class="tt">${esc(it.name)}</div>${it.year ? `<span class="ds-yr">${esc(it.year)}</span>` : ""}</div>
+        <div class="tool-hd"><span class="tool-ic">${logo}</span><div class="tt">${esc(pick(it.name))}</div>${it.year ? `<span class="ds-yr">${esc(it.year)}</span>` : ""}</div>
         ${it.meta ? `<div class="tmeta">${esc(pick(it.meta))}</div>` : ""}
         ${pick(it.desc) ? `<p class="td">${esc(pick(it.desc))}</p>` : ""}
         ${(link || extras) ? `<div class="ds-act">${link}${extras}</div>` : ""}
