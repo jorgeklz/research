@@ -193,7 +193,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = 130;
+  const VER = 131;
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -781,7 +781,13 @@ ${refsHtml}
         (quart === "all" || p.quartile === quart) &&
         (topic === "all" || (p.topics || []).includes(topic)) &&
         (!oaOnly || p.openAccess));
-      if (clearBtn) clearBtn.hidden = !(type !== "all" || year !== "all" || quart !== "all" || oaOnly || searchQuery || topic !== "all");
+      if (clearBtn) {
+        const n = [type !== "all", year !== "all", quart !== "all", !!searchQuery, topic !== "all"].filter(Boolean).length;
+        clearBtn.hidden = !n;
+        clearBtn.textContent = `× ${T.clearFilters} (${n})`;
+        if (yearSel) yearSel.classList.toggle("is-set", year !== "all");
+        if (qWrap) qWrap.classList.toggle("is-set", quart !== "all");
+      }
       renderTopics();
       if (searchQuery) {
         filtered = filtered.filter((p) => {
@@ -2017,20 +2023,22 @@ ${refsHtml}
     const ref = pub || post._ref;
     const doiURL = post.doi ? "https://doi.org/" + post.doi : ((post.links || [])[0] || {}).url;
     const oa = (post.links || []).some((l) => /open access|acceso abierto/i.test(l.label));
+    const linkItems = [];
+    if (doiURL) linkItems.push(`<a class="rp-l" href="${esc(doiURL)}" target="_blank" rel="noopener">${ICON.external}<span>${T.readPaper}</span>${oa ? `<em>${T.openAccess}</em>` : ""}</a>`);
+    (post.links || []).filter((l) => l.url !== doiURL).forEach((l) => linkItems.push(`<a class="rp-l" href="${esc(l.url)}" target="_blank" rel="noopener">${ICON.external}<span>${esc(l.label)}</span></a>`));
+    const linksHtml = linkItems.length ? `<div class="rp-links">${linkItems.join("")}</div>` : "";
     if (ref) {
       html += `<div class="refbox">
         <span class="lab">${T.aboutPaper}</span>
-        <div class="ref-cite"><em>${esc(ref.title)}</em>. ${esc(ref.venue || "")}${ref.year ? ", " + ref.year : ""}.${post.doi ? ` <a href="https://doi.org/${esc(post.doi)}" target="_blank" rel="noopener">doi:${esc(post.doi)}</a>` : ""}</div>
-        ${doiURL ? `<a class="read-paper" href="${esc(doiURL)}" target="_blank" rel="noopener">${ICON.external}<span>${T.readPaper}</span>${oa ? `<span class="oa-chip">${T.openAccess}</span>` : ""}</a>` : ""}
+        <div class="ref-body"><div class="ref-cite"><em>${esc(ref.title)}</em>. ${esc(ref.venue || "")}${ref.year ? ", " + ref.year : ""}.${post.doi ? ` <a href="https://doi.org/${esc(post.doi)}" target="_blank" rel="noopener">doi:${esc(post.doi)}</a>` : ""}</div>
+        ${linksHtml}</div>
       </div>`;
-    } else if (doiURL) {
-      html += `<a class="read-paper" href="${esc(doiURL)}" target="_blank" rel="noopener">${ICON.external}<span>${T.readPaper}</span>${oa ? `<span class="oa-chip">${T.openAccess}</span>` : ""}</a>`;
+    } else if (linksHtml) {
+      html += `<div class="refbox"><span class="lab">${T.aboutPaper}</span><div class="ref-body">${linksHtml}</div></div>`;
     }
     if (post.auto) html += `<p style="color:var(--ink-3);font-size:.9em"><em>${T.autoNote}</em></p>`;
     body.innerHTML = html;
-    const extra = (post.links || []).filter((l) => l.url !== doiURL);
-    if (links) links.innerHTML = extra.map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${ICON.external} ${esc(l.label)}</a>`).join("");
-    if (post._posts) renderRelated(post._posts, post);
+    if (links) links.innerHTML = "";
     
     // Inject GraphComment widget
     const commentsSec = $("#comments-section");
