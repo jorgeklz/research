@@ -85,9 +85,9 @@
       projOpen: "Open project site", projLabel: "Research project", projBack: "All projects", projNone: "Project not found.",
       stOngoing: "Ongoing", stProposal: "Proposal", stCompleted: "Completed",
       projSummary: "Summary",
-      projProject: "Project", projProjectSub: "Description and objectives", projTeam: "Team", projTeamSub: "People and institutions", projResultsSub: "Publications, observatories and expected production",
-      projSections: "Sections of the project", projBackground: "Background", projQuestion: "Question", projObjectives: "Objectives", projAlignment: "Alignment",
-      tmPI: "Principal investigator", tmRes: "Researchers", tmPhd: "PhD students", tmMs: "Master's students", tmBsc: "Undergraduate students", projPartners: "Partner institutions",
+      projProject: "Project", projProjectSub: "Description and objective", projTeam: "Team", projTeamSub: "People and institutions", projResultsSub: "Publications, observatories and expected production",
+      projSections: "Sections of the project", projBackground: "Background", projObjective: "General objective", projTop: "Top of page", projAlignment: "Alignment",
+      tmPI: "Director", tmRes: "Researchers", tmPhd: "PhD students", tmMs: "Master's students", tmBsc: "Undergraduate students", projPartners: "Partner institutions",
       projPublications: "Publications", projObservatories: "Observatories", projSoftwareH: "Software", projWebsites: "Websites", projExpected: "Expected production", projObservatory: "Observatory",
       projPubEmpty: "Papers from this project will be listed here as they are published.",
       projResults: "Results", projPaper: "Paper", projWebsite: "Website", projNoResults: "Papers, software and websites from this project will be listed here as they are published.",
@@ -140,9 +140,9 @@
       projOpen: "Abrir sitio del proyecto", projLabel: "Proyecto de investigación", projBack: "Todos los proyectos", projNone: "Proyecto no encontrado.",
       stOngoing: "Vigente", stProposal: "Propuesta", stCompleted: "Finalizado",
       projSummary: "Resumen",
-      projProject: "Proyecto", projProjectSub: "Descripción y objetivos", projTeam: "Equipo", projTeamSub: "Personas e instituciones", projResultsSub: "Publicaciones, observatorios y producción esperada",
-      projSections: "Secciones del proyecto", projBackground: "Antecedentes", projQuestion: "Pregunta", projObjectives: "Objetivos", projAlignment: "Alineación",
-      tmPI: "Investigador principal", tmRes: "Investigadores", tmPhd: "Estudiantes de doctorado", tmMs: "Estudiantes de maestría", tmBsc: "Estudiantes de grado", projPartners: "Instituciones socias",
+      projProject: "Proyecto", projProjectSub: "Descripción y objetivo", projTeam: "Equipo", projTeamSub: "Personas e instituciones", projResultsSub: "Publicaciones, observatorios y producción esperada",
+      projSections: "Secciones del proyecto", projBackground: "Antecedentes", projObjective: "Objetivo general", projTop: "Volver arriba", projAlignment: "Alineación",
+      tmPI: "Director", tmRes: "Investigadores", tmPhd: "Estudiantes de doctorado", tmMs: "Estudiantes de maestría", tmBsc: "Estudiantes de grado", projPartners: "Instituciones socias",
       projPublications: "Publicaciones", projObservatories: "Observatorios", projSoftwareH: "Software", projWebsites: "Sitios web", projExpected: "Producción esperada", projObservatory: "Observatorio",
       projPubEmpty: "Los artículos de este proyecto se listarán aquí a medida que se publiquen.",
       projResults: "Resultados", projPaper: "Artículo", projWebsite: "Sitio web", projNoResults: "Los artículos, el software y los sitios web de este proyecto se listarán aquí a medida que se publiquen.",
@@ -190,7 +190,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = "120";
+  const VER = "121";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -1672,8 +1672,7 @@ ${refsHtml}
     if (d) {
       const row = (l, h) => `<div class="proj-row"><span>${esc(l)}</span><div>${h}</div></div>`;
       projHtml = (d.background ? row(T.projBackground, `<p>${esc(pick(d.background))}</p>`) : "")
-        + (d.question ? row(T.projQuestion, `<p>${esc(pick(d.question))}</p>`) : "")
-        + ((d.objectives || []).length ? row(T.projObjectives, `<ol class="proj-ol">${d.objectives.map((o, i) => `<li><em>${i + 1}</em><span>${esc(pick(o.t))}</span><small>${esc(pick(o.when))}</small></li>`).join("")}</ol>`) : "")
+        + (d.objective ? row(T.projObjective, `<p>${esc(pick(d.objective))}</p>`) : "")
         + ((d.alignment || []).length ? row(T.projAlignment, `<div class="proj-align">${d.alignment.map((a) => `<span>${ICO[a.icon] || ""}${esc(pick(a.t))}</span>`).join("")}</div>`) : "");
     }
     // axis 2: team (LinkedIn chips in the same style as MeteoNet)
@@ -1688,22 +1687,21 @@ ${refsHtml}
         const ms = team.filter((m) => m.group === g);
         return ms.length ? `<div class="proj-g"><span>${esc(label)}</span></div><div class="tm-grid">${ms.map(chip).join("")}</div>` : "";
       }).join("");
-      if ((p.partners || []).length) teamHtml += `<div class="proj-g"><span>${esc(T.projPartners)}</span></div><div class="tm-grid">${p.partners.map((n) => `<span class="tm-inst">${ICO.building}<span>${esc(n)}</span></span>`).join("")}</div>`;
+      if ((p.partners || []).length) teamHtml += `<div class="proj-g"><span>${esc(T.projPartners)}</span></div><div class="tm-grid">${p.partners.map((n) => `<a class="tm-chip tm-inst" href="${esc(n.url)}" target="_blank" rel="noopener noreferrer">${ICO.building}<span>${esc(n.name)}</span></a>`).join("")}</div>`;
     }
 
     const axes = [];
     if (projHtml) axes.push(["proj-project", "project", T.projProject, T.projProjectSub, projHtml]);
     if (teamHtml) axes.push(["proj-team", "team", T.projTeam, T.projTeamSub, teamHtml]);
     axes.push(["proj-results", "results", T.projResults, T.projResultsSub, resHtml + extra]);
-    const axis = (a) => `<section class="proj-ax" id="${a[0]}"><h2>${esc(a[2])}</h2><p class="proj-sub">${esc(a[3])}</p>${a[4]}</section>`;
+    const TOP = `<a class="to-top" href="#top">${svg('<path d="M12 19V5"/><path d="M6 11l6-6 6 6"/>', 14)}<span>${esc(T.projTop)}</span></a>`;
+    const axis = (a) => `<section class="proj-ax" id="${a[0]}"><h2>${esc(a[2])}</h2><p class="proj-sub">${esc(a[3])}</p>${a[4]}<div class="to-top-wrap">${TOP}</div></section>`;
     const rail = axes.length > 1
       ? `<nav class="proj-rail" aria-label="${esc(T.projSections)}">${axes.map((a, i) => `<a href="#${a[0]}"${i === 0 ? ' class="on"' : ""}>${ICO[a[1]]}<span>${esc(a[2])}</span></a>`).join("")}</nav>` : "";
 
     stage.innerHTML = `<header class="page-head proj-head">
         <p class="eyebrow">${esc(T.projLabel)} · ${esc(projStatus(p.status))}</p>
         <h1 class="proj-title">${esc(p.short)}</h1>
-        <p class="say">${esc(pick(p.title))}</p>
-        ${meta ? `<p class="proj-meta">${esc(meta)}</p>` : ""}
       </header>
       ${paras.length ? `<section class="cv-block proj-sum">${paras.map((t) => `<p>${esc(t)}</p>`).join("")}</section>` : ""}
       <div class="proj-body${rail ? " has-rail" : ""}">${rail}<div class="proj-main">${axes.map(axis).join("")}</div></div>

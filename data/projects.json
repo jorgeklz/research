@@ -110,7 +110,7 @@
             "en": "MeteoNet",
             "es": "MeteoNet"
           },
-          "url": "https://jorgeklz.github.io/meteonet/",
+          "url": "https://posgrado.utm.edu.ec/meteonet/",
           "year": 2026,
           "meta": null,
           "sub": {
@@ -189,52 +189,10 @@
           "en": "Institutions generate data in tables, event logs, time series, geographic files and forms. Every observatory repeats the same tasks, yet each is built as an isolated application, which raises the cost and makes it hard to maintain.",
           "es": "Las instituciones generan datos en tablas, registros de eventos, series de tiempo, archivos geográficos y formularios. Cada observatorio repite las mismas tareas, pero se construye como una aplicación aislada, lo que eleva el costo y dificulta su mantenimiento."
         },
-        "question": {
-          "en": "How far can a platform with a generic architecture and data model integrate, analyze, forecast and detect patterns in data from different domains, without being rebuilt for each one?",
-          "es": "¿En qué medida una plataforma con una arquitectura y un modelo de datos genéricos puede integrar, analizar, predecir y detectar patrones en datos de distintos dominios, sin reconstruirse para cada uno?"
+        "objective": {
+          "en": "To design and validate a general-purpose platform, built on a generic architecture and data model, that integrates, analyzes, forecasts and detects patterns in data from different domains, so that a new observatory is set up by configuration.",
+          "es": "Diseñar y validar una plataforma de propósito general, basada en una arquitectura y un modelo de datos genéricos, que integre, analice, pronostique y detecte patrones en datos de distintos dominios, de modo que un nuevo observatorio se ponga en marcha por configuración."
         },
-        "objectives": [
-          {
-            "t": {
-              "en": "Identify requirements and common data patterns",
-              "es": "Identificar requisitos y patrones de datos comunes"
-            },
-            "when": {
-              "en": "Aug 2026 to Jan 2027",
-              "es": "Ago 2026 a Ene 2027"
-            }
-          },
-          {
-            "t": {
-              "en": "Design the architecture, the generic data model and the dashboard",
-              "es": "Diseñar la arquitectura, el modelo de datos genérico y el panel"
-            },
-            "when": {
-              "en": "Oct 2026 to Mar 2027",
-              "es": "Oct 2026 a Mar 2027"
-            }
-          },
-          {
-            "t": {
-              "en": "Build the analytics, forecasting and alert modules",
-              "es": "Construir los módulos de analítica, pronóstico y alertas"
-            },
-            "when": {
-              "en": "Jan to Dec 2027",
-              "es": "Ene a Dic 2027"
-            }
-          },
-          {
-            "t": {
-              "en": "Evaluate the platform across domains",
-              "es": "Evaluar la plataforma en distintos dominios"
-            },
-            "when": {
-              "en": "Jul 2027 to Jan 2029",
-              "es": "Jul 2027 a Ene 2029"
-            }
-          }
-        ],
         "alignment": [
           {
             "icon": "target",
@@ -253,9 +211,18 @@
         ]
       },
       "partners": [
-        "Universidad Técnica de Manabí",
-        "Universidad Bolivariana del Ecuador",
-        "Universidad Estatal de Milagro"
+        {
+          "name": "Universidad Técnica de Manabí",
+          "url": "https://utm.edu.ec"
+        },
+        {
+          "name": "Universidad Bolivariana del Ecuador",
+          "url": "https://ube.edu.ec"
+        },
+        {
+          "name": "Universidad Estatal de Milagro",
+          "url": "https://unemi.edu.ec"
+        }
       ],
       "expected": [
         {

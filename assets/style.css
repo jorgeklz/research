@@ -1120,16 +1120,12 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 .proj-ax h2 { margin: 0; font-size: 1.25rem; font-weight: 700; color: var(--green-900); }
 .proj-sub { margin: .15rem 0 .6rem; font-size: var(--fs-xs); color: var(--ink-3); }
 .proj-row { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 1.1rem; padding: .85rem 0; border-bottom: 1px solid var(--line); font-size: var(--fs-base); line-height: 1.65; }
-.proj-row > span { padding-top: .15rem; font-size: var(--fs-xs); letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); }
+.proj-row > span { padding-top: .1rem; font-size: var(--fs-sm); font-weight: 700; color: var(--ink-2); }
 .proj-row p { margin: 0; color: var(--ink); }
-.proj-ol { margin: 0; padding: 0; list-style: none; }
-.proj-ol li { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto; gap: .5rem; padding: .2rem 0; }
-.proj-ol em { font-style: normal; font-weight: 700; color: var(--blue); }
-.proj-ol small { font-size: var(--fs-xs); color: var(--ink-3); white-space: nowrap; padding-top: .15rem; }
 .proj-align { display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; }
 .proj-align span { display: inline-flex; align-items: center; gap: .45rem; color: var(--green-900); }
 .proj-align svg { color: var(--blue); flex: none; }
-.proj-g { display: flex; align-items: center; gap: .5rem; margin: 1.4rem 0 .3rem; font-size: var(--fs-xs); letter-spacing: .07em; text-transform: uppercase; font-weight: 700; color: var(--blue); }
+.proj-g { display: flex; align-items: center; gap: .5rem; margin: 1.4rem 0 .3rem; font-size: var(--fs-sm); font-weight: 700; color: var(--blue-600); }
 .proj-g small { font-weight: 400; letter-spacing: 0; color: var(--ink-3); font-size: var(--fs-xs); }
 .proj-sub + .proj-g { margin-top: .6rem; }
 .proj-ri.pend a, .proj-ri.pend .proj-rt { color: var(--ink-3); font-weight: 500; }
@@ -1150,6 +1146,8 @@ a.tm-chip:hover .tm-li { transform: scale(1.12); color: var(--blue); }
   .proj-rail { position: static; flex-direction: row; justify-content: space-around; padding-bottom: 1rem; border-bottom: 1px solid var(--line); }
   .proj-rail a svg { width: 20px; height: 20px; }
   .proj-row { grid-template-columns: minmax(0, 1fr); gap: .2rem; }
-  .proj-ol li { grid-template-columns: 20px minmax(0, 1fr); }
-  .proj-ol small { grid-column: 2; }
-}
+    }
+
+.proj-ax .to-top-wrap { justify-content: flex-start; padding: 1.3rem 0 0; }
+.tm-inst svg { margin-right: 0; }
+.proj-head .eyebrow { text-transform: none; letter-spacing: .01em; font-size: var(--fs-sm); }
