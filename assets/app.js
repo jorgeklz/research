@@ -85,6 +85,7 @@
       projOpen: "Open project site", projLabel: "Research project", projBack: "All projects", projNone: "Project not found.",
       stOngoing: "Ongoing", stProposal: "Proposal", stCompleted: "Completed",
       projSummary: "Summary",
+      railProjects: "Projects", railTools: "Software", railData: "Datasets",
       projProject: "Project", projProjectSub: "Description and objective", projTeam: "Team", projTeamSub: "People and institutions", projResultsSub: "Publications and observatories",
       projSections: "Sections of the project", projBackground: "Background", projObjective: "General objective", projTop: "Top of page", projAlignment: "Alignment",
       tmPI: "Director", tmRes: "Researchers", tmPhd: "PhD students", tmMs: "Master's students", tmBsc: "Undergraduate students", projPartners: "Partner institutions",
@@ -140,6 +141,7 @@
       projOpen: "Abrir sitio del proyecto", projLabel: "Proyecto de investigación", projBack: "Todos los proyectos", projNone: "Proyecto no encontrado.",
       stOngoing: "Vigente", stProposal: "Propuesta", stCompleted: "Finalizado",
       projSummary: "Resumen",
+      railProjects: "Proyectos", railTools: "Software", railData: "Datos",
       projProject: "Proyecto", projProjectSub: "Descripción y objetivo", projTeam: "Equipo", projTeamSub: "Personas e instituciones", projResultsSub: "Publicaciones y observatorios",
       projSections: "Secciones del proyecto", projBackground: "Antecedentes", projObjective: "Objetivo general", projTop: "Volver arriba", projAlignment: "Alineación",
       tmPI: "Director", tmRes: "Investigadores", tmPhd: "Estudiantes de doctorado", tmMs: "Estudiantes de maestría", tmBsc: "Estudiantes de grado", projPartners: "Instituciones socias",
@@ -190,7 +192,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = "124";
+  const VER = "125";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -1446,7 +1448,9 @@ ${refsHtml}
       .catch(() => { wrap.innerHTML = `<p class="loading">${T.ytFail}</p>`; });
   }
   function wireHomeTabs(channelId) {
-    const tabsEl = $("#home-tabs"); if (!tabsEl) return;
+    const tabsEl = $("#home-tabs");
+    // no tabs: the classes section sits below the publications, so load it right away
+    if (!tabsEl) { if ($("#yt-list")) loadYouTubeOnce(channelId); return; }
     const tabs = $$("button", tabsEl);
     const panels = { pubs: $("#home-panel-pubs"), yt: $("#home-panel-yt") };
     tabs.forEach((btn) => {
@@ -1719,14 +1723,64 @@ ${refsHtml}
     }
   }
 
+  /* ---------- fixed icon rail (Home, Portfolio) ---------- */
+  const RL_ICON = {
+    chart: svg('<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>', 24),
+    network: svg('<circle cx="12" cy="12" r="2.2"/><circle cx="5" cy="6" r="1.8"/><circle cx="19" cy="6" r="1.8"/><circle cx="5" cy="18" r="1.8"/><circle cx="19" cy="18" r="1.8"/><path d="M10.3 10.6 6.4 7.2M13.7 10.6 17.6 7.2M10.3 13.4 6.4 16.8M13.7 13.4 17.6 16.8"/>', 24),
+    paper: svg('<path d="M6 2h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z"/><path d="M15 2v5h5"/><line x1="9" y1="13" x2="16" y2="13"/><line x1="9" y1="17" x2="14" y2="17"/>', 24),
+    video: svg('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9.5 5 2.5-5 2.5Z"/>', 24),
+    flask: svg('<path d="M9 3h6"/><path d="M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21.5h11.6a2 2 0 0 0 1.7-3L14 9V3"/>', 24),
+    code: svg('<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>', 24),
+    database: svg('<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.6 3.1 3 7 3s7-1.4 7-3V6"/><path d="M5 12v6c0 1.6 3.1 3 7 3s7-1.4 7-3v-6"/>', 24)
+  };
+  // the top bar is sticky: its height keeps the rail and the anchors clear of it
+  function syncTopbar() { const tb = $(".topbar"); if (tb) document.documentElement.style.setProperty("--tb-h", tb.offsetHeight + "px"); }
+  function initRails() {
+    syncTopbar();
+    $$(".rl-body[data-rail]").forEach((body) => {
+      if (body.dataset.ready) return; body.dataset.ready = "1";
+      const secs = $$(".rl-ax", body);
+      if (!secs.length) return;
+      secs.forEach((s) => {
+        if (!s.hasAttribute("data-noh")) {
+          const h = document.createElement("div"); h.className = "rl-hd";
+          h.innerHTML = `<h2>${esc(s.dataset.title || s.dataset.label)}</h2>`;
+          s.insertBefore(h, s.firstChild);
+        }
+        const top = document.createElement("div"); top.className = "to-top-wrap";
+        top.innerHTML = `<a class="to-top" href="#top">${svg('<path d="M12 19V5"/><path d="M6 11l6-6 6 6"/>', 14)}<span>${esc(T.projTop)}</span></a>`;
+        s.appendChild(top);
+      });
+      if (secs.length > 1) {
+        const nav = document.createElement("nav"); nav.className = "rl-nav"; nav.setAttribute("aria-label", T.projSections);
+        nav.innerHTML = secs.map((s, i) => `<a href="#${s.id}"${i === 0 ? ' class="on"' : ""}>${RL_ICON[s.dataset.icon] || ""}<span>${esc(s.dataset.label)}</span></a>`).join("");
+        body.insertBefore(nav, body.firstChild); body.classList.add("has-rail");
+        const links = $$("a", nav);
+        const spy = () => {
+          const y = (parseInt(getComputedStyle(document.documentElement).getPropertyValue("--tb-h"), 10) || 140) + 90;
+          let cur = 0; secs.forEach((s, i) => { if (s.getBoundingClientRect().top <= y) cur = i; });
+          links.forEach((a, i) => a.classList.toggle("on", i === cur));
+        };
+        window.addEventListener("scroll", spy, { passive: true }); spy();
+      }
+    });
+  }
+  window.addEventListener("resize", syncTopbar);
+
   function fillCV(profile, projects) {
     const stage = $("#cv-stage"); if (!stage) return;
-    // no tabs anymore: the portfolio page shows only tools & databases
+    // no tabs anymore: the portfolio page shows projects, tools and databases beside the icon rail
     const tabsEl = $("#cv-tabs"); if (tabsEl) tabsEl.remove();
-    stage.innerHTML = `<div id="cv-projects"></div><div id="cv-toolbox"></div><div id="cv-datasets"></div>`;
-    projectsCards($("#cv-projects"), (projects && projects.items) || []);
-    toolboxCards($("#cv-toolbox"), profile.toolbox || []);
-    datasetsCards($("#cv-datasets"), profile.datasets || []);
+    const prj = (projects && projects.items) || [], tools = profile.toolbox || [], ds = profile.datasets || [];
+    const secs = [];
+    if (prj.length) secs.push(["sec-projects", T.railProjects, "flask", "cv-projects"]);
+    if (tools.length) secs.push(["sec-tools", T.railTools, "code", "cv-toolbox"]);
+    if (ds.length) secs.push(["sec-data", T.railData, "database", "cv-datasets"]);
+    stage.innerHTML = `<div class="rl-body" data-rail><div class="rl-main">${secs.map((x) => `<section class="rl-ax" id="${x[0]}" data-label="${esc(x[1])}" data-icon="${x[2]}" data-noh><div id="${x[3]}"></div></section>`).join("")}</div></div>`;
+    if (prj.length) projectsCards($("#cv-projects"), prj);
+    if (tools.length) toolboxCards($("#cv-toolbox"), tools);
+    if (ds.length) datasetsCards($("#cv-datasets"), ds);
+    initRails();
   }
   // Builds the news feed as one entry per publication, in the exact order the
   // publications themselves are listed (pubList, already sorted newest-first).
@@ -1967,6 +2021,7 @@ ${refsHtml}
   };
 
   /* ---------- boot ---------- */
+  syncTopbar(); initRails();
   Promise.all([fetchJSON("profile"), fetchJSON("publications"), fetchJSON("posts"),
     (PAGE === "cv" || PAGE === "project") ? fetchJSON("projects").catch(() => ({ items: [] })) : Promise.resolve({ items: [] })])
     .then(([profile, pubs, posts, projects]) => {

@@ -1108,14 +1108,14 @@ h1.title em { font-style: normal; color: var(--blue-700); }
 /* project page: three axes beside an icon rail */
 .proj-body { margin-top: 1.4rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
 .proj-body.has-rail { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 1.8rem; }
-.proj-rail { position: sticky; top: 5.5rem; align-self: start; display: flex; flex-direction: column; gap: 1.3rem; }
+.proj-rail { position: sticky; top: calc(var(--tb-h, 140px) + 16px); align-self: start; display: flex; flex-direction: column; gap: 1.3rem; }
 .proj-rail a { display: flex; flex-direction: column; align-items: center; gap: .3rem; font-size: var(--fs-xs); color: var(--ink-3); text-align: center; transition: color .15s; }
 .proj-rail a svg { color: #b4c8bb; transition: color .15s; }
 .proj-rail a:hover, .proj-rail a.on { color: var(--green-900); }
 .proj-rail a.on { font-weight: 700; }
 .proj-rail a:hover svg, .proj-rail a.on svg { color: var(--blue); }
 .proj-main { min-width: 0; }
-.proj-ax { padding-bottom: 2rem; scroll-margin-top: 5rem; }
+.proj-ax { padding-bottom: 2rem; scroll-margin-top: calc(var(--tb-h, 140px) + 12px); }
 .proj-ax + .proj-ax { padding-top: 1.8rem; border-top: 1px solid var(--line); }
 .proj-ax h2 { margin: 0; font-size: 1.25rem; font-weight: 700; color: var(--green-900); }
 .proj-sub { margin: .15rem 0 .6rem; font-size: var(--fs-xs); color: var(--ink-3); }
@@ -1153,3 +1153,30 @@ a.tm-chip:hover .tm-li { transform: scale(1.12); color: var(--blue); }
 .proj-head .eyebrow { text-transform: none; letter-spacing: .01em; font-size: var(--fs-sm); }
 .proj-ax[hidden] { display: none; }
 .has-rail .proj-ax + .proj-ax { padding-top: 0; border-top: 0; }
+
+/* fixed icon rail on Home and Portfolio: same pattern as the project page */
+.rl-body { margin-top: 1.4rem; }
+.rl-body.has-rail { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 1.8rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
+.rl-nav { position: sticky; top: calc(var(--tb-h, 140px) + 16px); align-self: start; display: flex; flex-direction: column; gap: 1.3rem; }
+.rl-nav a { display: flex; flex-direction: column; align-items: center; gap: .3rem; font-size: var(--fs-xs); color: var(--ink-3); text-align: center; transition: color .15s; }
+.rl-nav a svg { color: #b4c8bb; transition: color .15s; }
+.rl-nav a:hover, .rl-nav a.on { color: var(--green-900); }
+.rl-nav a.on { font-weight: 700; }
+.rl-nav a:hover svg, .rl-nav a.on svg { color: var(--blue); }
+.rl-main { min-width: 0; }
+.rl-ax { padding-bottom: 2rem; scroll-margin-top: calc(var(--tb-h, 140px) + 12px); }
+.rl-ax + .rl-ax { padding-top: 1.8rem; border-top: 1px solid var(--line-2); }
+.rl-hd h2 { margin: 0 0 .7rem; font-size: 1.25rem; font-weight: 700; color: var(--green-900); }
+.rl-ax .to-top-wrap { justify-content: flex-start; padding: 1.3rem 0 0; }
+.rl-ax .cv-block { margin-top: 0; }
+.rl-ax .sec-title { justify-content: flex-end; margin: 0 0 .5rem; }
+/* inside the rail layout the metric and chart blocks lose their card look */
+.rl-ax .metrics-section { margin: 0; }
+.rl-ax .metrics-chart-card { background: none; border: 0; box-shadow: none; padding: 0; margin-top: 1rem; }
+.rl-ax .stat { background: none; border: 0; border-left: 0; box-shadow: none; padding: .35rem 0; }
+.rl-ax .stat:hover, .rl-ax .stat.open, .rl-ax .stat-hero:hover { background: none; box-shadow: none; transform: none; border: 0; }
+@media (max-width: 720px) {
+  .rl-body.has-rail { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; }
+  .rl-nav { position: static; flex-direction: row; justify-content: space-around; padding-bottom: 1rem; border-bottom: 1px solid var(--line); }
+  .rl-nav a svg { width: 20px; height: 20px; }
+}
