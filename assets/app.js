@@ -193,7 +193,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = 129;
+  const VER = 130;
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -719,7 +719,7 @@ ${refsHtml}
       const old = document.getElementById("tp-modal"); if (old) old.remove();
       const m = document.createElement("div"); m.id = "tp-modal"; m.className = "tp-modal";
       m.setAttribute("role", "dialog"); m.setAttribute("aria-modal", "true");
-      const rows = items.map((p) => {
+      const row = (p) => {
         const curated = (p.postId && byId[p.postId]) || (p.doi && byId[normDoi(p.doi)]);
         const post = curated ? `${POST_PAGE}?id=${encodeURIComponent(curated.id)}`
           : (p.doi && (p.year || 0) >= 2024 ? `${POST_PAGE}?doi=${encodeURIComponent(p.doi)}` : null);
@@ -727,13 +727,19 @@ ${refsHtml}
         const href = post || doi;
         return `<li>${href ? `<a href="${href}"${post ? "" : ' target="_blank" rel="noopener"'}>${esc(p.title)}</a>` : `<span>${esc(p.title)}</span>`}
           <small>${esc([p.year, p.venue].filter(Boolean).join(" · "))}${post && doi ? ` · <a href="${doi}" target="_blank" rel="noopener">${T.doi}</a>` : ""}</small></li>`;
-      }).join("");
-      m.innerHTML = `<div class="tp-card"><div class="tp-hd"><h3>${esc(topicLabel(t))}<small>${items.length}</small></h3><button type="button" class="tp-x" aria-label="${LANG === "es" ? "Cerrar" : "Close"}">×</button></div><ul>${rows}</ul></div>`;
+      };
+      let pg = 0; const pages = Math.max(1, Math.ceil(items.length / 3));
+      const draw = () => {
+        m.innerHTML = `<div class="tp-card"><div class="tp-hd"><h3>${esc(topicLabel(t))}<small>${items.length}</small></h3><button type="button" class="tp-x" aria-label="${LANG === "es" ? "Cerrar" : "Close"}">×</button></div><ul>${items.slice(pg * 3, pg * 3 + 3).map(row).join("")}</ul>${pages > 1 ? `<div class="pagination"><button type="button" data-d="-1"${pg === 0 ? " disabled" : ""}>${T.prev}</button><span class="info">${T.pageOf(pg + 1, pages)}</span><button type="button" data-d="1"${pg >= pages - 1 ? " disabled" : ""}>${T.next}</button></div>` : ""}</div>`;
+      };
       const close = () => { m.remove(); document.removeEventListener("keydown", onKey); };
       const onKey = (e) => { if (e.key === "Escape") close(); };
-      m.addEventListener("click", (e) => { if (e.target === m || e.target.closest(".tp-x")) close(); });
+      m.addEventListener("click", (e) => {
+        if (e.target === m || e.target.closest(".tp-x")) return close();
+        const b = e.target.closest("button[data-d]"); if (b) { pg = Math.max(0, Math.min(pages - 1, pg + +b.dataset.d)); draw(); }
+      });
       document.addEventListener("keydown", onKey);
-      document.body.appendChild(m);
+      draw(); document.body.appendChild(m);
     }
 
     const dlBtn = $("#dl-pubs");

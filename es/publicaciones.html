@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg?v=4">
-<link rel="stylesheet" href="../assets/style.css?v=129">
+<link rel="stylesheet" href="../assets/style.css?v=130">
 </head>
 <body data-page="publications" data-root="..">
 
@@ -51,16 +51,15 @@
 <main class="wrap content">
   <noscript><p class="loading">Este sitio carga su contenido con JavaScript. Actívalo, o consulta las publicaciones en <a href="https://orcid.org/0000-0001-8558-9122">ORCID</a> y <a href="https://scholar.google.com/citations?user=w8fiGu0AAAAJ">Google Scholar</a>.</p></noscript>
   <div class="page-head">    <p class="say">Cargadas en vivo desde ORCID y enriquecidas con Crossref, así la lista se mantiene al día sola. Cada trabajo enlaza a su DOI y puede abrir un post divulgativo.</p>
-    <button id="dl-pubs" class="btn ghost" type="button">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 19h14"/></svg>
-      <span>Descargar todas las publicaciones (Word)</span>
-    </button>
   </div>
 
   <div class="rl-body" data-rail data-select>
    <div class="rl-main">
     <section class="rl-ax" id="sec-papers" data-label="Artículos" data-icon="paper" data-title="Artículos">
-  <div class="orcid-note" id="orcid-note"><span class="dot"></span><span class="txt">Cargando publicaciones desde ORCID…</span></div>
+  <div class="pub-top">
+    <div class="orcid-note" id="orcid-note"><span class="dot"></span><span class="txt">Cargando publicaciones desde ORCID…</span></div>
+    <button id="dl-pubs" class="pub-dl" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 19h14"/></svg><span>Descargar (Word)</span></button>
+  </div>
 
   <div class="pub-toolbar">
     <div class="filters" id="pub-filters"></div>
@@ -102,6 +101,6 @@
   </div>
 </footer>
 
-<script src="../assets/app.js?v=129"></script>
+<script src="../assets/app.js?v=130"></script>
 </body>
 </html>
