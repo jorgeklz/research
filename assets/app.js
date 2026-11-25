@@ -67,6 +67,7 @@
   const POST_PAGE = LANG === "es" ? "entrada.html" : "post.html";
   const ORCID_ID = "0000-0001-8558-9122";
   const PAGE_SIZE = 5;
+  const NEWS_PAGE = 3;
   // works hidden from the site (and therefore from the metrics)
   const EXCLUDE_DOIS = new Set([]);
   const isExcluded = (p) => p && EXCLUDE_DOIS.has((p.doi || "").toLowerCase());
@@ -192,7 +193,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = 127;
+  const VER = 128;
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -843,6 +844,7 @@ ${refsHtml}
         <div class="filters"><button type="button" id="pub-oa-only" aria-pressed="false">${T.openAccess}</button></div>
         <button type="button" class="pub-clear" id="pub-clear" hidden>${T.clearFilters}</button>`;
       toolbar.after(row);
+      const ctl = toolbar.querySelector(".pub-controls"); if (ctl) row.appendChild(ctl);
       yearSel = $("#pub-year-select"); qWrap = $("#pub-quartiles"); oaBtn = $("#pub-oa-only"); clearBtn = $("#pub-clear");
       yearSel.addEventListener("change", () => { year = yearSel.value; apply(); });
       qWrap.addEventListener("click", (e) => {
@@ -1915,13 +1917,13 @@ ${refsHtml}
     let s = buildNewsList(curatedPubsSorted(pubs), posts);
     let page = 0;
     function render() {
-      const pages = Math.max(1, Math.ceil(s.length / PAGE_SIZE));
+      const pages = Math.max(1, Math.ceil(s.length / NEWS_PAGE));
       page = Math.min(page, pages - 1);
       wrap.innerHTML = "";
       if (!s.length) { wrap.innerHTML = `<p class="loading">${T.empty}</p>`; }
       const yrs = document.createElement("div"); yrs.className = "proj-years";
       let grp = null, gy = null;
-      s.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE).forEach((p) => {
+      s.slice(page * NEWS_PAGE, page * NEWS_PAGE + NEWS_PAGE).forEach((p) => {
         const y = String(p.date || "").slice(0, 4);
         if (!grp || gy !== y) {
           gy = y;
@@ -1933,7 +1935,7 @@ ${refsHtml}
       });
       if (s.length) wrap.appendChild(yrs);
       if (pag) {
-        pag.style.display = s.length > PAGE_SIZE ? "flex" : "none";
+        pag.style.display = s.length > NEWS_PAGE ? "flex" : "none";
         info.textContent = T.pageOf(page + 1, pages);
         prev.disabled = page === 0; next.disabled = page >= pages - 1;
         updateGoto(pag, pages, page, (i) => { page = Math.max(0, Math.min(i, pages - 1)); render(); window.scrollTo({ top: 0, behavior: "smooth" }); });
@@ -1972,7 +1974,7 @@ ${refsHtml}
   function renderPost(profile, pubs, post) {
     const hero = $("#post-hero"), body = $("#article"), links = $("#post-links");
     document.title = pick(post.title) + " — " + profile.name;
-    hero.innerHTML = `<h1>${esc(pick(post.title))}</h1>${postMeta(post, pubs, { showViews: true, shareUrl: location.href })}`;
+    hero.innerHTML = `<p class="eyebrow">${esc(pubKind(post, pubs).label)}</p><h1 class="proj-title">${esc(pick(post.title))}</h1>${postMeta(post, pubs, { showViews: true, shareUrl: location.href })}`;
     loadViewCount(post);
     let html = md(pick(post.body));
     const pub = post.doi && pubs.items.find((p) => normDoi(p.doi) === normDoi(post.doi));
@@ -2062,7 +2064,7 @@ ${refsHtml}
       // (local JSON → live ORCID → Crossref → OpenAlex) and ALWAYS build a post,
       // so the page never renders blank.
       const local = pubs.items.find((p) => normDoi(p.doi) === normDoi(doi));
-      hero.innerHTML = `<div class="meta"><span class="chip paper">${T.paper}</span></div><h1>${esc(local ? local.title : "")}</h1>`;
+      hero.innerHTML = `<p class="eyebrow">${T.paper}</p><h1 class="proj-title">${esc(local ? local.title : "")}</h1>`;
       body.innerHTML = `<p class="loading">${T.generating}</p>`;
 
       const finish = (meta) => {

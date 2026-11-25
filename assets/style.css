@@ -1238,3 +1238,31 @@ a.tm-chip:hover .tm-li { transform: scale(1.12); color: var(--blue); }
 .related .rel { border-top: 1px solid var(--line); }
 .backlink { background: none; border: 0; box-shadow: none; padding: 0; border-radius: 0; font-weight: 700; color: var(--blue-600); }
 .backlink:hover { box-shadow: none; transform: none; text-decoration: underline; text-underline-offset: 4px; }
+
+/* round 4: tidy publication controls, full-width intros, rows instead of cards in Portfolio, post header */
+.page-head .say { max-width: none; }
+.rl-ax .pub-toolbar { display: flex; align-items: center; justify-content: space-between; gap: .6rem 1.6rem; margin: 0 0 .9rem; padding: 0; border: 0; }
+.rl-ax .pub-toolbar .filters { margin: 0; }
+.rl-ax .pub-search { width: 240px; max-width: 100%; }
+.rl-ax .pub-filter-row { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem 1.5rem; margin: 0 0 1.2rem; padding: .7rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.rl-ax .pub-filter-row .filters { margin: 0; gap: .2rem 1rem; }
+.rl-ax .pub-fgroup { display: inline-flex; align-items: center; gap: .6rem; }
+.rl-ax .sort-label { font-size: var(--fs-xs); font-weight: 600; color: var(--ink-3); white-space: nowrap; }
+.rl-ax .pub-sort-select { border: 0; border-bottom: 1px solid var(--line-2); border-radius: 0; background: none; box-shadow: none; padding: .15rem .2rem; font-size: var(--fs-sm); }
+.rl-ax .pub-sort-select:hover, .rl-ax .pub-sort-select:focus { border-bottom-color: var(--blue); box-shadow: none; }
+.rl-ax .pub-clear { margin: 0; padding: 0; }
+.rl-ax .pub-controls { margin-left: auto; display: flex; align-items: center; gap: .5rem 1.4rem; flex-wrap: wrap; }
+.rl-ax .pub-summary .sum-badge { background: none; border: 0; padding: 0; border-radius: 0; color: var(--ink-3); font-size: var(--fs-xs); font-weight: 600; }
+@media (max-width: 640px) { .rl-ax .pub-toolbar { flex-direction: column; align-items: stretch; } .rl-ax .pub-controls { margin-left: 0; } }
+/* Portfolio lists: hairline rows, no cards, no pills */
+.rl-ax .toolbox { display: block; border-top: 1px solid var(--line); }
+.rl-ax .tool-card { position: relative; background: none; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; box-shadow: none; transform: none; padding: .95rem 0; gap: .25rem; }
+.rl-ax .tool-card:hover { background: none; box-shadow: none; transform: none; border-color: var(--line); }
+.rl-ax .tool-card .ds-yr { background: none; border: 0; padding: 0; border-radius: 0; color: var(--ink-3); font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0; }
+.rl-ax .tool-badge { background: none; border: 0; padding: 0; color: var(--ink-3); }
+/* post header, same as the project header */
+.post-hero { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+.post-hero .eyebrow { text-transform: none; letter-spacing: .01em; font-size: var(--fs-sm); }
+.post-hero h1.proj-title { max-width: none; font-size: clamp(1.9rem, 5vw, 2.6rem); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 .5rem; }
+.post-hero h1 + .meta { margin-top: .9rem; }
+.post-layout { margin-top: 1.4rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
