@@ -88,7 +88,7 @@
       projSummary: "Summary",
       railProjects: "Projects", railTools: "Software", railData: "Datasets",
       projProject: "Project", projProjectSub: "Description and objective", projTeam: "Team", projTeamSub: "People and institutions", projResultsSub: "Publications and observatories",
-      projSections: "Sections of the project", projBackground: "Background", projObjective: "General objective", projTop: "Top of page", projAlignment: "Alignment",
+      projSections: "Sections of the project", projBackground: "Background", projObjective: "General objective", projTop: "Top of page", projAlignment: "Alignment", projRefs: "References",
       tmPI: "Director", tmRes: "Researchers", tmPhd: "PhD students", tmMs: "Master's students", tmBsc: "Undergraduate students", projPartners: "Partner institutions",
       projPublications: "Publications", projObservatories: "Observatories", projSoftwareH: "Software", projWebsites: "Websites", projObservatory: "Observatory",
       projPubEmpty: "Papers from this project will be listed here as they are published.",
@@ -144,7 +144,7 @@
       projSummary: "Resumen",
       railProjects: "Proyectos", railTools: "Software", railData: "Datos",
       projProject: "Proyecto", projProjectSub: "Descripción y objetivo", projTeam: "Equipo", projTeamSub: "Personas e instituciones", projResultsSub: "Publicaciones y observatorios",
-      projSections: "Secciones del proyecto", projBackground: "Antecedentes", projObjective: "Objetivo general", projTop: "Volver arriba", projAlignment: "Alineación",
+      projSections: "Secciones del proyecto", projBackground: "Antecedentes", projObjective: "Objetivo general", projTop: "Volver arriba", projAlignment: "Alineación", projRefs: "Referencias",
       tmPI: "Director", tmRes: "Investigadores", tmPhd: "Estudiantes de doctorado", tmMs: "Estudiantes de maestría", tmBsc: "Estudiantes de grado", projPartners: "Instituciones socias",
       projPublications: "Publicaciones", projObservatories: "Observatorios", projSoftwareH: "Software", projWebsites: "Sitios web", projObservatory: "Observatorio",
       projPubEmpty: "Los artículos de este proyecto se listarán aquí a medida que se publiquen.",
@@ -193,7 +193,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = 132;
+  const VER = 133;
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -471,43 +471,6 @@
   }
 
   /* ---------- publication card ---------- */
-  function pubEl(p, byId) {
-    const el = document.createElement("article");
-    el.className = "pub";
-    const doiURL = p.doi ? "https://doi.org/" + p.doi : null;
-    const curated = (p.postId && byId[p.postId]) || (p.doi && byId[normDoi(p.doi)]);
-    // only offer an explanatory post for curated ones or 2024+ publications
-    const postHref = curated ? `${POST_PAGE}?id=${encodeURIComponent(curated.id)}`
-      : (p.doi && (p.year || 0) >= 2024 ? `${POST_PAGE}?doi=${encodeURIComponent(p.doi)}` : null);
-    const qBadge = p.quartile ? `<span class="badge-quartile badge-${esc(p.quartile.toLowerCase())}">${esc(p.quartile)}</span>` : "";
-    const oaBadge = p.openAccess ? `<span class="badge-oa">${ICON.oa} ${T.openAccess}</span>` : "";
-    const openAlexUrl = p.doi ? `https://openalex.org/works?filter=doi:${encodeURIComponent(normDoi(p.doi))}` : null;
-    const citesChip = typeof p.citations === "number" && p.citations > 0
-      ? (openAlexUrl
-          ? `<a class="cites-chip" href="${openAlexUrl}" target="_blank" rel="noopener" title="${LANG === 'es' ? 'Ver en OpenAlex' : 'View on OpenAlex'}">${ICON.mCite} ${T.citedByOpenAlex(p.citations)} ↗</a>`
-          : `<span class="cites-chip">${ICON.mCite} ${T.citedByOpenAlex(p.citations)}</span>`)
-      : "";
-    el.innerHTML = `
-      <h3>${doiURL ? `<a href="${doiURL}" target="_blank" rel="noopener">` : ""}${esc(p.title)}${doiURL ? "</a>" : ""}</h3>
-      ${p.authors && p.authors.length ? `<p class="auth">${boldSelf(p.authors)}</p>` : ""}
-      <div class="meta">
-        <span class="yrchip">${p.year || "—"} · ${esc(typeLabel(p.type))}</span>
-        ${qBadge}
-        ${oaBadge}
-        ${p.venue ? `<span class="ven">${esc(p.venue)}${p.pages && !String(p.venue).includes(String(p.pages)) ? ", " + esc(p.pages) : ""}</span>` : ""}
-        ${typeof p.scholarCitations === "number" && p.scholarCitations > 0 ? `<span class="cites-chip cites-scholar">${ICON.mCite} ${T.citedByScholar(p.scholarCitations)}</span>` : ""}
-        ${citesChip}
-      </div>
-      <div class="act">
-        ${doiURL ? `<a href="${doiURL}" target="_blank" rel="noopener">${ICON.external} ${T.doi}</a>` : ""}
-        <button type="button" class="bib">${ICON.cite} ${T.cite}</button>
-        ${postHref ? `<a href="${postHref}">${ICON.doc} ${T.postLink}</a>` : ""}
-      </div>`;
-    el.querySelector("button.bib").addEventListener("click", () =>
-      navigator.clipboard.writeText(bibtex(p)).then(() => toast(T.copied)).catch(() => toast(T.copied)));
-    return el;
-  }
-
   /* ---------- shared: curated list + ORCID live fetch/merge (used by Publications and News pages) ---------- */
   function curatedPubsSorted(pubs) {
     return [...pubs.items].sort((a, b) => (b.year || 0) - (a.year || 0) || (b.date || "").localeCompare(a.date || "") || (b.citations || 0) - (a.citations || 0));
@@ -995,29 +958,6 @@ ${refsHtml}
     return post.id ? `${POST_PAGE}?id=${encodeURIComponent(post.id)}`
       : `${POST_PAGE}?doi=${encodeURIComponent(post.doi)}`;
   }
-  function cardEl(post, pubs) {
-    const el = document.createElement("article"); el.className = "card";
-    const href = postCardHref(post);
-    el.innerHTML = `
-      ${postMeta(post, pubs)}
-      <h3><a href="${href}">${esc(pick(post.title))}</a></h3>
-      <p>${esc(pick(post.summary))}</p>
-      <a class="more" href="${href}">${T.readMore} ${ICON.arrow}</a>`;
-    return el;
-  }
-  function rowsEl(container, items, kind) {
-    container.innerHTML = "";
-    items.forEach((it) => {
-      const el = document.createElement("div"); el.className = "row";
-      const when = (kind === "edu" || kind === "award") ? it.year : it.period;
-      const badge = it.note ? `<span class="badge">${esc(pick(it.note))}</span>` : "";
-      const org = esc(pick(it.org));
-      const orgHtml = it.orgUrl ? `<a href="${esc(it.orgUrl)}" target="_blank" rel="noopener">${org}</a>` : org;
-      el.innerHTML = `<div class="when">${esc(when)}</div><div class="what"><div class="t">${esc(pick(it.title || it.role))}${badge}</div><div class="o">${orgHtml}</div></div>`;
-      container.appendChild(el);
-    });
-  }
-
   function fillChrome(profile) {
     const name = LANG === "es" && profile.nameEs ? profile.nameEs : profile.name;
     $$(".brand .bname").forEach((e) => e.textContent = name);
@@ -1561,21 +1501,6 @@ ${refsHtml}
       mail.innerHTML = `<a class="contact-mail" href="mailto:${esc(profile.email)}">${ICON.mail}<span>${esc(profile.email)}</span></a>`;
     }
   }
-  function projectsRows(container, projects) {
-    // research projects: period · title · role/funder · status badge
-    const research = (projects.research || []).map((p) => `
-      <div class="row">
-        <div class="when">${esc(pick(p.period))}</div>
-        <div class="what">
-          <div class="t">${esc(pick(p.title))}${p.status ? `<span class="badge">${esc(pick(p.status))}</span>` : ""}</div>
-          <div class="o">${T.projRole}: ${esc(pick(p.role))} · ${T.projFunder}: ${esc(pick(p.funder))}</div>
-        </div>
-      </div>`).join("");
-    container.innerHTML = research
-      ? `<p class="cv-note">${esc(T.projNote)}</p><div class="cv-block"><div class="rows">${research}</div></div>`
-      : "";
-  }
-
   // Card grid for tools / software / databases, in the spirit of a research-lab
   // "software & data" page: each item is a card with a type badge, a short
   // description and an access link when one exists. Items still to be filled in
@@ -1655,21 +1580,6 @@ ${refsHtml}
     paginateRows(container.querySelector(".toolbox"), 5);
   }
 
-  // BibTeX for a Mendeley dataset, copied to the clipboard just like publications.
-  function datasetBibtex(d) {
-    const key = (d.name || "data").toLowerCase().replace(/[^a-z0-9]/g, "") + (d.year || "");
-    const authors = (d.authors && d.authors.length ? d.authors : ["Parraga-Alava, Jorge"]).join(" and ");
-    const fields = [
-      `  author    = {${authors}}`,
-      `  title     = {${d.name}}`,
-      `  year      = {${d.year || ""}}`,
-      `  publisher = {Mendeley Data}`
-    ];
-    if (d.version) fields.push(`  version   = {${d.version}}`);
-    if (d.doi) fields.push(`  doi       = {${d.doi}}`);
-    return `@misc{${key},\n` + fields.join(",\n") + `\n}`;
-  }
-
   // Dataset cards — same minimalist card design as the R packages: one line-style
   // dataset icon for all, a very short description, a link to the repository and a
   // cite button (BibTeX to clipboard, like the publications list). Sorted by year.
@@ -1727,6 +1637,7 @@ ${refsHtml}
     const back = LANG === "es" ? "portafolio.html#projects" : "portfolio.html#projects";
     if (!p) { stage.innerHTML = `<p class="loading">${esc(T.projNone)} <a href="${back}">${esc(T.projBack)}</a></p>`; return; }
     document.title = `${p.short} | ${profile.name}`;
+    setPageMeta(document.title, String((pick(p.summary) || [])[0] || "").slice(0, 200));
     const lang = $(".lang-top"); if (lang) lang.setAttribute("href", lang.getAttribute("href").split("?")[0] + "?id=" + encodeURIComponent(p.id));
 
     const meta = [pick(p.period), pick(p.role), pick(p.funder)].filter(Boolean).join(" · ");
@@ -1785,14 +1696,18 @@ ${refsHtml}
       const row = (l, h) => `<div class="proj-row"><span>${esc(l)}</span><div>${h}</div></div>`;
       projHtml = (d.background ? row(T.projBackground, `<p>${esc(pick(d.background))}</p>`) : "")
         + (d.objective ? row(T.projObjective, `<p>${esc(pick(d.objective))}</p>`) : "")
+        + ((p.facts || []).map((f) => row(pick(f.l), `<p>${esc(pick(f.v))}</p>`)).join(""))
         + ((d.alignment || []).length ? row(T.projAlignment, `<div class="proj-align">${d.alignment.map((a) => `<span>${ICO[a.icon] || ""}${esc(pick(a.t))}</span>`).join("")}</div>`) : "");
+    }
+    if (d && (p.refs || []).length) {
+      projHtml += `<div class="proj-row"><span>${esc(T.projRefs)}</span><div><ol class="proj-refs">${p.refs.map((r) => `<li>${esc(r.t)}${r.doi ? ` <a href="https://doi.org/${esc(r.doi)}" target="_blank" rel="noopener">doi:${esc(r.doi)}</a>` : ""}</li>`).join("")}</ol></div></div>`;
     }
     // axis 2: team (LinkedIn chips in the same style as MeteoNet)
     const team = p.team || [];
     let teamHtml = "";
     if (team.length || (p.partners || []).length) {
       const chip = (m) => m.url === "#"
-        ? `<a class="tm-chip" href="#" title="LinkedIn: ${esc(m.name)}">${LI_ICON}<span>${esc(m.name)}</span></a>`
+        ? `<span class="tm-chip">${LI_ICON}<span>${esc(m.name)}</span></span>`
         : `<a class="tm-chip" href="${esc(m.url)}" target="_blank" rel="noopener noreferrer" title="LinkedIn: ${esc(m.name)}">${LI_ICON}<span>${esc(m.name)}</span></a>`;
       const GROUPS = [["pi", T.tmPI], ["res", T.tmRes], ["phd", T.tmPhd], ["ms", T.tmMs], ["bsc", T.tmBsc]];
       teamHtml = GROUPS.map(([g, label]) => {
@@ -1991,26 +1906,16 @@ ${refsHtml}
     fetchLivePubs(pubs).then((merged) => { s = buildNewsList(merged, posts); render(); }).catch(() => {});
   }
 
-  function renderRelated(posts, current) {
-    const box = $("#post-related"); if (!box) return;
-    const topics = new Set(current.topics || []);
-    const scored = posts.items
-      .filter((p) => p.id !== current.id)
-      .map((p) => ({ p, n: (p.topics || []).filter((t) => topics.has(t)).length }))
-      .filter((x) => x.n > 0)
-      .sort((a, b) => b.n - a.n || (a.p.date < b.p.date ? 1 : -1))
-      .slice(0, 5);
-    if (!scored.length) { const wrap = box.closest(".related"); if (wrap) wrap.style.display = "none"; return; }
-    box.innerHTML = scored.map(({ p }) => {
-      const doiURL = p.doi ? "https://doi.org/" + p.doi : null;
-      return `<div class="rel">
-        <a class="rel-main" href="${POST_PAGE}?id=${encodeURIComponent(p.id)}">
-          <span class="rel-t">${esc(pick(p.title))}</span>
-          <span class="rel-m">${fmtDate(p.date)}</span>
-        </a>
-        ${doiURL ? `<a class="rel-doi" href="${doiURL}" target="_blank" rel="noopener" title="${T.doi}: ${esc(p.doi)}">${ICON.external}<span>${T.readOriginalPaper}</span></a>` : ""}
-      </div>`;
-    }).join("");
+  // dynamic pages (one post, one project): canonical and social title follow the content shown
+  function setPageMeta(title, desc) {
+    try {
+      const cn = document.querySelector('link[rel="canonical"]');
+      if (cn) cn.setAttribute("href", location.origin + location.pathname + location.search);
+      const set = (sel, v) => { const m = document.querySelector(sel); if (m && v) m.setAttribute("content", v); };
+      set('meta[property="og:title"]', title); set('meta[name="twitter:title"]', title);
+      set('meta[property="og:url"]', location.origin + location.pathname + location.search);
+      if (desc) { set('meta[name="description"]', desc); set('meta[property="og:description"]', desc); set('meta[name="twitter:description"]', desc); }
+    } catch (e) {}
   }
 
   function renderPost(profile, pubs, post) {
@@ -2018,6 +1923,7 @@ ${refsHtml}
     document.title = pick(post.title) + " — " + profile.name;
     hero.innerHTML = `<p class="eyebrow">${esc(pubKind(post, pubs).label)}</p><h1 class="proj-title">${esc(pick(post.title))}</h1>${postMeta(post, pubs, { showViews: true, shareUrl: location.href })}`;
     loadViewCount(post);
+    setPageMeta(pick(post.title) + " | " + profile.name, String(pick(post.summary) || "").slice(0, 200));
     let html = md(pick(post.body));
     const pub = post.doi && pubs.items.find((p) => normDoi(p.doi) === normDoi(post.doi));
     const ref = pub || post._ref;

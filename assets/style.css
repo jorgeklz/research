@@ -1314,3 +1314,13 @@ a.tm-chip:hover .tm-li { transform: scale(1.12); color: var(--blue); }
 .rp-l svg { width: 14px; height: 14px; }
 .rp-l:hover { color: var(--blue-700); text-decoration: underline; text-underline-offset: 4px; }
 .rp-l em { font-style: normal; font-weight: 600; font-size: var(--fs-xs); color: var(--ink-3); margin-left: .2rem; }
+
+/* round 8: accessibility and project references */
+.skip { position: absolute; left: .6rem; top: -3rem; z-index: 300; padding: .5rem .9rem; background: var(--green-900); color: #fff; border-radius: 6px; font-size: var(--fs-sm); font-weight: 600; transition: top .15s; }
+.skip:focus { top: .6rem; }
+a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible, .rl-nav a:focus-visible, .proj-rail a:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 3px; }
+.tp-card:focus-visible { outline: 0; }
+.proj-refs { margin: 0; padding-left: 1.2rem; font-size: var(--fs-sm); line-height: 1.6; color: var(--ink-2); }
+.proj-refs li { margin: 0 0 .5rem; }
+.proj-refs a { font-weight: 600; color: var(--blue-600); }
+span.tm-chip .tm-li { color: var(--ink-3); }

@@ -745,7 +745,11 @@
       "year": 2023,
       "pages": null,
       "openAccess": false,
-      "postId": "post-housing-fuzzy-recommender-system-a-syste"
+      "postId": "post-housing-fuzzy-recommender-system-a-syste",
+      "topics": [
+        "recommender-systems",
+        "review"
+      ]
     },
     {
       "id": "cienciamatria2023-busuu",
@@ -779,7 +783,12 @@
       "year": 2023,
       "pages": "52-63",
       "openAccess": false,
-      "postId": "post-predicting-academic-performance-of-low-i"
+      "postId": "post-predicting-academic-performance-of-low-i",
+      "topics": [
+        "education",
+        "machine-learning",
+        "data-mining"
+      ]
     },
     {
       "id": "cbcovid19ec-a-dataset-complete-blood-cou-2022",
@@ -793,7 +802,12 @@
       "year": 2022,
       "pages": null,
       "openAccess": false,
-      "postId": "post-cbcovid19ec-a-dataset-complete-blood-cou"
+      "postId": "post-cbcovid19ec-a-dataset-complete-blood-cou",
+      "topics": [
+        "dataset",
+        "health",
+        "machine-learning"
+      ]
     },
     {
       "id": "episteme2022-web20",
@@ -832,7 +846,11 @@
       "year": 2022,
       "pages": "105228",
       "openAccess": true,
-      "postId": "post-feature-selection-reveal-peripheral-bloo"
+      "postId": "post-feature-selection-reveal-peripheral-bloo",
+      "topics": [
+        "bioinformatics",
+        "health"
+      ]
     },
     {
       "id": "monitoring-of-air-pollution-levels-with-2022",
@@ -846,7 +864,11 @@
       "year": 2022,
       "pages": null,
       "openAccess": false,
-      "postId": "post-monitoring-of-air-pollution-levels-with"
+      "postId": "post-monitoring-of-air-pollution-levels-with",
+      "topics": [
+        "iot",
+        "sensors"
+      ]
     },
     {
       "id": "lnns2022-elderly",
@@ -884,7 +906,12 @@
       "year": 2021,
       "pages": "16-27",
       "openAccess": false,
-      "postId": "post-aphids-detection-on-lemons-leaf-image-us"
+      "postId": "post-aphids-detection-on-lemons-leaf-image-us",
+      "topics": [
+        "agriculture",
+        "computer-vision",
+        "deep-learning"
+      ]
     },
     {
       "id": "evaluation-of-lora-technology-for-aquacu-2021",
@@ -899,7 +926,11 @@
       "year": 2021,
       "pages": "93-105",
       "openAccess": false,
-      "postId": "post-evaluation-of-lora-technology-for-aquacu"
+      "postId": "post-evaluation-of-lora-technology-for-aquacu",
+      "topics": [
+        "iot",
+        "sensors"
+      ]
     },
     {
       "id": "data2021-lelephid",
@@ -942,7 +973,11 @@
       "year": 2021,
       "pages": "257-266",
       "openAccess": false,
-      "postId": "post-opinion-and-sentiment-analysis-of-twitte"
+      "postId": "post-opinion-and-sentiment-analysis-of-twitte",
+      "topics": [
+        "social-media",
+        "nlp"
+      ]
     },
     {
       "id": "testicular-germ-cell-tumors-type-2-have-2021",
@@ -958,7 +993,11 @@
       "year": 2021,
       "pages": "357-362",
       "openAccess": false,
-      "postId": "post-testicular-germ-cell-tumors-type-2-have"
+      "postId": "post-testicular-germ-cell-tumors-type-2-have",
+      "topics": [
+        "bioinformatics",
+        "health"
+      ]
     },
     {
       "id": "sst2021-social-emergency",
@@ -997,7 +1036,12 @@
       "year": 2021,
       "pages": "106693",
       "openAccess": true,
-      "postId": "post-urbangency-an-emergency-events-dataset-b"
+      "postId": "post-urbangency-an-emergency-events-dataset-b",
+      "topics": [
+        "dataset",
+        "emergency",
+        "social-media"
+      ]
     },
     {
       "id": "dib2020-power",
@@ -1056,7 +1100,12 @@
       "year": 2020,
       "pages": null,
       "openAccess": false,
-      "postId": "post-lelephid-a-small-images-dataset-for-aphi"
+      "postId": "post-lelephid-a-small-images-dataset-for-aphi",
+      "topics": [
+        "dataset",
+        "agriculture",
+        "computer-vision"
+      ]
     },
     {
       "id": "ijms2020-tgct",
@@ -1091,7 +1140,12 @@
       "year": 2020,
       "pages": null,
       "openAccess": false,
-      "postId": "post-urbangency"
+      "postId": "post-urbangency",
+      "topics": [
+        "dataset",
+        "emergency",
+        "social-media"
+      ]
     },
     {
       "id": "an-unsupervised-learning-approach-for-au-2019",
@@ -1108,7 +1162,12 @@
       "year": 2019,
       "pages": "1-8",
       "openAccess": false,
-      "postId": "post-an-unsupervised-learning-approach-for-au"
+      "postId": "post-an-unsupervised-learning-approach-for-au",
+      "topics": [
+        "social-media",
+        "nlp",
+        "machine-learning"
+      ]
     },
     {
       "id": "gene-expression-of-genes-for-tumour-mark-2019",
@@ -1124,7 +1183,11 @@
       "year": 2019,
       "pages": "41",
       "openAccess": false,
-      "postId": "post-gene-expression-of-genes-for-tumour-mark"
+      "postId": "post-gene-expression-of-genes-for-tumour-mark",
+      "topics": [
+        "bioinformatics",
+        "health"
+      ]
     },
     {
       "id": "gene-signatures-for-testicular-germ-cell-2019",
@@ -1139,7 +1202,11 @@
       "year": 2019,
       "pages": "36",
       "openAccess": false,
-      "postId": "post-gene-signatures-for-testicular-germ-cell"
+      "postId": "post-gene-signatures-for-testicular-germ-cell",
+      "topics": [
+        "bioinformatics",
+        "health"
+      ]
     },
     {
       "id": "multi-objective-genetic-algorithms-are-t-2019",
@@ -1153,7 +1220,10 @@
       "year": 2019,
       "pages": null,
       "openAccess": false,
-      "postId": "post-multi-objective-genetic-algorithms-are-t"
+      "postId": "post-multi-objective-genetic-algorithms-are-t",
+      "topics": [
+        "optimization"
+      ]
     },
     {
       "id": "pcstcol-power-consumption-data-from-an-a-2019",
@@ -1167,7 +1237,11 @@
       "year": 2019,
       "pages": null,
       "openAccess": false,
-      "postId": "post-pcstcol-power-consumption-data-from-an-a"
+      "postId": "post-pcstcol-power-consumption-data-from-an-a",
+      "topics": [
+        "dataset",
+        "energy"
+      ]
     },
     {
       "id": "dib2019-rocole",
@@ -1207,7 +1281,13 @@
       "year": 2019,
       "pages": null,
       "openAccess": false,
-      "postId": "post-moc-gapbk-multi-objective-clustering-alg"
+      "postId": "post-moc-gapbk-multi-objective-clustering-alg",
+      "topics": [
+        "clustering",
+        "bioinformatics",
+        "optimization",
+        "software"
+      ]
     },
     {
       "id": "a-multi-objective-gene-clustering-algori-2018",
@@ -1223,7 +1303,12 @@
       "year": 2018,
       "pages": null,
       "openAccess": true,
-      "postId": "post-a-multi-objective-gene-clustering-algori"
+      "postId": "post-a-multi-objective-gene-clustering-algori",
+      "topics": [
+        "clustering",
+        "bioinformatics",
+        "optimization"
+      ]
     },
     {
       "id": "how-predicting-the-academic-success-of-s-2018",
@@ -1238,7 +1323,12 @@
       "year": 2018,
       "pages": "1-6",
       "openAccess": false,
-      "postId": "post-how-predicting-the-academic-success-of-s"
+      "postId": "post-how-predicting-the-academic-success-of-s",
+      "topics": [
+        "education",
+        "machine-learning",
+        "data-mining"
+      ]
     },
     {
       "id": "methodological-proposal-for-technologica-2018",
@@ -1252,7 +1342,11 @@
       "year": 2018,
       "pages": null,
       "openAccess": false,
-      "postId": "post-methodological-proposal-for-technologica"
+      "postId": "post-methodological-proposal-for-technologica",
+      "topics": [
+        "education",
+        "higher-education"
+      ]
     },
     {
       "id": "propuesta-metodol-gica-para-proyectos-de-2018",
@@ -1266,7 +1360,11 @@
       "year": 2018,
       "pages": null,
       "openAccess": false,
-      "postId": "post-propuesta-metodol-gica-para-proyectos-de"
+      "postId": "post-propuesta-metodol-gica-para-proyectos-de",
+      "topics": [
+        "education",
+        "higher-education"
+      ]
     },
     {
       "id": "unsupervised-pattern-recognition-for-geo-2018",
@@ -1280,7 +1378,11 @@
       "year": 2018,
       "pages": null,
       "openAccess": false,
-      "postId": "post-unsupervised-pattern-recognition-for-geo-2018"
+      "postId": "post-unsupervised-pattern-recognition-for-geo-2018",
+      "topics": [
+        "clustering",
+        "machine-learning"
+      ]
     },
     {
       "id": "unsupervised-pattern-recognition-for-geo-2018",
@@ -1297,7 +1399,11 @@
       "year": 2018,
       "pages": "1-8",
       "openAccess": false,
-      "postId": "post-unsupervised-pattern-recognition-for-geo"
+      "postId": "post-unsupervised-pattern-recognition-for-geo",
+      "topics": [
+        "clustering",
+        "machine-learning"
+      ]
     },
     {
       "id": "a-bi-objective-clustering-algorithm-for-2017",
@@ -1312,7 +1418,12 @@
       "year": 2017,
       "pages": null,
       "openAccess": true,
-      "postId": "post-a-bi-objective-clustering-algorithm-for"
+      "postId": "post-a-bi-objective-clustering-algorithm-for",
+      "topics": [
+        "clustering",
+        "bioinformatics",
+        "optimization"
+      ]
     },
     {
       "id": "using-local-search-strategies-to-improve-2017",
@@ -1328,7 +1439,11 @@
       "year": 2017,
       "pages": "1119-1126",
       "openAccess": false,
-      "postId": "post-using-local-search-strategies-to-improve"
+      "postId": "post-using-local-search-strategies-to-improve",
+      "topics": [
+        "optimization",
+        "clustering"
+      ]
     },
     {
       "id": "a-bi-objective-model-for-gene-clustering-2016",
@@ -1343,7 +1458,12 @@
       "year": 2016,
       "pages": "1-12",
       "openAccess": false,
-      "postId": "post-a-bi-objective-model-for-gene-clustering"
+      "postId": "post-a-bi-objective-model-for-gene-clustering",
+      "topics": [
+        "clustering",
+        "bioinformatics",
+        "optimization"
+      ]
     },
     {
       "id": "genes-involved-in-the-seminoma-testicula-2016",
@@ -1357,7 +1477,11 @@
       "year": 2016,
       "pages": null,
       "openAccess": false,
-      "postId": "post-genes-involved-in-the-seminoma-testicula"
+      "postId": "post-genes-involved-in-the-seminoma-testicula",
+      "topics": [
+        "bioinformatics",
+        "health"
+      ]
     }
   ]
 }

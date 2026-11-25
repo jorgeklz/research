@@ -141,6 +141,100 @@
           "name": "Universidad Estatal de Milagro",
           "url": "https://unemi.edu.ec"
         }
+      ],
+      "facts": [
+        {
+          "l": {
+            "en": "Code",
+            "es": "Código"
+          },
+          "v": {
+            "en": "PYTAUTO3334-2023-FCI0027",
+            "es": "PYTAUTO3334-2023-FCI0027"
+          }
+        },
+        {
+          "l": {
+            "en": "Dates",
+            "es": "Fechas"
+          },
+          "v": {
+            "en": "January 2024 to December 2026",
+            "es": "Enero de 2024 a diciembre de 2026"
+          }
+        },
+        {
+          "l": {
+            "en": "Budget",
+            "es": "Presupuesto"
+          },
+          "v": {
+            "en": "USD 30,000: USD 24,000 in degree scholarships and USD 6,000 in institutional funds for publication and conference costs",
+            "es": "USD 30.000: USD 24.000 en becas de titulación y USD 6.000 en fondos institucionales para costos de publicación y congresos"
+          }
+        },
+        {
+          "l": {
+            "en": "Research line",
+            "es": "Línea de investigación"
+          },
+          "v": {
+            "en": "Information and communication technologies, software development",
+            "es": "Tecnologías de información y comunicación, desarrollo de software"
+          }
+        },
+        {
+          "l": {
+            "en": "Stages",
+            "es": "Etapas"
+          },
+          "v": {
+            "en": "Literature review and dataset selection, application of optimization techniques, evaluation on numerical, textual and image datasets",
+            "es": "Revisión de literatura y selección de conjuntos de datos, aplicación de técnicas de optimización, evaluación sobre conjuntos de datos numéricos, textuales y de imágenes"
+          }
+        }
+      ],
+      "refs": [
+        {
+          "t": "Ali, Awwad, Al-Razgan & Maarouf (2023). Hyperparameter Search for Machine Learning Algorithms for Optimizing the Computational Complexity. Processes",
+          "doi": "10.3390/pr11020349"
+        },
+        {
+          "t": "Bacanin et al. (2023). Multivariate energy forecasting via metaheuristic tuned long-short term memory and gated recurrent unit neural networks. Information Sciences",
+          "doi": "10.1016/j.ins.2023.119122"
+        },
+        {
+          "t": "Bischl et al. (2023). Hyperparameter optimization: Foundations, algorithms, best practices, and open challenges. WIREs Data Mining and Knowledge Discovery",
+          "doi": ""
+        },
+        {
+          "t": "Celik & Inik (2024). Development of hybrid models based on deep learning and optimized machine learning algorithms for brain tumor multi-classification. Expert Systems with Applications",
+          "doi": "10.1016/j.eswa.2023.122159"
+        },
+        {
+          "t": "Jayaram, Kalpana, Borra & Bhavani (2023). A brief study on rice diseases recognition and image classification. International Journal of Electrical and Computer Engineering",
+          "doi": "10.11591/ijece.v13i6.pp6302-6311"
+        },
+        {
+          "t": "Kalyani, Sai Sudheer, Janakiramaiah & Narendra Kumar Rao (2023). Hyperparameter Optimization for Transfer Learning-based Disease Detection in Cassava Plants",
+          "doi": "10.56042/jsir.v82i05.1089"
+        },
+        {
+          "t": "Magdy, Abd Elaziz, Elgarayhi, Ewees & Sallah (2023). Bone metastasis detection method based on improving golden jackal optimization using whale optimization algorithm. Scientific Reports",
+          "doi": "10.1038/s41598-023-41733-x"
+        },
+        {
+          "t": "Okoji, Okoji & Awarun (2023). Performance evaluation of artificial intelligence with particle swarm optimization (PSO) to predict treatment water plant DBPs. Chemosphere",
+          "doi": "10.1016/j.chemosphere.2023.140238"
+        },
+        {
+          "t": "Petrovic et al. (2023). Marine Vessel Classification and Multivariate Trajectories Forecasting Using Metaheuristics-Optimized eXtreme Gradient Boosting and Recurrent Neural Networks. Applied Sciences",
+          "doi": "10.3390/app13169181"
+        },
+        {
+          "t": "Srinivas, Bagadi, Rama Reddy, Praveen & Aparanjini (2024). An efficient hybrid optimization algorithm for detecting heart disease using adaptive stacked residual convolutional neural networks. Biomedical Signal Processing and Control",
+          "doi": "10.1016/j.bspc.2023.105522"
+        }
       ]
     },
     {
