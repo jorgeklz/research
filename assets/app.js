@@ -190,7 +190,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = "123";
+  const VER = "124";
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -1705,13 +1705,17 @@ ${refsHtml}
       <div class="proj-body${rail ? " has-rail" : ""}">${rail}<div class="proj-main">${axes.map(axis).join("")}</div></div>
       <a class="backlink" href="${back}">← ${esc(T.projBack)}</a>`;
 
-    // highlight the axis being read
+    // with several axes, only the selected one is shown (Project by default)
     const links = [...stage.querySelectorAll(".proj-rail a")];
-    if (links.length && "IntersectionObserver" in window) {
-      const io = new IntersectionObserver((es) => es.forEach((e) => {
-        if (e.isIntersecting) links.forEach((a) => a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id));
-      }), { rootMargin: "-20% 0px -65% 0px" });
-      stage.querySelectorAll(".proj-ax").forEach((s) => io.observe(s));
+    if (links.length) {
+      const panels = [...stage.querySelectorAll(".proj-ax")];
+      const open = (pid, focus) => {
+        if (!panels.some((x) => x.id === pid)) pid = panels[0].id;
+        panels.forEach((x) => { x.hidden = x.id !== pid; });
+        links.forEach((a) => { const on = a.getAttribute("href") === "#" + pid; a.classList.toggle("on", on); a.setAttribute("aria-current", on ? "true" : "false"); });
+      };
+      links.forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); open(a.getAttribute("href").slice(1)); }));
+      open((location.hash || "").slice(1));
     }
   }
 

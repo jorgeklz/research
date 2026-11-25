@@ -1151,3 +1151,5 @@ a.tm-chip:hover .tm-li { transform: scale(1.12); color: var(--blue); }
 .proj-ax .to-top-wrap { justify-content: flex-start; padding: 1.3rem 0 0; }
 .tm-inst svg { margin-right: 0; }
 .proj-head .eyebrow { text-transform: none; letter-spacing: .01em; font-size: var(--fs-sm); }
+.proj-ax[hidden] { display: none; }
+.has-rail .proj-ax + .proj-ax { padding-top: 0; border-top: 0; }
