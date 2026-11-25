@@ -102,7 +102,7 @@
       views: "views", viewsOne: "view", shareWa: "Share on WhatsApp",
       empty: "Nothing here yet.", notFound: "Post not found.", loadingOrcid: "Loading publications from ORCID…",
       syncedOrcid: "Live from ORCID", worksTotal: "publications",
-      prev: "← Prev", next: "Next →", pageOf: (a, b) => `Page ${a} of ${b}`, goTo: "Go to",
+      back: "Back", prev: "← Prev", next: "Next →", pageOf: (a, b) => `Page ${a} of ${b}`, goTo: "Go to",
       backNews: "← All posts", generating: "Preparing a plain-language summary…",
       autoNote: "Summary generated automatically from the publication metadata.",
       autoSummary: "Read a plain-language summary of this paper, generated from its abstract.",
@@ -158,7 +158,7 @@
       views: "vistas", viewsOne: "vista", shareWa: "Compartir en WhatsApp",
       empty: "Aún no hay contenido.", notFound: "Entrada no encontrada.", loadingOrcid: "Cargando publicaciones desde ORCID…",
       syncedOrcid: "En vivo desde ORCID", worksTotal: "publicaciones",
-      prev: "← Ant.", next: "Sig. →", pageOf: (a, b) => `Página ${a} de ${b}`, goTo: "Ir a",
+      back: "Volver", prev: "← Ant.", next: "Sig. →", pageOf: (a, b) => `Página ${a} de ${b}`, goTo: "Ir a",
       backNews: "← Todos los posts", generating: "Preparando un resumen divulgativo…",
       autoNote: "Resumen generado automáticamente a partir de los metadatos de la publicación.",
       autoSummary: "Lee un resumen en lenguaje simple de este artículo, generado a partir de su abstract.",
@@ -193,7 +193,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = 128;
+  const VER = 129;
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -711,10 +711,30 @@ ${refsHtml}
       const pg = e.target.closest("[data-tp]");
       if (pg) { topicPage += +pg.dataset.tp; renderTopics(); return; }
       const b = e.target.closest(".tp-row"); if (!b) return;
-      topic = topic === b.dataset.t ? "all" : b.dataset.t;
-      apply();
-      document.dispatchEvent(new CustomEvent("rl-open", { detail: "sec-papers" }));
+      openTopicModal(b.dataset.t);
     });
+    function openTopicModal(t) {
+      const items = all.filter((p) => (p.topics || []).includes(t))
+        .sort((x, y) => (y.year || 0) - (x.year || 0));
+      const old = document.getElementById("tp-modal"); if (old) old.remove();
+      const m = document.createElement("div"); m.id = "tp-modal"; m.className = "tp-modal";
+      m.setAttribute("role", "dialog"); m.setAttribute("aria-modal", "true");
+      const rows = items.map((p) => {
+        const curated = (p.postId && byId[p.postId]) || (p.doi && byId[normDoi(p.doi)]);
+        const post = curated ? `${POST_PAGE}?id=${encodeURIComponent(curated.id)}`
+          : (p.doi && (p.year || 0) >= 2024 ? `${POST_PAGE}?doi=${encodeURIComponent(p.doi)}` : null);
+        const doi = p.doi ? "https://doi.org/" + p.doi : null;
+        const href = post || doi;
+        return `<li>${href ? `<a href="${href}"${post ? "" : ' target="_blank" rel="noopener"'}>${esc(p.title)}</a>` : `<span>${esc(p.title)}</span>`}
+          <small>${esc([p.year, p.venue].filter(Boolean).join(" · "))}${post && doi ? ` · <a href="${doi}" target="_blank" rel="noopener">${T.doi}</a>` : ""}</small></li>`;
+      }).join("");
+      m.innerHTML = `<div class="tp-card"><div class="tp-hd"><h3>${esc(topicLabel(t))}<small>${items.length}</small></h3><button type="button" class="tp-x" aria-label="${LANG === "es" ? "Cerrar" : "Close"}">×</button></div><ul>${rows}</ul></div>`;
+      const close = () => { m.remove(); document.removeEventListener("keydown", onKey); };
+      const onKey = (e) => { if (e.key === "Escape") close(); };
+      m.addEventListener("click", (e) => { if (e.target === m || e.target.closest(".tp-x")) close(); });
+      document.addEventListener("keydown", onKey);
+      document.body.appendChild(m);
+    }
 
     const dlBtn = $("#dl-pubs");
     if (dlBtn) dlBtn.addEventListener("click", () => exportPublicationsWord(profile, all, dlBtn));
@@ -841,11 +861,10 @@ ${refsHtml}
         <label class="sort-label" for="pub-year-select">${T.yearLabel}</label>
         <select id="pub-year-select" class="pub-sort-select"></select>
         <div class="pub-fgroup"><span class="sort-label">${T.quartileLabel}</span><div class="filters" id="pub-quartiles"></div></div>
-        <div class="filters"><button type="button" id="pub-oa-only" aria-pressed="false">${T.openAccess}</button></div>
         <button type="button" class="pub-clear" id="pub-clear" hidden>${T.clearFilters}</button>`;
       toolbar.after(row);
       const ctl = toolbar.querySelector(".pub-controls"); if (ctl) row.appendChild(ctl);
-      yearSel = $("#pub-year-select"); qWrap = $("#pub-quartiles"); oaBtn = $("#pub-oa-only"); clearBtn = $("#pub-clear");
+      yearSel = $("#pub-year-select"); qWrap = $("#pub-quartiles"); clearBtn = $("#pub-clear");
       yearSel.addEventListener("change", () => { year = yearSel.value; apply(); });
       qWrap.addEventListener("click", (e) => {
         const b = e.target.closest("button"); if (!b) return;
@@ -853,17 +872,10 @@ ${refsHtml}
         qWrap.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
         apply();
       });
-      oaBtn.addEventListener("click", () => {
-        oaOnly = !oaOnly;
-        oaBtn.classList.toggle("on", oaOnly);
-        oaBtn.setAttribute("aria-pressed", String(oaOnly));
-        apply();
-      });
       clearBtn.addEventListener("click", () => {
         type = "all"; year = "all"; quart = "all"; oaOnly = false; searchQuery = ""; topic = "all";
         if (searchInput) searchInput.value = "";
         fw.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x.dataset.t === "all"));
-        oaBtn.classList.remove("on"); oaBtn.setAttribute("aria-pressed", "false");
         yearSel.value = "all";
         quartSig = ""; // rebuild the quartile chips with "All" selected
         apply();
@@ -1595,6 +1607,21 @@ ${refsHtml}
     }
   }
 
+  // lists of 5 rows with a small pager (Portfolio)
+  function paginateRows(box, size) {
+    const items = [...box.children];
+    if (items.length <= size) return;
+    const nav = document.createElement("div"); nav.className = "pagination";
+    box.after(nav);
+    let pg = 0; const pages = Math.ceil(items.length / size);
+    const show = () => {
+      items.forEach((el, i) => { el.hidden = Math.floor(i / size) !== pg; });
+      nav.innerHTML = `<button type="button" data-d="-1"${pg === 0 ? " disabled" : ""}>${T.prev}</button><span class="info">${T.pageOf(pg + 1, pages)}</span><button type="button" data-d="1"${pg >= pages - 1 ? " disabled" : ""}>${T.next}</button>`;
+    };
+    nav.addEventListener("click", (e) => { const b = e.target.closest("button[data-d]"); if (!b) return; pg = Math.max(0, Math.min(pages - 1, pg + +b.dataset.d)); show(); });
+    show();
+  }
+
   function toolboxCards(container, items) {
     const list = items.filter((it) => it.type === "tool" || it.type === "software")
       .sort((a, b) => (+b.year || 0) - (+a.year || 0));
@@ -1613,6 +1640,7 @@ ${refsHtml}
     };
     container.innerHTML = `<div class="cv-block"><h2>${esc(T.tbTools)}</h2><div class="toolbox">${list.map(card).join("")}</div></div>`;
     wireUsedMenus(container);
+    paginateRows(container.querySelector(".toolbox"), 5);
   }
 
   // BibTeX for a Mendeley dataset, copied to the clipboard just like publications.
@@ -1650,6 +1678,7 @@ ${refsHtml}
     }).join("");
     container.innerHTML = `<div class="cv-block"><h2>${esc(T.tbDatabases)}</h2><div class="toolbox">${cards}</div></div>`;
     wireUsedMenus(container);
+    paginateRows(container.querySelector(".toolbox"), 5);
   }
 
 
@@ -1671,6 +1700,7 @@ ${refsHtml}
       </article>`;
     };
     container.innerHTML = `<div class="cv-block" id="projects"><h2>${esc(T.cvProjects)}</h2><div class="toolbox">${list.map(card).join("")}</div></div>`;
+    paginateRows(container.querySelector(".toolbox"), 5);
   }
 
   // Project page: header and summary, then (when the project has detail or a team) three
@@ -2126,6 +2156,17 @@ ${refsHtml}
   };
 
   /* ---------- boot ---------- */
+  (function addBack() {
+    if (PAGE === "home") return;
+    const main = document.querySelector("main.content"); if (!main) return;
+    const dflt = { project: (LANG === "es" ? "portafolio.html#projects" : "portfolio.html#projects"), post: LANG === "es" ? "noticias.html" : "news.html" }[PAGE] || (LANG === "es" ? "index.html" : "../index.html".replace("../", ""));
+    const a = document.createElement("a"); a.className = "backtop"; a.href = dflt;
+    a.innerHTML = `<span aria-hidden="true">←</span> ${esc(T.back)}`;
+    a.addEventListener("click", (e) => {
+      try { if (history.length > 1 && document.referrer && new URL(document.referrer).origin === location.origin) { e.preventDefault(); history.back(); } } catch (x) {}
+    });
+    main.insertBefore(a, main.firstChild);
+  })();
   syncTopbar(); initRails();
   Promise.all([fetchJSON("profile"), fetchJSON("publications"), fetchJSON("posts"),
     (PAGE === "cv" || PAGE === "project") ? fetchJSON("projects").catch(() => ({ items: [] })) : Promise.resolve({ items: [] })])
