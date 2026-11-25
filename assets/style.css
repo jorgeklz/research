@@ -1206,3 +1206,35 @@ a.tm-chip:hover .tm-li { transform: scale(1.12); color: var(--blue); }
 .tp-row span { font-weight: 600; text-transform: capitalize; }
 .tp-row small { margin-left: auto; color: var(--ink-3); font-size: var(--fs-xs); }
 .tp-row:hover span, .tp-row.on span { color: var(--blue-600); text-decoration: underline; text-decoration-color: var(--mint); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+
+/* round 3: refinements to the project-page design language */
+/* select mode: only one section is visible, so no divider before it */
+.rl-body[data-select] .rl-ax + .rl-ax { padding-top: 0; border-top: 0; }
+.rl-body { margin-top: 2.2rem; }
+.page-head { margin-bottom: 2.6rem; }
+.rl-hd h2 { margin: 0 0 1.2rem; }
+.rl-hd h2:has(+ .rl-sub) { margin-bottom: .4rem; }
+.rl-sub { margin: 0 0 1.6rem; }
+/* class videos: flat tiles, no green edge */
+.yt-card { border-left: 1px solid var(--line); box-shadow: none; }
+.yt-card:hover { border-left-color: var(--line-2); box-shadow: none; transform: none; }
+/* publication rows: Q1, citations and the explanatory post stand out */
+.pr-q { font-weight: 700; color: var(--ink-2); }
+.pr-q.q-Q1 { color: #fff; background: var(--green-900); padding: .02rem .4rem; border-radius: 4px; letter-spacing: .02em; }
+.pr-c { display: inline-flex; align-items: center; gap: .25rem; font-weight: 700; color: var(--blue-700); }
+.pr-c svg { width: 13px; height: 13px; color: var(--blue); }
+.proj-ri .pr-ls a.pr-post { font-size: var(--fs-sm); font-weight: 700; color: var(--green-900); text-decoration: underline; text-decoration-color: var(--mint); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+.proj-ri .pr-ls a.pr-post:hover { color: var(--blue-600); }
+/* topics pager */
+.tp-list + .pagination { margin-top: 1rem; }
+/* posts list */
+.nw-s { margin: .35rem 0 0; font-size: var(--fs-sm); line-height: 1.6; color: var(--ink-2); max-width: 70ch; }
+/* single post: flat, same language */
+.post-hero { border-bottom: 1px solid var(--line); }
+.post-hero h1 { max-width: 40ch; }
+.refbox { background: none; border: 0; border-top: 1px solid var(--line); border-radius: 0; box-shadow: none; padding: 1.1rem 0 0; }
+.refbox .lab { text-transform: none; letter-spacing: .01em; font-size: var(--fs-sm); }
+.related h3 { text-transform: none; letter-spacing: 0; font-size: var(--fs-base); color: var(--green-900); }
+.related .rel { border-top: 1px solid var(--line); }
+.backlink { background: none; border: 0; box-shadow: none; padding: 0; border-radius: 0; font-weight: 700; color: var(--blue-600); }
+.backlink:hover { box-shadow: none; transform: none; text-decoration: underline; text-underline-offset: 4px; }

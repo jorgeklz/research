@@ -192,7 +192,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = "126";
+  const VER = 127;
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -655,16 +655,18 @@ ${refsHtml}
     const postHref = curated ? `${POST_PAGE}?id=${encodeURIComponent(curated.id)}`
       : (p.doi && (p.year || 0) >= 2024 ? `${POST_PAGE}?doi=${encodeURIComponent(p.doi)}` : null);
     const venue = p.venue ? p.venue + (p.pages && !String(p.venue).includes(String(p.pages)) ? ", " + p.pages : "") : "";
-    const meta = [typeLabel(p.type), venue, p.quartile, p.openAccess ? T.openAccess : "",
-      typeof p.citations === "number" && p.citations > 0 ? T.citedByOpenAlex(p.citations) : "",
-      typeof p.scholarCitations === "number" && p.scholarCitations > 0 ? T.citedByScholar(p.scholarCitations) : ""].filter(Boolean).join(" · ");
+    const parts = [esc(typeLabel(p.type)), venue ? esc(venue) : "",
+      p.quartile ? `<b class="pr-q q-${esc(p.quartile)}">${esc(p.quartile)}</b>` : "",
+      p.openAccess ? esc(T.openAccess) : "",
+      typeof p.citations === "number" && p.citations > 0 ? `<span class="pr-c">${ICON.mCite}${esc(T.citedByOpenAlex(p.citations))}</span>` : "",
+      typeof p.scholarCitations === "number" && p.scholarCitations > 0 ? `<span class="pr-c">${ICON.mCite}${esc(T.citedByScholar(p.scholarCitations))}</span>` : ""].filter(Boolean);
     el.innerHTML = `${doiURL ? `<a href="${doiURL}" target="_blank" rel="noopener">${esc(p.title)}</a>` : `<span class="proj-rt">${esc(p.title)}</span>`}
-      <div class="proj-rk">${PUB_ICO[p.type] || PUB_ICO.journal}<span>${esc(meta)}</span></div>
+      <div class="proj-rk">${PUB_ICO[p.type] || PUB_ICO.journal}<span>${parts.join(" · ")}</span></div>
       ${p.authors && p.authors.length ? `<div class="pr-au">${boldSelf(p.authors)}</div>` : ""}
       <div class="pr-ls">
+        ${postHref ? `<a class="pr-post" href="${postHref}">${ICON.doc} ${T.postLink}</a>` : ""}
         ${doiURL ? `<a href="${doiURL}" target="_blank" rel="noopener">${ICON.external} ${T.doi}</a>` : ""}
         <button type="button" class="bib">${ICON.cite} ${T.cite}</button>
-        ${postHref ? `<a href="${postHref}">${ICON.doc} ${T.postLink}</a>` : ""}
       </div>`;
     el.querySelector("button.bib").addEventListener("click", () =>
       navigator.clipboard.writeText(bibtex(p)).then(() => toast(T.copied)).catch(() => toast(T.copied)));
@@ -678,7 +680,7 @@ ${refsHtml}
     const sortSelect = $("#pub-sort-select"), sumEl = $("#pub-summary");
 
     let all = [], filtered = [], type = "all", sort = "recent", page = 0, searchQuery = "";
-    let year = "all", quart = "all", oaOnly = false, topic = "all";
+    let year = "all", quart = "all", oaOnly = false, topic = "all", topicPage = 0;
     let yearSel = null, qWrap = null, oaBtn = null, clearBtn = null, yearsSig = "", quartSig = "";
 
     const searchInput = $("#pub-search");
@@ -695,12 +697,18 @@ ${refsHtml}
       if (!topicsEl) return;
       const cnt = new Map();
       all.forEach((p) => (p.topics || []).forEach((t) => cnt.set(t, (cnt.get(t) || 0) + 1)));
-      const rows = [...cnt.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+      const all5 = [...cnt.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+      const tPages = Math.max(1, Math.ceil(all5.length / 5));
+      topicPage = Math.min(topicPage, tPages - 1);
+      const rows = all5.slice(topicPage * 5, topicPage * 5 + 5);
       topicsEl.innerHTML = rows.length
         ? `<div class="tp-list">${rows.map(([t, n]) => `<button type="button" class="tp-row${t === topic ? " on" : ""}" data-t="${esc(t)}">${RL_ICON.tag}<span>${esc(topicLabel(t))}</span><small>${n}</small></button>`).join("")}</div>`
         : `<p class="loading">${T.empty}</p>`;
+      if (tPages > 1) topicsEl.innerHTML += `<div class="pagination"><button type="button" data-tp="-1"${topicPage === 0 ? " disabled" : ""}>${T.prev}</button><span class="info">${T.pageOf(topicPage + 1, tPages)}</span><button type="button" data-tp="1"${topicPage >= tPages - 1 ? " disabled" : ""}>${T.next}</button></div>`;
     }
     if (topicsEl) topicsEl.addEventListener("click", (e) => {
+      const pg = e.target.closest("[data-tp]");
+      if (pg) { topicPage += +pg.dataset.tp; renderTopics(); return; }
       const b = e.target.closest(".tp-row"); if (!b) return;
       topic = topic === b.dataset.t ? "all" : b.dataset.t;
       apply();
@@ -1888,6 +1896,18 @@ ${refsHtml}
       .sort((a, b) => (a.date < b.date ? 1 : -1));
     return out.concat(leftover);
   }
+  function newsRow(post, pubs) {
+    const el = document.createElement("div"); el.className = "proj-ri nw";
+    const href = postCardHref(post);
+    const k = pubKind(post, pubs);
+    const mins = readingMinutes(post);
+    el.innerHTML = `<a href="${href}">${esc(pick(post.title))}</a>
+      <div class="proj-rk">${k.icon}<span>${esc(fmtDate(post.date))} · ${esc(k.label)} · ${mins} ${esc(T.minRead)}</span></div>
+      <p class="nw-s">${esc(pick(post.summary))}</p>
+      <div class="pr-ls"><a class="pr-post" href="${href}">${ICON.doc} ${T.readMore}</a></div>`;
+    return el;
+  }
+
   function fillNews(profile, pubs, posts) {
     const wrap = $("#news-list");
     const pag = $("#news-pagination"), info = $("#news-info");
@@ -1899,12 +1919,19 @@ ${refsHtml}
       page = Math.min(page, pages - 1);
       wrap.innerHTML = "";
       if (!s.length) { wrap.innerHTML = `<p class="loading">${T.empty}</p>`; }
+      const yrs = document.createElement("div"); yrs.className = "proj-years";
+      let grp = null, gy = null;
       s.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE).forEach((p) => {
-        const c = cardEl(p, pubs);
-        c.classList.add("fade-up");
-        wrap.appendChild(c);
-        observer.observe(c);
+        const y = String(p.date || "").slice(0, 4);
+        if (!grp || gy !== y) {
+          gy = y;
+          const blk = document.createElement("div"); blk.className = "proj-yr";
+          blk.innerHTML = `<b>${esc(y)}</b><div></div>`;
+          yrs.appendChild(blk); grp = blk.lastElementChild;
+        }
+        grp.appendChild(newsRow(p, pubs));
       });
+      if (s.length) wrap.appendChild(yrs);
       if (pag) {
         pag.style.display = s.length > PAGE_SIZE ? "flex" : "none";
         info.textContent = T.pageOf(page + 1, pages);
@@ -2107,7 +2134,6 @@ ${refsHtml}
       else if (PAGE === "cv") fillCV(profile, projects);
       else if (PAGE === "project") fillProject(profile, projects, pubs);
       else if (PAGE === "publications") {
-        if ($("#stat-grid")) renderMetrics({ pubs: 0, cites: 0, h: 0, oa: 0, cpp: 0, i10: 0, g: 0, m: 0, app: 0, first: 0, intl: 0, cited: 0 });
         fillPublications(profile, pubs, posts);
       }
       else if (PAGE === "news") fillNews(profile, pubs, posts);
