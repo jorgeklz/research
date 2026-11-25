@@ -193,7 +193,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = 131;
+  const VER = 132;
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -2173,12 +2173,13 @@ ${refsHtml}
   (function addBack() {
     if (PAGE === "home") return;
     const main = document.querySelector("main.content"); if (!main) return;
-    const dflt = { project: (LANG === "es" ? "portafolio.html#projects" : "portfolio.html#projects"), post: LANG === "es" ? "noticias.html" : "news.html" }[PAGE] || (LANG === "es" ? "index.html" : "../index.html".replace("../", ""));
-    const a = document.createElement("a"); a.className = "backtop"; a.href = dflt;
-    a.innerHTML = `<span aria-hidden="true">←</span> ${esc(T.back)}`;
-    a.addEventListener("click", (e) => {
-      try { if (history.length > 1 && document.referrer && new URL(document.referrer).origin === location.origin) { e.preventDefault(); history.back(); } } catch (x) {}
-    });
+    const es = LANG === "es";
+    const target = {
+      project: [es ? "portafolio.html#projects" : "portfolio.html#projects", es ? "Proyectos de investigación" : "Research projects"],
+      post: [es ? "noticias.html" : "news.html", "Posts"]
+    }[PAGE] || ["index.html", es ? "Inicio" : "Home"];
+    const a = document.createElement("a"); a.className = "backtop"; a.href = target[0];
+    a.innerHTML = `<span aria-hidden="true">←</span> ${esc(target[1])}`;
     main.insertBefore(a, main.firstChild);
   })();
   syncTopbar(); initRails();

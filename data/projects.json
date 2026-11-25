@@ -53,8 +53,95 @@
           "doi": "10.1109/smc58881.2025.11343106"
         }
       ],
-      "team": [],
-      "related": []
+      "team": [
+        {
+          "group": "pi",
+          "name": "Jorge Párraga-Álava",
+          "url": "https://www.linkedin.com/in/jorge-p-470a03302/"
+        },
+        {
+          "group": "res",
+          "name": "Jorge Rodas Silva",
+          "url": "#"
+        },
+        {
+          "group": "res",
+          "name": "Jaime Meza Hormaza",
+          "url": "#"
+        },
+        {
+          "group": "res",
+          "name": "Carlos Silva Villafuerte",
+          "url": "#"
+        },
+        {
+          "group": "res",
+          "name": "Diego Terán Pineda",
+          "url": "#"
+        },
+        {
+          "group": "res",
+          "name": "Leticia Vaca Cárdenas",
+          "url": "https://www.linkedin.com/in/leticia-vaca-cárdenas/"
+        },
+        {
+          "group": "ms",
+          "name": "Joel García Arteaga",
+          "url": "#"
+        },
+        {
+          "group": "ms",
+          "name": "Leonela Murillo Párraga",
+          "url": "#"
+        },
+        {
+          "group": "ms",
+          "name": "Jesús Zambrano Zambrano",
+          "url": "#"
+        },
+        {
+          "group": "bsc",
+          "name": "Kleiner Alarcón Cuenca",
+          "url": "#"
+        }
+      ],
+      "related": [],
+      "detail": {
+        "background": {
+          "en": "How well an artificial intelligence model works depends on the data it learns from. A model that performs well on one dataset can fail on another, and tuning its parameters is slow and expensive, even more so with large numerical, text and image datasets. That cost keeps many of these techniques out of reach for places with limited computing resources.",
+          "es": "El buen funcionamiento de un modelo de inteligencia artificial depende de los datos con los que aprende. Un modelo que rinde bien con unos datos puede fallar con otros, y ajustar sus parámetros es lento y costoso, más aún con conjuntos grandes de datos numéricos, de texto y de imágenes. Ese costo deja muchas de estas técnicas fuera del alcance de lugares con recursos de cómputo limitados."
+        },
+        "objective": {
+          "en": "To apply advanced optimization strategies that improve the efficiency, adaptability and performance of artificial intelligence models when analyzing numerical, textual and image datasets in resource-constrained environments.",
+          "es": "Aplicar estrategias avanzadas de optimización que mejoren la eficiencia, la adaptabilidad y el desempeño de los modelos de inteligencia artificial en el análisis de conjuntos de datos numéricos, textuales y de imágenes en entornos con recursos limitados."
+        },
+        "alignment": [
+          {
+            "icon": "target",
+            "t": {
+              "en": "Sustainable Development Goals 3 and 9",
+              "es": "Objetivos de Desarrollo Sostenible 3 y 9"
+            }
+          },
+          {
+            "icon": "flag",
+            "t": {
+              "en": "National Development Plan of Ecuador",
+              "es": "Plan Nacional de Desarrollo de Ecuador"
+            }
+          }
+        ]
+      },
+      "partners": [
+        {
+          "name": "Universidad Técnica de Manabí",
+          "url": "https://utm.edu.ec"
+        },
+        {
+          "name": "Universidad Estatal de Milagro",
+          "url": "https://unemi.edu.ec"
+        }
+      ]
     },
     {
       "id": "observaia",
