@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg?v=4">
-<link rel="stylesheet" href="../assets/style.css?v=136">
+<link rel="stylesheet" href="../assets/style.css?v=137">
 </head>
 <body data-page="publications" data-root="..">
 <a class="skip" href="#main">Saltar al contenido</a>
@@ -66,21 +66,8 @@
     <button id="dl-pubs" class="pub-dl" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 19h14"/></svg><span>Descargar (Word)</span></button>
   </div>
 
-  <div class="pub-toolbar">
-    <div class="filters" id="pub-filters"></div>
-    <input type="text" id="pub-search" class="pub-search" placeholder="Buscar artículos" />
-    <div class="pub-controls">
-      <div class="pub-summary" id="pub-summary"><span class="sum-badge">Cargando…</span></div>
-      <div class="pub-sort-wrap">
-        <label for="pub-sort-select" class="sort-label">Ordenar por:</label>
-        <select id="pub-sort-select" class="pub-sort-select">
-          <option value="recent">Más recientes</option>
-          <option value="cites">Más citadas</option>
-          <option value="title">Título (A–Z)</option>
-        </select>
-      </div>
-    </div>
-  </div>
+  <div class="pub-bar2" id="pub-bar"><label class="pub-find"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="text" id="pub-search" class="pub-search" placeholder="Buscar artículos"></label></div>
+  <div class="pub-state"><span class="pub-summary" id="pub-summary"></span><span class="pub-tags" id="pub-tags"></span><button type="button" class="pub-clear" id="pub-clear" hidden></button></div>
   <div class="pubs" id="pub-list"><p class="loading skeleton" style="width: 100%; height: 60px;"></p></div>
 
   <div class="pagination" id="pub-pagination" style="display:none">
@@ -106,6 +93,6 @@
   </div>
 </footer>
 
-<script src="../assets/app.js?v=136"></script>
+<script src="../assets/app.js?v=137"></script>
 </body>
 </html>

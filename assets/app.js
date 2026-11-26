@@ -117,7 +117,7 @@
       advMetricsHide: "Hide advanced bibliometrics",
       advMetricsBadge: "8 more",
       sortLabel: "Sort by:",
-      yearLabel: "Year", allYears: "All years", quartileLabel: "Quartile", clearFilters: "Clear filters",
+      yearLabel: "Year", allYears: "All years", quartileLabel: "Quartile", allQuartiles: "All quartiles", typeLabel: "Type", allTypes: "All types", clearFilters: "Clear all",
       sortRecent: "Newest first",
       sortCites: "Most cited",
       sortTitle: "Title (A–Z)",
@@ -173,7 +173,7 @@
       advMetricsHide: "Ocultar métricas avanzadas",
       advMetricsBadge: "8 más",
       sortLabel: "Ordenar por:",
-      yearLabel: "Año", allYears: "Todos los años", quartileLabel: "Cuartil", clearFilters: "Quitar filtros",
+      yearLabel: "Año", allYears: "Todos los años", quartileLabel: "Cuartil", allQuartiles: "Todos los cuartiles", typeLabel: "Tipo", allTypes: "Todos los tipos", clearFilters: "Quitar todos",
       sortRecent: "Más recientes",
       sortCites: "Más citadas",
       sortTitle: "Título (A–Z)",
@@ -193,7 +193,7 @@
   const pick = (v) => (v && typeof v === "object" && (v.en || v.es) ? (v[LANG] || v.en || v.es) : v);
   const normDoi = (d) => (d || "").toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "").trim();
 
-  const VER = 136;
+  const VER = 137;
   const fetchJSON = (name) => fetch(`${ROOT}/data/${name}.json?v=${VER}`).then((r) => {
     if (!r.ok) throw new Error(name + ": " + r.status); return r.json();
   });
@@ -641,11 +641,11 @@ ${refsHtml}
     const list = $("#pub-list"), fw = $("#pub-filters"), byId = indexPosts(posts);
     const pag = $("#pub-pagination"), info = $("#pag-info");
     const prev = $("#pag-prev"), next = $("#pag-next"), note = $("#orcid-note");
-    const sortSelect = $("#pub-sort-select"), sumEl = $("#pub-summary");
+    let sortSelect = null; const sumEl = $("#pub-summary"), tagsEl = $("#pub-tags");
 
     let all = [], filtered = [], type = "all", sort = "recent", page = 0, searchQuery = "";
     let year = "all", quart = "all", oaOnly = false, topic = "all", topicPage = 0;
-    let yearSel = null, qWrap = null, oaBtn = null, clearBtn = null, yearsSig = "", quartSig = "";
+    let yearSel = null, qSel = null, typeSel = null, clearBtn = null, yearsSig = "", quartSig = "";
 
     const searchInput = $("#pub-search");
     if (searchInput) {
@@ -708,13 +708,6 @@ ${refsHtml}
     const dlBtn = $("#dl-pubs");
     if (dlBtn) dlBtn.addEventListener("click", () => exportPublicationsWord(profile, all, dlBtn));
 
-    if (sortSelect) {
-      sortSelect.addEventListener("change", (e) => {
-        sort = e.target.value;
-        apply();
-      });
-    }
-
     function syncFilterOptions() {
       if (yearSel) {
         const years = [...new Set(all.map((p) => p.year).filter(Boolean))].sort((x, y) => y - x);
@@ -725,14 +718,14 @@ ${refsHtml}
           year = yearSel.value;
         }
       }
-      if (qWrap) {
+      if (qSel) {
         const qs = ["Q1", "Q2", "Q3", "Q4"].filter((q) => all.some((p) => p.quartile === q));
         if (qs.join() !== quartSig) {
           quartSig = qs.join();
           if (!qs.includes(quart)) quart = "all";
-          qWrap.innerHTML = [`<button type="button" data-q="all" class="${quart === "all" ? "on" : ""}">${T.all}</button>`]
-            .concat(qs.map((q) => `<button type="button" data-q="${q}" class="${quart === q ? "on" : ""}">${q}</button>`)).join("");
-          qWrap.parentElement.hidden = qs.length === 0;
+          qSel.innerHTML = `<option value="all">${T.allQuartiles}</option>` + qs.map((q) => `<option value="${q}">${q}</option>`).join("");
+          qSel.value = quart;
+          qSel.hidden = qs.length === 0;
         }
       }
     }
@@ -744,13 +737,14 @@ ${refsHtml}
         (quart === "all" || p.quartile === quart) &&
         (topic === "all" || (p.topics || []).includes(topic)) &&
         (!oaOnly || p.openAccess));
-      if (clearBtn) {
-        const n = [type !== "all", year !== "all", quart !== "all", !!searchQuery, topic !== "all"].filter(Boolean).length;
-        clearBtn.hidden = !n;
-        clearBtn.textContent = `× ${T.clearFilters} (${n})`;
-        if (yearSel) yearSel.classList.toggle("is-set", year !== "all");
-        if (qWrap) qWrap.classList.toggle("is-set", quart !== "all");
-      }
+      const tags = [];
+      if (type !== "all") tags.push(["type", T[type] || type]);
+      if (year !== "all") tags.push(["year", year]);
+      if (quart !== "all") tags.push(["quart", quart]);
+      if (topic !== "all") tags.push(["topic", topicLabel(topic)]);
+      if (tagsEl) tagsEl.innerHTML = tags.map(([k, l]) => `<button type="button" class="pub-tag" data-k="${k}" aria-label="${esc(l)} ×">${esc(l)} <span aria-hidden="true">×</span></button>`).join("");
+      if (clearBtn) clearBtn.hidden = !(tags.length || searchQuery);
+      [[typeSel, type], [yearSel, year], [qSel, quart]].forEach(([el, v]) => { if (el) { el.value = v; el.classList.toggle("is-set", v !== "all"); } });
       renderTopics();
       if (searchQuery) {
         filtered = filtered.filter((p) => {
@@ -769,7 +763,7 @@ ${refsHtml}
       }
       if (sumEl) {
         const sumCites = filtered.reduce((acc, p) => acc + (p.citations || 0), 0);
-        sumEl.innerHTML = `<span class="sum-badge">${esc(T.summaryCount(filtered.length, all.length, sumCites) + (topic !== "all" ? " · " + topicLabel(topic) : ""))}</span>`;
+        sumEl.textContent = T.summaryCount(filtered.length, all.length, sumCites);
       }
       page = 0; render();
     }
@@ -817,42 +811,35 @@ ${refsHtml}
     if (prev) prev.addEventListener("click", () => { if (page > 0) { page--; render(); window.scrollTo({ top: 0, behavior: "smooth" }); } });
     if (next) next.addEventListener("click", () => { page++; render(); window.scrollTo({ top: 0, behavior: "smooth" }); });
 
-    if (fw) {
-      const types = ["all", "journal", "conference"];
-      fw.innerHTML = types.map((t) => `<button data-t="${t}" class="${t === "all" ? "on" : ""}">${t === "all" ? T.all : T[t]}</button>`).join("");
-      fw.addEventListener("click", (e) => {
-        const b = e.target.closest("button"); if (!b) return;
-        fw.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
-        type = b.dataset.t; apply();
-      });
-    }
-
-    // extra filters (publications page only): year, quartile, open access, clear
-    const toolbar = $(".pub-toolbar");
-    if (fw && toolbar) {
-      const row = document.createElement("div");
-      row.className = "pub-filter-row";
-      row.innerHTML = `
-        <label class="sort-label" for="pub-year-select">${T.yearLabel}</label>
-        <select id="pub-year-select" class="pub-sort-select"></select>
-        <div class="pub-fgroup"><span class="sort-label">${T.quartileLabel}</span><div class="filters" id="pub-quartiles"></div></div>
-        <button type="button" class="pub-clear" id="pub-clear" hidden>${T.clearFilters}</button>`;
-      toolbar.after(row);
-      const ctl = toolbar.querySelector(".pub-controls"); if (ctl) row.appendChild(ctl);
-      yearSel = $("#pub-year-select"); qWrap = $("#pub-quartiles"); clearBtn = $("#pub-clear");
+    // one line of menus: type, year, quartile, order. Applied filters show as removable tags.
+    const bar = $("#pub-bar");
+    if (bar) {
+      const mk = (id, label, opts) => {
+        const el = document.createElement("select");
+        el.id = id; el.className = "pub-menu"; el.setAttribute("aria-label", label);
+        el.innerHTML = opts; bar.appendChild(el); return el;
+      };
+      typeSel = mk("pub-type-select", T.typeLabel, `<option value="all">${T.allTypes}</option><option value="journal">${T.journal}</option><option value="conference">${T.conference}</option>`);
+      yearSel = mk("pub-year-select", T.yearLabel, `<option value="all">${T.allYears}</option>`);
+      qSel = mk("pub-quart-select", T.quartileLabel, `<option value="all">${T.allQuartiles}</option>`);
+      sortSelect = mk("pub-sort-select", T.sortLabel, `<option value="recent">${T.sortRecent}</option><option value="cites">${T.sortCites}</option><option value="title">${T.sortTitle}</option>`);
+      typeSel.addEventListener("change", () => { type = typeSel.value; apply(); });
       yearSel.addEventListener("change", () => { year = yearSel.value; apply(); });
-      qWrap.addEventListener("click", (e) => {
-        const b = e.target.closest("button"); if (!b) return;
-        quart = b.dataset.q;
-        qWrap.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
-        apply();
-      });
+      qSel.addEventListener("change", () => { quart = qSel.value; apply(); });
+      sortSelect.addEventListener("change", () => { sort = sortSelect.value; apply(); });
+    }
+    if (tagsEl) tagsEl.addEventListener("click", (e) => {
+      const b = e.target.closest(".pub-tag"); if (!b) return;
+      const k = b.dataset.k;
+      if (k === "type") type = "all"; else if (k === "year") year = "all"; else if (k === "quart") quart = "all"; else if (k === "topic") topic = "all";
+      apply();
+    });
+    clearBtn = $("#pub-clear");
+    if (clearBtn) {
+      clearBtn.textContent = T.clearFilters;
       clearBtn.addEventListener("click", () => {
-        type = "all"; year = "all"; quart = "all"; oaOnly = false; searchQuery = ""; topic = "all";
+        type = "all"; year = "all"; quart = "all"; searchQuery = ""; topic = "all";
         if (searchInput) searchInput.value = "";
-        fw.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x.dataset.t === "all"));
-        yearSel.value = "all";
-        quartSig = ""; // rebuild the quartile chips with "All" selected
         apply();
       });
     }
